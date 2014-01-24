@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
@@ -20,11 +21,15 @@ public class MainActivity extends Activity {
         
         // Assumes current activity is the searchable activity
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        //searchView.setIconifiedByDefault(false);
-        
+    }
+    
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
         checkSearch();
     }
-
+    
     private void checkSearch() {
         // Get the intent, verify the action and get the query
         Intent intent = getIntent();
@@ -32,13 +37,14 @@ public class MainActivity extends Activity {
             String query = intent.getStringExtra(SearchManager.QUERY);
             performSearch(query);
         }
-        if (Intent.ACTION_VIEW.equals(intent.getAction())) {
+        if (/*Intent.ACTION_VIEW*/"android.Intent.action.VIEW".equals(intent.getAction())) {
             String query = intent.getDataString();
             performSearch(query);
         }
     }
     
     private void performSearch(String query) {
-        
+        TextView name = (TextView)findViewById(R.id.name);
+        name.setText(query);
     }
 }
