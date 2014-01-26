@@ -21,16 +21,73 @@ public final class R {
         public static final int activity_vertical_margin=0x7f050001;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
+        public static final int acier=0x7f020000;
+        public static final int combat=0x7f020001;
+        public static final int dragon=0x7f020002;
+        public static final int eau=0x7f020003;
+        public static final int electrique=0x7f020004;
+        public static final int fee=0x7f020005;
+        public static final int feu=0x7f020006;
+        public static final int glace=0x7f020007;
+        public static final int ic_launcher=0x7f020008;
+        public static final int insecte=0x7f020009;
+        public static final int normal=0x7f02000a;
+        public static final int plante=0x7f02000b;
+        public static final int poison=0x7f02000c;
+        public static final int psy=0x7f02000d;
+        public static final int roche=0x7f02000e;
+        public static final int sol=0x7f02000f;
+        public static final int spectre=0x7f020010;
+        public static final int tenebre=0x7f020011;
+        public static final int vol=0x7f020012;
+        public static final int weakness_ignore=0x7f020013;
+        public static final int weakness_normal=0x7f020014;
+        public static final int weakness_strong=0x7f020015;
+        public static final int weakness_very_strong=0x7f020016;
+        public static final int weakness_very_weak=0x7f020017;
+        public static final int weakness_weak=0x7f020018;
     }
     public static final class id {
-        public static final int TextView01=0x7f090000;
-        public static final int imageView1=0x7f090005;
-        public static final int menu_search=0x7f090006;
-        public static final int name=0x7f090001;
-        public static final int search_text=0x7f090004;
-        public static final int textView1=0x7f090002;
-        public static final int textView2=0x7f090003;
+        public static final int acier=0x7f090015;
+        public static final int attTxt=0x7f09000a;
+        public static final int combat=0x7f090016;
+        public static final int defTxt=0x7f09000b;
+        public static final int dragon=0x7f090017;
+        public static final int drawAtt=0x7f090010;
+        public static final int drawDef=0x7f090011;
+        public static final int drawLife=0x7f09000f;
+        public static final int drawSpa=0x7f090012;
+        public static final int drawSpd=0x7f090013;
+        public static final int drawSpeed=0x7f090014;
+        public static final int eau=0x7f090018;
+        public static final int electrique=0x7f090019;
+        public static final int fee=0x7f09001a;
+        public static final int feu=0x7f09001b;
+        public static final int glace=0x7f09001c;
+        public static final int icon=0x7f090003;
+        public static final int insecte=0x7f09001d;
+        public static final int lifeTxt=0x7f090009;
+        public static final int menu_search=0x7f090027;
+        public static final int nameTxt=0x7f090002;
+        public static final int normal=0x7f09001e;
+        public static final int numberTxt=0x7f090001;
+        public static final int plante=0x7f09001f;
+        public static final int poison=0x7f090020;
+        public static final int psy=0x7f090021;
+        public static final int roche=0x7f090022;
+        public static final int search_text=0x7f090000;
+        public static final int sol=0x7f090023;
+        public static final int spaTxt=0x7f09000c;
+        public static final int spdTxt=0x7f09000d;
+        public static final int spectre=0x7f090024;
+        public static final int speedTxt=0x7f09000e;
+        public static final int talent1Txt=0x7f090006;
+        public static final int talent2Txt=0x7f090007;
+        public static final int talent3Txt=0x7f090008;
+        public static final int tenebre=0x7f090025;
+        public static final int type1=0x7f090004;
+        public static final int type2=0x7f090005;
+        public static final int vol=0x7f090026;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -39,9 +96,35 @@ public final class R {
         public static final int main=0x7f080000;
     }
     public static final class string {
+        public static final int acier=0x7f06000b;
         public static final int app_name=0x7f060000;
+        public static final int att=0x7f060006;
+        public static final int combat=0x7f06000c;
+        public static final int def=0x7f060007;
+        public static final int dragon=0x7f06000d;
+        public static final int eau=0x7f06000e;
+        public static final int electrique=0x7f06000f;
+        public static final int fee=0x7f060010;
+        public static final int feu=0x7f060011;
+        public static final int glace=0x7f060012;
+        public static final int icon=0x7f060003;
+        public static final int insecte=0x7f060013;
+        public static final int life=0x7f060005;
+        public static final int normal=0x7f060014;
+        public static final int plante=0x7f060015;
+        public static final int poison=0x7f060016;
+        public static final int psy=0x7f060017;
+        public static final int roche=0x7f060018;
         public static final int search_hint=0x7f060002;
         public static final int search_title=0x7f060001;
+        public static final int sol=0x7f060019;
+        public static final int spatt=0x7f060008;
+        public static final int spdef=0x7f060009;
+        public static final int spectre=0x7f06001a;
+        public static final int speed=0x7f06000a;
+        public static final int tenebre=0x7f06001b;
+        public static final int type=0x7f060004;
+        public static final int vol=0x7f06001c;
     }
     public static final class style {
         /** 

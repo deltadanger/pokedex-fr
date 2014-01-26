@@ -1,6 +1,7 @@
 package fr.pokedex;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class Pokemon {
@@ -34,5 +35,25 @@ public class Pokemon {
         this.spAttack = spAttack;
         this.spDefense = spDefense;
         this.speed = speed;
+    }
+    
+    public HashMap<Type, Weakness> getWeaknesses() {
+    	HashMap<Type, Weakness> result = ReceiveTypeTable.table.get(type1);
+    	
+    	HashMap<Type, Weakness> type2Weaknesses = ReceiveTypeTable.table.get(type2);
+    	
+    	for (Type t : type2Weaknesses.keySet()) {
+    		if (Weakness.IGNORE.equals(type2Weaknesses.get(t))) {
+    			result.put(t, Weakness.IGNORE);
+    			
+    		} else if (type2Weaknesses.get(t).compareTo(Weakness.NORMAL) > 0) {
+    			result.put(t, result.get(t).decrease());
+    			
+    		} else if (type2Weaknesses.get(t).compareTo(Weakness.NORMAL) < 0) {
+    			result.put(t, result.get(t).increase());
+    		}
+    	}
+    	
+    	return result;
     }
 }

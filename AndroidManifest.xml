@@ -34,7 +34,10 @@
         <provider
             android:name=".SearchContentProvider"
             android:authorities="fr.pokedex.SearchContentProvider"
-            android:enabled="true" >
-        </provider>
+            android:enabled="true" />
+        
+        <provider
+            android:name=".AssetsProvider"
+            android:authorities="fr.pokedex.assets" />
     </application>
 </manifest>
