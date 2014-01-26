@@ -6,6 +6,27 @@ public class ReceiveTypeTable {
     @SuppressWarnings("serial")
     public static HashMap<Type, HashMap<Type, Weakness>> table = new HashMap<Type, HashMap<Type,Weakness>>() {{
         
+        this.put(Type.NONE, new HashMap<Type, Weakness>(){{
+            this.put(Type.ACIER, Weakness.NORMAL);
+            this.put(Type.COMBAT, Weakness.NORMAL);
+            this.put(Type.DRAGON, Weakness.NORMAL);
+            this.put(Type.EAU, Weakness.NORMAL);
+            this.put(Type.ELECTRIQUE, Weakness.NORMAL);
+            this.put(Type.FEE, Weakness.NORMAL);
+            this.put(Type.FEU, Weakness.NORMAL);
+            this.put(Type.GLACE, Weakness.NORMAL);
+            this.put(Type.INSECTE, Weakness.NORMAL);
+            this.put(Type.NORMAL, Weakness.NORMAL);
+            this.put(Type.PLANTE, Weakness.NORMAL);
+            this.put(Type.POISON, Weakness.NORMAL);
+            this.put(Type.PSY, Weakness.NORMAL);
+            this.put(Type.ROCHE, Weakness.NORMAL);
+            this.put(Type.SOL, Weakness.NORMAL);
+            this.put(Type.SPECTRE, Weakness.NORMAL);
+            this.put(Type.TENEBRE, Weakness.NORMAL);
+            this.put(Type.VOL, Weakness.NORMAL);
+        }});
+        
         this.put(Type.ACIER, new HashMap<Type, Weakness>(){{
             this.put(Type.ACIER, Weakness.STRONG);
             this.put(Type.COMBAT, Weakness.WEAK);

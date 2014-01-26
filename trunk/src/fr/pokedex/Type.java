@@ -2,28 +2,28 @@ package fr.pokedex;
 
 
 public enum Type {
-    NONE (""),
-    ACIER ("Acier"),
-    COMBAT ("Combat"),
-    DRAGON ("Combat"),
-    EAU ("Combat"),
-    ELECTRIQUE ("Combat"),
-    FEE ("Combat"),
-    FEU ("Combat"),
-    GLACE ("Combat"),
-    INSECTE ("Combat"),
-    NORMAL ("Combat"),
-    PLANTE ("Combat"),
-    POISON ("Combat"),
-    PSY ("Combat"),
-    ROCHE ("Combat"),
-    SOL ("Combat"),
-    SPECTRE ("Combat"),
-    TENEBRE ("Combat"),
-    VOL ("Combat");
+    NONE (0),
+    ACIER (R.drawable.acier),
+    COMBAT (R.drawable.combat),
+    DRAGON (R.drawable.dragon),
+    EAU (R.drawable.eau),
+    ELECTRIQUE (R.drawable.electrique),
+    FEE (R.drawable.fee),
+    FEU (R.drawable.feu),
+    GLACE (R.drawable.glace),
+    INSECTE (R.drawable.insecte),
+    NORMAL (R.drawable.normal),
+    PLANTE (R.drawable.plante),
+    POISON (R.drawable.poison),
+    PSY (R.drawable.psy),
+    ROCHE (R.drawable.roche),
+    SOL (R.drawable.sol),
+    SPECTRE (R.drawable.spectre),
+    TENEBRE (R.drawable.tenebre),
+    VOL (R.drawable.vol);
     
-    public String display;
-    private Type(String display) {
-        this.display = display;
+    public int image;
+    private Type(int image) {
+        this.image = image;
     }
 }

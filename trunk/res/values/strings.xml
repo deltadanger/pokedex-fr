@@ -4,5 +4,32 @@
     <string name="app_name">Pokedex Fr</string>
     <string name="search_title">Recherche</string>
     <string name="search_hint">Chercher Pokemon</string>
+    <string name="icon">Icone de Pokemon</string>
+    <string name="type">Type</string>
+    
+    <string name="life">Vie</string>
+    <string name="att">Attaque</string>
+    <string name="def">Defense</string>
+    <string name="spatt">Sp Attaque</string>
+    <string name="spdef">Sp Defense</string>
+    <string name="speed">Vitesse</string>
 
+    <string name="acier">acier</string>
+    <string name="combat">combat</string>
+    <string name="dragon">dragon</string>
+    <string name="eau">eau</string>
+    <string name="electrique">electrique</string>
+    <string name="fee">fee</string>
+    <string name="feu">feu</string>
+    <string name="glace">glace</string>
+    <string name="insecte">insecte</string>
+    <string name="normal">normal</string>
+    <string name="plante">plante</string>
+    <string name="poison">poison</string>
+    <string name="psy">psy</string>
+    <string name="roche">roche</string>
+    <string name="sol">sol</string>
+    <string name="spectre">spectre</string>
+    <string name="tenebre">tenebre</string>
+    <string name="vol">vol</string>
 </resources>
