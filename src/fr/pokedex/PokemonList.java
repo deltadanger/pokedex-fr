@@ -85,7 +85,7 @@ public class PokemonList {
         this.put("Volcaropod", new Pokemon("Volcaropod", 219, Type.FEU, Type.ROCHE, talents, 50, 50, 120, 80, 80, 30));
 
         talents = new ArrayList<Talent>(){{this.add(Talent.FARCEUR);this.add(Talent.ACHARNE);}};
-        this.put("Boreas (Forme Totemique)", new Pokemon("Boreas (Forme Totemique)", 641, Type.VOL, Type.VOL, talents, 79, 100, 80, 110, 90, 121));
+        this.put("Boreas (Forme Totemique)", new Pokemon("Boreas (Forme Totemique)", 641, Type.VOL, Type.NONE, talents, 79, 100, 80, 110, 90, 121));
 
         talents = new ArrayList<Talent>(){{this.add(Talent.SERENITE);}};
         this.put("Meloetta (Forme Voix)", new Pokemon("Meloetta (Forme Voix)", 648, Type.NORMAL, Type.PSY, talents, 100, 77, 77, 128, 128, 90));
@@ -1024,7 +1024,7 @@ public class PokemonList {
         this.put("Jungko", new Pokemon("Jungko", 254, Type.PLANTE, Type.NONE, talents, 70, 85, 65, 105, 85, 120));
 
         talents = new ArrayList<Talent>(){{this.add(Talent.FARCEUR);this.add(Talent.ACHARNE);}};
-        this.put("Boreas (Forme Avatar)", new Pokemon("Boreas (Forme Avatar)", 641, Type.VOL, Type.VOL, talents, 79, 115, 70, 125, 80, 111));
+        this.put("Boreas (Forme Avatar)", new Pokemon("Boreas (Forme Avatar)", 641, Type.VOL, Type.NONE, talents, 79, 115, 70, 125, 80, 111));
 
         talents = new ArrayList<Talent>(){{this.add(Talent.CORPS_SAIN);this.add(Talent.LIGHT_METAL);}};
         this.put("Registeel", new Pokemon("Registeel", 379, Type.ACIER, Type.NONE, talents, 80, 75, 150, 75, 150, 50));

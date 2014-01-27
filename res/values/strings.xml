@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="assets_authority">fr.pokedex.assets</string>
+    <string name="search_authority">fr.pokedex.SearchContentProvider</string>
+    
     <string name="app_name">Pokedex Fr</string>
     <string name="search_title">Recherche</string>
-    <string name="search_hint">Chercher Pokemon</string>
+    <string name="search_hint">Chercher Pokemon ou numéro</string>
     <string name="icon">Icone de Pokemon</string>
     <string name="type">Type</string>
     

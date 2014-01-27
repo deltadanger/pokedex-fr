@@ -22,20 +22,15 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import fr.pokedex.utils.Utils;
 
-/*
- * TODO:
- * - Fix autocompletion speed
- */
-
 public class MainActivity extends Activity {
 	
 	private final int STAT_BAR_HEIGHT = 57;
-	private final int COLOUR_LIFE = Color.rgb(128, 255, 128);
-	private final int COLOUR_ATTACK = Color.rgb(255, 128, 128);
-	private final int COLOUR_DEFENSE = Color.rgb(255, 255, 128);
-	private final int COLOUR_SP_ATTACK = Color.rgb(255, 128, 255);
-	private final int COLOUR_SP_DEFENSE = Color.rgb(128, 128, 128);
-	private final int COLOUR_SPEED = Color.rgb(128, 255, 255);
+	private final int COLOUR_LIFE = Color.rgb(79, 202, 30);
+	private final int COLOUR_ATTACK = Color.rgb(227, 11, 11);
+	private final int COLOUR_DEFENSE = Color.rgb(254, 212, 43);
+	private final int COLOUR_SP_ATTACK = Color.rgb(202, 30, 180);
+	private final int COLOUR_SP_DEFENSE = Color.rgb(126, 67, 246);
+	private final int COLOUR_SPEED = Color.rgb(30, 180, 180);
 
 	private final int WEAKNESS_BLOCK_WIDTH = 140;
 	private final int WEAKNESS_BLOCK_HEIGHT = 60;
@@ -127,10 +122,6 @@ public class MainActivity extends Activity {
     private void checkSearch() {
         // Get the intent, verify the action and get the query
         Intent intent = getIntent();
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            String query = intent.getStringExtra(SearchManager.QUERY);
-            performSearch(query);
-        }
         if (/*Intent.ACTION_VIEW*/"android.Intent.action.VIEW".equals(intent.getAction())) {
             String query = intent.getDataString();
             performSearch(query);
@@ -147,7 +138,8 @@ public class MainActivity extends Activity {
         
         try {
             ImageView image = (ImageView)findViewById(R.id.icon);
-            image.setImageDrawable(Drawable.createFromStream(getAssets().open("image/" + Utils.standardize(currentPokemon.name) + ".png"), null));
+            image.setImageDrawable(Drawable.createFromStream(getAssets().open("image/" + Utils.standardize(currentPokemon.name, true) + ".png"), null));
+            image.invalidate();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -162,15 +154,17 @@ public class MainActivity extends Activity {
         content.setSpan(new UnderlineSpan(), 0, currentPokemon.abilities.get(0).name.length(), 0);
         talentTxt.setText(content);
         
+        talentTxt = (TextView)findViewById(R.id.talent2Txt);
+        talentTxt.setText("");
         if (currentPokemon.abilities.size() > 1) {
-            talentTxt = (TextView)findViewById(R.id.talent2Txt);
             content = new SpannableString(currentPokemon.abilities.get(1).name);
             content.setSpan(new UnderlineSpan(), 0, currentPokemon.abilities.get(1).name.length(), 0);
             talentTxt.setText(content);
         }
         
+        talentTxt = (TextView)findViewById(R.id.talent3Txt);
+        talentTxt.setText("");
         if (currentPokemon.abilities.size() > 2) {
-            talentTxt = (TextView)findViewById(R.id.talent3Txt);
             content = new SpannableString(currentPokemon.abilities.get(2).name);
             content.setSpan(new UnderlineSpan(), 0, currentPokemon.abilities.get(2).name.length(), 0);
             talentTxt.setText(content);
