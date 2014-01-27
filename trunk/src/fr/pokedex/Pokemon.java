@@ -37,10 +37,11 @@ public class Pokemon {
         this.speed = speed;
     }
     
-    public HashMap<Type, Weakness> getWeaknesses() {
-    	HashMap<Type, Weakness> result = ReceiveTypeTable.table.get(type1);
+    @SuppressWarnings("unchecked")
+	public HashMap<Type, Weakness> getWeaknesses() {
+    	HashMap<Type, Weakness> result = (HashMap<Type, Weakness>)ReceiveTypeTable.table.get(type1).clone();
     	
-    	HashMap<Type, Weakness> type2Weaknesses = ReceiveTypeTable.table.get(type2);
+    	HashMap<Type, Weakness> type2Weaknesses = (HashMap<Type, Weakness>)ReceiveTypeTable.table.get(type2).clone();
     	
     	for (Type t : type2Weaknesses.keySet()) {
     		if (Weakness.IGNORE.equals(type2Weaknesses.get(t))) {

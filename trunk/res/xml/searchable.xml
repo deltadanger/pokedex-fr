@@ -4,7 +4,7 @@
     android:hint="@string/search_hint"
     android:queryAfterZeroResults="true"
     android:searchSuggestThreshold="1"
-    android:searchSuggestAuthority="fr.pokedex.SearchContentProvider"
+    android:searchSuggestAuthority="@string/search_authority"
     android:searchSuggestIntentAction="android.Intent.action.VIEW">
     
 </searchable>

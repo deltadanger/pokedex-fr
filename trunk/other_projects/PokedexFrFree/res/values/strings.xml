@@ -1,0 +1,8 @@
+<resources>
+
+    <string name="app_name">Pokedex Fr Free</string>
+    
+    <string name="assets_authority">fr.free.pokedex.assets</string>
+    <string name="search_authority">fr.free.pokedex.SearchContentProvider</string>
+
+</resources>

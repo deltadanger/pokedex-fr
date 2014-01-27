@@ -18,7 +18,7 @@ public class SearchContentProvider extends ContentProvider {
             String arg4) {
         Integer id = 1;
         MatrixCursor c = new MatrixCursor(new String[]{BaseColumns._ID, SearchManager.SUGGEST_COLUMN_TEXT_1, SearchManager.SUGGEST_COLUMN_ICON_1, SearchManager.SUGGEST_COLUMN_INTENT_DATA});
-         
+        
         String query = Utils.standardize(uri.getLastPathSegment());
         if ("".equals(query)) {
             return c;
@@ -30,8 +30,12 @@ public class SearchContentProvider extends ContentProvider {
         for (Object obj : names) {
             String name = obj.toString();
             String stdName = Utils.standardize(name);
+            String number = ""+PokemonList.perName.get(name).number;
             if (stdName.contains(query)) {
-                c.addRow(new Object[]{id++, name, "content://fr.pokedex.assets/image/"+Utils.standardize(name, true)+".png", name});
+                c.addRow(new Object[]{id++, "#" + number + " " + name, "content://" + getContext().getString(R.string.assets_authority) + "/image/"+Utils.standardize(name, true)+".png", name});
+            }
+            if (number.contains(query)) {
+            	c.addRow(new Object[]{id++, "#" + number + " " + name, "content://" + getContext().getString(R.string.assets_authority) + "/image/"+Utils.standardize(name, true)+".png", name});
             }
         }
         return c;
