@@ -24,7 +24,6 @@ import fr.pokedex.utils.Utils;
 
 public class MainActivity extends Activity {
 	
-	private final int STAT_BAR_HEIGHT = 57;
 	private final int COLOUR_LIFE = Color.rgb(79, 202, 30);
 	private final int COLOUR_ATTACK = Color.rgb(227, 11, 11);
 	private final int COLOUR_DEFENSE = Color.rgb(254, 212, 43);
@@ -32,8 +31,9 @@ public class MainActivity extends Activity {
 	private final int COLOUR_SP_DEFENSE = Color.rgb(126, 67, 246);
 	private final int COLOUR_SPEED = Color.rgb(30, 180, 180);
 
-	private final int WEAKNESS_BLOCK_WIDTH = 140;
-	private final int WEAKNESS_BLOCK_HEIGHT = 60;
+    private final int STAT_BAR_HEIGHT = 19;
+	private final int WEAKNESS_BLOCK_WIDTH = 46;
+	private final int WEAKNESS_BLOCK_HEIGHT = 20;
 
     private Pokemon currentPokemon;
     
@@ -129,6 +129,11 @@ public class MainActivity extends Activity {
     }
     
     private void performSearch(String query) {
+        final float dpToPx = getResources().getDisplayMetrics().density;
+        final int barHeight = (int)(STAT_BAR_HEIGHT*dpToPx + 0.5f);
+        final int weaknessBlockWidth = (int)(WEAKNESS_BLOCK_WIDTH*dpToPx + 0.5f);
+        final int weaknessBlockHeight = (int)(WEAKNESS_BLOCK_HEIGHT*dpToPx + 0.5f);
+        
         currentPokemon = PokemonList.perName.get(query);
         TextView nameTxt = (TextView)findViewById(R.id.nameTxt);
         nameTxt.setText(currentPokemon.name);
@@ -173,112 +178,112 @@ public class MainActivity extends Activity {
         TextView statTxt = (TextView)findViewById(R.id.lifeTxt);
         statTxt.setText(""+currentPokemon.life);
         View draw = findViewById(R.id.drawLife);
-        draw.setLayoutParams(new LayoutParams(currentPokemon.life*2, STAT_BAR_HEIGHT));
+        draw.setLayoutParams(new LayoutParams((int)(currentPokemon.life*2f/3f * dpToPx + 0.5f), barHeight));
         draw.setBackgroundColor(COLOUR_LIFE);
         
         statTxt = (TextView)findViewById(R.id.attTxt);
         statTxt.setText(""+currentPokemon.attack);
         draw = findViewById(R.id.drawAtt);
-        draw.setLayoutParams(new LayoutParams(currentPokemon.attack*2, STAT_BAR_HEIGHT));
+        draw.setLayoutParams(new LayoutParams((int)(currentPokemon.attack*2f/3f * dpToPx + 0.5f), barHeight));
         draw.setBackgroundColor(COLOUR_ATTACK);
         
         statTxt = (TextView)findViewById(R.id.defTxt);
         statTxt.setText(""+currentPokemon.defense);
         draw = findViewById(R.id.drawDef);
-        draw.setLayoutParams(new LayoutParams(currentPokemon.defense*2, STAT_BAR_HEIGHT));
+        draw.setLayoutParams(new LayoutParams((int)(currentPokemon.defense*2f/3f * dpToPx + 0.5f), barHeight));
         draw.setBackgroundColor(COLOUR_DEFENSE);
         
         statTxt = (TextView)findViewById(R.id.spaTxt);
         statTxt.setText(""+currentPokemon.spAttack);
         draw = findViewById(R.id.drawSpa);
-        draw.setLayoutParams(new LayoutParams(currentPokemon.spAttack*2, STAT_BAR_HEIGHT));
+        draw.setLayoutParams(new LayoutParams((int)(currentPokemon.spAttack*2f/3f * dpToPx + 0.5f), barHeight));
         draw.setBackgroundColor(COLOUR_SP_ATTACK);
         
         statTxt = (TextView)findViewById(R.id.spdTxt);
         statTxt.setText(""+currentPokemon.spDefense);
         draw = findViewById(R.id.drawSpd);
-        draw.setLayoutParams(new LayoutParams(currentPokemon.spDefense*2, STAT_BAR_HEIGHT));
+        draw.setLayoutParams(new LayoutParams((int)(currentPokemon.spDefense*2f/3f * dpToPx + 0.5f), barHeight));
         draw.setBackgroundColor(COLOUR_SP_DEFENSE);
         
         statTxt = (TextView)findViewById(R.id.speedTxt);
         statTxt.setText(""+currentPokemon.speed);
         draw = findViewById(R.id.drawSpeed);
-        draw.setLayoutParams(new LayoutParams(currentPokemon.speed*2, STAT_BAR_HEIGHT));
+        draw.setLayoutParams(new LayoutParams((int)(currentPokemon.speed*2f/3f * dpToPx + 0.5f), barHeight));
         draw.setBackgroundColor(COLOUR_SPEED);
         
         
         HashMap<Type, Weakness>weaknesses = currentPokemon.getWeaknesses();
 
         View typeWeakness = findViewById(R.id.acier);
-        typeWeakness.setLayoutParams(new LayoutParams(WEAKNESS_BLOCK_WIDTH, WEAKNESS_BLOCK_HEIGHT));
+        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
         typeWeakness.setBackgroundResource(weaknesses.get(Type.ACIER).resource);
         
         typeWeakness = findViewById(R.id.combat);
-        typeWeakness.setLayoutParams(new LayoutParams(WEAKNESS_BLOCK_WIDTH, WEAKNESS_BLOCK_HEIGHT));
+        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
         typeWeakness.setBackgroundResource(weaknesses.get(Type.COMBAT).resource);
         
         typeWeakness = findViewById(R.id.dragon);
-        typeWeakness.setLayoutParams(new LayoutParams(WEAKNESS_BLOCK_WIDTH, WEAKNESS_BLOCK_HEIGHT));
+        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
         typeWeakness.setBackgroundResource(weaknesses.get(Type.DRAGON).resource);
         
         typeWeakness = findViewById(R.id.eau);
-        typeWeakness.setLayoutParams(new LayoutParams(WEAKNESS_BLOCK_WIDTH, WEAKNESS_BLOCK_HEIGHT));
+        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
         typeWeakness.setBackgroundResource(weaknesses.get(Type.EAU).resource);
         
         typeWeakness = findViewById(R.id.electrique);
-        typeWeakness.setLayoutParams(new LayoutParams(WEAKNESS_BLOCK_WIDTH, WEAKNESS_BLOCK_HEIGHT));
+        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
         typeWeakness.setBackgroundResource(weaknesses.get(Type.ELECTRIQUE).resource);
         
         typeWeakness = findViewById(R.id.fee);
-        typeWeakness.setLayoutParams(new LayoutParams(WEAKNESS_BLOCK_WIDTH, WEAKNESS_BLOCK_HEIGHT));
+        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
         typeWeakness.setBackgroundResource(weaknesses.get(Type.FEE).resource);
         
         typeWeakness = findViewById(R.id.feu);
-        typeWeakness.setLayoutParams(new LayoutParams(WEAKNESS_BLOCK_WIDTH, WEAKNESS_BLOCK_HEIGHT));
+        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
         typeWeakness.setBackgroundResource(weaknesses.get(Type.FEU).resource);
         
         typeWeakness = findViewById(R.id.glace);
-        typeWeakness.setLayoutParams(new LayoutParams(WEAKNESS_BLOCK_WIDTH, WEAKNESS_BLOCK_HEIGHT));
+        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
         typeWeakness.setBackgroundResource(weaknesses.get(Type.GLACE).resource);
         
         typeWeakness = findViewById(R.id.insecte);
-        typeWeakness.setLayoutParams(new LayoutParams(WEAKNESS_BLOCK_WIDTH, WEAKNESS_BLOCK_HEIGHT));
+        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
         typeWeakness.setBackgroundResource(weaknesses.get(Type.INSECTE).resource);
         
         typeWeakness = findViewById(R.id.normal);
-        typeWeakness.setLayoutParams(new LayoutParams(WEAKNESS_BLOCK_WIDTH, WEAKNESS_BLOCK_HEIGHT));
+        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
         typeWeakness.setBackgroundResource(weaknesses.get(Type.NORMAL).resource);
         
         typeWeakness = findViewById(R.id.plante);
-        typeWeakness.setLayoutParams(new LayoutParams(WEAKNESS_BLOCK_WIDTH, WEAKNESS_BLOCK_HEIGHT));
+        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
         typeWeakness.setBackgroundResource(weaknesses.get(Type.PLANTE).resource);
         
         typeWeakness = findViewById(R.id.poison);
-        typeWeakness.setLayoutParams(new LayoutParams(WEAKNESS_BLOCK_WIDTH, WEAKNESS_BLOCK_HEIGHT));
+        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
         typeWeakness.setBackgroundResource(weaknesses.get(Type.POISON).resource);
         
         typeWeakness = findViewById(R.id.psy);
-        typeWeakness.setLayoutParams(new LayoutParams(WEAKNESS_BLOCK_WIDTH, WEAKNESS_BLOCK_HEIGHT));
+        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
         typeWeakness.setBackgroundResource(weaknesses.get(Type.PSY).resource);
         
         typeWeakness = findViewById(R.id.roche);
-        typeWeakness.setLayoutParams(new LayoutParams(WEAKNESS_BLOCK_WIDTH, WEAKNESS_BLOCK_HEIGHT));
+        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
         typeWeakness.setBackgroundResource(weaknesses.get(Type.ROCHE).resource);
         
         typeWeakness = findViewById(R.id.sol);
-        typeWeakness.setLayoutParams(new LayoutParams(WEAKNESS_BLOCK_WIDTH, WEAKNESS_BLOCK_HEIGHT));
+        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
         typeWeakness.setBackgroundResource(weaknesses.get(Type.SOL).resource);
         
         typeWeakness = findViewById(R.id.spectre);
-        typeWeakness.setLayoutParams(new LayoutParams(WEAKNESS_BLOCK_WIDTH, WEAKNESS_BLOCK_HEIGHT));
+        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
         typeWeakness.setBackgroundResource(weaknesses.get(Type.SPECTRE).resource);
         
         typeWeakness = findViewById(R.id.tenebre);
-        typeWeakness.setLayoutParams(new LayoutParams(WEAKNESS_BLOCK_WIDTH, WEAKNESS_BLOCK_HEIGHT));
+        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
         typeWeakness.setBackgroundResource(weaknesses.get(Type.TENEBRE).resource);
         
         typeWeakness = findViewById(R.id.vol);
-        typeWeakness.setLayoutParams(new LayoutParams(WEAKNESS_BLOCK_WIDTH, WEAKNESS_BLOCK_HEIGHT));
+        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
         typeWeakness.setBackgroundResource(weaknesses.get(Type.VOL).resource);
     }
 }
