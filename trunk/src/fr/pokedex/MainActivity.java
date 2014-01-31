@@ -22,6 +22,13 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import fr.pokedex.utils.Utils;
 
+/*
+ * TODO:
+ * - Add swipe functions to increase/decrease the pokemon number
+ * - Reduce overrall size of application
+ * - Add attack list and evolution chain
+ */
+
 public class MainActivity extends Activity {
 	
 	private final int COLOUR_LIFE = Color.rgb(79, 202, 30);
