@@ -72,7 +72,7 @@ def main(types, megatypes, caracs, datatalents):
         
         text += """}}}};
         this.put("{name}", new Pokemon("{name}", {number}, Type.{type1}, Type.{type2}, talents, {life}, {attack}, {defense}, {spattack}, {spdefense}, {speed}));""".format(**p)
-    print text
+    print list.keys()
 
 
 

@@ -59,63 +59,79 @@
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp">
+            android:layout_marginLeft="10dp">
+    
+            <LinearLayout
+                android:id="@+id/evolutions"
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
             
-            <ImageView
-                android:id="@+id/type1"
-                android:contentDescription="@+string/type"
-                android:layout_width="40dp"
-                android:layout_height="20dp"
-                android:layout_marginLeft="3dp"
-                android:layout_marginTop="3dp"
-                android:layout_marginRight="3dp"
-                android:layout_marginBottom="3dp"
-                android:scaleType="fitCenter" />
+			<LinearLayout
+			    android:orientation="horizontal"
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content">
             
-            <ImageView
-                android:id="@+id/type2"
-                android:contentDescription="@+string/type"
-                android:layout_width="40dp"
-                android:layout_height="20dp"
-                android:layout_marginLeft="3dp"
-                android:layout_marginTop="3dp"
-                android:layout_marginRight="3dp"
-                android:layout_marginBottom="3dp"
-                android:scaleType="fitCenter" />
-            
-        </LinearLayout>
-        
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="20dp">
-            
-            <TextView
-                android:id="@+id/talent1Txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#0000FF"
-                android:textSize="16sp" />
-            
-            <TextView
-                android:id="@+id/talent2Txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#0000FF"
-                android:layout_marginTop="5dp"
-                android:textSize="16sp" />
-            
-            <TextView
-                android:id="@+id/talent3Txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#0000FF"
-                android:layout_marginTop="5dp"
-                android:textSize="16sp" />
-        
+		        <LinearLayout
+		            android:orientation="vertical"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content">
+		            
+		            <ImageView
+		                android:id="@+id/type1"
+		                android:contentDescription="@+string/type"
+		                android:layout_width="40dp"
+		                android:layout_height="20dp"
+		                android:layout_marginLeft="3dp"
+		                android:layout_marginTop="3dp"
+		                android:layout_marginRight="3dp"
+		                android:layout_marginBottom="3dp"
+		                android:scaleType="fitCenter" />
+		            
+		            <ImageView
+		                android:id="@+id/type2"
+		                android:contentDescription="@+string/type"
+		                android:layout_width="40dp"
+		                android:layout_height="20dp"
+		                android:layout_marginLeft="3dp"
+		                android:layout_marginTop="3dp"
+		                android:layout_marginRight="3dp"
+		                android:layout_marginBottom="3dp"
+		                android:scaleType="fitCenter" />
+		            
+		        </LinearLayout>
+		        
+		        <LinearLayout
+		            android:orientation="vertical"
+		            android:layout_width="fill_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_marginLeft="40dp">
+		            
+		            <TextView
+		                android:id="@+id/talent1Txt"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:textColor="#0000FF"
+		                android:textSize="16sp" />
+		            
+		            <TextView
+		                android:id="@+id/talent2Txt"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:textColor="#0000FF"
+		                android:layout_marginTop="4dp"
+		                android:textSize="16sp" />
+		            
+		            <TextView
+		                android:id="@+id/talent3Txt"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:textColor="#0000FF"
+		                android:layout_marginTop="4dp"
+		                android:textSize="16sp" />
+		        
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
     

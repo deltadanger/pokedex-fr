@@ -1,4 +1,4 @@
-package fr.pokedex;
+package fr.pokedex.data;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,6 +19,8 @@ public class Pokemon {
     public int spAttack;
     public int spDefense;
     public int speed;
+    
+    public Pokemon[] evolutions;
     
     public Pokemon(String name, int number, Type type1, Type type2,
             ArrayList<Talent> abilities, int life, int attack, int defense, int spAttack,

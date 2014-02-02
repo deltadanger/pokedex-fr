@@ -1,4 +1,4 @@
-package fr.pokedex;
+package fr.pokedex.data;
 
 import java.util.HashMap;
 
