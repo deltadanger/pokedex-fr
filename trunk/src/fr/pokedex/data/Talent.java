@@ -1,4 +1,4 @@
-package fr.pokedex;
+package fr.pokedex.data;
 
 public enum Talent {
     

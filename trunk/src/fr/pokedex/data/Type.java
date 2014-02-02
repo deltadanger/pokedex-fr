@@ -1,4 +1,6 @@
-package fr.pokedex;
+package fr.pokedex.data;
+
+import fr.pokedex.R;
 
 
 public enum Type {

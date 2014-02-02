@@ -14,12 +14,20 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
+import fr.pokedex.data.Pokemon;
+import fr.pokedex.data.PokemonList;
+import fr.pokedex.data.Talent;
+import fr.pokedex.data.Type;
+import fr.pokedex.data.Weakness;
 import fr.pokedex.utils.Utils;
 
 /*
@@ -29,7 +37,7 @@ import fr.pokedex.utils.Utils;
  * - Add attack list and evolution chain
  */
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements View.OnTouchListener {
 	
 	private final int COLOUR_LIFE = Color.rgb(79, 202, 30);
 	private final int COLOUR_ATTACK = Color.rgb(227, 11, 11);
@@ -41,6 +49,15 @@ public class MainActivity extends Activity {
     private final int STAT_BAR_HEIGHT = 19;
 	private final int WEAKNESS_BLOCK_WIDTH = 46;
 	private final int WEAKNESS_BLOCK_HEIGHT = 20;
+	
+	private final int EVOLUTION_PIC_WIDTH = 30;
+	private final int EVOLUTION_PIC_HEIGHT = 30;
+	private final int ARROW_WIDTH = 10;
+	private final int ARROW_HEIGHT = 10;
+	private final int EVOLUTION_MARGIN = 3;
+	private final int ARROW_MARGIN_LEFT = 3;
+	private final int ARROW_MARGIN_TOP = 10;
+	
 
     private Pokemon currentPokemon;
     
@@ -48,6 +65,8 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        PokemonList.setEvolutions();
         
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) findViewById(R.id.search_text);
@@ -135,6 +154,28 @@ public class MainActivity extends Activity {
         }
     }
     
+    public boolean onTouch(View view, MotionEvent event) {
+    	if (view == findViewById(R.id.evolutions)) {
+	    	final int eventX = (int) event.getRawX();
+	        final int eventY = (int) event.getRawY();
+	        switch (event.getAction() & MotionEvent.ACTION_MASK) {
+	            case MotionEvent.ACTION_DOWN:
+	                break;
+	            case MotionEvent.ACTION_UP:
+	                break;
+	            case MotionEvent.ACTION_POINTER_DOWN:
+	                break;
+	            case MotionEvent.ACTION_POINTER_UP:
+	                break;
+	            case MotionEvent.ACTION_MOVE:
+	            	
+	                break;
+	        }
+    	}
+    	
+    	return true;
+    }
+    
     private void performSearch(String query) {
         final float dpToPx = getResources().getDisplayMetrics().density;
         final int barHeight = (int)(STAT_BAR_HEIGHT*dpToPx + 0.5f);
@@ -154,6 +195,34 @@ public class MainActivity extends Activity {
             image.invalidate();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        
+        LinearLayout evolutions = (LinearLayout)findViewById(R.id.evolutions);
+        evolutions.removeAllViews();
+        ImageView img;
+        LayoutParams layout;
+        for (int i = 0; i < currentPokemon.evolutions.length; i++) {
+        	Pokemon p = currentPokemon.evolutions[i];
+        	try {
+	        	layout = new LayoutParams((int)(EVOLUTION_PIC_WIDTH*dpToPx + 0.5f), (int)(EVOLUTION_PIC_HEIGHT*dpToPx + 0.5f));
+	        	layout.setMargins((int)(EVOLUTION_MARGIN*dpToPx + 0.5f), 0, 0, 0);
+	        	img = new ImageView(this);
+	        	img.setLayoutParams(layout);
+				img.setImageDrawable(Drawable.createFromStream(getAssets().open("image/" + Utils.standardize(p.name, true) + ".png"), null));
+				evolutions.addView(img);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+        	
+        	// Another element, add an arrow
+        	if (i+1 < currentPokemon.evolutions.length) {
+	        	layout = new LayoutParams((int)(ARROW_WIDTH*dpToPx + 0.5f), (int)(ARROW_HEIGHT*dpToPx + 0.5f));
+	        	layout.setMargins((int)(ARROW_MARGIN_LEFT*dpToPx + 0.5f), (int)(ARROW_MARGIN_TOP*dpToPx + 0.5f), 0, 0);
+        		img = new ImageView(this);
+	        	img.setLayoutParams(layout);
+        		img.setImageResource(R.drawable.arrow);
+        		evolutions.addView(img);
+        	}
         }
 
         ImageView type = (ImageView)findViewById(R.id.type1);

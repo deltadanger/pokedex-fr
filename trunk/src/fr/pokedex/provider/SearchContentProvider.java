@@ -1,4 +1,4 @@
-package fr.pokedex;
+package fr.pokedex.provider;
 
 import java.util.Arrays;
 
@@ -9,6 +9,8 @@ import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.net.Uri;
 import android.provider.BaseColumns;
+import fr.pokedex.R;
+import fr.pokedex.data.PokemonList;
 import fr.pokedex.utils.Utils;
 
 public class SearchContentProvider extends ContentProvider {

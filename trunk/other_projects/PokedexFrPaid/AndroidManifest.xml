@@ -34,12 +34,12 @@
         </activity>
         
         <provider
-            android:name="fr.pokedex.SearchContentProvider"
+            android:name="fr.pokedex.provider.SearchContentProvider"
             android:authorities="fr.paid.pokedex.SearchContentProvider"
             android:enabled="true" />
         
         <provider
-            android:name="fr.pokedex.AssetsProvider"
+            android:name="fr.pokedex.provider.AssetsProvider"
             android:authorities="fr.paid.pokedex.assets" />
     </application>
 

@@ -1,4 +1,4 @@
-package fr.pokedex;
+package fr.pokedex.provider;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

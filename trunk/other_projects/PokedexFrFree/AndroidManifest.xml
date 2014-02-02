@@ -44,12 +44,12 @@
              android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
         
         <provider
-            android:name="fr.pokedex.SearchContentProvider"
+            android:name="fr.pokedex.provider.SearchContentProvider"
             android:authorities="fr.free.pokedex.SearchContentProvider"
             android:enabled="true" />
         
         <provider
-            android:name="fr.pokedex.AssetsProvider"
+            android:name="fr.pokedex.provider.AssetsProvider"
             android:authorities="fr.free.pokedex.assets" />
     </application>
 </manifest>

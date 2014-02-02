@@ -36,12 +36,12 @@
         </activity>
         
         <provider
-            android:name=".SearchContentProvider"
+            android:name="fr.pokedex.provider.SearchContentProvider"
             android:authorities="fr.pokedex.SearchContentProvider"
             android:enabled="true" />
         
         <provider
-            android:name=".AssetsProvider"
+            android:name="fr.pokedex.provider.AssetsProvider"
             android:authorities="fr.pokedex.assets" />
     </application>
 </manifest>
