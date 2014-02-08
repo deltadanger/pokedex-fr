@@ -35,6 +35,8 @@ import fr.pokedex.utils.Utils;
  * - Add swipe functions to increase/decrease the pokemon number
  * - Reduce overrall size of application
  * - Add attack list and evolution chain
+ * - Add dark theme
+ * - Search by type
  */
 
 public class MainActivity extends Activity implements View.OnTouchListener {
