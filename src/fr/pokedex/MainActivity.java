@@ -14,13 +14,11 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
-import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 import fr.pokedex.data.Pokemon;
@@ -32,14 +30,12 @@ import fr.pokedex.utils.Utils;
 
 /*
  * TODO:
- * - Add swipe functions to increase/decrease the pokemon number
- * - Reduce overrall size of application
- * - Add attack list and evolution chain
+ * - Add attack list
  * - Add dark theme
  * - Search by type
  */
 
-public class MainActivity extends Activity implements View.OnTouchListener {
+public class MainActivity extends Activity {
 	
 	private final int COLOUR_LIFE = Color.rgb(79, 202, 30);
 	private final int COLOUR_ATTACK = Color.rgb(227, 11, 11);
@@ -60,7 +56,6 @@ public class MainActivity extends Activity implements View.OnTouchListener {
 	private final int ARROW_MARGIN_LEFT = 3;
 	private final int ARROW_MARGIN_TOP = 10;
 	
-
     private Pokemon currentPokemon;
     
     @Override
@@ -156,28 +151,6 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         }
     }
     
-    public boolean onTouch(View view, MotionEvent event) {
-    	if (view == findViewById(R.id.evolutions)) {
-	    	final int eventX = (int) event.getRawX();
-	        final int eventY = (int) event.getRawY();
-	        switch (event.getAction() & MotionEvent.ACTION_MASK) {
-	            case MotionEvent.ACTION_DOWN:
-	                break;
-	            case MotionEvent.ACTION_UP:
-	                break;
-	            case MotionEvent.ACTION_POINTER_DOWN:
-	                break;
-	            case MotionEvent.ACTION_POINTER_UP:
-	                break;
-	            case MotionEvent.ACTION_MOVE:
-	            	
-	                break;
-	        }
-    	}
-    	
-    	return true;
-    }
-    
     private void performSearch(String query) {
         final float dpToPx = getResources().getDisplayMetrics().density;
         final int barHeight = (int)(STAT_BAR_HEIGHT*dpToPx + 0.5f);
@@ -204,13 +177,19 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         ImageView img;
         LayoutParams layout;
         for (int i = 0; i < currentPokemon.evolutions.length; i++) {
-        	Pokemon p = currentPokemon.evolutions[i];
+        	final Pokemon p = currentPokemon.evolutions[i];
         	try {
 	        	layout = new LayoutParams((int)(EVOLUTION_PIC_WIDTH*dpToPx + 0.5f), (int)(EVOLUTION_PIC_HEIGHT*dpToPx + 0.5f));
 	        	layout.setMargins((int)(EVOLUTION_MARGIN*dpToPx + 0.5f), 0, 0, 0);
 	        	img = new ImageView(this);
 	        	img.setLayoutParams(layout);
 				img.setImageDrawable(Drawable.createFromStream(getAssets().open("image/" + Utils.standardize(p.name, true) + ".png"), null));
+				img.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View arg0) {
+                        performSearch(p.name);
+                    }
+                });
 				evolutions.addView(img);
 			} catch (IOException e) {
 				e.printStackTrace();
