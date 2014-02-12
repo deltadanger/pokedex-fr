@@ -31,7 +31,7 @@ public class MainActivity extends Activity {
         PokemonList.initialize();
         
         Intent intent = new Intent(this, PokemonPage.class);
-        intent.putExtra(PokemonPage.INTENT_EXTRA_POKEMON_NUMBER, 1);
+        intent.putExtra(PokemonPage.INTENT_EXTRA_POKEMON_INDEX, 1);
         startActivity(intent);
         finish();
     }

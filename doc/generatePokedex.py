@@ -37,10 +37,12 @@ def main(types, megatypes, caracs, datatalents):
         
         
     toRemove = {}
+    index = 0
     for carac in caracs.split("\n"):
         carac = carac.split("\t")
         name = carac[2].strip()
         number = int(carac[0])
+        index += 1
         life = int(carac[3])
         attack = int(carac[4])
         defense = int(carac[5])
@@ -49,16 +51,20 @@ def main(types, megatypes, caracs, datatalents):
         speed = int(carac[8])
         
         if name.find("(") == -1:
-            list[name].update({"life": life, "attack": attack, "defense": defense, "spattack": spattack, "spdefense": spdefense, "speed": speed})
+            list[name].update({"index": index, "life": life, "attack": attack, "defense": defense, "spattack": spattack, "spdefense": spdefense, "speed": speed})
         else:
             for baseName, p in list.items():
                 if p["number"] == number and baseName.find("(") == -1:
                     break
             list[name] = list[baseName].copy()
-            list[name].update({"name": name, "life": life, "attack": attack, "defense": defense, "spattack": spattack, "spdefense": spdefense, "speed": speed})
+            list[name].update({"name": name, "index": index, "life": life, "attack": attack, "defense": defense, "spattack": spattack, "spdefense": spdefense, "speed": speed})
             toRemove[baseName] = True
     
     for name, v in toRemove.items():
+        # Decrease all indexes greater than the one to be removed
+        for n, p in list.items():
+            if list[name].has_key("index") and p.has_key("index") and p["index"] > list[name]["index"]:
+                p["index"] -= 1
         del list[name]
     
     text = ""
@@ -71,8 +77,8 @@ def main(types, megatypes, caracs, datatalents):
             text += "this.add(Talent.{});".format(talent)
         
         text += """}}}};
-        this.put("{name}", new Pokemon("{name}", {number}, Type.{type1}, Type.{type2}, talents, {life}, {attack}, {defense}, {spattack}, {spdefense}, {speed}));""".format(**p)
-    print list.keys()
+        this.put("{name}", new Pokemon("{name}", {number}, {index}, Type.{type1}, Type.{type2}, talents, {life}, {attack}, {defense}, {spattack}, {spdefense}, {speed}));""".format(**p)
+    print text
 
 
 
@@ -400,7 +406,7 @@ VOL		134 	100 	95 	100 	80
 	46 	35 	34 	45 	20
 #162 	pokemon 	Fouinar 	Furret 	NORMAL
 	76 	45 	64 	55 	90
-#163 	pokemon 	Hoot-hoot 	Hoothoot 	NORMAL
+#163 	pokemon 	Hoot-hoot 	Hoot-hoot 	NORMAL
 VOL		30 	36 	30 	56 	50
 #164 	pokemon 	Noarfang 	Noctowl 	NORMAL
 VOL		50 	76 	50 	96 	70
@@ -1357,7 +1363,7 @@ COMBAT		129 	72 	90 	90 	108
 #640 	pokemon 	Viridium 	Virizion 	PLANTE
 COMBAT		90 	90 	72 	129 	108
 #641 	pokemon 	Boreas 	Tornadus 	VOL
-VOL		115 	125 	70 	80 	111
+	115 	125 	70 	80 	111
 #642 	pokemon 	Fulguris 	Thundurus 	ELECTRIQUE
 VOL		115 	125 	70 	80 	111
 #643 	pokemon 	Reshiram 	Reshiram 	DRAGON
@@ -2663,7 +2669,7 @@ talents = {
 "Symbios":
 [u'Envelocape', u'Garde Magik', u'Rege-Force'],
 "Melo":
-[u'Joli Sourire', u'Garde Magique', u'Garde Amie'],
+[u'Joli Sourire', u'Garde Magik', u'Garde Amie'],
 "Lianaja":
 [u'Engrais', u'Contestation'],
 "Arcko":
@@ -2947,7 +2953,7 @@ talents = {
 "Tortank":
 [u'Torrent', u'Cuvette'],
 "Minidraco":
-[u'Mue', u'Ecaille Spe.'],
+[u'Mue', u'Ecaille Speciale'],
 "Trioxhydre":
 [u'Levitation'],
 "Melofee":
@@ -3093,7 +3099,7 @@ talents = {
 "Geolithe":
 [u'Fermete', u'Force Sable'],
 "Draco":
-[u'Mue', u'Ecaille Spe.'],
+[u'Mue', u'Ecaille Speciale'],
 "Magnezone":
 [u'Fermete', u'Magnepiege', u'Analyste'],
 "Roselia":
@@ -3489,7 +3495,8 @@ talents = {
 "Phyllali":
 [u'Feuil. Garde', u'Chlorophyle'],
 "Mistigrix":
-[u'Regard Vif', u'Infiltration', u'Farceur(M)/Battant(F)'],
+[u'Regard Vif', u'Infiltration', u'Farceur', u'Battant'],
+# [u'Regard Vif', u'Infiltration', u'Farceur(M)/Battant(F)'],
 "Grotichon":
 [u'Brasier', u'Isograisse'],
 "Tropius":
@@ -3527,7 +3534,7 @@ talents = {
 "Coupenotte":
 [u'Rivalite', u'Brise Moule', u'Tension'],
 "Muciole":
-[u'Lumiatirance', u'Essaim', u'Farceur'],
+[u'Lumiattirance', u'Essaim', u'Farceur'],
 "Cizayox":
 [u'Essaim', u'Technicien', u'Light Metal'],
 "Triopikeur":

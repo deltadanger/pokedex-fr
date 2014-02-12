@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -31,7 +30,7 @@ import fr.pokedex.utils.Utils;
 
 public class PokemonPage extends Activity {
 
-    public static final String INTENT_EXTRA_POKEMON_NUMBER = "intent_extra_pokemon_number";
+    public static final String INTENT_EXTRA_POKEMON_INDEX = "intent_extra_pokemon_index";
 
     private final int COLOUR_LIFE = Color.rgb(79, 202, 30);
     private final int COLOUR_ATTACK = Color.rgb(227, 11, 11);
@@ -73,11 +72,12 @@ public class PokemonPage extends Activity {
         Intent intent = getIntent();
 
         if (/*Intent.ACTION_VIEW*/"android.Intent.action.VIEW".equals(intent.getAction())) {
+            overridePendingTransition(0,0);
             String query = intent.getDataString();
             loadData(query);
         } else {
-            int number = intent.getIntExtra(INTENT_EXTRA_POKEMON_NUMBER, 1);
-            loadData(number);
+            int index = intent.getIntExtra(INTENT_EXTRA_POKEMON_INDEX, 1);
+            loadData(index);
         }
         
         TextView talentTxt = (TextView)findViewById(R.id.talent1Txt);
@@ -120,17 +120,17 @@ public class PokemonPage extends Activity {
         case MotionEvent.ACTION_UP:
             float position = event.getX();
 
-            if (position - touchPositionX > swipeDetect && currentPokemon.number - 1 > 0) {
+            if (position - touchPositionX > swipeDetect && currentPokemon.index - 1 > 0) {
                 Intent intent = new Intent(this, PokemonPage.class);
-                intent.putExtra(INTENT_EXTRA_POKEMON_NUMBER, currentPokemon.number - 1);
+                intent.putExtra(INTENT_EXTRA_POKEMON_INDEX, currentPokemon.index - 1);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out);
                 finish();
             }
 
-            if (touchPositionX - position > swipeDetect && currentPokemon.number + 1 < PokemonList.perNumber.size()) {
+            if (touchPositionX - position > swipeDetect && currentPokemon.index + 1 <= PokemonList.perIndex.size()) {
                 Intent intent = new Intent(this, PokemonPage.class);
-                intent.putExtra(INTENT_EXTRA_POKEMON_NUMBER, currentPokemon.number + 1);
+                intent.putExtra(INTENT_EXTRA_POKEMON_INDEX, currentPokemon.index + 1);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
                 finish();
@@ -155,8 +155,8 @@ public class PokemonPage extends Activity {
         dialog.show();
     }
     
-    private void loadData(int number) {
-        currentPokemon = PokemonList.perNumber.get(number);
+    private void loadData(int index) {
+        currentPokemon = PokemonList.perIndex.get(index);
         loadData();
     }
     
@@ -166,6 +166,9 @@ public class PokemonPage extends Activity {
     }
     
     private void loadData() {
+        if (currentPokemon == null) {
+            currentPokemon = Pokemon.UNKNOWN;
+        }
         
         final int barHeight = (int)(STAT_BAR_HEIGHT*dpToPx + 0.5f);
         final int weaknessBlockWidth = (int)(WEAKNESS_BLOCK_WIDTH*dpToPx + 0.5f);
@@ -196,7 +199,9 @@ public class PokemonPage extends Activity {
                 layout.setMargins((int)(EVOLUTION_MARGIN*dpToPx + 0.5f), 0, 0, 0);
                 img = new ImageView(this);
                 img.setLayoutParams(layout);
-                img.setImageDrawable(Drawable.createFromStream(getAssets().open("image/" + Utils.standardize(p.name, true) + ".png"), null));
+                img.setImageDrawable(Drawable.createFromStream(
+                        getAssets().open(
+                                "image/" + Utils.standardize(p.name, true) + ".png"), null));
                 img.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View arg0) {

@@ -5,8 +5,13 @@ import java.util.HashMap;
 
 
 public class Pokemon {
+    
+    @SuppressWarnings("serial")
+    public static Pokemon UNKNOWN = new Pokemon("Unknown", 0, 0, Type.NONE, Type.NONE, new ArrayList<Talent>(){{this.add(Talent.ERREUR);}}, 0, 0, 0, 0, 0, 0){{this.evolutions = new Pokemon[]{};}};
+    
     public String name;
     public int number;
+    public int index;
     
     public Type type1;
     public Type type2;
@@ -22,12 +27,13 @@ public class Pokemon {
     
     public Pokemon[] evolutions;
     
-    public Pokemon(String name, int number, Type type1, Type type2,
+    public Pokemon(String name, int number, int index, Type type1, Type type2,
             ArrayList<Talent> abilities, int life, int attack, int defense, int spAttack,
             int spDefense, int speed) {
         super();
         this.name = name;
         this.number = number;
+        this.index = index;
         this.type1 = type1;
         this.type2 = type2;
         this.abilities = abilities;

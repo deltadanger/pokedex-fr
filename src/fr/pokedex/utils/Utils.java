@@ -18,7 +18,7 @@ public class Utils {
             result = result.substring(0, result.indexOf(" ("));
         }
         
-        result = result.replace(" ", "-");
+        result = result.replace(" ", "-").replace(".", "");
         
         return result.trim();
     }
