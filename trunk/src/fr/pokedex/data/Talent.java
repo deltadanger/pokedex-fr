@@ -1,6 +1,8 @@
 package fr.pokedex.data;
 
 public enum Talent {
+
+    ERREUR ("Erreur", "Il y a eu une erreur lors du chargement de ce pokémon.", ""),
     
     ABSENTEISME ("Absentéisme ", "Le Pokémon n'attaque qu'un tour sur deux.", ""),
     ABSORB_EAU ("Absorb Eau ", "Les attaques de type eau reçues par le Pokémon régénèrent 1/4 de ses PV.", ""),

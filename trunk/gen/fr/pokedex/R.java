@@ -165,7 +165,6 @@ public final class R {
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static int AppTheme=0x7f080001;
-        public static int noAnimTheme=0x7f080002;
     }
     public static final class xml {
         public static int searchable=0x7f050000;
