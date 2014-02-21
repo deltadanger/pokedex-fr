@@ -1,8 +1,6 @@
 import os, urllib
 from HTMLParser import HTMLParser
 
-PROXY = "http://jacoelt:8*ziydwys@crlwsgateway_cluster.salmat.com.au:8080"
-
 list = {}
 
 def main(types, megatypes, caracs, datatalents):
