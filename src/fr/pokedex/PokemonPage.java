@@ -121,7 +121,7 @@ public class PokemonPage extends Activity {
             float position = event.getX();
 
             if (position - touchPositionX > swipeDetect && currentPokemon.index - 1 > 0) {
-                Intent intent = new Intent(this, PokemonPage.class);
+                Intent intent = new Intent(this, this.getClass());
                 intent.putExtra(INTENT_EXTRA_POKEMON_INDEX, currentPokemon.index - 1);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out);
@@ -129,7 +129,7 @@ public class PokemonPage extends Activity {
             }
 
             if (touchPositionX - position > swipeDetect && currentPokemon.index + 1 <= PokemonList.perIndex.size()) {
-                Intent intent = new Intent(this, PokemonPage.class);
+                Intent intent = new Intent(this, this.getClass());
                 intent.putExtra(INTENT_EXTRA_POKEMON_INDEX, currentPokemon.index + 1);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
