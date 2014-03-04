@@ -8,10 +8,9 @@ import android.util.SparseArray;
 @SuppressWarnings("serial")
 public class PokemonList {
     
-    public static SparseArray<Pokemon> perIndex;
+    public static SparseArray<Pokemon> perIndex = new SparseArray<Pokemon>();
 	
 	public static void initialize() {
-	    perIndex = new SparseArray<Pokemon>();
 	    for (String name : perName.keySet()) {
 	        Pokemon p = perName.get(name);
 	        perIndex.put(p.index, p);

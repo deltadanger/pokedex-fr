@@ -64,6 +64,8 @@ def main(types, megatypes, caracs, datatalents):
             if list[name].has_key("index") and p.has_key("index") and p["index"] > list[name]["index"]:
                 p["index"] -= 1
         del list[name]
+    print list
+    return
     
     text = ""
     for name, p in list.items():
