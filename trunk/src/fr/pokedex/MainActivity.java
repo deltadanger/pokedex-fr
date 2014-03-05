@@ -7,6 +7,7 @@ import fr.pokedex.data.PokemonList;
 
 /*
  * TODO:
+ * - Icone transparente
  * - Ajout d'infos supplémentaires
  *      - Taille
  *      - Poids

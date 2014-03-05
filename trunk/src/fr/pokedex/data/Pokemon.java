@@ -5,10 +5,7 @@ import java.util.HashMap;
 
 
 public class Pokemon {
-    
-    @SuppressWarnings("serial")
-    public static Pokemon UNKNOWN = new Pokemon("Unknown", 0, 0, Type.NONE, Type.NONE, new ArrayList<Talent>(){{this.add(Talent.ERREUR);}}, 0, 0, 0, 0, 0, 0){{this.evolutions = new Pokemon[]{};}};
-    
+     
     public String name;
     public int number;
     public int index;
@@ -25,7 +22,15 @@ public class Pokemon {
     public int spDefense;
     public int speed;
     
-    public Pokemon[] evolutions;
+    public EvolutionLink evolutions;
+    
+    public int catchRate;
+    public String weight;
+    public String hatch;
+    public String gender;
+    public String ev;
+    public String eggGroup;
+    public String size;
     
     public Pokemon(String name, int number, int index, Type type1, Type type2,
             ArrayList<Talent> abilities, int life, int attack, int defense, int spAttack,
