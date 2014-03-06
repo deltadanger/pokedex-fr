@@ -2,12 +2,12 @@ package fr.pokedex.data;
 
 import java.util.HashMap;
 
-public class EvolutionLink {
+public class EvolutionNode {
     public Pokemon base;
     
-    public HashMap<String, EvolutionLink> evolutions;
+    public HashMap<String, EvolutionNode> evolutions;
     
-    public EvolutionLink(Pokemon base, HashMap<String, EvolutionLink> evolutions) {
+    public EvolutionNode(Pokemon base, HashMap<String, EvolutionNode> evolutions) {
         this.base = base;
         this.evolutions = evolutions;
     }

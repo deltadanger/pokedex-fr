@@ -5,7 +5,10 @@ import java.util.HashMap;
 
 
 public class Pokemon {
-     
+    
+    @SuppressWarnings("serial")
+    public static Pokemon UNKNOWN = new Pokemon("Unknown", 0, 0, Type.NONE, Type.NONE, new ArrayList<Talent>(){{this.add(Talent.ERREUR);}}, 0, 0, 0, 0, 0, 0){{this.evolutions = null;}};
+    
     public String name;
     public int number;
     public int index;
@@ -22,9 +25,9 @@ public class Pokemon {
     public int spDefense;
     public int speed;
     
-    public EvolutionLink evolutions;
+    public EvolutionNode evolutions;
     
-    public int catchRate;
+    public String catchRate;
     public String weight;
     public String hatch;
     public String gender;
@@ -69,5 +72,30 @@ public class Pokemon {
     	}
     	
     	return result;
+    }
+    
+    public Pokemon[] getSimpleEvolutionList() {
+        return getEvolutionList(evolutions).toArray(new Pokemon[]{});
+    }
+    
+    @SuppressWarnings("serial")
+    private ArrayList<Pokemon> getEvolutionList(final EvolutionNode root) {
+        if (root == null) {
+            return new ArrayList<Pokemon>();
+        }
+        
+        if (root.evolutions == null || root.evolutions.size() < 1) {
+            return new ArrayList<Pokemon>(){{this.add(root.base);}};
+        }
+        
+        ArrayList<Pokemon> result = new ArrayList<Pokemon>(){{this.add(root.base);}};
+        for (String path : root.evolutions.keySet()) {
+            result.addAll(getEvolutionList(root.evolutions.get(path)));
+        }
+        return result;
+    }
+    
+    public String toString() {
+        return name;
     }
 }
