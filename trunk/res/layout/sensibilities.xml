@@ -1,0 +1,425 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" 
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="10dp">
+        
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            
+            <ImageView
+                android:contentDescription="@+string/acier"
+                android:layout_width="40dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginBottom="3dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/acier" />
+            
+            <View
+                android:id="@+id/acier"
+                android:layout_width="fill_parent"
+                android:layout_height="10dp" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            
+            <ImageView
+                android:contentDescription="@+string/combat"
+                android:layout_width="40dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginBottom="3dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/combat" />
+            
+            <View
+                android:id="@+id/combat"
+                android:layout_width="fill_parent"
+                android:layout_height="10dp" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            
+            <ImageView
+                android:contentDescription="@+string/dragon"
+                android:layout_width="40dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginBottom="3dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/dragon" />
+            
+            <View
+                android:id="@+id/dragon"
+                android:layout_width="fill_parent"
+                android:layout_height="10dp" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            
+            <ImageView
+                android:contentDescription="@+string/eau"
+                android:layout_width="40dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginBottom="3dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/eau" />
+            
+            <View
+                android:id="@+id/eau"
+                android:layout_width="fill_parent"
+                android:layout_height="10dp" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            
+            <ImageView
+                android:contentDescription="@+string/electrique"
+                android:layout_width="40dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginBottom="3dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/electrique" />
+            
+            <View
+                android:id="@+id/electrique"
+                android:layout_width="fill_parent"
+                android:layout_height="10dp" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            
+            <ImageView
+                android:contentDescription="@+string/fee"
+                android:layout_width="40dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginBottom="3dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/fee" />
+            
+            <View
+                android:id="@+id/fee"
+                android:layout_width="fill_parent"
+                android:layout_height="10dp" />
+        </LinearLayout>
+    </LinearLayout>
+    
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp">
+        
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            
+            <ImageView
+                android:contentDescription="@+string/feu"
+                android:layout_width="40dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginBottom="3dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/feu" />
+            
+            <View
+                android:id="@+id/feu"
+                android:layout_width="fill_parent"
+                android:layout_height="10dp" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            
+            <ImageView
+                android:contentDescription="@+string/glace"
+                android:layout_width="40dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginBottom="3dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/glace" />
+            
+            <View
+                android:id="@+id/glace"
+                android:layout_width="fill_parent"
+                android:layout_height="10dp" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            
+            <ImageView
+                android:contentDescription="@+string/insecte"
+                android:layout_width="40dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginBottom="3dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/insecte" />
+            
+            <View
+                android:id="@+id/insecte"
+                android:layout_width="fill_parent"
+                android:layout_height="10dp" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            
+            <ImageView
+                android:contentDescription="@+string/normal"
+                android:layout_width="40dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginBottom="3dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/normal" />
+            
+            <View
+                android:id="@+id/normal"
+                android:layout_width="fill_parent"
+                android:layout_height="10dp" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            
+            <ImageView
+                android:contentDescription="@+string/plante"
+                android:layout_width="40dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginBottom="3dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/plante" />
+            
+            <View
+                android:id="@+id/plante"
+                android:layout_width="fill_parent"
+                android:layout_height="10dp" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            
+            <ImageView
+                android:contentDescription="@+string/poison"
+                android:layout_width="40dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginBottom="3dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/poison" />
+            
+            <View
+                android:id="@+id/poison"
+                android:layout_width="fill_parent"
+                android:layout_height="10dp" />
+        </LinearLayout>
+    </LinearLayout>
+    
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp">
+        
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            
+            <ImageView
+                android:contentDescription="@+string/psy"
+                android:layout_width="40dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginBottom="3dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/psy" />
+            
+            <View
+                android:id="@+id/psy"
+                android:layout_width="fill_parent"
+                android:layout_height="10dp" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            
+            <ImageView
+                android:contentDescription="@+string/roche"
+                android:layout_width="40dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginBottom="3dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/roche" />
+            
+            <View
+                android:id="@+id/roche"
+                android:layout_width="fill_parent"
+                android:layout_height="10dp" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            
+            <ImageView
+                android:contentDescription="@+string/sol"
+                android:layout_width="40dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginBottom="3dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/sol" />
+            
+            <View
+                android:id="@+id/sol"
+                android:layout_width="fill_parent"
+                android:layout_height="10dp" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            
+            <ImageView
+                android:contentDescription="@+string/spectre"
+                android:layout_width="40dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginBottom="3dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/spectre" />
+            
+            <View
+                android:id="@+id/spectre"
+                android:layout_width="fill_parent"
+                android:layout_height="10dp" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            
+            <ImageView
+                android:contentDescription="@+string/tenebre"
+                android:layout_width="40dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginBottom="3dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/tenebre" />
+            
+            <View
+                android:id="@+id/tenebre"
+                android:layout_width="fill_parent"
+                android:layout_height="10dp" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            
+            <ImageView
+                android:contentDescription="@+string/vol"
+                android:layout_width="40dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginBottom="3dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/vol" />
+            
+            <View
+                android:id="@+id/vol"
+                android:layout_width="fill_parent"
+                android:layout_height="10dp" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

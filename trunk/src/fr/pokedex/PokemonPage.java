@@ -16,6 +16,7 @@ import android.text.style.UnderlineSpan;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
@@ -51,7 +52,7 @@ public class PokemonPage extends Activity {
     private final int ARROW_MARGIN_LEFT = 3;
     private final int ARROW_MARGIN_TOP = 10;
     
-    private final int SWIPE_MIN_MOVE = 20;
+    private final int SWIPE_MIN_MOVE = 50;
     private float touchPositionX = 0f;
     
     private float dpToPx;
@@ -60,7 +61,9 @@ public class PokemonPage extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+//        ((ScrollView)findViewById(R.id.main_layout)).requestDisallowInterceptTouchEvent(true);
         dpToPx = this.getResources().getDisplayMetrics().density;
         
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
@@ -109,7 +112,9 @@ public class PokemonPage extends Activity {
     }
     
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        boolean ret = super.dispatchTouchEvent(event);
+        
         final int swipeDetect = (int)(SWIPE_MIN_MOVE*dpToPx + 0.5f);
         switch (event.getAction())
         {
@@ -137,7 +142,8 @@ public class PokemonPage extends Activity {
             }
             break;
         }
-        return false;
+        
+        return ret;
     }
     
     private void showTalentDialog(int n) {
@@ -188,12 +194,13 @@ public class PokemonPage extends Activity {
             e.printStackTrace();
         }
         
+        Pokemon[] currentPokemonEvolutions = currentPokemon.getSimpleEvolutionList();
         LinearLayout evolutions = (LinearLayout)findViewById(R.id.evolutions);
         evolutions.removeAllViews();
         ImageView img;
         LayoutParams layout;
-        for (int i = 0; i < currentPokemon.evolutions.length; i++) {
-            final Pokemon p = currentPokemon.evolutions[i];
+        for (int i = 0; i < currentPokemonEvolutions.length; i++) {
+            final Pokemon p = currentPokemonEvolutions[i];
             try {
                 layout = new LayoutParams((int)(EVOLUTION_PIC_WIDTH*dpToPx + 0.5f), (int)(EVOLUTION_PIC_HEIGHT*dpToPx + 0.5f));
                 layout.setMargins((int)(EVOLUTION_MARGIN*dpToPx + 0.5f), 0, 0, 0);
@@ -214,7 +221,7 @@ public class PokemonPage extends Activity {
             }
             
             // Another element, add an arrow
-            if (i+1 < currentPokemon.evolutions.length) {
+            if (i+1 < currentPokemonEvolutions.length) {
                 layout = new LayoutParams((int)(ARROW_WIDTH*dpToPx + 0.5f), (int)(ARROW_HEIGHT*dpToPx + 0.5f));
                 layout.setMargins((int)(ARROW_MARGIN_LEFT*dpToPx + 0.5f), (int)(ARROW_MARGIN_TOP*dpToPx + 0.5f), 0, 0);
                 img = new ImageView(this);
