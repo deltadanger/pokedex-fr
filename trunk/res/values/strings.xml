@@ -8,6 +8,7 @@
     <string name="search_title">Recherche</string>
     <string name="search_hint">Chercher Pokemon ou numéro</string>
     <string name="icon">Icone de Pokemon</string>
+    <string name="expand">Elargir</string>
     <string name="type">Type</string>
     
     <string name="life">Vie</string>
