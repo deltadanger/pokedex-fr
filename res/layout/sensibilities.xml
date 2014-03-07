@@ -30,7 +30,7 @@
             
             <View
                 android:id="@+id/acier"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="10dp" />
         </LinearLayout>
         
@@ -52,7 +52,7 @@
             
             <View
                 android:id="@+id/combat"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="10dp" />
         </LinearLayout>
         
@@ -74,7 +74,7 @@
             
             <View
                 android:id="@+id/dragon"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="10dp" />
         </LinearLayout>
         
@@ -96,7 +96,7 @@
             
             <View
                 android:id="@+id/eau"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="10dp" />
         </LinearLayout>
         
@@ -118,7 +118,7 @@
             
             <View
                 android:id="@+id/electrique"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="10dp" />
         </LinearLayout>
         
@@ -140,7 +140,7 @@
             
             <View
                 android:id="@+id/fee"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="10dp" />
         </LinearLayout>
     </LinearLayout>
@@ -169,7 +169,7 @@
             
             <View
                 android:id="@+id/feu"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="10dp" />
         </LinearLayout>
         
@@ -191,7 +191,7 @@
             
             <View
                 android:id="@+id/glace"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="10dp" />
         </LinearLayout>
         
@@ -213,7 +213,7 @@
             
             <View
                 android:id="@+id/insecte"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="10dp" />
         </LinearLayout>
         
@@ -235,7 +235,7 @@
             
             <View
                 android:id="@+id/normal"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="10dp" />
         </LinearLayout>
         
@@ -257,7 +257,7 @@
             
             <View
                 android:id="@+id/plante"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="10dp" />
         </LinearLayout>
         
@@ -279,7 +279,7 @@
             
             <View
                 android:id="@+id/poison"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="10dp" />
         </LinearLayout>
     </LinearLayout>
@@ -308,7 +308,7 @@
             
             <View
                 android:id="@+id/psy"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="10dp" />
         </LinearLayout>
         
@@ -330,7 +330,7 @@
             
             <View
                 android:id="@+id/roche"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="10dp" />
         </LinearLayout>
         
@@ -352,7 +352,7 @@
             
             <View
                 android:id="@+id/sol"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="10dp" />
         </LinearLayout>
         
@@ -374,7 +374,7 @@
             
             <View
                 android:id="@+id/spectre"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="10dp" />
         </LinearLayout>
         
@@ -396,7 +396,7 @@
             
             <View
                 android:id="@+id/tenebre"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="10dp" />
         </LinearLayout>
         
@@ -418,7 +418,7 @@
             
             <View
                 android:id="@+id/vol"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="10dp" />
         </LinearLayout>
     </LinearLayout>

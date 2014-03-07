@@ -13,10 +13,14 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
@@ -27,6 +31,8 @@ import fr.pokedex.data.PokemonList;
 import fr.pokedex.data.Talent;
 import fr.pokedex.data.Type;
 import fr.pokedex.data.Weakness;
+import fr.pokedex.utils.ExpandAnimation;
+import fr.pokedex.utils.ExpandAnimation.Direction;
 import fr.pokedex.utils.Utils;
 
 public class PokemonPage extends Activity {
@@ -58,6 +64,8 @@ public class PokemonPage extends Activity {
     private float dpToPx;
     private Pokemon currentPokemon;
     
+    private ExpandAnimation animation;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +79,7 @@ public class PokemonPage extends Activity {
         
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setIconified(false);
+        searchView.clearFocus();
         
         Intent intent = getIntent();
 
@@ -109,6 +118,31 @@ public class PokemonPage extends Activity {
                 showTalentDialog(2);
             }
         });
+        
+        final LinearLayout infos = (LinearLayout)findViewById(R.id.info_content);
+        infos.getViewTreeObserver().addOnGlobalLayoutListener( 
+            new OnGlobalLayoutListener(){
+
+                @SuppressWarnings("deprecation")
+                @Override
+                public void onGlobalLayout() {
+                    animation = new ExpandAnimation(infos);
+                    animation.setDuration(500);
+                    
+                    infos.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                    infos.setVisibility(View.GONE);
+                }
+
+        });
+        
+        ImageView expandArrow = (ImageView)findViewById(R.id.expand);
+        expandArrow.setOnClickListener(new OnClickListener() {
+            
+            @Override
+            public void onClick(View arg0) {
+                animateViewHeight(infos);
+            }
+        });
     }
     
     @Override
@@ -144,6 +178,38 @@ public class PokemonPage extends Activity {
         }
         
         return ret;
+    }
+    
+    private void animateViewHeight(final LinearLayout v) {
+        final int visibility;
+        
+        if (View.GONE == v.getVisibility()) {
+            visibility = View.VISIBLE;
+            animation.setDirection(Direction.EXPAND);
+        } else {
+            visibility = View.GONE;
+            animation.setDirection(Direction.COLLAPSE);
+        }
+
+        animation.setAnimationListener(new AnimationListener() {
+            
+            @Override
+            public void onAnimationStart(Animation arg0) {
+                v.setVisibility(View.VISIBLE);
+            }
+            
+            @Override
+            public void onAnimationRepeat(Animation arg0) {
+            }
+            
+            @Override
+            public void onAnimationEnd(Animation arg0) {
+                if (View.GONE == visibility) {
+                    v.setVisibility(visibility);
+                }
+            }
+        });
+        v.startAnimation(animation);
     }
     
     private void showTalentDialog(int n) {

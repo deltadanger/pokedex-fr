@@ -1,27 +1,32 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_layout"
-    tools:context=".MainActivity"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:orientation="vertical">
     
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        android:orientation="vertical">
+    <SearchView
+        android:id="@+id/search_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10" />
+    
+    <ScrollView
+        tools:context=".MainActivity"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         
-        <SearchView
-            android:id="@+id/search_text"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:ems="10" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" 
+            android:orientation="vertical">
+            
+            <include layout="@layout/head" />
+            <include layout="@layout/infos" />
+            <include layout="@layout/stats" />
+            <include layout="@layout/sensibilities" />
+            
+        </LinearLayout>
         
-        <include layout="@layout/head" />
-        
-        <View android:layout_width="fill_parent" android:layout_height="200dp"/>
-        
-        <include layout="@layout/stats" />
-        <include layout="@layout/sensibilities" />
-        
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
+</LinearLayout>
