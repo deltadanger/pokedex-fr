@@ -17,6 +17,14 @@
     <string name="spatt">Sp Attaque</string>
     <string name="spdef">Sp Defense</string>
     <string name="speed">Vitesse</string>
+    
+    <string name="size">Taille :</string>
+    <string name="weight">Poids :</string>
+    <string name="ev">EV :</string>
+    <string name="catch_rate">Taux de capture :</string>
+    <string name="gender">Sexe :</string>
+    <string name="hatch">Eclosion :</string>
+    <string name="egg_group">Groupe oeuf :</string>
 
     <string name="acier">acier</string>
     <string name="combat">combat</string>

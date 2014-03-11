@@ -25,6 +25,7 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.SearchView;
 import android.widget.TextView;
+import fr.pokedex.data.EvolutionNode;
 import fr.pokedex.data.Pokemon;
 import fr.pokedex.data.PokemonList;
 import fr.pokedex.data.Talent;
@@ -322,6 +323,30 @@ public class PokemonPage extends Activity {
             content.setSpan(new UnderlineSpan(), 0, currentPokemon.abilities.get(2).name.length(), 0);
             talentTxt.setText(content);
         }
+        
+        // Additional information
+        addEvolutions(currentPokemon.evolutions, (LinearLayout)findViewById(R.id.full_evolutions));
+        TextView infoTxt = (TextView)findViewById(R.id.size_txt);
+        infoTxt.setText(currentPokemon.size);
+        
+        infoTxt = (TextView)findViewById(R.id.weight_txt);
+        infoTxt.setText(currentPokemon.weight);
+
+        infoTxt = (TextView)findViewById(R.id.ev_txt);
+        infoTxt.setText(currentPokemon.ev);
+
+        infoTxt = (TextView)findViewById(R.id.catch_rate_txt);
+        infoTxt.setText(currentPokemon.catchRate);
+        
+        infoTxt = (TextView)findViewById(R.id.gender_txt);
+        infoTxt.setText(currentPokemon.gender);
+        
+        infoTxt = (TextView)findViewById(R.id.hatch_txt);
+        infoTxt.setText(currentPokemon.hatch);
+        
+        infoTxt = (TextView)findViewById(R.id.egg_group_txt);
+        infoTxt.setText(currentPokemon.eggGroup);
+        
 
         TextView statTxt = (TextView)findViewById(R.id.lifeTxt);
         statTxt.setText(""+currentPokemon.life);
@@ -433,5 +458,44 @@ public class PokemonPage extends Activity {
         typeWeakness = findViewById(R.id.vol);
         typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
         typeWeakness.setBackgroundResource(weaknesses.get(Type.VOL).resource);
+    }
+    
+    private void addEvolutions(EvolutionNode root, LinearLayout layout) {
+        
+        
+        
+//        evolutions = (LinearLayout)findViewById(R.id.evolutions);
+//        evolutions.removeAllViews();
+//        for (int i = 0; i < currentPokemonEvolutions.length; i++) {
+//            final Pokemon p = currentPokemonEvolutions[i];
+//            try {
+//                layout = new LayoutParams((int)(EVOLUTION_PIC_WIDTH*dpToPx + 0.5f), (int)(EVOLUTION_PIC_HEIGHT*dpToPx + 0.5f));
+//                layout.setMargins((int)(EVOLUTION_MARGIN*dpToPx + 0.5f), 0, 0, 0);
+//                img = new ImageView(this);
+//                img.setLayoutParams(layout);
+//                img.setImageDrawable(Drawable.createFromStream(
+//                        getAssets().open(
+//                                "image/" + Utils.standardize(p.name, true) + ".png"), null));
+//                img.setOnClickListener(new OnClickListener() {
+//                    @Override
+//                    public void onClick(View arg0) {
+//                        loadData(p.name);
+//                    }
+//                });
+//                evolutions.addView(img);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            
+//            // Another element, add an arrow
+//            if (i+1 < currentPokemonEvolutions.length) {
+//                layout = new LayoutParams((int)(ARROW_WIDTH*dpToPx + 0.5f), (int)(ARROW_HEIGHT*dpToPx + 0.5f));
+//                layout.setMargins((int)(ARROW_MARGIN_LEFT*dpToPx + 0.5f), (int)(ARROW_MARGIN_TOP*dpToPx + 0.5f), 0, 0);
+//                img = new ImageView(this);
+//                img.setLayoutParams(layout);
+//                img.setImageResource(R.drawable.arrow);
+//                evolutions.addView(img);
+//            }
+//        }
     }
 }
