@@ -26,14 +26,14 @@ public class Pokemon {
     public int speed;
     
     public EvolutionNode evolutions;
-    
-    public String catchRate;
-    public String weight;
-    public String hatch;
-    public String gender;
-    public String ev;
-    public String eggGroup;
+
     public String size;
+    public String weight;
+    public String ev;
+    public String catchRate;
+    public String gender;
+    public String hatch;
+    public String eggGroup;
     
     public Pokemon(String name, int number, int index, Type type1, Type type2,
             ArrayList<Talent> abilities, int life, int attack, int defense, int spAttack,

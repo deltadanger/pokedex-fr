@@ -17,6 +17,7 @@ import fr.pokedex.data.PokemonList;
  *      - Nombre de pas
  *      - Répartition Male/Femelle
  *      - Talents
+ * - Garder section "info supp" dans le même état lors d'un changement de page
  * X Recherche par type
  * - Theme sombre
  * - Liste des attaques apprises
