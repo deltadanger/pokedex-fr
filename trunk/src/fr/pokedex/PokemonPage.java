@@ -13,7 +13,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -71,7 +70,6 @@ public class PokemonPage extends Activity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
-//        ((ScrollView)findViewById(R.id.main_layout)).requestDisallowInterceptTouchEvent(true);
         dpToPx = this.getResources().getDisplayMetrics().density;
         
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
@@ -130,6 +128,7 @@ public class PokemonPage extends Activity {
                     animation.setDuration(500);
                     
                     infos.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+//                    infos.getViewTreeObserver().removeOnGlobalLayoutListener(this); // if API level > 18
                     infos.setVisibility(View.GONE);
                 }
 
@@ -210,6 +209,7 @@ public class PokemonPage extends Activity {
             }
         });
         v.startAnimation(animation);
+        findViewById(R.id.main_layout).invalidate();
     }
     
     private void showTalentDialog(int n) {
