@@ -1,6 +1,5 @@
 package fr.pokedex.utils;
 
-import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
@@ -33,8 +32,6 @@ public class ExpandAnimation extends Animation {
         } else {
             newHeight = originalHeight - (int)(originalHeight*interpolatedTime);
         }
-        Log.d("test", ""+originalHeight);
-        Log.d("test", ""+interpolatedTime);
         LayoutParams params = new LayoutParams(v.getLayoutParams().width, newHeight);
         v.setLayoutParams(params);
         v.requestLayout();
