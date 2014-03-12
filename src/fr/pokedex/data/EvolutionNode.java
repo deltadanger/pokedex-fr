@@ -11,4 +11,12 @@ public class EvolutionNode {
         this.base = base;
         this.evolutions = evolutions;
     }
+    
+    public boolean isLeaf() {
+        return evolutions == null || evolutions.isEmpty();
+    }
+    
+    public boolean hasSeveralPaths() {
+        return evolutions != null && evolutions.size() > 1;
+    }
 }

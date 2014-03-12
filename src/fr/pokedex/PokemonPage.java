@@ -1,6 +1,7 @@
 package fr.pokedex;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.app.Activity;
@@ -9,10 +10,13 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,6 +24,7 @@ import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
@@ -38,6 +43,9 @@ import fr.pokedex.utils.Utils;
 public class PokemonPage extends Activity {
 
     public static final String INTENT_EXTRA_POKEMON_INDEX = "intent_extra_pokemon_index";
+    public static final String INTENT_EXTRA_INFO_STATE = "intent_extra_info_state";
+    
+    private static int infosVisibility = View.GONE;
 
     private final int COLOUR_LIFE = Color.rgb(79, 202, 30);
     private final int COLOUR_ATTACK = Color.rgb(227, 11, 11);
@@ -57,6 +65,9 @@ public class PokemonPage extends Activity {
     private final int EVOLUTION_MARGIN = 3;
     private final int ARROW_MARGIN_LEFT = 3;
     private final int ARROW_MARGIN_TOP = 10;
+
+    private final int FULL_EVOLUTION_PIC_WIDTH = 70;
+    private final int FULL_EVOLUTION_PIC_HEIGHT = 70;
     
     private final int SWIPE_MIN_MOVE = 50;
     private float touchPositionX = 0f;
@@ -65,6 +76,9 @@ public class PokemonPage extends Activity {
     private Pokemon currentPokemon;
     
     private ExpandAnimation animation;
+    
+    private HorizontalScrollView fullEvolutionsScrollView;
+    private boolean touchedInsideScrollView = false;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,8 +94,8 @@ public class PokemonPage extends Activity {
         searchView.setIconified(false);
         searchView.clearFocus();
         
-        Intent intent = getIntent();
-
+        final Intent intent = getIntent();
+        
         if (/*Intent.ACTION_VIEW*/"android.Intent.action.VIEW".equals(intent.getAction())) {
             overridePendingTransition(0,0);
             String query = intent.getDataString();
@@ -90,6 +104,23 @@ public class PokemonPage extends Activity {
             int index = intent.getIntExtra(INTENT_EXTRA_POKEMON_INDEX, 1);
             loadData(index);
         }
+
+        final LinearLayout infos = (LinearLayout)findViewById(R.id.info_content);
+        infos.getViewTreeObserver().addOnGlobalLayoutListener( 
+            new OnGlobalLayoutListener(){
+
+                @SuppressWarnings("deprecation")
+                @Override
+                public void onGlobalLayout() {
+                    animation = new ExpandAnimation(infos);
+                    animation.setDuration(500);
+                    
+                    infos.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+//                    infos.getViewTreeObserver().removeOnGlobalLayoutListener(this); // requires API level >= 18
+                    infos.setVisibility(infosVisibility);
+                }
+
+        });
         
         TextView talentTxt = (TextView)findViewById(R.id.talent1Txt);
         talentTxt.setOnClickListener(new OnClickListener() {
@@ -118,23 +149,6 @@ public class PokemonPage extends Activity {
             }
         });
         
-        final LinearLayout infos = (LinearLayout)findViewById(R.id.info_content);
-        infos.getViewTreeObserver().addOnGlobalLayoutListener( 
-            new OnGlobalLayoutListener(){
-
-                @SuppressWarnings("deprecation")
-                @Override
-                public void onGlobalLayout() {
-                    animation = new ExpandAnimation(infos);
-                    animation.setDuration(500);
-                    
-                    infos.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-//                    infos.getViewTreeObserver().removeOnGlobalLayoutListener(this); // if API level > 18
-                    infos.setVisibility(View.GONE);
-                }
-
-        });
-        
         ImageView expandArrow = (ImageView)findViewById(R.id.expand);
         expandArrow.setOnClickListener(new OnClickListener() {
             
@@ -149,19 +163,27 @@ public class PokemonPage extends Activity {
     public boolean dispatchTouchEvent(MotionEvent event) {
         boolean ret = super.dispatchTouchEvent(event);
         
-        final int swipeDetect = (int)(SWIPE_MIN_MOVE*dpToPx + 0.5f);
         switch (event.getAction())
         {
         // when user first touches the screen we get x and y coordinate
         case MotionEvent.ACTION_DOWN:
+            touchedInsideScrollView = isInsideHorizontalScrollView(event.getX(), event.getY());
             touchPositionX = event.getX();
             break;
+            
         case MotionEvent.ACTION_UP:
+            if (touchedInsideScrollView) {
+                break;
+            }
+            
+            final LinearLayout infos = (LinearLayout)findViewById(R.id.info_content);
+            final int swipeDetect = (int)(SWIPE_MIN_MOVE*dpToPx + 0.5f);
             float position = event.getX();
 
             if (position - touchPositionX > swipeDetect && currentPokemon.index - 1 > 0) {
                 Intent intent = new Intent(this, this.getClass());
                 intent.putExtra(INTENT_EXTRA_POKEMON_INDEX, currentPokemon.index - 1);
+                intent.putExtra(INTENT_EXTRA_INFO_STATE, infos.getVisibility());
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out);
                 finish();
@@ -170,6 +192,7 @@ public class PokemonPage extends Activity {
             if (touchPositionX - position > swipeDetect && currentPokemon.index + 1 <= PokemonList.perIndex.size()) {
                 Intent intent = new Intent(this, this.getClass());
                 intent.putExtra(INTENT_EXTRA_POKEMON_INDEX, currentPokemon.index + 1);
+                intent.putExtra(INTENT_EXTRA_INFO_STATE, infos.getVisibility());
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
                 finish();
@@ -180,14 +203,44 @@ public class PokemonPage extends Activity {
         return ret;
     }
     
-    private void animateViewHeight(final LinearLayout v) {
-        final int visibility;
+    private boolean isInsideHorizontalScrollView(float x, float y) {
+        Log.d("test", "" + x + ", " + y);
+        View v = findViewById(R.id.evolution_scroll);
+        int[] location = {0,0};
+        v.getLocationOnScreen(location);
+        Rect rect = new Rect(location[0],
+                             location[1],
+                             location[0] + v.getWidth(),
+                             location[1] + v.getHeight());
+
+        Log.d("test", "1st " + rect);
+        if (rect.contains((int) x, (int) y)) {
+            return true;
+        }
+
+        LinearLayout infos = (LinearLayout)findViewById(R.id.info_content);
+        if (fullEvolutionsScrollView != null && View.VISIBLE == infos.getVisibility()) {
+            fullEvolutionsScrollView.getLocationOnScreen(location);
+            rect = new Rect(location[0],
+                            location[1],
+                            location[0] + fullEvolutionsScrollView.getWidth(),
+                            location[1] + fullEvolutionsScrollView.getHeight());
+
+            Log.d("test", "2nd " + rect);
+            if (rect.contains((int) x, (int) y)) {
+                return true;
+            }
+        }
         
+        return false;
+    }
+    
+    private void animateViewHeight(final LinearLayout v) {
         if (View.GONE == v.getVisibility()) {
-            visibility = View.VISIBLE;
+            infosVisibility = View.VISIBLE;
             animation.setDirection(Direction.EXPAND);
         } else {
-            visibility = View.GONE;
+            infosVisibility = View.GONE;
             animation.setDirection(Direction.COLLAPSE);
         }
 
@@ -204,8 +257,8 @@ public class PokemonPage extends Activity {
             
             @Override
             public void onAnimationEnd(Animation arg0) {
-                if (View.GONE == visibility) {
-                    v.setVisibility(visibility);
+                if (View.GONE == infosVisibility) {
+                    v.setVisibility(infosVisibility);
                 }
             }
         });
@@ -325,7 +378,10 @@ public class PokemonPage extends Activity {
         }
         
         // Additional information
-        addEvolutions(currentPokemon.evolutions, (LinearLayout)findViewById(R.id.full_evolutions));
+        LinearLayout fullEvolutionsLayout = (LinearLayout)findViewById(R.id.full_evolutions);
+        fullEvolutionsLayout.removeAllViews();
+        addEvolutions(currentPokemon.evolutions, fullEvolutionsLayout);
+        
         TextView infoTxt = (TextView)findViewById(R.id.size_txt);
         infoTxt.setText(currentPokemon.size);
         
@@ -460,42 +516,70 @@ public class PokemonPage extends Activity {
         typeWeakness.setBackgroundResource(weaknesses.get(Type.VOL).resource);
     }
     
-    private void addEvolutions(EvolutionNode root, LinearLayout layout) {
+    private void addEvolutions(final EvolutionNode root, LinearLayout layout) {
+        LayoutParams params;
+        ImageView img;
+        TextView text;
+    
+        try {
+            params = new LayoutParams((int)(FULL_EVOLUTION_PIC_WIDTH*dpToPx + 0.5f), (int)(FULL_EVOLUTION_PIC_HEIGHT*dpToPx + 0.5f));
+            params.setMargins((int)(EVOLUTION_MARGIN*dpToPx + 0.5f), 0, 0, 0);
+            img = new ImageView(this);
+            img.setLayoutParams(params);
+            img.setImageDrawable(Drawable.createFromStream(
+                    getAssets().open(
+                            "image/" + Utils.standardize(root.base.name, true) + ".png"), null));
+            img.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View arg0) {
+                    loadData(root.base.name);
+                }
+            });
+            layout.addView(img);
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (root.isLeaf()) {
+            return;
+        }
         
-        
-        
-//        evolutions = (LinearLayout)findViewById(R.id.evolutions);
-//        evolutions.removeAllViews();
-//        for (int i = 0; i < currentPokemonEvolutions.length; i++) {
-//            final Pokemon p = currentPokemonEvolutions[i];
-//            try {
-//                layout = new LayoutParams((int)(EVOLUTION_PIC_WIDTH*dpToPx + 0.5f), (int)(EVOLUTION_PIC_HEIGHT*dpToPx + 0.5f));
-//                layout.setMargins((int)(EVOLUTION_MARGIN*dpToPx + 0.5f), 0, 0, 0);
-//                img = new ImageView(this);
-//                img.setLayoutParams(layout);
-//                img.setImageDrawable(Drawable.createFromStream(
-//                        getAssets().open(
-//                                "image/" + Utils.standardize(p.name, true) + ".png"), null));
-//                img.setOnClickListener(new OnClickListener() {
-//                    @Override
-//                    public void onClick(View arg0) {
-//                        loadData(p.name);
-//                    }
-//                });
-//                evolutions.addView(img);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            
-//            // Another element, add an arrow
-//            if (i+1 < currentPokemonEvolutions.length) {
-//                layout = new LayoutParams((int)(ARROW_WIDTH*dpToPx + 0.5f), (int)(ARROW_HEIGHT*dpToPx + 0.5f));
-//                layout.setMargins((int)(ARROW_MARGIN_LEFT*dpToPx + 0.5f), (int)(ARROW_MARGIN_TOP*dpToPx + 0.5f), 0, 0);
-//                img = new ImageView(this);
-//                img.setLayoutParams(layout);
-//                img.setImageResource(R.drawable.arrow);
-//                evolutions.addView(img);
-//            }
-//        }
+        fullEvolutionsScrollView = null;
+        if (root.hasSeveralPaths()) {
+            LinearLayout individualEvolutionLayout;
+            
+            params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+            
+            fullEvolutionsScrollView = new HorizontalScrollView(this);
+            layout.addView(fullEvolutionsScrollView);
+            
+            LinearLayout multipleEvolutionsLayout = new LinearLayout(this);
+            multipleEvolutionsLayout.setOrientation(LinearLayout.HORIZONTAL);
+            multipleEvolutionsLayout.setLayoutParams(params);
+            fullEvolutionsScrollView.addView(multipleEvolutionsLayout);
+            
+            for (String path : root.evolutions.keySet()) {
+                individualEvolutionLayout = new LinearLayout(this);
+                individualEvolutionLayout.setOrientation(LinearLayout.VERTICAL);
+                individualEvolutionLayout.setLayoutParams(params);
+                
+                multipleEvolutionsLayout.addView(individualEvolutionLayout);
+                text = new TextView(this);
+                text.setText(path);
+                params = new LayoutParams((int)(FULL_EVOLUTION_PIC_WIDTH*dpToPx + 0.5f), LayoutParams.WRAP_CONTENT);
+                text.setLayoutParams(params);
+                text.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+                individualEvolutionLayout.addView(text);
+                addEvolutions(root.evolutions.get(path), individualEvolutionLayout);
+            }
+            
+        } else {
+            String path = (String)root.evolutions.keySet().toArray()[0];
+            text = new TextView(this);
+            text.setText(path);
+            layout.addView(text);
+            addEvolutions(root.evolutions.get(path), layout);
+        }
     }
 }
