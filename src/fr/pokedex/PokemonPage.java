@@ -27,6 +27,7 @@ import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.ScrollView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import fr.pokedex.data.EvolutionNode;
@@ -42,7 +43,7 @@ import fr.pokedex.utils.Utils;
 public class PokemonPage extends Activity {
 
     public static final String INTENT_EXTRA_POKEMON_INDEX = "intent_extra_pokemon_index";
-    public static final String INTENT_EXTRA_INFO_STATE = "intent_extra_info_state";
+    public static final String INTENT_EXTRA_SCROLL_POSITION = "intent_extra_scroll_position";
     
     private static int infosVisibility = View.GONE;
 
@@ -120,6 +121,10 @@ public class PokemonPage extends Activity {
                     infos.getViewTreeObserver().removeGlobalOnLayoutListener(this);
 //                    infos.getViewTreeObserver().removeOnGlobalLayoutListener(this); // requires API level >= 18
                     infos.setVisibility(infosVisibility);
+
+                    ScrollView scroll = (ScrollView)findViewById(R.id.main_scroll);
+                    int scrollPosition = intent.getIntExtra(INTENT_EXTRA_SCROLL_POSITION, 0);
+                    scroll.scrollTo(0, scrollPosition);
                 }
 
         });
@@ -178,14 +183,14 @@ public class PokemonPage extends Activity {
                 break;
             }
             
-            final LinearLayout infos = (LinearLayout)findViewById(R.id.info_content);
+            final ScrollView scroll = (ScrollView)findViewById(R.id.main_scroll);
             final int swipeDetect = (int)(SWIPE_MIN_MOVE*dpToPx + 0.5f);
             float position = event.getX();
 
             if (position - touchPositionX > swipeDetect && currentPokemon.index - 1 > 0) {
                 Intent intent = new Intent(this, this.getClass());
                 intent.putExtra(INTENT_EXTRA_POKEMON_INDEX, currentPokemon.index - 1);
-                intent.putExtra(INTENT_EXTRA_INFO_STATE, infos.getVisibility());
+                intent.putExtra(INTENT_EXTRA_SCROLL_POSITION, scroll.getScrollY());
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out);
                 finish();
@@ -194,7 +199,7 @@ public class PokemonPage extends Activity {
             if (touchPositionX - position > swipeDetect && currentPokemon.index + 1 <= PokemonList.perIndex.size()) {
                 Intent intent = new Intent(this, this.getClass());
                 intent.putExtra(INTENT_EXTRA_POKEMON_INDEX, currentPokemon.index + 1);
-                intent.putExtra(INTENT_EXTRA_INFO_STATE, infos.getVisibility());
+                intent.putExtra(INTENT_EXTRA_SCROLL_POSITION, scroll.getScrollY());
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
                 finish();
@@ -382,7 +387,7 @@ public class PokemonPage extends Activity {
             fullEvolutionsLayout.removeAllViews();
             TextView text = new TextView(this);
             LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-            params.setMargins(0, 0, 0, (int)(FULL_EVOLUTION_TITLE_MARGIN*dpToPx + 0.5f));
+            params.setMargins(0, (int)(FULL_EVOLUTION_TITLE_MARGIN*dpToPx + 0.5f), 0, (int)(FULL_EVOLUTION_TITLE_MARGIN*dpToPx + 0.5f));
             text.setLayoutParams(params);
             text.setTextSize(TypedValue.COMPLEX_UNIT_SP, FULL_EVOLUTION_TITLE_SIZE);
             text.setText(R.string.evolution_chain);
