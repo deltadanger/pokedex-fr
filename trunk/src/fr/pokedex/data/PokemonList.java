@@ -237,7 +237,7 @@ public class PokemonList {
         p.size = "0,4m";
 
         p = perName.get("Apireine");
-        p.evolutions = new EvolutionNode(perName.get("Apitrini"), new HashMap<String, EvolutionNode>(){{this.put("Si Femelle ( F), Niveau 21", new EvolutionNode(perName.get("Apireine"), null));}});
+        p.evolutions = new EvolutionNode(perName.get("Apitrini"), new HashMap<String, EvolutionNode>(){{this.put("Si Femelle, Niveau 21", new EvolutionNode(perName.get("Apireine"), null));}});
         p.catchRate = "45";
         p.weight = "38,5kg";
         p.hatch = "14 cycles - 3840 pas";
@@ -587,7 +587,7 @@ public class PokemonList {
         p.size = "0,4m";
 
         p = perName.get("Pitrouille (Taille Maxi)");
-        p.evolutions = new EvolutionNode(perName.get("Pitrouille"), null);
+        p.evolutions = new EvolutionNode(perName.get("Pitrouille (Taille Maxi)"), new HashMap<String, EvolutionNode>(){{this.put("Echange", new EvolutionNode(perName.get("Banshitrouye (Taille Maxi)"), null));}});
         p.catchRate = "";
         p.weight = "3,5kg";
         p.hatch = "pas";
@@ -597,7 +597,7 @@ public class PokemonList {
         p.size = "0,3m";
 
         p = perName.get("Cheniselle (Cape Dechet)");
-        p.evolutions = new EvolutionNode(perName.get("Cheniti"), new HashMap<String, EvolutionNode>(){{this.put("Si Femelle ( F), Niveau 20", new EvolutionNode(perName.get("Papilord"), null));}});
+        p.evolutions = new EvolutionNode(perName.get("Cheniti"), new HashMap<String, EvolutionNode>(){{this.put("Si Male, Niveau 20", new EvolutionNode(perName.get("Papilord"), null));this.put("Si Femelle, Niveau 20", new EvolutionNode(perName.get("Cheniselle (Cape Dechet)"), null));}});
         p.catchRate = "45";
         p.weight = "6,5kg";
         p.hatch = "14 cycles - 3840 pas";
@@ -607,7 +607,7 @@ public class PokemonList {
         p.size = "0,5m";
 
         p = perName.get("Exagide (Forme Assaut)");
-        p.evolutions = new EvolutionNode(perName.get("Monorpale"), new HashMap<String, EvolutionNode>(){{this.put("Niveau 35", new EvolutionNode(perName.get("Dimocles"), null));}});
+        p.evolutions = new EvolutionNode(perName.get("Monorpale"), new HashMap<String, EvolutionNode>(){{this.put("Niveau 35", new EvolutionNode(perName.get("Dimocles"), new HashMap<String, EvolutionNode>(){{this.put("Avec une Pierre Nuit", new EvolutionNode(perName.get("Exagide (Forme Assaut)"), null));}}));}});
         p.catchRate = "";
         p.weight = "53,0kg";
         p.hatch = "18 cycles - 4845 pas";
@@ -617,7 +617,7 @@ public class PokemonList {
         p.size = "1,7m";
 
         p = perName.get("Tarsal");
-        p.evolutions = new EvolutionNode(perName.get("Tarsal"), new HashMap<String, EvolutionNode>(){{this.put("Niveau 20", new EvolutionNode(perName.get("Kirlia"), new HashMap<String, EvolutionNode>(){{this.put("Gardevoirite", new EvolutionNode(perName.get("Mega-Gardevoir"), null));this.put("Niveau 30", new EvolutionNode(perName.get("Gardevoir"), null));this.put("Male ( M) + Pierre Aube", new EvolutionNode(perName.get("Gallame"), null));}}));}});
+        p.evolutions = new EvolutionNode(perName.get("Tarsal"), new HashMap<String, EvolutionNode>(){{this.put("Niveau 20", new EvolutionNode(perName.get("Kirlia"), new HashMap<String, EvolutionNode>(){{this.put("Male + Pierre Aube", new EvolutionNode(perName.get("Gallame"), null));this.put("Niveau 30", new EvolutionNode(perName.get("Gardevoir"), new HashMap<String, EvolutionNode>(){{this.put("Gardevoirite", new EvolutionNode(perName.get("Mega-Gardevoir"), null));}}));}}));}});
         p.catchRate = "235";
         p.weight = "6,6kg";
         p.hatch = "19 cycles - 5120 pas";
@@ -927,7 +927,7 @@ public class PokemonList {
         p.size = "0,4m";
 
         p = perName.get("Stalgamin");
-        p.evolutions = new EvolutionNode(perName.get("Stalgamin"), new HashMap<String, EvolutionNode>(){{this.put("Femelle ( F) + Pierre Aube", new EvolutionNode(perName.get("Momartik"), null));this.put("Niveau 42", new EvolutionNode(perName.get("Oniglali"), null));}});
+        p.evolutions = new EvolutionNode(perName.get("Stalgamin"), new HashMap<String, EvolutionNode>(){{this.put("Femelle + Pierre Aube", new EvolutionNode(perName.get("Momartik"), null));this.put("Niveau 42", new EvolutionNode(perName.get("Oniglali"), null));}});
         p.catchRate = "190";
         p.weight = "16,8kg";
         p.hatch = "19 cycles - 5120 pas";
@@ -1047,7 +1047,7 @@ public class PokemonList {
         p.size = "1,0m";
 
         p = perName.get("Exagide (Forme Parade)");
-        p.evolutions = new EvolutionNode(perName.get("Monorpale"), new HashMap<String, EvolutionNode>(){{this.put("Niveau 35", new EvolutionNode(perName.get("Dimocles"), null));}});
+        p.evolutions = new EvolutionNode(perName.get("Monorpale"), new HashMap<String, EvolutionNode>(){{this.put("Niveau 35", new EvolutionNode(perName.get("Dimocles"), new HashMap<String, EvolutionNode>(){{this.put("Avec une Pierre Nuit", new EvolutionNode(perName.get("Exagide (Forme Parade)"), null));}}));}});
         p.catchRate = "";
         p.weight = "53,0kg";
         p.hatch = "18 cycles - 4845 pas";
@@ -1117,7 +1117,7 @@ public class PokemonList {
         p.size = "1,2m";
 
         p = perName.get("Kirlia");
-        p.evolutions = new EvolutionNode(perName.get("Tarsal"), new HashMap<String, EvolutionNode>(){{this.put("Niveau 20", new EvolutionNode(perName.get("Kirlia"), new HashMap<String, EvolutionNode>(){{this.put("Gardevoirite", new EvolutionNode(perName.get("Mega-Gardevoir"), null));this.put("Niveau 30", new EvolutionNode(perName.get("Gardevoir"), null));this.put("Male ( M) + Pierre Aube", new EvolutionNode(perName.get("Gallame"), null));}}));}});
+        p.evolutions = new EvolutionNode(perName.get("Tarsal"), new HashMap<String, EvolutionNode>(){{this.put("Niveau 20", new EvolutionNode(perName.get("Kirlia"), new HashMap<String, EvolutionNode>(){{this.put("Male + Pierre Aube", new EvolutionNode(perName.get("Gallame"), null));this.put("Niveau 30", new EvolutionNode(perName.get("Gardevoir"), new HashMap<String, EvolutionNode>(){{this.put("Gardevoirite", new EvolutionNode(perName.get("Mega-Gardevoir"), null));}}));}}));}});
         p.catchRate = "120";
         p.weight = "20,2kg";
         p.hatch = "19 cycles - 5120 pas";
@@ -1587,7 +1587,7 @@ public class PokemonList {
         p.size = "1,0m";
 
         p = perName.get("Mega-Gardevoir");
-        p.evolutions = new EvolutionNode(perName.get("Tarsal"), new HashMap<String, EvolutionNode>(){{this.put("Niveau 20", new EvolutionNode(perName.get("Kirlia"), new HashMap<String, EvolutionNode>(){{this.put("Gardevoirite", new EvolutionNode(perName.get("Mega-Gardevoir"), null));this.put("Niveau 30", new EvolutionNode(perName.get("Gardevoir"), null));this.put("Male ( M) + Pierre Aube", new EvolutionNode(perName.get("Gallame"), null));}}));}});
+        p.evolutions = new EvolutionNode(perName.get("Tarsal"), new HashMap<String, EvolutionNode>(){{this.put("Niveau 20", new EvolutionNode(perName.get("Kirlia"), new HashMap<String, EvolutionNode>(){{this.put("Male + Pierre Aube", new EvolutionNode(perName.get("Gallame"), null));this.put("Niveau 30", new EvolutionNode(perName.get("Gardevoir"), new HashMap<String, EvolutionNode>(){{this.put("Gardevoirite", new EvolutionNode(perName.get("Mega-Gardevoir"), null));}}));}}));}});
         p.catchRate = "";
         p.weight = "48,4kg";
         p.hatch = "";
@@ -1667,7 +1667,7 @@ public class PokemonList {
         p.size = "0,9m";
 
         p = perName.get("Cheniselle (Cape Plante)");
-        p.evolutions = new EvolutionNode(perName.get("Cheniti"), new HashMap<String, EvolutionNode>(){{this.put("Si Femelle ( F), Niveau 20", new EvolutionNode(perName.get("Papilord"), null));}});
+        p.evolutions = new EvolutionNode(perName.get("Cheniti"), new HashMap<String, EvolutionNode>(){{this.put("Si Male, Niveau 20", new EvolutionNode(perName.get("Papilord"), null));this.put("Si Femelle, Niveau 20", new EvolutionNode(perName.get("Cheniselle (Cape Plante)"), null));}});
         p.catchRate = "45";
         p.weight = "6,5kg";
         p.hatch = "14 cycles - 3840 pas";
@@ -2407,7 +2407,7 @@ public class PokemonList {
         p.size = "1,0m";
 
         p = perName.get("Cheniti");
-        p.evolutions = new EvolutionNode(perName.get("Cheniti"), new HashMap<String, EvolutionNode>(){{this.put("Si Femelle ( F), Niveau 20", new EvolutionNode(perName.get("Papilord"), null));}});
+        p.evolutions = new EvolutionNode(perName.get("Cheniti"), new HashMap<String, EvolutionNode>(){{this.put("Si Male, Niveau 20", new EvolutionNode(perName.get("Papilord"), null));this.put("Si Femelle, Niveau 20", new EvolutionNode(perName.get("Cheniselle (Cape Plante)"), null));}});
         p.catchRate = "120";
         p.weight = "3,4kg";
         p.hatch = "14 cycles - 3840 pas";
@@ -2677,7 +2677,7 @@ public class PokemonList {
         p.size = "1,3m";
 
         p = perName.get("Cheniselle (Cape Sol)");
-        p.evolutions = new EvolutionNode(perName.get("Cheniti"), new HashMap<String, EvolutionNode>(){{this.put("Si Femelle ( F), Niveau 20", new EvolutionNode(perName.get("Papilord"), null));}});
+        p.evolutions = new EvolutionNode(perName.get("Cheniti"), new HashMap<String, EvolutionNode>(){{this.put("Si Male, Niveau 20", new EvolutionNode(perName.get("Papilord"), null));this.put("Si Femelle, Niveau 20", new EvolutionNode(perName.get("Cheniselle (Cape Sol)"), null));}});
         p.catchRate = "45";
         p.weight = "6,5kg";
         p.hatch = "14 cycles - 3840 pas";
@@ -3427,7 +3427,7 @@ public class PokemonList {
         p.size = "1,8m";
 
         p = perName.get("Banshitrouye (Taille Ultra)");
-        p.evolutions = new EvolutionNode(perName.get("Pitrouille"), null);
+        p.evolutions = new EvolutionNode(perName.get("Pitrouille (Taille Ultra)"), new HashMap<String, EvolutionNode>(){{this.put("Echange", new EvolutionNode(perName.get("Banshitrouye (Taille Ultra)"), null));}});
         p.catchRate = "";
         p.weight = "9,5kg";
         p.hatch = "pas";
@@ -3687,7 +3687,7 @@ public class PokemonList {
         p.size = "1,0m";
 
         p = perName.get("Dimocles");
-        p.evolutions = new EvolutionNode(perName.get("Monorpale"), new HashMap<String, EvolutionNode>(){{this.put("Niveau 35", new EvolutionNode(perName.get("Dimocles"), null));}});
+        p.evolutions = new EvolutionNode(perName.get("Monorpale"), new HashMap<String, EvolutionNode>(){{this.put("Niveau 35", new EvolutionNode(perName.get("Dimocles"), new HashMap<String, EvolutionNode>(){{this.put("Avec une Pierre Nuit", new EvolutionNode(perName.get("Exagide (Forme Parade)"), null));}}));}});
         p.catchRate = "";
         p.weight = "4,5kg";
         p.hatch = "pas";
@@ -3877,7 +3877,7 @@ public class PokemonList {
         p.size = "1,2m";
 
         p = perName.get("Apitrini");
-        p.evolutions = new EvolutionNode(perName.get("Apitrini"), new HashMap<String, EvolutionNode>(){{this.put("Si Femelle ( F), Niveau 21", new EvolutionNode(perName.get("Apireine"), null));}});
+        p.evolutions = new EvolutionNode(perName.get("Apitrini"), new HashMap<String, EvolutionNode>(){{this.put("Si Femelle, Niveau 21", new EvolutionNode(perName.get("Apireine"), null));}});
         p.catchRate = "120";
         p.weight = "5,5kg";
         p.hatch = "14 cycles - 3840 pas";
@@ -3905,6 +3905,10 @@ public class PokemonList {
         p.ev = "+2 Vit.";
         p.eggGroup = "Sol";
         p.size = "0,8m";
+    }
+    
+    private static void setAdditionalInformationPart2() {
+        Pokemon p;
 
         p = perName.get("Arceus");
         p.evolutions = null;
@@ -3925,10 +3929,6 @@ public class PokemonList {
         p.ev = "+2 Att. Spe";
         p.eggGroup = "Humanoide";
         p.size = "1,3m";
-    }
-    
-    private static void setAdditionalInformationPart2() {
-        Pokemon p;
 
         p = perName.get("Muciole");
         p.evolutions = null;
@@ -4131,7 +4131,7 @@ public class PokemonList {
         p.size = "1,4m";
 
         p = perName.get("Papilord");
-        p.evolutions = new EvolutionNode(perName.get("Cheniti"), new HashMap<String, EvolutionNode>(){{this.put("Si Femelle ( F), Niveau 20", new EvolutionNode(perName.get("Papilord"), null));}});
+        p.evolutions = new EvolutionNode(perName.get("Cheniti"), new HashMap<String, EvolutionNode>(){{this.put("Si Male, Niveau 20", new EvolutionNode(perName.get("Papilord"), null));this.put("Si Femelle, Niveau 20", new EvolutionNode(perName.get("Cheniselle (Cape Plante)"), null));}});
         p.catchRate = "45";
         p.weight = "23,3kg";
         p.hatch = "14 cycles - 3840 pas";
@@ -4511,7 +4511,7 @@ public class PokemonList {
         p.size = "0,4m";
 
         p = perName.get("Monorpale");
-        p.evolutions = new EvolutionNode(perName.get("Monorpale"), new HashMap<String, EvolutionNode>(){{this.put("Niveau 35", new EvolutionNode(perName.get("Dimocles"), null));}});
+        p.evolutions = new EvolutionNode(perName.get("Monorpale"), new HashMap<String, EvolutionNode>(){{this.put("Niveau 35", new EvolutionNode(perName.get("Dimocles"), new HashMap<String, EvolutionNode>(){{this.put("Avec une Pierre Nuit", new EvolutionNode(perName.get("Exagide (Forme Parade)"), null));}}));}});
         p.catchRate = "";
         p.weight = "2,0kg";
         p.hatch = "pas";
@@ -4621,7 +4621,7 @@ public class PokemonList {
         p.size = "2,1m";
 
         p = perName.get("Banshitrouye (Taille Mini)");
-        p.evolutions = new EvolutionNode(perName.get("Pitrouille"), null);
+        p.evolutions = new EvolutionNode(perName.get("Pitrouille (Taille Mini)"), new HashMap<String, EvolutionNode>(){{this.put("Echange", new EvolutionNode(perName.get("Banshitrouye (Taille Mini)"), null));}});
         p.catchRate = "";
         p.weight = "9,5kg";
         p.hatch = "pas";
@@ -5051,7 +5051,7 @@ public class PokemonList {
         p.size = "0,5m";
 
         p = perName.get("Gallame");
-        p.evolutions = new EvolutionNode(perName.get("Tarsal"), new HashMap<String, EvolutionNode>(){{this.put("Niveau 20", new EvolutionNode(perName.get("Kirlia"), new HashMap<String, EvolutionNode>(){{this.put("Gardevoirite", new EvolutionNode(perName.get("Mega-Gardevoir"), null));this.put("Niveau 30", new EvolutionNode(perName.get("Gardevoir"), null));this.put("Male ( M) + Pierre Aube", new EvolutionNode(perName.get("Gallame"), null));}}));}});
+        p.evolutions = new EvolutionNode(perName.get("Tarsal"), new HashMap<String, EvolutionNode>(){{this.put("Niveau 20", new EvolutionNode(perName.get("Kirlia"), new HashMap<String, EvolutionNode>(){{this.put("Male + Pierre Aube", new EvolutionNode(perName.get("Gallame"), null));this.put("Niveau 30", new EvolutionNode(perName.get("Gardevoir"), new HashMap<String, EvolutionNode>(){{this.put("Gardevoirite", new EvolutionNode(perName.get("Mega-Gardevoir"), null));}}));}}));}});
         p.catchRate = "60";
         p.weight = "52,0kg";
         p.hatch = "19 cycles - 5120 pas";
@@ -5541,7 +5541,7 @@ public class PokemonList {
         p.size = "1,5m";
 
         p = perName.get("Pitrouille (Taille Mini)");
-        p.evolutions = new EvolutionNode(perName.get("Pitrouille"), null);
+        p.evolutions = new EvolutionNode(perName.get("Pitrouille (Taille Mini)"), new HashMap<String, EvolutionNode>(){{this.put("Echange", new EvolutionNode(perName.get("Banshitrouye (Taille Mini)"), null));}});
         p.catchRate = "";
         p.weight = "3,5kg";
         p.hatch = "pas";
@@ -6721,7 +6721,7 @@ public class PokemonList {
         p.size = "0,6m";
 
         p = perName.get("Oniglali");
-        p.evolutions = new EvolutionNode(perName.get("Stalgamin"), new HashMap<String, EvolutionNode>(){{this.put("Femelle ( F) + Pierre Aube", new EvolutionNode(perName.get("Momartik"), null));this.put("Niveau 42", new EvolutionNode(perName.get("Oniglali"), null));}});
+        p.evolutions = new EvolutionNode(perName.get("Stalgamin"), new HashMap<String, EvolutionNode>(){{this.put("Femelle + Pierre Aube", new EvolutionNode(perName.get("Momartik"), null));this.put("Niveau 42", new EvolutionNode(perName.get("Oniglali"), null));}});
         p.catchRate = "75";
         p.weight = "256,5kg";
         p.hatch = "19 cycles - 5120 pas";
@@ -6771,7 +6771,7 @@ public class PokemonList {
         p.size = "2,2m";
 
         p = perName.get("Pitrouille (Taille Normale)");
-        p.evolutions = new EvolutionNode(perName.get("Pitrouille"), null);
+        p.evolutions = new EvolutionNode(perName.get("Pitrouille (Taille Normale)"), new HashMap<String, EvolutionNode>(){{this.put("Echange", new EvolutionNode(perName.get("Banshitrouye (Taille Normale)"), null));}});
         p.catchRate = "";
         p.weight = "3,5kg";
         p.hatch = "pas";
@@ -6881,7 +6881,7 @@ public class PokemonList {
         p.size = "1,0m";
 
         p = perName.get("Gardevoir");
-        p.evolutions = new EvolutionNode(perName.get("Tarsal"), new HashMap<String, EvolutionNode>(){{this.put("Niveau 20", new EvolutionNode(perName.get("Kirlia"), new HashMap<String, EvolutionNode>(){{this.put("Gardevoirite", new EvolutionNode(perName.get("Mega-Gardevoir"), null));this.put("Niveau 30", new EvolutionNode(perName.get("Gardevoir"), null));this.put("Male ( M) + Pierre Aube", new EvolutionNode(perName.get("Gallame"), null));}}));}});
+        p.evolutions = new EvolutionNode(perName.get("Tarsal"), new HashMap<String, EvolutionNode>(){{this.put("Niveau 20", new EvolutionNode(perName.get("Kirlia"), new HashMap<String, EvolutionNode>(){{this.put("Male + Pierre Aube", new EvolutionNode(perName.get("Gallame"), null));this.put("Niveau 30", new EvolutionNode(perName.get("Gardevoir"), new HashMap<String, EvolutionNode>(){{this.put("Gardevoirite", new EvolutionNode(perName.get("Mega-Gardevoir"), null));}}));}}));}});
         p.catchRate = "45";
         p.weight = "48,4kg";
         p.hatch = "19 cycles - 5120 pas";
@@ -7121,7 +7121,7 @@ public class PokemonList {
         p.size = "0,7m";
 
         p = perName.get("Momartik");
-        p.evolutions = new EvolutionNode(perName.get("Stalgamin"), new HashMap<String, EvolutionNode>(){{this.put("Femelle ( F) + Pierre Aube", new EvolutionNode(perName.get("Momartik"), null));this.put("Niveau 42", new EvolutionNode(perName.get("Oniglali"), null));}});
+        p.evolutions = new EvolutionNode(perName.get("Stalgamin"), new HashMap<String, EvolutionNode>(){{this.put("Femelle + Pierre Aube", new EvolutionNode(perName.get("Momartik"), null));this.put("Niveau 42", new EvolutionNode(perName.get("Oniglali"), null));}});
         p.catchRate = "75";
         p.weight = "26,6kg";
         p.hatch = "19 cycles - 5120 pas";
@@ -7211,7 +7211,7 @@ public class PokemonList {
         p.size = "1,0m";
 
         p = perName.get("Pitrouille (Taille Ultra)");
-        p.evolutions = new EvolutionNode(perName.get("Pitrouille"), null);
+        p.evolutions = new EvolutionNode(perName.get("Pitrouille (Taille Ultra)"), new HashMap<String, EvolutionNode>(){{this.put("Echange", new EvolutionNode(perName.get("Banshitrouye (Taille Ultra)"), null));}});
         p.catchRate = "";
         p.weight = "3,5kg";
         p.hatch = "pas";
@@ -7361,7 +7361,7 @@ public class PokemonList {
         p.size = "0,2m";
 
         p = perName.get("Banshitrouye (Taille Maxi)");
-        p.evolutions = new EvolutionNode(perName.get("Pitrouille"), null);
+        p.evolutions = new EvolutionNode(perName.get("Pitrouille (Taille Maxi)"), new HashMap<String, EvolutionNode>(){{this.put("Echange", new EvolutionNode(perName.get("Banshitrouye (Taille Maxi)"), null));}});
         p.catchRate = "";
         p.weight = "9,5kg";
         p.hatch = "pas";
@@ -7671,7 +7671,7 @@ public class PokemonList {
         p.size = "1,5m";
 
         p = perName.get("Banshitrouye (Taille Normale)");
-        p.evolutions = new EvolutionNode(perName.get("Pitrouille"), null);
+        p.evolutions = new EvolutionNode(perName.get("Pitrouille (Taille Normale)"), new HashMap<String, EvolutionNode>(){{this.put("Echange", new EvolutionNode(perName.get("Banshitrouye (Taille Normale)"), null));}});
         p.catchRate = "";
         p.weight = "9,5kg";
         p.hatch = "pas";

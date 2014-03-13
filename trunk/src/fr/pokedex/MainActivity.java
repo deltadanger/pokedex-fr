@@ -8,16 +8,8 @@ import fr.pokedex.data.PokemonList;
 
 /*
  * TODO:
- * - Icone transparente
- * - Conserver scroll position quand changement de fenetre
- * - Ajout d'infos supplémentaires
- *      - Taille
- *      - Poids
- *      - Moyens d'évolution
- *      - Groupe Oeuf
- *      - Nombre de pas
- *      - Répartition Male/Femelle
- *      - Talents
+ * - Update "unfold" image
+ * - fix gapping issues around "unfold" image
  * X Recherche par type
  * - Theme sombre
  * - Liste des attaques apprises
@@ -37,7 +29,7 @@ public class MainActivity extends Activity {
         PokemonList.initialize();
 
         Intent intent = new Intent(this, PokemonPage.class);
-        intent.putExtra(PokemonPage.INTENT_EXTRA_POKEMON_INDEX, 6);
+        intent.putExtra(PokemonPage.INTENT_EXTRA_POKEMON_INDEX, 1);
         startActivity(intent);
         finish();
     }
