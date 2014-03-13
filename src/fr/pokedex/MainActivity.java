@@ -9,6 +9,7 @@ import fr.pokedex.data.PokemonList;
 /*
  * TODO:
  * - Icone transparente
+ * - Conserver scroll position quand changement de fenetre
  * - Ajout d'infos supplémentaires
  *      - Taille
  *      - Poids
@@ -36,7 +37,7 @@ public class MainActivity extends Activity {
         PokemonList.initialize();
 
         Intent intent = new Intent(this, PokemonPage.class);
-        intent.putExtra(PokemonPage.INTENT_EXTRA_POKEMON_INDEX, 1);
+        intent.putExtra(PokemonPage.INTENT_EXTRA_POKEMON_INDEX, 6);
         startActivity(intent);
         finish();
     }
