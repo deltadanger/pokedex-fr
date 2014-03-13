@@ -10,119 +10,116 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/expand_arrow"
-        android:padding="0dp" />
+        android:padding="0dp"
+        android:layout_margin="0dp" />
     
     <LinearLayout android:id="@+id/info_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
         
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            
+            <TableRow>
+                
+                <TextView android:text="@string/size"
+                    android:textSize="15sp"
+                    android:paddingLeft="40dp" />
+                
+                <TextView android:id="@+id/size_txt"
+                    android:textSize="15sp"
+                    android:paddingLeft="10dp" />
+                
+            </TableRow>
+            
+            <TableRow
+                android:layout_marginTop="5dp">
+                
+                <TextView android:text="@string/weight"
+                    android:textSize="15sp"
+                    android:paddingLeft="40dp" />
+                
+                <TextView android:id="@+id/weight_txt"
+                    android:textSize="15sp"
+                    android:paddingLeft="10dp" />
+                
+            </TableRow>
+            
+            <TableRow
+                android:layout_marginTop="5dp">
+                
+                <TextView android:text="@string/ev"
+                    android:textSize="15sp"
+                    android:paddingLeft="40dp" />
+                
+                <TextView android:id="@+id/ev_txt"
+                    android:textSize="15sp"
+                    android:paddingLeft="10dp" />
+                
+            </TableRow>
+            
+            <TableRow
+                android:layout_marginTop="5dp">
+                
+                <TextView android:text="@string/catch_rate"
+                    android:textSize="15sp"
+                    android:paddingLeft="40dp" />
+                
+                <TextView android:id="@+id/catch_rate_txt"
+                    android:textSize="15sp"
+                    android:paddingLeft="10dp" />
+                
+            </TableRow>
+            
+            <TableRow
+                android:layout_marginTop="5dp">
+                
+                <TextView android:text="@string/gender"
+                    android:textSize="15sp"
+                    android:paddingLeft="40dp" />
+                
+                <TextView android:id="@+id/gender_txt"
+                    android:textSize="15sp"
+                    android:paddingLeft="10dp" />
+                
+            </TableRow>
+            
+            <TableRow
+                android:layout_marginTop="5dp">
+                
+                <TextView android:text="@string/hatch"
+                    android:textSize="15sp"
+                    android:paddingLeft="40dp" />
+                
+                <TextView android:id="@+id/hatch_txt"
+                    android:textSize="15sp"
+                    android:paddingLeft="10dp" />
+                
+            </TableRow>
+            
+            <TableRow
+                android:layout_marginTop="5dp">
+                
+                <TextView android:text="@string/egg_group"
+                    android:textSize="15sp"
+                    android:paddingLeft="40dp" />
+                
+                <TextView android:id="@+id/egg_group_txt"
+                    android:textSize="15sp"
+                    android:paddingLeft="10dp" />
+                
+            </TableRow>
+            
+        </TableLayout>
+        
         <LinearLayout android:id="@+id/full_evolutions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center_horizontal" />
-        
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                
-                <TextView android:text="@string/size"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                
-                <TextView android:id="@+id/size_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                
-                <TextView android:text="@string/weight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                
-                <TextView android:id="@+id/weight_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                
-            </LinearLayout>
-            
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                
-                <TextView android:text="@string/ev"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                
-                <TextView android:id="@+id/ev_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                
-                <TextView android:text="@string/catch_rate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                
-                <TextView android:id="@+id/catch_rate_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                
-            </LinearLayout>
-            
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                
-                <TextView android:text="@string/gender"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                
-                <TextView android:id="@+id/gender_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                
-            </LinearLayout>
-            
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                
-                <TextView android:text="@string/hatch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                
-                <TextView android:id="@+id/hatch_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                
-            </LinearLayout>
-            
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                
-                <TextView android:text="@string/egg_group"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                
-                <TextView android:id="@+id/egg_group_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                
-            </LinearLayout>
-            
-        </LinearLayout>
-        
-        <!--View android:layout_width="match_parent" android:layout_height="200dp"
-            android:background="#FF00FF"/-->
-        
+            android:gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp" />
     </LinearLayout>
 </LinearLayout>

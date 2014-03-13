@@ -74,6 +74,10 @@ public class Pokemon {
     	return result;
     }
     
+    public boolean hasEvolutions() {
+        return evolutions != null && !evolutions.isLeaf();
+    }
+    
     public Pokemon[] getSimpleEvolutionList() {
         return getEvolutionList(evolutions).toArray(new Pokemon[]{});
     }
