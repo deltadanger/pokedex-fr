@@ -47,4 +47,6 @@
     <string name="spectre">spectre</string>
     <string name="tenebre">tenebre</string>
     <string name="vol">vol</string>
+    
+    <string name="loading_error">Il y a eu une erreur lors du chargement de ce Pokémon.</string>
 </resources>

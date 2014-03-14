@@ -7,7 +7,22 @@ import java.util.HashMap;
 public class Pokemon {
     
     @SuppressWarnings("serial")
-    public static Pokemon UNKNOWN = new Pokemon("Unknown", 0, 0, Type.NONE, Type.NONE, new ArrayList<Talent>(){{this.add(Talent.ERREUR);}}, 0, 0, 0, 0, 0, 0){{this.evolutions = null;}};
+    public static Pokemon MISSINGNO = new Pokemon(
+            "MissingNo", 0, 0, 
+            Type.NONE, 
+            Type.NONE, 
+            new ArrayList<Talent>(){{
+                this.add(Talent.ERREUR);
+            }}, 0, 0, 0, 0, 0, 0){{
+                this.evolutions = null;
+                this.catchRate = "0";
+                this.weight = "0,0kg";
+                this.hatch = "0 cycles - 0 pas";
+                this.gender = "Asexue";
+                this.ev = "Aucun";
+                this.eggGroup = "Sans oeuf";
+                this.size = "0,0m";
+            }};
     
     public String name;
     public int number;

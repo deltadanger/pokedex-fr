@@ -1,21 +1,16 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" 
-    android:orientation="vertical">
-    
-    <SearchView
-        android:id="@+id/search_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10" />
+    android:layout_height="match_parent">
     
     <ScrollView
         android:id="@+id/main_scroll"
         tools:context=".MainActivity"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:paddingTop="50dp">
         
         <LinearLayout
             android:id="@+id/main_scroll_layout"
@@ -32,4 +27,10 @@
         </LinearLayout>
         
     </ScrollView>
-</LinearLayout>
+    
+    <SearchView
+        android:id="@+id/search_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" />
+</RelativeLayout>

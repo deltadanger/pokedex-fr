@@ -30,6 +30,7 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.ScrollView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 import fr.pokedex.data.EvolutionNode;
 import fr.pokedex.data.Pokemon;
 import fr.pokedex.data.PokemonList;
@@ -71,9 +72,12 @@ public class PokemonPage extends Activity {
     private final int FULL_EVOLUTION_TITLE_SIZE = 18;
     private final int FULL_EVOLUTION_TITLE_MARGIN = 10;
     private final int FULL_EVOLUTION_PATH_SIZE = 10;
-    
+
     private final int SWIPE_MIN_MOVE = 50;
+    private final int SCROLL_THRESHOLD = 20;
     private float touchPositionX = 0f;
+    private float touchPositionY = 0f;
+    private boolean disableScroll = false;
     
     private float dpToPx;
     private Pokemon currentPokemon;
@@ -81,7 +85,8 @@ public class PokemonPage extends Activity {
     private ExpandAnimation animation;
     
     private HorizontalScrollView fullEvolutionsScrollView;
-    private boolean touchedInsideScrollView = false;
+    private HorizontalScrollView touchedScrollView;
+    private int touchedScrollViewPosition;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,22 +175,33 @@ public class PokemonPage extends Activity {
     public boolean dispatchTouchEvent(MotionEvent event) {
         boolean ret = super.dispatchTouchEvent(event);
         
+        float position;
+        final ScrollView scroll = (ScrollView)findViewById(R.id.main_scroll);
+        
         switch (event.getAction())
         {
         // when user first touches the screen we get x and y coordinate
         case MotionEvent.ACTION_DOWN:
-            touchedInsideScrollView = isInsideHorizontalScrollView(event.getX(), event.getY());
+            touchedScrollView = getHorizontalScrollView(event.getX(), event.getY());
+            touchedScrollViewPosition = 0;
+            if (touchedScrollView != null) {
+                touchedScrollViewPosition = touchedScrollView.getScrollX();
+            }
             touchPositionX = event.getX();
+            touchPositionY = event.getY();
+            disableScroll = true;
             break;
             
         case MotionEvent.ACTION_UP:
-            if (touchedInsideScrollView) {
+            position = event.getX();
+            
+            if (touchedScrollView != null && (
+                    touchedScrollView.canScrollHorizontally((int) (touchPositionX - position)) ||
+                    touchedScrollViewPosition != touchedScrollView.getScrollX())) {
                 break;
             }
             
-            final ScrollView scroll = (ScrollView)findViewById(R.id.main_scroll);
             final int swipeDetect = (int)(SWIPE_MIN_MOVE*dpToPx + 0.5f);
-            float position = event.getX();
 
             if (position - touchPositionX > swipeDetect && currentPokemon.index - 1 > 0) {
                 Intent intent = new Intent(this, this.getClass());
@@ -205,12 +221,30 @@ public class PokemonPage extends Activity {
                 finish();
             }
             break;
+            
+        case MotionEvent.ACTION_MOVE:
+            position = event.getY();
+            float threshold = Math.max((SCROLL_THRESHOLD*dpToPx + 0.5f), Math.abs(event.getX()-touchPositionX));
+            
+            if (disableScroll && Math.abs(position-touchPositionY) < threshold) {
+                scroll.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        return true;
+                    }
+                });
+            } else {
+                scroll.setOnTouchListener(null);
+                // Scrolling should not be disabled again until re-touched
+                disableScroll = false;
+            }
+            break;
         }
         
         return ret;
     }
     
-    private boolean isInsideHorizontalScrollView(float x, float y) {
+    private HorizontalScrollView getHorizontalScrollView(float x, float y) {
         View v = findViewById(R.id.evolution_scroll);
         int[] location = {0,0};
         v.getLocationOnScreen(location);
@@ -220,7 +254,7 @@ public class PokemonPage extends Activity {
                              location[1] + v.getHeight());
 
         if (rect.contains((int) x, (int) y)) {
-            return true;
+            return (HorizontalScrollView)v;
         }
 
         LinearLayout infos = (LinearLayout)findViewById(R.id.info_content);
@@ -232,11 +266,11 @@ public class PokemonPage extends Activity {
                             location[1] + fullEvolutionsScrollView.getHeight());
 
             if (rect.contains((int) x, (int) y)) {
-                return true;
+                return fullEvolutionsScrollView;
             }
         }
         
-        return false;
+        return null;
     }
     
     private void animateViewHeight(final LinearLayout v) {
@@ -286,18 +320,30 @@ public class PokemonPage extends Activity {
     }
     
     private void loadData(int index) {
-        currentPokemon = PokemonList.perIndex.get(index);
-        loadData();
+        try {
+            currentPokemon = PokemonList.perIndex.get(index);
+            loadData();
+        } catch (Exception e) {
+            Toast.makeText(this, R.string.loading_error, Toast.LENGTH_LONG).show();
+            currentPokemon = Pokemon.MISSINGNO;
+            loadData();
+        }
     }
     
     private void loadData(String name) {
-        currentPokemon = PokemonList.perName.get(name);
-        loadData();
+        try {
+            currentPokemon = PokemonList.perName.get(name);
+            loadData();
+        } catch (Exception e) {
+            Toast.makeText(this, R.string.loading_error, Toast.LENGTH_LONG).show();
+            currentPokemon = Pokemon.MISSINGNO;
+            loadData();
+        }
     }
     
     private void loadData() {
         if (currentPokemon == null) {
-            currentPokemon = Pokemon.UNKNOWN;
+            currentPokemon = Pokemon.MISSINGNO;
         }
         
         final int barHeight = (int)(STAT_BAR_HEIGHT*dpToPx + 0.5f);
@@ -327,7 +373,7 @@ public class PokemonPage extends Activity {
             final Pokemon p = currentPokemonEvolutions[i];
             try {
                 layout = new LayoutParams((int)(EVOLUTION_PIC_WIDTH*dpToPx + 0.5f), (int)(EVOLUTION_PIC_HEIGHT*dpToPx + 0.5f));
-                layout.setMargins((int)(EVOLUTION_MARGIN*dpToPx + 0.5f), 0, 0, 0);
+                layout.leftMargin = (int)(EVOLUTION_MARGIN*dpToPx + 0.5f);
                 img = new ImageView(this);
                 img.setLayoutParams(layout);
                 img.setImageDrawable(Drawable.createFromStream(
@@ -347,7 +393,8 @@ public class PokemonPage extends Activity {
             // Another element, add an arrow
             if (i+1 < currentPokemonEvolutions.length) {
                 layout = new LayoutParams((int)(ARROW_WIDTH*dpToPx + 0.5f), (int)(ARROW_HEIGHT*dpToPx + 0.5f));
-                layout.setMargins((int)(ARROW_MARGIN_LEFT*dpToPx + 0.5f), (int)(ARROW_MARGIN_TOP*dpToPx + 0.5f), 0, 0);
+                layout.leftMargin = (int)(ARROW_MARGIN_LEFT*dpToPx + 0.5f);
+                layout.topMargin = (int)(ARROW_MARGIN_TOP*dpToPx + 0.5f);
                 img = new ImageView(this);
                 img.setLayoutParams(layout);
                 img.setImageResource(R.drawable.arrow);
@@ -387,7 +434,8 @@ public class PokemonPage extends Activity {
             fullEvolutionsLayout.removeAllViews();
             TextView text = new TextView(this);
             LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-            params.setMargins(0, (int)(FULL_EVOLUTION_TITLE_MARGIN*dpToPx + 0.5f), 0, (int)(FULL_EVOLUTION_TITLE_MARGIN*dpToPx + 0.5f));
+            params.topMargin = (int)(FULL_EVOLUTION_TITLE_MARGIN*dpToPx + 0.5f);
+            params.bottomMargin = (int)(FULL_EVOLUTION_TITLE_MARGIN*dpToPx + 0.5f);
             text.setLayoutParams(params);
             text.setTextSize(TypedValue.COMPLEX_UNIT_SP, FULL_EVOLUTION_TITLE_SIZE);
             text.setText(R.string.evolution_chain);
@@ -538,7 +586,8 @@ public class PokemonPage extends Activity {
             TextView text = new TextView(this);
             text.setText(root.base.name);
             params = new LayoutParams((int)(FULL_EVOLUTION_PIC_WIDTH*dpToPx + 0.5f), LayoutParams.WRAP_CONTENT);
-            params.setMargins(0, (int)(EVOLUTION_MARGIN*dpToPx + 0.5f), 0, (int)(EVOLUTION_MARGIN*dpToPx + 0.5f));
+            params.topMargin = (int)(EVOLUTION_MARGIN*dpToPx + 0.5f);
+            params.bottomMargin = (int)(EVOLUTION_MARGIN*dpToPx + 0.5f);
             text.setLayoutParams(params);
             text.setGravity(Gravity.CENTER_HORIZONTAL);
             layout.addView(text);
@@ -583,7 +632,10 @@ public class PokemonPage extends Activity {
             for (String path : root.evolutions.keySet()) {
                 individualEvolutionLayout = new LinearLayout(this);
                 individualEvolutionLayout.setOrientation(LinearLayout.VERTICAL);
-                params.setMargins((int)(EVOLUTION_MARGIN*dpToPx + 0.5f), (int)(EVOLUTION_MARGIN*dpToPx + 0.5f), (int)(EVOLUTION_MARGIN*dpToPx + 0.5f), 0);
+                params.setMargins((int)(EVOLUTION_MARGIN*dpToPx + 0.5f),
+                                  (int)(EVOLUTION_MARGIN*dpToPx + 0.5f),
+                                  (int)(EVOLUTION_MARGIN*dpToPx + 0.5f),
+                                  0);
                 individualEvolutionLayout.setLayoutParams(params);
                 
                 multipleEvolutionsLayout.addView(individualEvolutionLayout);

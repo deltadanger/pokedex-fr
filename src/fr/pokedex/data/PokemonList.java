@@ -2147,7 +2147,7 @@ public class PokemonList {
         p.size = "0,9m";
 
         p = perName.get("Stari");
-        p.evolutions = null;
+        p.evolutions = new EvolutionNode(perName.get("Stari"), new HashMap<String, EvolutionNode>(){{this.put("Pierre Eau", new EvolutionNode(perName.get("Staross"), null));}});
         p.catchRate = "225";
         p.weight = "34,5kg";
         p.hatch = "19 cycles - 5120 pas";
@@ -3007,7 +3007,7 @@ public class PokemonList {
         p.size = "1,3m";
 
         p = perName.get("Staross");
-        p.evolutions = null;
+        p.evolutions = new EvolutionNode(perName.get("Stari"), new HashMap<String, EvolutionNode>(){{this.put("Pierre Eau", new EvolutionNode(perName.get("Staross"), null));}});
         p.catchRate = "60";
         p.weight = "80,0kg";
         p.hatch = "19 cycles - 5120 pas";
@@ -3905,10 +3905,6 @@ public class PokemonList {
         p.ev = "+2 Vit.";
         p.eggGroup = "Sol";
         p.size = "0,8m";
-    }
-    
-    private static void setAdditionalInformationPart2() {
-        Pokemon p;
 
         p = perName.get("Arceus");
         p.evolutions = null;
@@ -4239,6 +4235,10 @@ public class PokemonList {
         p.ev = "+1 Def.; +1 Def. Spe";
         p.eggGroup = "Indetermine";
         p.size = "1,6m";
+    }
+    
+    private static void setAdditionalInformationPart2() {
+        Pokemon p;
 
         p = perName.get("Aquali");
         p.evolutions = new EvolutionNode(perName.get("Evoli"), new HashMap<String, EvolutionNode>(){{this.put("Avec une Pierre Foudre", new EvolutionNode(perName.get("Voltali"), null));this.put("Pres d'une Pierre Mousse + gagne un niveau", new EvolutionNode(perName.get("Phyllali"), null));this.put("Bonheur , Jour", new EvolutionNode(perName.get("Mentali"), null));this.put("2 coeurs d'affection a la Poke Recre + gagne un niveau + avoir une attaque Fee", new EvolutionNode(perName.get("Nymphali"), null));this.put("Avec une Pierre Eau", new EvolutionNode(perName.get("Aquali"), null));this.put("Pres d'une Pierre Glacee + gagne un niveau", new EvolutionNode(perName.get("Givrali"), null));this.put("Avec une Pierre Feu", new EvolutionNode(perName.get("Pyroli"), null));this.put("Bonheur , Nuit", new EvolutionNode(perName.get("Noctali"), null));}});
