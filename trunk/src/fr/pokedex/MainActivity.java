@@ -8,8 +8,6 @@ import fr.pokedex.data.PokemonList;
 
 /*
  * TODO:
- * - Update "unfold" image
- * - fix gapping issues around "unfold" image
  * X Recherche par type
  * - Theme sombre
  * - Liste des attaques apprises

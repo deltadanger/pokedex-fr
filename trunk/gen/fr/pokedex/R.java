@@ -87,8 +87,8 @@ public final class R {
         public static int insecte=0x7f0a0021;
         public static int lifeTxt=0x7f0a002b;
         public static int main_layout=0x7f0a0000;
-        public static int main_scroll=0x7f0a0002;
-        public static int main_scroll_layout=0x7f0a0003;
+        public static int main_scroll=0x7f0a0001;
+        public static int main_scroll_layout=0x7f0a0002;
         public static int menu_search=0x7f0a0037;
         public static int nameTxt=0x7f0a0005;
         public static int normal=0x7f0a0022;
@@ -97,7 +97,7 @@ public final class R {
         public static int poison=0x7f0a0024;
         public static int psy=0x7f0a0025;
         public static int roche=0x7f0a0026;
-        public static int search_text=0x7f0a0001;
+        public static int search_text=0x7f0a0003;
         public static int size_txt=0x7f0a0011;
         public static int sol=0x7f0a0027;
         public static int spaTxt=0x7f0a002e;
@@ -147,6 +147,7 @@ public final class R {
         public static int info_title=0x7f07000f;
         public static int insecte=0x7f07001f;
         public static int life=0x7f070008;
+        public static int loading_error=0x7f070029;
         public static int normal=0x7f070020;
         public static int plante=0x7f070021;
         public static int poison=0x7f070022;
