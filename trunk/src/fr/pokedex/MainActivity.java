@@ -11,6 +11,7 @@ import fr.pokedex.data.PokemonList;
  * X Recherche par type
  * - Theme sombre
  * - Liste des attaques apprises
+ * - Ajouter lien entre Ptéra et Mega-Ptéra
  */
 
 /* 
