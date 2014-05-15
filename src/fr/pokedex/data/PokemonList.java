@@ -5511,7 +5511,7 @@ public class PokemonList {
         p.size = "0,4m";
 
         p = perName.get("Ptera");
-        p.evolutions = new EvolutionNode(perName.get("Ptera"), null);
+        p.evolutions = new EvolutionNode(perName.get("Ptera"), new HashMap<String, EvolutionNode>(){{this.put("Pteraite", new EvolutionNode(perName.get("Mega-Ptera"), null));}});
         p.catchRate = "45";
         p.weight = "59,0kg";
         p.hatch = "34 cycles - 8960 pas";
@@ -5519,6 +5519,16 @@ public class PokemonList {
         p.ev = "+2 Vit.";
         p.eggGroup = "Vol";
         p.size = "1,8m";
+
+        p = perName.get("Mega-Ptera");
+        p.evolutions = new EvolutionNode(perName.get("Ptera"), new HashMap<String, EvolutionNode>(){{this.put("Pteraite", new EvolutionNode(perName.get("Mega-Ptera"), null));}});
+        p.catchRate = "";
+        p.weight = "79,0kg";
+        p.hatch = "";
+        p.gender = "12.5% femelle; 87.5% male";
+        p.ev = "";
+        p.eggGroup = "";
+        p.size = "2,1m";
 
         p = perName.get("Galopa");
         p.evolutions = new EvolutionNode(perName.get("Ponyta"), new HashMap<String, EvolutionNode>(){{this.put("Niveau 40", new EvolutionNode(perName.get("Galopa"), null));}});

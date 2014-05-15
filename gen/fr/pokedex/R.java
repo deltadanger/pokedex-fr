@@ -148,6 +148,7 @@ public final class R {
         public static int insecte=0x7f07001f;
         public static int life=0x7f070008;
         public static int loading_error=0x7f070029;
+        public static int no_result=0x7f07002a;
         public static int normal=0x7f070020;
         public static int plante=0x7f070021;
         public static int poison=0x7f070022;
