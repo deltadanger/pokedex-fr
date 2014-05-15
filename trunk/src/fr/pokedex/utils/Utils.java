@@ -18,9 +18,9 @@ public class Utils {
             result = result.substring(0, result.indexOf(" ("));
         }
         
-        result = result.replace(" ", "-").replace(".", "");
+        result = result.trim().replace(" ", "-").replace(".", "");
         
-        return result.trim();
+        return result;
     }
     
     public static String standardize(Object s) {

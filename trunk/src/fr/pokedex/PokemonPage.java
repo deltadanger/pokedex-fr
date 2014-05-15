@@ -2,6 +2,7 @@ package fr.pokedex;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -96,7 +97,7 @@ public class PokemonPage extends Activity {
         dpToPx = this.getResources().getDisplayMetrics().density;
         
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) findViewById(R.id.search_text);
+        final SearchView searchView = (SearchView) findViewById(R.id.search_text);
         
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setIconified(false);
@@ -108,6 +109,29 @@ public class PokemonPage extends Activity {
             overridePendingTransition(0,0);
             String query = intent.getDataString();
             loadData(query);
+            
+        } else if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String originalQuery = intent.getStringExtra(SearchManager.QUERY);
+            String query = Utils.standardize(originalQuery);
+            boolean validSearch = false;
+            
+            for (Entry<String, Pokemon> el : PokemonList.perName.entrySet()) {
+                String name = Utils.standardize(el.getKey());
+                String number = Utils.standardize(""+el.getValue().number);
+                
+                if (query.equals(name) || query.equals(number)) {
+                    loadData(el.getKey());
+                    validSearch = true;
+                    break;
+                }
+            }
+            
+            if (!validSearch) {
+                Toast.makeText(PokemonPage.this, R.string.no_result, Toast.LENGTH_LONG).show();
+                loadData(1);
+                searchView.setQuery(originalQuery, false);
+            }
+            
         } else {
             int index = intent.getIntExtra(INTENT_EXTRA_POKEMON_INDEX, 1);
             loadData(index);
@@ -182,6 +206,7 @@ public class PokemonPage extends Activity {
         {
         // when user first touches the screen we get x and y coordinate
         case MotionEvent.ACTION_DOWN:
+            
             touchedScrollView = getHorizontalScrollView(event.getX(), event.getY());
             touchedScrollViewPosition = 0;
             if (touchedScrollView != null) {
