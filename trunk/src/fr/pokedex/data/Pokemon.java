@@ -3,6 +3,8 @@ package fr.pokedex.data;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import android.util.SparseIntArray;
+
 
 public class Pokemon {
     
@@ -11,17 +13,17 @@ public class Pokemon {
             "MissingNo", 0, 0, 
             Type.NONE, 
             Type.NONE, 
-            new ArrayList<Talent>(){{
-                this.add(Talent.ERREUR);
+            new ArrayList<Ability>(){{
+                this.add(Ability.ERREUR);
             }}, 0, 0, 0, 0, 0, 0){{
                 this.evolutions = null;
-                this.catchRate = "0";
-                this.weight = "0,0kg";
-                this.hatch = "0 cycles - 0 pas";
-                this.gender = "Asexue";
-                this.ev = "Aucun";
-                this.eggGroup = "Sans oeuf";
-                this.size = "0,0m";
+                this.catchRate = 0;
+                this.weight = 0;
+                this.hatch = 0;
+                this.gender = -1;
+                this.ev = new SparseIntArray();
+                this.eggGroup = new EggGroup[]{EggGroup.NO_EGG};
+                this.size = 0;
             }};
     
     public String name;
@@ -31,7 +33,7 @@ public class Pokemon {
     public Type type1;
     public Type type2;
     
-    public ArrayList<Talent> abilities;
+    public ArrayList<Ability> abilities;
     
     public int life;
     public int attack;
@@ -42,16 +44,16 @@ public class Pokemon {
     
     public EvolutionNode evolutions;
 
-    public String size;
-    public String weight;
-    public String ev;
-    public String catchRate;
-    public String gender;
-    public String hatch;
-    public String eggGroup;
+    public float size;
+    public float weight;
+    public SparseIntArray ev;
+    public int catchRate;
+    public float gender;
+    public int hatch;
+    public EggGroup[] eggGroup;
     
     public Pokemon(String name, int number, int index, Type type1, Type type2,
-            ArrayList<Talent> abilities, int life, int attack, int defense, int spAttack,
+            ArrayList<Ability> abilities, int life, int attack, int defense, int spAttack,
             int spDefense, int speed) {
         super();
         this.name = name;

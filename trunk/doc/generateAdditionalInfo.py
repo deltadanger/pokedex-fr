@@ -1,13 +1,52 @@
 # -*- coding: utf-8 -*- 
-import urllib, unicodedata, string
+import urllib, unicodedata, string, re
 from HTMLParser import HTMLParser
 
 PROXY = "http://jacoelt:8*ziydwys@crlwsgateway_cluster.salmat.com.au:8080"
 HOME_URL = "http://www.pokepedia.fr"
 BASE_URL = "http://www.pokepedia.fr/index.php/Liste_des_Pok%C3%A9mon_par_statistiques_de_base"
 
-def main(list):
-    
+
+egg_group_matching = {
+    "Vol": "FLYING",
+    "Amorphe": "AMORPHOUS",
+    "Eau 1": "WATER1",
+    "Eau 2": "WATER2",
+    "Eau 3": "WATER3",
+    "Dragon": "DRAGON",
+    "Fee": "FAIRY",
+    "Humanoide": "HUMANLIKE",
+    "Indetermine": "UNKNOWN",
+    "Insecte": "BUG",
+    "Metamorph": "DITTO",
+    "Mineral": "MINERAL",
+    "Monstre": "MONSTER",
+    "Sol": "FIELD",
+    "Plante": "GRASS",
+    "Sans Oeuf": "NO_EGG",
+    "Sans oeuf": "NO_EGG",
+    "": "NO_EGG",
+}
+
+ev_name_matching = {
+    "PV": "life_short",
+    "PV.": "life_short",
+    "Att.": "att_short",
+    "Att": "att_short",
+    "Def.": "def_short",
+    "Def": "def_short",
+    "Def0": "def_short",
+    "Att. Spe": "spatt_short",
+    "Att Spe.": "spatt_short",
+    "Att. Spe.": "spatt_short",
+    "Def. Spe": "spdef_short",
+    "Def. Spe.": "spdef_short",
+    "Vit.": "speed_short",
+}
+
+def main(list, name_match):
+
+
     text = ""
     spacing = "        "
     for name, info in list.items():
@@ -15,40 +54,62 @@ def main(list):
     # name = "Kirlia"
     # info = list[name]
         
+        weight = info["weight"].replace("kg", "").replace(",", ".")
+        
+        hatch = -1
+        match = re.match("\d+ cycles - (\d+) pas", info["hatch"])
+        if match:
+            hatch = match.group(1)
+        
+        gender = -1
+        match = re.match("([\d\.]+)% femelle; [\d\.]+% male", info["gender"])
+        if match:
+            gender = match.group(1)
+        
+        evs = ""
+        for ev in re.split("[;,]", info["ev"]):
+            ev_match = re.match("\+(\d) (.*)", ev)
+            if ev_match:
+                evs += "this.append({}, R.string.{});".format(ev_match.group(1), ev_name_matching[ev_match.group(2)])
+        
+        egg_groups = []
+        for egg_group in info["egg"].split("/"):
+            egg_groups.append("EggGroup." + egg_group_matching[egg_group])
+        
+        size = info["size"].replace("m", "").replace(",", ".")
+        
+        
         tree = generate_evolution_tree(info["evolutions"], list)
         
-        text += spacing + "p = perName.get(\"{name}\");\n".format(name=name)
+        
+        text += spacing + "p = perName.get(ctx.getString(R.string.name_{name}));\n".format(name=toId(name))
         text += spacing + "p.evolutions = " + get_text_from_evolution_tree(tree) + ";\n"
         
-        text += spacing + "p.catchRate = \"{}\";\n".format(info["catch"])
-        text += spacing + "p.weight = \"{}\";\n".format(info["weight"])
-        text += spacing + "p.hatch = \"{}\";\n".format(info["hatch"])
-        text += spacing + "p.gender = \"{}\";\n".format(info["gender"])
-        text += spacing + "p.ev = \"{}\";\n".format(info["ev"])
-        text += spacing + "p.eggGroup = \"{}\";\n".format(info["egg"])
-        text += spacing + "p.size = \"{}\";\n\n".format(info["size"])
+        text += spacing + "p.catchRate = {};\n".format(info["catch"] if info["catch"] else "-1")
+        text += spacing + "p.weight = {}f;\n".format(weight)
+        text += spacing + "p.hatch = {};\n".format(hatch)
+        text += spacing + "p.gender = {}f;\n".format(gender)
+        text += spacing + "p.ev = new SparseIntArray(){{{{{}}}}};\n".format(evs)
+        text += spacing + "p.eggGroup = new EggGroup[]{{{}}};\n".format(",".join(egg_groups))
+        text += spacing + "p.size = {}f;\n\n".format(size)
 
     print text
-    # p.evolutions = new EvolutionNode(perName.get("{name}"), new HashMap<String, EvolutionNode>(){{this.put("{path}", new EvolutionNode(perName.get("{name}"), null));}});
-    # p.catchRate = 0;
-    # p.weight = "";
-    # p.hatch = "";
-    # p.gender = "";
-    # p.ev = "";
-    # p.eggGroup= "";
-    # p.size = "";
 
 def get_text_from_evolution_tree(evolution_tree):
     if not evolution_tree:
         return "null"
         
     if not evolution_tree.nodes:
-        return "new EvolutionNode(perName.get(\"{name}\"), null)".format(name=evolution_tree.name)
+        return "new EvolutionNode(perName.get(ctx.getString(R.string.name_{name})), null)".format(name=toId(evolution_tree.name))
     
-    text = "new EvolutionNode(perName.get(\"{name}\"), new HashMap<String, EvolutionNode>(){{{{".format(name=evolution_tree.name)
+    text = "new EvolutionNode(perName.get(ctx.getString(R.string.name_{name})), new HashMap<String, EvolutionNode>(){{{{".format(name=toId(evolution_tree.name))
     
     for path, evolutions in evolution_tree.nodes.items():
-        text += "this.put(\"{path}\", ".format(path=path) + get_text_from_evolution_tree(evolutions) + ");"
+        if path.startswith("Niveau "):
+            path = "ctx.getString(R.string.level) + \"" + path[7:] + '"'
+        else:
+            path = '"' + path + '"'
+        text += "this.put({path}, ".format(path=path) + get_text_from_evolution_tree(evolutions) + ");"
     
     return text + "}})"
     
@@ -459,19 +520,43 @@ class EggParser(StandardInfoParser):
 
 def normalize(text):
     return text.strip()\
-        .replace(u"\xe9", "e")\
-        .replace(u"\xe8", "e")\
-        .replace(u"\xea", "e")\
-        .replace(u"\xe0", "a")\
-        .replace(u"\xe2", "a")\
-        .replace(u"\xef", "i")\
-        .replace(u"\xf4", "o")\
-        .replace(u"\xe7", "c")\
-        .replace(u"\u0153", "oe")\
-        .replace(u"\xc9", "E")\
-        .replace(u"\u2640", " F")\
-        .replace(u"\u2642", " M")\
-        .replace(u"\u2014", "")
+        .replace("é", "e")\
+        .replace("è", "e")\
+        .replace("ê", "e")\
+        .replace("à", "a")\
+        .replace("â", "a")\
+        .replace("ï", "i")\
+        .replace("ô", "o")\
+        .replace("ç", "c")\
+        .replace("ç", "c")\
+        .replace("œ", "oe")\
+        .replace("É", "e")
+        # .replace(u"\xe9", "e")\
+        # .replace(u"\xe8", "e")\
+        # .replace(u"\xea", "e")\
+        # .replace(u"\xe0", "a")\
+        # .replace(u"\xe2", "a")\
+        # .replace(u"\xef", "i")\
+        # .replace(u"\xf4", "o")\
+        # .replace(u"\xe7", "c")\
+        # .replace(u"\u0153", "oe")\
+        # .replace(u"\xc9", "E")\
+        # .replace(u"\u2640", " F")\
+        # .replace(u"\u2642", " M")\
+        # .replace(u"\u2014", "")
+
+def toId(text):
+    text = text.lower()\
+        .replace(" ", "_")\
+        .replace("-", "_")\
+        .replace(".", "")\
+        .replace("'", "")\
+        .replace("(", "")\
+        .replace(")", "")
+    
+    return name_match[text]
+
+name_match = {'scorplane': 'gligar', 'snubbull': 'snubbull', 'ratentif': 'patrat', 'hypnomade': 'hypno', 'mammochon': 'mamoswine', 'phyllali': 'leafeon', 'celebi': 'celebi', 'togetic': 'togetic', 'carabing': 'karrablast', 'metamorph': 'ditto', 'mega_ectoplasma': 'mega_gengar', 'ossatueur': 'marowak', 'monaflemit': 'slaking', 'palkia': 'palkia', 'nymphali': 'sylveon', 'loupio': 'chinchou', 'mega_absol': 'mega_absol', 'noctali': 'umbreon', 'baggaid': 'scrafty', 'abra': 'abra', 'debugant': 'tyrogue', 'pifeuil': 'nuzleaf', 'tarpaud': 'politoed', 'demolosse': 'houndoom', 'miradar': 'watchog', 'kaimorse': 'walrein', 'stalgamin': 'snorunt', 'teddiursa': 'teddiursa', 'azurill': 'azurill', 'registeel': 'registeel', 'amonita': 'omanyte', 'lamperoie': 'eelektrik', 'mesmerella': 'gothorita', 'qwilfish': 'qwilfish', 'pharamp': 'ampharos', 'galopa': 'rapidash', 'roitiflam': 'emboar', 'marisson': 'chespin', 'furaiglon': 'rufflet', 'electhor': 'zapdos', 'lewsor': 'elgyem', 'hippopotas': 'hippopotas', 'mega_mewtwo_x': 'mega_mewtwo_x', 'mega_mewtwo_y': 'mega_mewtwo_y', 'armulys': 'silcoon', 'florges': 'florges', 'fouinette': 'sentret', 'heliatronc': 'sunflora', 'pitrouille_taille_ultra': 'pumpkaboo_super_size', 'moufouette': 'stunky', 'zeblitz': 'zebstrika', 'torterra': 'torterra', 'simularbre': 'sudowoodo', 'insolourdo': 'dunsparce', 'zorua': 'zorua', 'meganium': 'meganium', 'ymphect': 'pupitar', 'vigoroth': 'vigoroth', 'roselia': 'roselia', 'givrali': 'glaceon', 'poussifeu': 'torchic', 'baggiguane': 'scraggy', 'lombre': 'lombre', 'tartard': 'poliwrath', 'delcatty': 'delcatty', 'abo': 'ekans', 'mysdibule': 'mawile', 'melo': 'cleffa', 'arkeapti': 'archen', 'ningale': 'nincada', 'kecleon': 'kecleon', 'vaututrice': 'mandibuzz', 'minidraco': 'dratini', 'goelise': 'wingull', 'floette': 'floette', 'ouvrifier': 'gurdurr', 'tropius': 'tropius', 'mew': 'mew', 'banshitrouye_taille_ultra': 'gourgeist_super_size', 'tenefix': 'sableye', 'ptera': 'aerodactyl', 'tylton': 'swablu', 'dracolosse': 'dragonite', 'negapi': 'minun', 'rhinoferos': 'rhydon', 'eoko': 'chimecho', 'passerouge': 'fletchling', 'tentacruel': 'tentacruel', 'armaldo': 'armaldo', 'ptiravi': 'happiny', 'sorbebe': 'vanillite', 'kyurem': 'kyurem_normal_kyurem', 'dedenne': 'dedenne', 'drascore': 'drapion', 'chaffreux': 'purugly', 'mega_scarhino': 'mega_heracross', 'banshitrouye_taille_normale': 'gourgeist_average_size', 'desseliande': 'trevenant', 'cotovol': 'jumpluff', 'pyrax': 'volcarona', 'cryptero': 'sigilyph', 'maracachi': 'maractus', 'chrysacier': 'metapod', 'okeoke': 'wynaut', 'ecrapince': 'corphish', 'munja': 'shedinja', 'symbios': 'reuniclus', 'lancargot': 'escavalier', 'poissirene': 'goldeen', 'motisma_forme_tonte': 'rotom_fan_rotom', 'spiritomb': 'spiritomb', 'meios': 'duosion', 'papilusion': 'butterfree', 'heatran': 'heatran', 'cliticlic': 'klinklang', 'xatu': 'xatu', 'gardevoir': 'gardevoir', 'jungko': 'sceptile', 'qulbutoke': 'wobbuffet', 'ramboum': 'loudred', 'charmina': 'medicham', 'floravol': 'skiploom', 'staross': 'starmie', 'tygnon': 'hitmonchan', 'absol': 'absol', 'pyronille': 'larvesta', 'escargaume': 'shelmet', 'taupiqueur': 'diglett', 'blindalys': 'cascoon', 'mustebouee': 'buizel', 'granbull': 'granbull', 'noarfang': 'noctowl', 'lainergie': 'flaaffy', 'fragilady': 'lilligant', 'lippoutou': 'jynx', 'motisma_forme_helice': 'rotom_mow_rotom', 'teraclope': 'dusclops', 'moustillon': 'oshawott', 'brocelome': 'phantump', 'cochignon': 'piloswine', 'lucario': 'lucario', 'ohmassacre': 'eelektross', 'maskadra': 'masquerain', 'onix': 'onix', 'grodrive': 'drifblim', 'seviper': 'seviper', 'nostenfer': 'crobat', 'boskara': 'grotle', 'feunard': 'ninetales', 'kranidos': 'cranidos', 'croaporal': 'frogadier', 'elecsprint': 'manectric', 'mistigrix': 'meowstic', 'makuhita': 'makuhita', 'donphan': 'donphan', 'sabelette': 'sandshrew', 'sonistrelle': 'noibat', 'artikodin': 'articuno', 'coxyclaque': 'ledian', 'gloupti': 'gulpin', 'victini': 'victini', 'miamiasme': 'trubbish', 'mega_brasegali': 'mega_blaziken', 'noadkoko': 'exeggutor', 'pachirisu': 'pachirisu', 'gueriaigle': 'braviary', 'mateloutre': 'dewott', 'motisma_forme_normale': 'rotom_normal_rotom', 'psystigri': 'espurr', 'venalgue': 'skrelp', 'pingoleon': 'empoleon', 'arbok': 'arbok', 'opermine': 'binacle', 'goupelin': 'delphox', 'octillery': 'octillery', 'crapustule': 'seismitoad', 'melofee': 'clefairy', 'lippouti': 'smoochum', 'arcanin': 'arcanine', 'grindur': 'ferroseed', 'genesect': 'genesect', 'mucuscule': 'goomy', 'deoxys_forme_de_base': 'deoxys_normal_forme', 'crikzik': 'kricketot', 'ursaring': 'ursaring', 'noeunoeuf': 'exeggcute', 'm_mime': 'mr_mime', 'sapereau': 'bunnelby', 'psykokwak': 'psyduck', 'funecire': 'litwick', 'entei': 'entei', 'lanturn': 'lanturn', 'sancoki': 'shellos', 'barpau': 'feebas', 'melancolux': 'lampent', 'lugia': 'lugia', 'boreas_forme_totemique': 'tornadus_therian_forme', 'zekrom': 'zekrom', 'scarabrute': 'pinsir', 'couaneton': 'ducklett', 'voltorbe': 'voltorb', 'magireve': 'mismagius', 'ponchiot': 'lillipup', 'marcacrin': 'swinub', 'krabby': 'krabby', 'diamat': 'zweilous', 'tritonde': 'tympole', 'bastiodon': 'bastiodon', 'amonistar': 'omastar', 'drackhaus': 'shelgon', 'blizzi': 'snover', 'sulfura': 'moltres', 'phione': 'phione', 'dynavolt': 'electrike', 'lugulabre': 'chandelure', 'etouraptor': 'staraptor', 'kabuto': 'kabuto', 'limagma': 'slugma', 'kadabra': 'kadabra', 'kaiminus': 'totodile', 'mystherbe': 'oddish', 'mega_leviator': 'mega_gyarados', 'cupcanaille': 'slurpuff', 'arcko': 'treecko', 'capidextre': 'ambipom', 'prinplouf': 'prinplup', 'zebibron': 'blitzle', 'mime_jr': 'mime_jr', 'boustiflor': 'weepinbell', 'draby': 'bagon', 'ferosinge': 'mankey', 'serpang': 'huntail', 'tarsal': 'ralts', 'luxray': 'luxray', 'lamantine': 'dewgong', 'peregrain': 'spewpa', 'bouldeneu': 'tangrowth', 'tortank': 'blastoise', 'kabutops': 'kabutops', 'demanta': 'mantine', 'sepiatop': 'inkay', 'caninos': 'growlithe', 'nanmeouie': 'audino', 'empiflor': 'victreebel', 'herbizarre': 'ivysaur', 'pyroli': 'flareon', 'tritosor': 'gastrodon', 'joliflor': 'bellossom', 'carmache': 'gabite', 'demeteros_forme_totemique': 'landorus_therian_forme', 'tengalice': 'shiftry', 'magneti': 'magnemite', 'meloetta_forme_danse': 'meloetta_pirouette_forme', 'embrylex': 'larvitar', 'persian': 'persian', 'monorpale': 'honedge', 'oniglali': 'glalie', 'pandarbare': 'pangoro', 'mega_charmina': 'mega_medicham', 'kravarech': 'dragalge', 'manternel': 'leavanny', 'helionceau': 'litleo', 'magnezone': 'magnezone', 'terrakium': 'terrakion', 'rhinolove': 'swoobat', 'colossinge': 'primeape', 'moyade': 'jellicent', 'kapoera': 'hitmontop', 'chuchmur': 'whismur', 'tutankafer': 'cofagrigus', 'archeodong': 'bronzong', 'zoroark': 'zoroark', 'mangriff': 'zangoose', 'mega_pharamp': 'mega_ampharos', 'braisillon': 'fletchinder', 'etourmi': 'starly', 'trompignon': 'foongus', 'emolga': 'emolga', 'scarhino': 'heracross', 'posipi': 'plusle', 'porygon2': 'porygon2', 'mega_tyranocif': 'mega_tyranitar', 'anchwatt': 'tynamo', 'mega_scarabrute': 'mega_pinsir', 'girafarig': 'girafarig', 'tetarte': 'poliwhirl', 'nidorino': 'nidorino', 'nidorina': 'nidorina', 'latias': 'latias', 'chlorobule': 'petilil', 'mushana': 'musharna', 'volcaropod': 'magcargo', 'terhal': 'beldum', 'mega_blizzaroi': 'mega_abomasnow', 'sucroquin': 'swirlix', 'lakmecygne': 'swanna', 'lixy': 'shinx', 'shaofouine': 'mienshao', 'mamanbo': 'alomomola', 'bargantua': 'basculin', 'altaria': 'altaria', 'kokiyas': 'shellder', 'darumarond': 'darumaka', 'colhomard': 'crawdaunt', 'fouinar': 'furret', 'papinox': 'dustox', 'manaphy': 'manaphy', 'cocotine': 'aromatisse', 'brouhabam': 'exploud', 'sepiatroce': 'malamar', 'kyurem_blanc': 'kyurem_white_kyurem', 'seracrawl': 'avalugg', 'strassie': 'carbink', 'maganon': 'magmortar', 'kungfouine': 'mienfoo', 'meditikka': 'meditite', 'manzai': 'bonsly', 'feunnec': 'fennekin', 'mega_alakazam': 'mega_alakazam', 'maraiste': 'quagsire', 'couverdure': 'swadloon', 'mygavolt': 'galvantula', 'galvaran': 'helioptile', 'triopikeur': 'dugtrio', 'kicklee': 'hitmonlee', 'golgopathe': 'barbaracle', 'motisma_forme_chaleur': 'rotom_heat_rotom', 'cacnea': 'cacnea', 'coquiperl': 'clamperl', 'ptyranidur': 'tyrunt', 'mega_elecsprint': 'mega_manectric', 'mega_carchacrok': 'mega_garchomp', 'morpheo': 'castform', 'tyranocif': 'tyranitar', 'judokrak': 'throh', 'bulbizarre': 'bulbasaur', 'crabicoque': 'dwebble', 'gobou': 'mudkip', 'excavarenne': 'diggersby', 'seleroc': 'lunatone', 'remoraid': 'remoraid', 'chacripan': 'purrloin', 'flamoutan': 'simisear', 'shaymin_forme_terrestre': 'shaymin_land_forme', 'chartor': 'torkoal', 'dimocles': 'doublade', 'roucarnage': 'pidgeot', 'leuphorie': 'blissey', 'banshitrouye_taille_mini': 'gourgeist_small_size', 'charkos': 'rampardos', 'mega_mysdibule': 'mega_mawile', 'flingouste': 'clauncher', 'suicune': 'suicune', 'clic': 'klang', 'ectoplasma': 'gengar', 'miaouss': 'meowth', 'tortipouss': 'turtwig', 'nirondelle': 'taillow', 'lilia': 'lileep', 'mega_cizayox': 'mega_scizor', 'migalos': 'ariados', 'lokhlass': 'lapras', 'poissoroy': 'seaking', 'gaulet': 'amoonguss', 'kaorine': 'claydol', 'parecool': 'slakoth', 'regirock': 'regirock', 'ponchien': 'herdier', 'wattouat': 'mareep', 'grolem': 'golem', 'granivol': 'hoppip', 'mewtwo': 'mewtwo', 'smogo': 'koffing', 'tranchodon': 'haxorus', 'muplodocus': 'goodra', 'rhinastoc': 'rhyperior', 'carvanha': 'carvanha', 'cadoizo': 'delibird', 'ceribou': 'cherubi', 'pitrouille_taille_normale': 'pumpkaboo_average_size', 'limonde': 'stunfisk', 'libegon': 'flygon', 'mega_florizarre': 'mega_venusaur', 'hippodocus': 'hippowdon', 'crefollet': 'mesprit', 'flobio': 'marshtomp', 'canarticho': 'farfetchd', 'metalosse': 'metagross', 'siderella': 'gothitelle', 'azumarill': 'azumarill', 'pitrouille_taille_maxi': 'pumpkaboo_large_size', 'fantominus': 'gastly', 'pitrouille_taille_mini': 'pumpkaboo_small_size', 'jirachi': 'jirachi', 'arceus': 'arceus', 'elektek': 'electabuzz', 'racaillou': 'geodude', 'togekiss': 'togekiss', 'ecayon': 'finneon', 'leviator': 'gyarados', 'lumivole': 'illumise', 'crocrodil': 'croconaw', 'grelacon': 'bergmite', 'dialga': 'dialga', 'momartik': 'froslass', 'vostourno': 'vullaby', 'coudlangue': 'lickilicky', 'yveltal': 'yveltal', 'polichombr': 'shuppet', 'dimoret': 'weavile', 'roucoups': 'pidgeotto', 'farfaduvet': 'whimsicott', 'flamajou': 'pansear', 'rototaupe': 'drilbur', 'deoxys_forme_vitesse': 'deoxys_speed_forme', 'hericendre': 'cyndaquil', 'pashmilla': 'cinccino', 'coupenotte': 'axew', 'lumineon': 'lumineon', 'camerupt': 'camerupt', 'coatox': 'toxicroak', 'venipatte': 'venipede', 'dragmara': 'aurorus', 'vivaldaim': 'deerling', 'minotaupe': 'excadrill', 'zarbi': 'unown', 'galifeu': 'combusken', 'milobellus': 'milotic', 'feurisson': 'quilava', 'zigzaton': 'zigzagoon', 'machoc': 'machop', 'tentacool': 'tentacool', 'solaroc': 'solrock', 'sorboul': 'vanillish', 'wailmer': 'wailmer', 'laggron': 'swampert', 'chovsourir': 'woobat', 'nodulithe': 'roggenrola', 'darumacho_mode_normal': 'darmanitan_standard_mode', 'yanmega': 'yanmega', 'magneton': 'magneton', 'aeropteryx': 'archeops', 'fulguris_forme_totemique': 'thundurus_therian_forme', 'tutafeh': 'yamask', 'chetiflor': 'bellsprout', 'melodelfe': 'clefable', 'colimucus': 'sliggoo', 'tiplouf': 'piplup', 'cacturne': 'cacturne', 'grotichon': 'pignite', 'salameche': 'charmander', 'anorith': 'anorith', 'deoxys_forme_defense': 'deoxys_defense_forme', 'electrode': 'electrode', 'nucleos': 'solosis', 'hypocean': 'seadra', 'motisma_forme_lavage': 'rotom_wash_rotom', 'iguolta': 'heliolisk', 'gringolem': 'golett', 'sorbouboul': 'vanilluxe', 'foretress': 'forretress', 'giratina_forme_originelle': 'giratina_origin_forme', 'corboss': 'honchkrow', 'scrutella': 'gothita', 'ramoloss': 'slowpoke', 'kangourex': 'kangaskhan', 'doduo': 'doduo', 'fluvetin': 'spritzee', 'hariyama': 'hariyama', 'muciole': 'volbeat', 'scobolide': 'whirlipede', 'machopeur': 'machoke', 'elekid': 'elekid', 'trioxhydre': 'hydreigon', 'dardargnan': 'beedrill', 'blindepique': 'chesnaught', 'majaspic': 'serperior', 'parasect': 'parasect', 'galeking': 'aggron', 'xerneas': 'xerneas', 'rattata': 'rattata', 'metang': 'metang', 'relicanth': 'relicanth', 'feuillajou': 'pansage', 'gamblast': 'clawitzer', 'shaymin_forme_celeste': 'shaymin_sky_forme', 'steelix': 'steelix', 'lepidonille': 'scatterbug', 'simiabraz': 'infernape', 'babimanta': 'mantyke', 'megapagos': 'carracosta', 'pandespiegle': 'pancham', 'goupix': 'vulpix', 'gruikui': 'tepig', 'banshitrouye_taille_maxi': 'gourgeist_large_size', 'kraknoix': 'trapinch', 'crefadet': 'azelf', 'typhlosion': 'typhlosion', 'dodrio': 'dodrio', 'rondoudou': 'jigglypuff', 'statitik': 'joltik', 'flotajou': 'panpour', 'blizzaroi': 'abomasnow', 'drattak': 'salamence', 'hypotrempe': 'horsea', 'trousselin': 'klefki', 'wailord': 'wailord', 'leopardus': 'liepard', 'medhyena': 'poochyena', 'galekid': 'aron', 'gigalithe': 'gigalith', 'darumacho_mode_daruma': 'darmanitan_zen_mode', 'keldeo': 'keldeo', 'hyporoi': 'kingdra', 'macronium': 'bayleef', 'spoink': 'spoink', 'rafflesia': 'vileplume', 'charmillon': 'beautifly', 'cheniselle_cape_sol': 'wormadam_sandy_cloak', 'lianaja': 'servine', 'exagide_forme_parade': 'aegislash_blade_forme', 'aeromite': 'venomoth', 'colombeau': 'tranquill', 'coxy': 'ledyba', 'feuforeve': 'misdreavus', 'munna': 'munna', 'cresselia': 'cresselia', 'neitram': 'beheeyem', 'carapagos': 'tirtouga', 'meloetta_forme_voix': 'meloetta_aria_forme', 'spectrum': 'haunter', 'goinfrex': 'munchlax', 'kyogre': 'kyogre', 'yanma': 'yanma', 'mega_demolosse': 'mega_houndoom', 'mastouffe': 'stoutland', 'mega_dracaufeu_x': 'mega_charizard_x', 'mega_dracaufeu_y': 'mega_charizard_y', 'deoxys_forme_attaque': 'deoxys_attack_forme', 'groret': 'grumpig', 'solochi': 'deino', 'pomdepik': 'pineco', 'noacier': 'ferrothorn', 'skelenox': 'duskull', 'gallame': 'gallade', 'drakkarmin': 'druddigon', 'lineon': 'linoone', 'chamallot': 'numel', 'groudon': 'groudon', 'flagadoss': 'slowbro', 'osselait': 'cubone', 'roucool': 'pidgey', 'lovdisc': 'luvdisc', 'farfuret': 'sneasel', 'moufflair': 'skuntank', 'brutalibre': 'hawlucha', 'couafarel': 'furfrou', 'luxio': 'luxio', 'boreas_forme_avatar': 'tornadus_incarnate_forme', 'alakazam': 'alakazam', 'melokrik': 'kricketune', 'clamiral': 'samurott', 'draco': 'dragonair', 'avaltout': 'swalot', 'fulguris_forme_avatar': 'thundurus_incarnate_forme', 'lockpin': 'lopunny', 'golemastoc': 'golurk', 'nidoran_m': 'nidoran_m', 'crehelf': 'uxie', 'nidoran_f': 'nidoran_f', 'raichu': 'raichu', 'cizayox': 'scizor', 'crabaraque': 'crustle', 'pikachu': 'pikachu', 'bruyverne': 'noivern', 'rayquaza': 'rayquaza', 'haydaim': 'sawsbuck', 'coconfort': 'kakuna', 'kirlia': 'kirlia', 'larveyette': 'sewaddle', 'doudouvet': 'cottonee', 'frison': 'bouffalant', 'kyurem_noir': 'kyurem_black_kyurem', 'mega_gardevoir': 'mega_gardevoir', 'regice': 'regice', 'mascaiman': 'sandile', 'batracne': 'palpitoad', 'flabebe': 'flabebe', 'scorvol': 'gliscor', 'tarinor': 'nosepass', 'giratina_forme_alternative': 'giratina_altered_forme', 'aspicot': 'weedle', 'leveinard': 'chansey', 'miasmax': 'garbodor', 'zygarde': 'zygarde', 'polarhume': 'cubchoo', 'nosferalto': 'golbat', 'fermite': 'durant', 'mega_tortank': 'mega_blastoise', 'brasegali': 'blaziken', 'rexillius': 'tyrantrum', 'brutapode': 'scolipede', 'cradopaud': 'croagunk', 'spinda': 'spinda', 'mentali': 'espeon', 'togepi': 'togepi', 'tauros': 'tauros', 'natu': 'natu', 'nosferapti': 'zubat', 'paras': 'paras', 'axoloto': 'wooper', 'skitty': 'skitty', 'scalproie': 'bisharp', 'raikou': 'raikou', 'geolithe': 'boldore', 'toudoudou': 'igglybuff', 'bekipan': 'pelipper', 'akwakwak': 'golduck', 'hexagel': 'cryogonal', 'tadmorv': 'grimer', 'keunotor': 'bidoof', 'capumain': 'aipom', 'rhinocorne': 'rhyhorn', 'grainipiot': 'seedot', 'cheniselle_cape_dechet': 'wormadam_trash_cloak', 'latios': 'latios', 'ludicolo': 'ludicolo', 'ponyta': 'ponyta', 'ouisticram': 'chimchar', 'regigigas': 'regigigas', 'chaglam': 'glameow', 'phanpy': 'phanpy', 'ortide': 'gloom', 'mega_kangourex': 'mega_kangaskhan', 'tic': 'klink', 'nidoqueen': 'nidoqueen', 'chenipotte': 'wurmple', 'mimigal': 'spinarak', 'germignon': 'chikorita', 'phogleur': 'sealeo', 'rapasdepic': 'fearow', 'korillon': 'chingling', 'musteflott': 'floatzel', 'boguerisse': 'quilladin', 'chapignon': 'breloom', 'flambusard': 'talonflame', 'rattatac': 'raticate', 'insecateur': 'scyther', 'evoli': 'eevee', 'vacilys': 'cradily', 'mackogneur': 'machamp', 'viskuse': 'frillish', 'grenousse': 'froakie', 'elekable': 'electivire', 'grodoudou': 'wigglytuff', 'barbicha': 'whiscash', 'archeomire': 'bronzor', 'baudrive': 'drifloon', 'voltali': 'jolteon', 'cabriolaine': 'skiddo', 'karaclee': 'sawk', 'motisma_forme_froid': 'rotom_frost_rotom', 'feuiloutan': 'simisage', 'ceriflor': 'cherrim', 'poichigeon': 'pidove', 'porygon_z': 'porygon_z', 'darkrai': 'darkrai', 'noctunoir': 'dusknoir', 'krabboss': 'kingler', 'smogogo': 'weezing', 'apireine': 'vespiquen', 'cornebre': 'murkrow', 'papilord': 'mothim', 'roserade': 'roserade', 'viridium': 'virizion', 'prismillon': 'vivillon', 'riolu': 'riolu', 'tarinorme': 'probopass', 'sharpedo': 'sharpedo', 'gravalanch': 'graveler', 'saquedeneu': 'tangela', 'pijako': 'chatot', 'amphinobi': 'greninja', 'aquali': 'vaporeon', 'nidoking': 'nidoking', 'reptincel': 'charmeleon', 'deflaisan': 'unfezant', 'ronflex': 'snorlax', 'incisache': 'fraxure', 'ptitard': 'poliwag', 'mega_branette': 'mega_banette', 'nenupiot': 'lotad', 'corayon': 'corsola', 'stari': 'staryu', 'etourvol': 'staravia', 'marill': 'marill', 'arakdo': 'surskit', 'demeteros_forme_avatar': 'landorus_incarnate_forme', 'betochef': 'conkeldurr', 'carabaffe': 'wartortle', 'chimpenfeu': 'monferno', 'escroco': 'krokorok', 'piafabec': 'spearow', 'nemelios': 'pyroar', 'cheniselle_cape_plante': 'wormadam_plant_cloak', 'flotoutan': 'simipour', 'vibraninf': 'vibrava', 'chinchidou': 'minccino', 'reshiram': 'reshiram', 'cobaltium': 'cobalion', 'roussil': 'braixen', 'balbuto': 'baltoy', 'porygon': 'porygon', 'aligatueur': 'feraligatr', 'scalpion': 'pawniard', 'carchacrok': 'garchomp', 'otaria': 'seel', 'exagide_forme_assaut': 'aegislash_shield_forme', 'magicarpe': 'magikarp', 'dracaufeu': 'charizard', 'heledelle': 'swellow', 'mega_ptera': 'mega_aerodactyl', 'carapuce': 'squirtle', 'queulorior': 'smeargle', 'ecremeuh': 'miltank', 'grahyena': 'mightyena', 'chenipan': 'caterpie', 'castorno': 'bibarel', 'mega_lucario': 'mega_lucario', 'malosse': 'houndour', 'obalie': 'spheal', 'cerfrousse': 'stantler', 'rosabyss': 'gorebyss', 'ninjask': 'ninjask', 'massko': 'grovyle', 'rozbouton': 'budew', 'vortente': 'carnivine', 'florizarre': 'venusaur', 'limaspeed': 'accelgor', 'grotadmorv': 'muk', 'polagriffe': 'beartic', 'cheniti': 'burmy', 'airmure': 'skarmory', 'magby': 'magby', 'rapion': 'skorupi', 'caratroc': 'shuckle', 'charpenti': 'timburr', 'balignon': 'shroomish', 'vipelierre': 'snivy', 'roigada': 'slowking', 'pichu': 'pichu', 'crustabri': 'cloyster', 'sablaireau': 'sandslash', 'aflamanoir': 'heatmor', 'mega_galeking': 'mega_aggron', 'ho_oh': 'ho_oh', 'griknot': 'gible', 'hoot_hoot': 'hoot_hoot', 'apitrini': 'combee', 'excelangue': 'lickitung', 'galegon': 'lairon', 'mimitoss': 'venonat', 'barloche': 'barboach', 'crocorible': 'krookodile', 'branette': 'banette', 'amagara': 'amaura', 'dinoclier': 'shieldon', 'magmar': 'magmar', 'laporeille': 'buneary', 'soporifik': 'drowzee', 'chevroum': 'gogoat', 'tournegrin': 'sunkern'}
 
 list = {}
 list.update ({u'Bulbizarre': {'catch': u'45', 'weight': u'6,9kg', 'hatch': u'19 cycles - 5120 pas', 'evolutions': [u'Bulbizarre', u'Niveau 16', u'Herbizarre', u'Niveau 32', u'Florizarre', u'Florizarrite', u'Mega-Florizarre'], 'gender': u'12.5% femelle; 87.5% male', 'ev': u'+1 Att. Spe', 'egg': u'Monstre/Plante', 'size': u'0,7m'}})
@@ -1162,8 +1247,8 @@ list.update ({u'Reshiram': {'catch': u'45', 'weight': u'330kg', 'hatch': u'120 c
 list.update ({u'Zekrom': {'catch': u'45', 'weight': u'345kg', 'hatch': u'120 cycles - 30855 pas', 'evolutions': [], 'gender': u'Asexue', 'ev': u'+3 Att.', 'egg': u'Sans oeuf', 'size': u'2,9m'}})
 list.update ({u'Demeteros (Forme Avatar)': {'catch': u'3', 'weight': u'68,0kg', 'hatch': u'120 cycles - 30855 pas', 'evolutions': [], 'gender': u'0% femelle; 100% male', 'ev': u'+3 Att.', 'egg': u'Sans oeuf', 'size': u'1,5m'}})
 list.update ({u'Demeteros (Forme Totemique)': {'catch': u'3', 'weight': u'68,0kg', 'hatch': u'120 cycles - 30855 pas', 'evolutions': [], 'gender': u'0% femelle; 100% male', 'ev': u'+3 Att.', 'egg': u'Sans oeuf', 'size': u'1,5m'}})
-list.update ({u'Kyurem (Noir)': {'catch': u'3', 'weight': u'325kg', 'hatch': u'120 cycles - 30855 pas', 'evolutions': [], 'gender': u'Asexue', 'ev': u'+1 PV; +1 Att.; +1 Def. Spe', 'egg': u'Sans oeuf', 'size': u'3,0m'}})
-list.update ({u'Kyurem (Blanc)': {'catch': u'3', 'weight': u'325kg', 'hatch': u'120 cycles - 30855 pas', 'evolutions': [], 'gender': u'Asexue', 'ev': u'+1 PV; +1 Att.; +1 Def. Spe', 'egg': u'Sans oeuf', 'size': u'3,0m'}})
+list.update ({u'Kyurem Noir': {'catch': u'3', 'weight': u'325kg', 'hatch': u'120 cycles - 30855 pas', 'evolutions': [], 'gender': u'Asexue', 'ev': u'+1 PV; +1 Att.; +1 Def. Spe', 'egg': u'Sans oeuf', 'size': u'3,0m'}})
+list.update ({u'Kyurem Blanc': {'catch': u'3', 'weight': u'325kg', 'hatch': u'120 cycles - 30855 pas', 'evolutions': [], 'gender': u'Asexue', 'ev': u'+1 PV; +1 Att.; +1 Def. Spe', 'egg': u'Sans oeuf', 'size': u'3,0m'}})
 list.update ({u'Keldeo': {'catch': u'3', 'weight': u'48,5kg', 'hatch': u'80 cycles - 20655 pas', 'evolutions': [], 'gender': u'Asexue', 'ev': u'+1 Att. Spe; +1 Def. Spe; +1 Vit.', 'egg': u'Sans oeuf', 'size': u'1,4m'}})
 list.update ({u'Meloetta (Forme Voix)': {'catch': u'5', 'weight': u'6,5kg', 'hatch': u'20 cycles - 5355 pas', 'evolutions': [], 'gender': u'Asexue', 'ev': u'+1 Att. Spe; +1 Def. Spe; +1 Vit.', 'egg': u'Sans oeuf', 'size': u'0,6m'}})
 list.update ({u'Meloetta (Forme Danse)': {'catch': u'5', 'weight': u'6,5kg', 'hatch': u'20 cycles - 5355 pas', 'evolutions': [], 'gender': u'Asexue', 'ev': u'+1 Att. Spe; +1 Def. Spe; +1 Vit.', 'egg': u'Sans oeuf', 'size': u'0,6m'}})
@@ -1245,5 +1330,4 @@ list.update ({u'Xerneas': {'catch': u'30', 'weight': u'215,0kg', 'hatch': u'pas'
 list.update ({u'Yveltal': {'catch': u'30', 'weight': u'203,0kg', 'hatch': u'pas', 'evolutions': [], 'gender': u'Asexue', 'ev': u'+3 PV', 'egg': u'Sans oeuf', 'size': u'5,8m'}})
 list.update ({u'Zygarde': {'catch': u'', 'weight': u'305,0kg', 'hatch': u'pas', 'evolutions': [], 'gender': u'Asexue', 'ev': u'+3 PV', 'egg': u'Sans oeuf', 'size': u'5,0m'}})
 
-
-main(list)
+main(list, name_match)

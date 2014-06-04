@@ -11,13 +11,6 @@
     <string name="expand">Elargir</string>
     <string name="type">Type</string>
     
-    <string name="life">Vie</string>
-    <string name="att">Attaque</string>
-    <string name="def">Defense</string>
-    <string name="spatt">Sp Attaque</string>
-    <string name="spdef">Sp Defense</string>
-    <string name="speed">Vitesse</string>
-    
     <string name="evolution_chain">Chaine d\'évolution</string>
     <string name="info_title">Détails</string>
     
@@ -29,24 +22,26 @@
     <string name="hatch">Eclosion :</string>
     <string name="egg_group">Groupe oeuf :</string>
 
-    <string name="acier">acier</string>
-    <string name="combat">combat</string>
+    <string name="steel">acier</string>
+    <string name="fighting">combat</string>
     <string name="dragon">dragon</string>
-    <string name="eau">eau</string>
-    <string name="electrique">electrique</string>
-    <string name="fee">fee</string>
-    <string name="feu">feu</string>
-    <string name="glace">glace</string>
-    <string name="insecte">insecte</string>
+    <string name="water">eau</string>
+    <string name="electric">electrique</string>
+    <string name="fairy">fee</string>
+    <string name="fire">feu</string>
+    <string name="ice">glace</string>
+    <string name="bug">insecte</string>
     <string name="normal">normal</string>
-    <string name="plante">plante</string>
+    <string name="grass">plante</string>
     <string name="poison">poison</string>
-    <string name="psy">psy</string>
-    <string name="roche">roche</string>
-    <string name="sol">sol</string>
-    <string name="spectre">spectre</string>
-    <string name="tenebre">tenebre</string>
-    <string name="vol">vol</string>
+    <string name="psychic">psy</string>
+    <string name="rock">roche</string>
+    <string name="ground">sol</string>
+    <string name="ghost">spectre</string>
+    <string name="dark">tenebre</string>
+    <string name="flying">vol</string>
+    
+    <string name="level">Niveau </string>
     
     <string name="loading_error">Il y a eu une erreur lors du chargement de ce Pokémon.</string>
     <string name="no_result">Il n\'existe pas de Pokémon avec ce nom ou ce numéro.</string>

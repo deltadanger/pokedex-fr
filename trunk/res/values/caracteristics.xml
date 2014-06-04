@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="life">Vie</string>
+    <string name="att">Attaque</string>
+    <string name="def">Defense</string>
+    <string name="spatt">Sp Attaque</string>
+    <string name="spdef">Sp Defense</string>
+    <string name="speed">Vitesse</string>
+    
+    <string name="life_short">Vie</string>
+    <string name="att_short">Att.</string>
+    <string name="def_short">Def.</string>
+    <string name="spatt_short">Sp.Att.</string>
+    <string name="spdef_short">Sp.Def.</string>
+    <string name="speed_short">Vit.</string>
+</resources>

@@ -1,6 +1,6 @@
 package fr.pokedex.data;
 
-public enum Talent {
+public enum Ability {
 
     ERREUR ("Erreur", "Il y a eu une erreur lors du chargement de ce pokémon.", ""),
     
@@ -198,7 +198,7 @@ public enum Talent {
     public String inFight;
     public String outFight;
     
-    Talent(String name, String inFight, String outFight) {
+    Ability(String name, String inFight, String outFight) {
         this.name = name;
         this.inFight = inFight;
         this.outFight = outFight;

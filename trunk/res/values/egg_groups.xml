@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="egg_group_flying">Aérien</string>
+    <string name="egg_group_amorphous">Amorphe</string>
+    <string name="egg_group_water1">Aquatique 1</string>
+    <string name="egg_group_water2">Aquatique 2</string>
+    <string name="egg_group_water3">Aquatique 3</string>
+    <string name="egg_group_dragon">Draconique</string>
+    <string name="egg_group_fairy">Féerique</string>
+    <string name="egg_group_humanlike">Humanoïde</string>
+    <string name="egg_group_unknown">Inconnu</string>
+    <string name="egg_group_bug">Insectoïde</string>
+    <string name="egg_group_ditto">Métamorph</string>
+    <string name="egg_group_mineral">Minéral</string>
+    <string name="egg_group_monster">Monstrueux</string>
+    <string name="egg_group_field">Terrestre</string>
+    <string name="egg_group_grass">Végétal</string>
+    <string name="egg_group_no_egg">Sans Oeuf</string>
+</resources>

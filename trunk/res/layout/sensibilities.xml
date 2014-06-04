@@ -26,7 +26,7 @@
                 android:layout_marginRight="3dp"
                 android:layout_marginBottom="3dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/acier" />
+                android:src="@drawable/steel" />
             
             <View
                 android:id="@+id/acier"
@@ -48,7 +48,7 @@
                 android:layout_marginRight="3dp"
                 android:layout_marginBottom="3dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/combat" />
+                android:src="@drawable/fighting" />
             
             <View
                 android:id="@+id/combat"
@@ -92,7 +92,7 @@
                 android:layout_marginRight="3dp"
                 android:layout_marginBottom="3dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/eau" />
+                android:src="@drawable/water" />
             
             <View
                 android:id="@+id/eau"
@@ -114,7 +114,7 @@
                 android:layout_marginRight="3dp"
                 android:layout_marginBottom="3dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/electrique" />
+                android:src="@drawable/electric" />
             
             <View
                 android:id="@+id/electrique"
@@ -136,7 +136,7 @@
                 android:layout_marginRight="3dp"
                 android:layout_marginBottom="3dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/fee" />
+                android:src="@drawable/fairy" />
             
             <View
                 android:id="@+id/fee"
@@ -165,7 +165,7 @@
                 android:layout_marginRight="3dp"
                 android:layout_marginBottom="3dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/feu" />
+                android:src="@drawable/fire" />
             
             <View
                 android:id="@+id/feu"
@@ -187,7 +187,7 @@
                 android:layout_marginRight="3dp"
                 android:layout_marginBottom="3dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/glace" />
+                android:src="@drawable/ice" />
             
             <View
                 android:id="@+id/glace"
@@ -209,7 +209,7 @@
                 android:layout_marginRight="3dp"
                 android:layout_marginBottom="3dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/insecte" />
+                android:src="@drawable/bug" />
             
             <View
                 android:id="@+id/insecte"
@@ -253,7 +253,7 @@
                 android:layout_marginRight="3dp"
                 android:layout_marginBottom="3dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/plante" />
+                android:src="@drawable/grass" />
             
             <View
                 android:id="@+id/plante"
@@ -304,7 +304,7 @@
                 android:layout_marginRight="3dp"
                 android:layout_marginBottom="3dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/psy" />
+                android:src="@drawable/psychic" />
             
             <View
                 android:id="@+id/psy"
@@ -326,7 +326,7 @@
                 android:layout_marginRight="3dp"
                 android:layout_marginBottom="3dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/roche" />
+                android:src="@drawable/rock" />
             
             <View
                 android:id="@+id/roche"
@@ -348,7 +348,7 @@
                 android:layout_marginRight="3dp"
                 android:layout_marginBottom="3dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/sol" />
+                android:src="@drawable/ground" />
             
             <View
                 android:id="@+id/sol"
@@ -370,7 +370,7 @@
                 android:layout_marginRight="3dp"
                 android:layout_marginBottom="3dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/spectre" />
+                android:src="@drawable/ghost" />
             
             <View
                 android:id="@+id/spectre"
@@ -392,7 +392,7 @@
                 android:layout_marginRight="3dp"
                 android:layout_marginBottom="3dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/tenebre" />
+                android:src="@drawable/dark" />
             
             <View
                 android:id="@+id/tenebre"
@@ -414,7 +414,7 @@
                 android:layout_marginRight="3dp"
                 android:layout_marginBottom="3dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/vol" />
+                android:src="@drawable/flying" />
             
             <View
                 android:id="@+id/vol"
