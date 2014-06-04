@@ -35,7 +35,7 @@ import android.widget.Toast;
 import fr.pokedex.data.EvolutionNode;
 import fr.pokedex.data.Pokemon;
 import fr.pokedex.data.PokemonList;
-import fr.pokedex.data.Talent;
+import fr.pokedex.data.Ability;
 import fr.pokedex.data.Type;
 import fr.pokedex.data.Weakness;
 import fr.pokedex.utils.ExpandAnimation;
@@ -251,6 +251,7 @@ public class PokemonPage extends Activity {
             position = event.getY();
             float threshold = Math.max((SCROLL_THRESHOLD*dpToPx + 0.5f), Math.abs(event.getX()-touchPositionX));
             
+            // Disable scroll while movement does not exceed threshold
             if (disableScroll && Math.abs(position-touchPositionY) < threshold) {
                 scroll.setOnTouchListener(new View.OnTouchListener() {
                     @Override
@@ -331,7 +332,7 @@ public class PokemonPage extends Activity {
     
     private void showTalentDialog(int n) {
         AlertDialog.Builder b = new AlertDialog.Builder(PokemonPage.this);
-        Talent ability = currentPokemon.abilities.get(n);
+        Ability ability = currentPokemon.abilities.get(n);
         b.setTitle(ability.name);
         
         String message = ability.inFight;

@@ -1,0 +1,12 @@
+To udpate:
+
+/ Types image files
+- strings.xml
+
+
+/ Pokemon Names (and image files?)
+- Abilities
+/ Additional info text
+- Evolution chain paths
+
+
