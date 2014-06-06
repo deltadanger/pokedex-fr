@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*- 
 
+from helper import *
+
 def main(data):
     data = data.split("\n")
     
@@ -9,12 +11,14 @@ def main(data):
     for row in data:
         row = row.split("\t")
         talent = {
-            "name": row[0],
+            "fr": row[0],
+            "name": toId(normalize(row[1])).upper(),
+            "id": toId(normalize(row[1])),
             "in_fight": row[2]
         }
         
         
-        if len(row) > 3 and row[3] != "—":
+        if len(row) > 3 and row[3] != "â€”":
             talent["out_fight"] = row[3]
         else:
             talent["out_fight"] = ""
@@ -22,199 +26,204 @@ def main(data):
         talents.append(talent)
     
     
+    xml = ""
+    enum = ""
     for talent in talents:
-        name = talent["name"].strip().replace("é", "e").replace("ê", "e").replace("è", "e").replace("É", "E").replace("-", "_").replace(" ", "_").replace(".", "").upper()
-        print '    {} ("{}", "{}", "{}"),'.format(name, talent["name"], talent["in_fight"], talent["out_fight"])
+        enum += 
         
+        print '    {} ("{}", "{}", "{}"),'.format(name, talent["name"], talent["in_fight"], talent["out_fight"])
+
     
-data = """Absentéisme 	Truant 	Le Pokémon n'attaque qu'un tour sur deux. 	—
-Absorb Eau 	Water Absorb 	Les attaques de type eau reçues par le Pokémon régénèrent 1/4 de ses PV. 	—
-Absorb Volt 	Volt Absorb 	Les attaques de type électrique reçues par le Pokémon régénèrent 1/4 de ses PV. 	—
-Agitation 	Hustle 	Statistiques : Augmente l'attaque de 50% mais baisse la précision de 20%. 	Augmente de 50% les chances de rencontrer un Pokémon sauvage de haut niveau.É
-Air Lock 	Air Lock 	Annule les effets du climat. 	—
-Anti-Bruit 	Soundproof 	Annule les effets dus à une attaque sonore. 	—
-Armumagma 	Magma Armor 	Immunise contre le gel. 	Divise par deux le nombre de pas nécessaire à l'éclosion d'un oeuf.É
-Armurbaston 	Battle Armor 	Annule les chances de coups critiques du Pokémon ennemi. 	—
-Attention 	Inner Focus 	Immunise contre la peur. 	—
-Benêt 	Oblivious 	Immunise contre le charme. 	—
-Boom Final 	Aftermath 	Enlève 1/4 de ses PV totaux au Pokémon ennemi assénant un coup fatal. 	—
-Brasier 	Blaze 	Augmente la puissance des attaques de type Feu de 50% lorsque le Pokémon a moins d'1/3 de ses PV totaux. 	—
-Cacophonie 	Cacophony 	Annule les effets dus à une attaque sonore. 	—
-Calque 	Trace 	Copie le talent du Pokémon adverse. 	—
-Chanceux 	Super Luck 	Double les chance de porter un coup critique. 	—
-Chlorophyle 	Chlorophyll 	Statistiques : Augmente la vitesse au soleil. 	—
-Ciel Gris 	Cloud Nine 	Annule les effets du climat. 	—
-Coloforce 	Huge Power 	Statistiques : Double l'attaque du Pokémon. 	—
-Coque Armure 	Shell Armor 	Annule les chances de coups critiques du Pokémon ennemi. 	—
-Corps Ardent 	Flame Body 	30% de chance de provoquer une brûlure sur le Pokémon adverse ayant attaqué. 	Divise par deux le nombre de pas nécessaire à l'éclosion d'un oeuf.É
-Corps Sain 	Clear Body 	Statistiques : Empêche la diminution de statistiques par le Pokémon adverse. 	—
-Crachin 	Drizzle 	Fait tomber la pluie tant que le Pokémon est en jeu. 	—
-Cran 	Guts 	Statistiques : Augmente de 50% l'attaque du Pokémon s'il subit un changement de statut. 	—
-Cuvette 	Rain Dish 	Régénère 1/16ème des PV par temps de pluie. 	—
-Déguisement 	Color Change 	Change le type du Pokémon en celui de la dernière attaque subie. 	—
-Écaille Spé. 	Marvel Scale 	Statistiques : Augmente la défense de 50% lorsque le Pokémon subit un changement de statut. 	—
-Échauffement 	Limber 	Immunise contre la paralysie. 	—
-Écran Fumée 	White Smoke 	Empêche la diminution de statistiques par le Pokémon adverse. 	Réduit de 50% les chances d'être attaqué par un Pokémon sauvage.É
-Écran Poudre 	Shield Dust 	Empêche les effets secondaires des attaques subies. 	—
-Engrais 	Overgrow 	Augmente la puissance des attaques de type Plante de 50% lorsque le Pokémon a moins d'1/3 de ses PV totaux. 	—
-Esprit Vital 	Vital Spirit 	Empêche le Pokémon d'être endormi. 	Augmente de 50% les chances de rencontrer un Pokémon sauvage de haut niveau.É
-Essaim 	Swarm 	Augmente la puissance des attaques de type Insecte de 50% lorsque le Pokémon a moins d'1/3 de ses PV totaux. 	Augmente les chances d'entendre le cri d'un Pokémon sauvage.É
-Fermeté 	Sturdy 	Immunise contre les attaques OHKO.* 	—
-Force Pure 	Pure Power 	Statistiques : Double l'attaque du Pokémon. 	—
-Fuite 	Run Away 	Assure la fuite contre les Pokémon sauvages. 	—
-Garde Mystik 	Wonder Guard 	Ne subit que les dégâts d'attaques super efficaces. 	—
-Glissade 	Swift Swim 	Statistiques : Double la vitesse par temps de pluie. 	—
-Glue 	Sticky Hold 	Empêche la perte de l'objet tenu. 	Facilite la capture des Pokémon pêchés.É
-Hyper Cutter 	Hyper Cutter 	Statistiques : Empêche la diminution d'attaque du Pokémon. 	—
-Ignifu-Voile 	Water Veil 	Immunise contre la brûlure. 	—
-Insomnia 	Insomnia 	Empêche le Pokémon d'être endormi. 	—
-Intimidation 	Intimidate 	Statistiques : Diminue d'un niveau l'attaque du Pokémon adverse. 	Réduit de 50% les chances d'être attaqué par un Pokémon sauvage de bas niveau.É
-Isograisse 	Thick Fat 	Les dégâts provoqués par les attaques des types Feu ou Glace sont divisés par 2. 	—
-Joli Sourire 	Cute Charm 	30% de chance de provoquer l'attirance du Pokémon adverse ayant attaqué. 	Augmente de 50% les chances d'être attaqué par un Pokémon sauvage du sexe opposé.É
-Lévitation 	Levitate 	Immunise contre les attaques de type Sol. 	—
-Lumiattirance 	Illuminate 	— 	Augmente les chances de rencontrer des Pokémon sauvages.RS
-Magnépiège 	Magnet Pull 	Empêche la fuite et le changement des Pokémon de type Acier. 	Augmente de 50% les chances de rencontrer un Pokémon sauvage de type acier.É
-Marque Ombre 	Shadow Tag 	Empêche la fuite des Pokémon sauvage et le changement du Pokémon adverse. 	—
-Matinal 	Early Bird 	Réduit le nombre de tours de sommeil du Pokémon. 	—
-Médic Nature 	Natural Cure 	Le Pokémon est soigné de toute altération d'état lorsqu'il est changé ou en fin de combat. 	—
-Météo 	Forecast 	Change le type et la forme du Pokémon selon le climat. 	—
-Minus 	Minus 	Statistiques : Augmente l'attaque spéciale de 50% en match double, si le partenaire à le talent « Plus ». 	—
-Moiteur 	Damp 	Émpêche l'utilisation d'attaques auto-destructrices par le Pokémon adverse. 	—
-Mue 	Shed Skin 	À chaque tour, le Pokémon a 33% de chance d'être soigné d'une altération d'état. 	—
-Oeil Composé 	Compoundeye 	Statistiques : Double la précision du Pokémon. 	Augmente les chances de rencontrer un Pokémon sauvage tenant un objet.É
-Paratonnerre 	Lightningrod 	Attire toutes les attaques de type électrique.* 	Augmente les chances de recevoir un appel sur le PokéNav.É
-Peau Dure 	Rough Skin 	Fait perdre 1/16è des PV du Pokémon adverse lors d'une attaque directe. 	—
-Piège 	Arena Trap 	Empêche la fuite et le changement du Pokémon adverse, s'il touche le sol. 	Augmente de 50% les chances d'être attaqué par un Pokémon sauvage.É
-Plus 	Plus 	Statistiques : Augmente l'attaque spéciale de 50% en match double, si le partenaire à le talent « Minus ». 	—
-Point Poison 	Poison Point 	30% de chance de provoquer l'empoisonnement du Pokémon adverse ayant attaqué. 	—
-Pose Spore 	Effect Spore 	30% de chance de provoquer l'empoisonnement, le sommeil ou la paralysie du Pokémon adverse ayant attaqué. 	—
-Pression 	Pressure 	Double l'utilisation de PP des attaques offensives du Pokémon adverse. 	Augmente de 50% les chances d'être attaqué par un Pokémon sauvage.É
-Puanteur 	Stench 	— 	Diminue les chances de rencontrer des Pokémon sauvages.RS
-Ramassage 	Pickup 	Donne une chance au Pokémon de ramasser un objet après un combat. 	—
-Regard Vif 	Keen Eye 	Statistiques : Empêche la perte de précision. 	Réduit de 50% les chances d'être attaqué par un Pokémon sauvage de bas niveau.É
-Sable Volant 	Sand Stream 	Déclenche une tempête de sable tant que le Pokémon est en jeu. 	—
-Sécheresse 	Drought 	Crée un temps ensoleillé tant que le Pokémon est en jeu. 	—
-Sérénité 	Serene Grace 	Double les chances de réussite des effets secondaires des attaques. 	—
-Statik 	Static 	30% de chance de provoquer la paralysie du Pokémon adverse ayant attaqué. 	Augmente de 50% les chances de rencontrer un Pokémon sauvage de type électrique.É
-Suintement 	Liquid Ooze 	Les attaques vampiriques du Pokémon adverse lui font perdre des PV. 	—
-Synchro 	Synchronize 	Toute altération d'état subie est transmise au Pokémon adverse. 	Augmente les chances de rencontrer un Pokémon sauvage ayant la même nature.É
-Tempo Perso 	Own Tempo 	Immunise contre la confusion. 	—
-Tête de Roc 	Rock Head 	Le Pokémon ne subit pas de dégâts de contrecoup. 	—
-Torche 	Flash Fire 	Annule les dégâts des attaques de type Feu subies, et augmente de 50% la puissance des attaques de type Feu lancées. 	—
-Torrent 	Torrent 	Augmente la puissance des attaques de type Eau de 50% lorsque le Pokémon a moins d'1/3 de ses PV totaux. 	—
-Turbo 	Speed Boost 	Statistiques : La vitesse du Pokémon augmente à chaque tour. 	—
-Vaccin 	Immunity 	Immunise contre l'empoisonnement. 	—
-Ventouse 	Suction Cups 	Empêche d'être changé de force par une attaque adverse. 	Facilite la capture des Pokémon pêchés.É
-Voile Sable 	Sand Veil 	Statistiques : Augmente l'esquive de 20% lors d'une tempête de sable, et immunise contre les dégâts de la tempête de sable. 	Réduit de 50% les chances d'être attaqué par un Pokémon sauvage lors d'une tempête de sable.É
-Adaptabilité 	Adaptability 	STAB : Si ce Pokémon utilise une attaque de son type, la puissance de l'attaque est multipliée par 2 au lieu de 1.5. 	—
-Alerte Neige 	Snow Warning 	Le Pokémon déclenche une grêle lorsqu'il est envoyé au combat. 	—
-Annule Garde 	No Guard 	Toutes les attaques du Pokémon et de son adversaire ont une précision de 100%. 	Augmente les chances de rencontrer un Pokémon sauvage.
-Anticipation 	Anticipation 	Alerte et protège lorsque le Pokémon adverse possède certaines attaques. 	—
-Brise Moule 	Mold Breaker 	Peut toucher un Pokémon adverse malgré son talent. 	—
-Cherche Miel 	Honey Gather 	— 	Le Pokémon peut trouver du Miel après un combat.
-Colérique 	Anger Point 	Statistiques : L'attaque du Pokémon est fortement augmentée lorsqu'il subit un coup critique. 	—
-Corps Gel 	Ice Body 	Régénère 1/16ème des PV par temps de grêle. Immunise les Pokémon n'ayant pas le type glace contre la grêle. 	—
-Début Calme 	Slow Start 	Statistiques : Divise par deux l'attaque et la vitesse du Pokémon pendant 5 tours. 	—
-Délestage 	Unburden 	Statistiques : Augmente la vitesse lorsqu'un objet tenu est utilisé, lancé ou perdu. 	—
-Don Floral 	Flower Gift 	Statistiques : Augmente l'attaque et la défense spéciale de 50% par temps ensoleillé. 	—
-Feuil. Garde 	Leaf Guard 	Soigne les altérations d'état par temps ensoleillé. 	—
-Filtre 	Filter 	Retire 1/4 des dégâts subits lors d'une attaque super efficace. 	—
-Force Soleil 	Solar Power 	Statistiques : Augmente l'attaque spéciale de 50% par temps ensoleillé, mais diminue les PV de 1/8ème par tour. 	—
-Fouille 	Frisk 	Permet de connaitre l'objet tenu d'un Pokémon adverse. 	—
-Frein 	Stall 	Le Pokémon attaque toujours en second pour deux attaques de même priorité. 	—
-Garde Magik 	Magic Guard 	Le Pokémon ne subit de dégâts que lors d'attaques directes. 	—
-Gloutonnerie 	Gluttony 	Le Pokémon utilise la baie portée lorsque les PV descendent en dessous de 50%. 	—
-Hydratation 	Hydration 	Soigne les altérations d'état par temps de pluie. 	—
-Ignifuge 	Heatproof 	Divise par 2 les dégâts des attaques de type feu et les effets de brûlure subis par le Pokémon. 	—
-Impassible 	Steadfast 	Statistiques : Augmente d'un niveau la vitesse du Pokémon lorsqu'il est apeuré. 	—
-Inconscient 	Unaware 	Ignore les améliorations de statistiques du Pokémon adverse, à l'exception de sa Vitesse. 	—
-Lavabo 	Storm Drain 	Attire toutes les attaques de type eau.* 	—
-Lentiteintée 	Tinted Lens 	Double les dégâts des attaques peu efficaces portées au Pokémon adverse. 	—
-Maladresse 	Klutz 	Empêche l'utilisation et/ou ignore l'effet des objets tenus en combat. 	—
-Mauvais Rêve 	Bad Dreams 	Fait perdre 1/8ème de ses PV au Pokémon adverse s'il est endormi. 	—
-Motorisé 	Motor Drive 	Immunise le Pokémon contre les attaques de type électrique. Augmente la vitesse du Pokémon d'un niveau par attaque électrique subie. 	—
-Multi-Coups 	Skill Link 	Utilise toujours le nombre de coups maximum d'une attaque. 	—
-Multitype 	Multitype 	Le type et la forme du Pokémon changent en fonction de la plaque qu'il porte. 	—
-Normalise 	Normalize 	Toutes les attaques du Pokémon sont considérées comme étant de type Normal. 	—
-Peau Sèche 	Dry Skin 	Les attaques de type eau soignent le Pokémon, qui regagne 1/4 de ses PV totaux. Par temps de pluie, il gagne 1/8ème de ses PV par tour. Les attaques de type feu infligent 25% de dégâts en plus. Par temps ensoleillé, il perd 1/8ème de ses PV par tour. 	—
-Pied Confus 	Tangled Feet 	Statistiques : Augmente l'esquive de 20% lorsque le Pokémon est confus. 	—
-Pied Véloce 	Quick Feet 	Statistiques : Augmente la vitesse de 50% lorsque le Pokémon subit une altération d'état. 	—
-Poing de Fer 	Iron Fist 	Augmente de 20% la puissance des attaques de "Poing". 	—
-Prédiction 	Forewarn 	Alerte le Pokémon de l'attaque la plus puissante du Pokémon adverse. 	—
-Querelleur 	Scrappy 	Permet de toucher les Pokémon de type Spectre avec des attaques de type Normal ou Combat. 	—
-Rideau Neige 	Snow Cloak 	Statistiques : Augmente l'esquive de 20% par temps de grêle. Immunise les Pokémon n'ayant pas le type glace contre la grêle. 	—
-Rivalité 	Rivalry 	Statistiques : Augmente l'attaque et l'attaque spéciale de 25% si le Pokémon adverse est de même sexe. Les diminue s'il est de sexe opposé. 	—
-Simple 	Simple 	Double les effets des modifications de statistiques, positives ou négatives. 	—
-Sniper 	Sniper 	Triple la puissance des coups critiques. 	—
-Soin Poison 	Poison Heal 	Le Pokémon récupère 1/8è de ses PV par tour lors d'un empoisonnement. 	Le Pokémon empoisonné perd tout de même ses PV lorsque son dresseur se déplace.*
-Solide Roc 	Solid Rock 	Retire 1/4 des dégâts subits lors d'une attaque super efficace. 	—
-Technicien 	Technician 	Augmente de 50% la puissance des attaques faibles (de puissance inférieure ou égale à 60). 	—
-Télécharge 	Download 	Statistiques : Augmente l'attaque ou l'attaque spéciale du Pokémon, selon la statistique de défense la plus faible du Pokémon adverse. 	—
-Téméraire 	Reckless 	Augmente de 20% la puissance des attaques infligeant des dégâts de recul. 	—
-Acharné 	Defiant 	Statistiques : Monte l'Attaque du Pokémon de deux niveau si l'une de ses statistiques est baissée par l'adversaire.
-Analyste 	Analytic 	Si le Pokémon frappe en dernier durant le tour, la puissance de son attaque est augmentée de 30%.
-Armurouillée 	Weak Armor 	Statistiques : Le Pokémon touché par une attaque physique voit sa défense diminuer d'un niveau et sa vitesse augmenter d'un niveau.
-Baigne Sable 	Sand Rush 	Statistiques : Double la Vitesse du Pokémon lors d'une tempête de sable. Immunise contre les dégâts de la tempête.
-Coeur de Coq 	Big Pecks 	Empêche la défense du Pokémon d'être baissée par les attaques adverses.
-Coeur Noble 	Justified 	Statistiques : Si le Pokémon est touché par une attaque de type ténèbres, son attaque augmente d'un niveau.
-Coeur Soin 	Healer 	À la fin de chaque tour, le Pokémon a 30% de chance de guérir ses alliés d'une altération d'état en combat double ou triple.
+data = """AbsentÃ©isme 	Truant 	Le PokÃ©mon n'attaque qu'un tour sur deux. 	â€”
+Absorb Eau 	Water Absorb 	Les attaques de type eau reÃ§ues par le PokÃ©mon rÃ©gÃ©nÃ¨rent 1/4 de ses PV. 	â€”
+Absorb Volt 	Volt Absorb 	Les attaques de type Ã©lectrique reÃ§ues par le PokÃ©mon rÃ©gÃ©nÃ¨rent 1/4 de ses PV. 	â€”
+Agitation 	Hustle 	Statistiques : Augmente l'attaque de 50% mais baisse la prÃ©cision de 20%. 	Augmente de 50% les chances de rencontrer un PokÃ©mon sauvage de haut niveau.Ã‰
+Air Lock 	Air Lock 	Annule les effets du climat. 	â€”
+Anti-Bruit 	Soundproof 	Annule les effets dus Ã  une attaque sonore. 	â€”
+Armumagma 	Magma Armor 	Immunise contre le gel. 	Divise par deux le nombre de pas nÃ©cessaire Ã  l'Ã©closion d'un Å“uf.Ã‰
+Armurbaston 	Battle Armor 	Annule les chances de coups critiques du PokÃ©mon ennemi. 	â€”
+Attention 	Inner Focus 	Immunise contre la peur. 	â€”
+BenÃªt 	Oblivious 	Immunise contre le charme* 	â€”
+Boom Final 	Aftermath 	EnlÃ¨ve 1/4 de ses PV totaux au PokÃ©mon ennemi assÃ©nant un coup fatal. 	â€”
+Brasier 	Blaze 	Augmente la puissance des attaques de type Feu de 50% lorsque le PokÃ©mon a moins d'1/3 de ses PV totaux. 	â€”
+Cacophonie (!) 	Cacophony 	Annule les effets dus Ã  une attaque sonore. 	â€”
+Calque 	Trace 	Copie le talent du PokÃ©mon adverse. 	â€”
+Chanceux 	Super Luck 	Double les chance de porter un coup critique. 	â€”
+Chlorophylle 	Chlorophyll 	Statistiques : Augmente la vitesse au soleil. 	â€”
+Ciel Gris 	Cloud Nine 	Annule les effets du climat. 	â€”
+Coloforce 	Huge Power 	Statistiques : Double l'attaque du PokÃ©mon. 	â€”
+Coque Armure 	Shell Armor 	Annule les chances de coups critiques du PokÃ©mon ennemi. 	â€”
+Corps Ardent 	Flame Body 	30% de chance de provoquer une brÃ»lure sur le PokÃ©mon adverse ayant attaquÃ©. 	Divise par deux le nombre de pas nÃ©cessaire Ã  l'Ã©closion d'un Å“uf.Ã‰
+Corps Sain 	Clear Body 	Statistiques : EmpÃªche la diminution de statistiques par le PokÃ©mon adverse. 	â€”
+Crachin 	Drizzle 	Fait tomber la pluie tant que le PokÃ©mon est en jeu. 	â€”
+Cran 	Guts 	Statistiques : Augmente de 50% l'attaque du PokÃ©mon s'il subit un changement de statut. 	â€”
+Cuvette 	Rain Dish 	RÃ©gÃ©nÃ¨re 1/16Ã¨me des PV par temps de pluie. 	â€”
+DÃ©guisement 	Color Change 	Change le type du PokÃ©mon en celui de la derniÃ¨re attaque subie. 	â€”
+Ã‰caille SpÃ©ciale 	Marvel Scale 	Statistiques : Augmente la dÃ©fense de 50% lorsque le PokÃ©mon subit un changement de statut. 	â€”
+Ã‰chauffement 	Limber 	Immunise contre la paralysie. 	â€”
+Ã‰cran FumÃ©e 	White Smoke 	EmpÃªche la diminution de statistiques par le PokÃ©mon adverse. 	RÃ©duit de 50% les chances d'Ãªtre attaquÃ© par un PokÃ©mon sauvage.Ã‰
+Ã‰cran Poudre 	Shield Dust 	EmpÃªche les effets secondaires des attaques subies. 	â€”
+Engrais 	Overgrow 	Augmente la puissance des attaques de type Plante de 50% lorsque le PokÃ©mon a moins d'1/3 de ses PV totaux. 	â€”
+Esprit Vital 	Vital Spirit 	EmpÃªche le PokÃ©mon d'Ãªtre endormi. 	Augmente de 50% les chances de rencontrer un PokÃ©mon sauvage de haut niveau.Ã‰
+Essaim 	Swarm 	Augmente la puissance des attaques de type Insecte de 50% lorsque le PokÃ©mon a moins d'1/3 de ses PV totaux. 	Augmente les chances d'entendre le cri d'un PokÃ©mon sauvage.Ã‰
+FermetÃ© 	Sturdy 	Immunise contre les attaques OHKO.* 	â€”
+Force Pure 	Pure Power 	Statistiques : Double l'attaque du PokÃ©mon. 	â€”
+Fuite 	Run Away 	Assure la fuite contre les PokÃ©mon sauvages. 	â€”
+Garde Mystik 	Wonder Guard 	Ne subit que les dÃ©gÃ¢ts d'attaques super efficaces. 	â€”
+Glissade 	Swift Swim 	Statistiques : Double la vitesse par temps de pluie. 	â€”
+Glue 	Sticky Hold 	EmpÃªche la perte de l'objet tenu. 	Facilite la capture des PokÃ©mon pÃªchÃ©s.Ã‰
+Hyper Cutter 	Hyper Cutter 	Statistiques : EmpÃªche la diminution d'attaque du PokÃ©mon. 	â€”
+Ignifu-Voile 	Water Veil 	Immunise contre la brÃ»lure. 	â€”
+Insomnia 	Insomnia 	EmpÃªche le PokÃ©mon d'Ãªtre endormi. 	â€”
+Intimidation 	Intimidate 	Statistiques : Diminue d'un niveau l'attaque du PokÃ©mon adverse. 	RÃ©duit de 50% les chances d'Ãªtre attaquÃ© par un PokÃ©mon sauvage de bas niveau.Ã‰
+Isograisse 	Thick Fat 	Les dÃ©gÃ¢ts provoquÃ©s par les attaques des types Feu ou Glace sont divisÃ©s par 2. 	â€”
+Joli Sourire 	Cute Charm 	30% de chance de provoquer l'attirance du PokÃ©mon adverse ayant attaquÃ©. 	Augmente de 50% les chances d'Ãªtre attaquÃ© par un PokÃ©mon sauvage du sexe opposÃ©.Ã‰
+LÃ©vitation 	Levitate 	Immunise contre les attaques de type Sol. 	â€”
+Lumiattirance 	Illuminate 	â€” 	Augmente les chances de rencontrer des PokÃ©mon sauvages.RS
+MagnÃ©piÃ¨ge 	Magnet Pull 	EmpÃªche la fuite et le changement des PokÃ©mon de type Acier. 	Augmente de 50% les chances de rencontrer un PokÃ©mon sauvage de type acier.Ã‰
+Marque Ombre 	Shadow Tag 	EmpÃªche la fuite des PokÃ©mon sauvage et le changement du PokÃ©mon adverse. 	â€”
+Matinal 	Early Bird 	RÃ©duit le nombre de tours de sommeil du PokÃ©mon. 	â€”
+MÃ©dic Nature 	Natural Cure 	Le PokÃ©mon est soignÃ© de toute altÃ©ration d'Ã©tat lorsqu'il est changÃ© ou en fin de combat. 	â€”
+MÃ©tÃ©o 	Forecast 	Change le type et la forme du PokÃ©mon selon le climat. 	â€”
+Minus 	Minus 	Statistiques : Augmente l'attaque spÃ©ciale de 50% en match double, si le partenaire Ã  le talent Â« Plus Â». 	â€”
+Moiteur 	Damp 	Ã‰mpÃªche l'utilisation d'attaques auto-destructrices par le PokÃ©mon adverse. 	â€”
+Mue 	Shed Skin 	Ã€ chaque tour, le PokÃ©mon a 33% de chance d'Ãªtre soignÃ© d'une altÃ©ration d'Ã©tat. 	â€”
+Å’il ComposÃ© 	Compoundeye 	Statistiques : Double la prÃ©cision du PokÃ©mon. 	Augmente les chances de rencontrer un PokÃ©mon sauvage tenant un objet.Ã‰
+Paratonnerre 	Lightningrod 	Attire toutes les attaques de type Ã©lectrique.* 	Augmente les chances de recevoir un appel sur le PokÃ©Nav.Ã‰
+Peau Dure 	Rough Skin 	Fait perdre 1/16Ã¨ des PV du PokÃ©mon adverse lors d'une attaque directe. 	â€”
+PiÃ¨ge 	Arena Trap 	EmpÃªche la fuite et le changement du PokÃ©mon adverse, s'il touche le sol. 	Augmente de 50% les chances d'Ãªtre attaquÃ© par un PokÃ©mon sauvage.Ã‰
+Plus 	Plus 	Statistiques : Augmente l'attaque spÃ©ciale de 50% en match double, si le partenaire Ã  le talent Â« Minus Â». 	â€”
+Point Poison 	Poison Point 	30% de chance de provoquer l'empoisonnement du PokÃ©mon adverse ayant attaquÃ©. 	â€”
+Pose Spore 	Effect Spore 	30% de chance de provoquer l'empoisonnement, le sommeil ou la paralysie du PokÃ©mon adverse ayant attaquÃ©. 	â€”
+Pression 	Pressure 	Double l'utilisation de PP des attaques offensives du PokÃ©mon adverse. 	Augmente de 50% les chances d'Ãªtre attaquÃ© par un PokÃ©mon sauvage.Ã‰
+Puanteur 	Stench 	Les attaques physiques ont 10% d'apeurer la cible * 	Diminue les chances de rencontrer des PokÃ©mon sauvages.RS
+Ramassage 	Pickup 	Donne une chance au PokÃ©mon de ramasser un objet aprÃ¨s un combat. 	â€”
+Regard Vif 	Keen Eye 	Statistiques : EmpÃªche la perte de prÃ©cision. 	RÃ©duit de 50% les chances d'Ãªtre attaquÃ© par un PokÃ©mon sauvage de bas niveau.Ã‰
+Sable Volant 	Sand Stream 	DÃ©clenche une tempÃªte de sable tant que le PokÃ©mon est en jeu. 	â€”
+SÃ©cheresse 	Drought 	CrÃ©e un temps ensoleillÃ© tant que le PokÃ©mon est en jeu. 	â€”
+SÃ©rÃ©nitÃ© 	Serene Grace 	Double les chances de rÃ©ussite des effets secondaires des attaques. 	â€”
+Statik 	Static 	30% de chance de provoquer la paralysie du PokÃ©mon adverse ayant attaquÃ©. 	Augmente de 50% les chances de rencontrer un PokÃ©mon sauvage de type Ã©lectrique.Ã‰
+Suintement 	Liquid Ooze 	Les attaques vampiriques du PokÃ©mon adverse lui font perdre des PV. 	â€”
+Synchro 	Synchronize 	Toute altÃ©ration d'Ã©tat subie est transmise au PokÃ©mon adverse. 	Augmente les chances de rencontrer un PokÃ©mon sauvage ayant la mÃªme nature.Ã‰
+Tempo Perso 	Own Tempo 	Immunise contre la confusion. 	â€”
+TÃªte de Roc 	Rock Head 	Le PokÃ©mon ne subit pas de dÃ©gÃ¢ts de contrecoup. 	â€”
+Torche 	Flash Fire 	Annule les dÃ©gÃ¢ts des attaques de type Feu subies, et augmente de 50% la puissance des attaques de type Feu lancÃ©es. 	â€”
+Torrent 	Torrent 	Augmente la puissance des attaques de type Eau de 50% lorsque le PokÃ©mon a moins d'1/3 de ses PV totaux. 	â€”
+Turbo 	Speed Boost 	Statistiques : La vitesse du PokÃ©mon augmente Ã  chaque tour. 	â€”
+Vaccin 	Immunity 	Immunise contre l'empoisonnement. 	â€”
+Ventouse 	Suction Cups 	EmpÃªche d'Ãªtre changÃ© de force par une attaque adverse. 	Facilite la capture des PokÃ©mon pÃªchÃ©s.Ã‰
+Voile Sable 	Sand Veil 	Statistiques : Augmente l'esquive de 20% lors d'une tempÃªte de sable, et immunise contre les dÃ©gÃ¢ts de la tempÃªte de sable. 	RÃ©duit de 50% les chances d'Ãªtre attaquÃ© par un PokÃ©mon sauvage lors d'une tempÃªte de sable.Ã‰
+Nom franÃ§ais 	Nom anglais 	Effet en combat 	Effet sur le terrain
+AdaptabilitÃ© 	Adaptability 	STAB : Si ce PokÃ©mon utilise une attaque de son type, la puissance de l'attaque est multipliÃ©e par 2 au lieu de 1.5. 	â€”
+Alerte Neige 	Snow Warning 	Le PokÃ©mon dÃ©clenche une grÃªle lorsqu'il est envoyÃ© au combat. 	â€”
+Annule Garde 	No Guard 	Toutes les attaques du PokÃ©mon et de son adversaire ont une prÃ©cision de 100%. 	Augmente les chances de rencontrer un PokÃ©mon sauvage.
+Anticipation 	Anticipation 	Alerte et protÃ¨ge lorsque le PokÃ©mon adverse possÃ¨de certaines attaques. 	â€”
+Brise Moule 	Mold Breaker 	Peut toucher un PokÃ©mon adverse malgrÃ© son talent. 	â€”
+Cherche Miel 	Honey Gather 	â€” 	Le PokÃ©mon peut trouver du Miel aprÃ¨s un combat.
+ColÃ©rique 	Anger Point 	Statistiques : L'attaque du PokÃ©mon est fortement augmentÃ©e lorsqu'il subit un coup critique. 	â€”
+Corps Gel 	Ice Body 	RÃ©gÃ©nÃ¨re 1/16Ã¨me des PV par temps de grÃªle. Immunise les PokÃ©mon n'ayant pas le type glace contre la grÃªle. 	â€”
+DÃ©but Calme 	Slow Start 	Statistiques : Divise par deux l'attaque et la vitesse du PokÃ©mon pendant 5 tours. 	â€”
+DÃ©lestage 	Unburden 	Statistiques : Augmente la vitesse lorsqu'un objet tenu est utilisÃ©, lancÃ© ou perdu. 	â€”
+Don Floral 	Flower Gift 	Statistiques : Augmente l'attaque et la dÃ©fense spÃ©ciale de 50% par temps ensoleillÃ©. 	â€”
+Feuille Garde 	Leaf Guard 	Soigne les altÃ©rations d'Ã©tat par temps ensoleillÃ©. 	â€”
+Filtre 	Filter 	Retire 1/4 des dÃ©gÃ¢ts subits lors d'une attaque super efficace. 	â€”
+Force Soleil 	Solar Power 	Statistiques : Augmente l'attaque spÃ©ciale de 50% par temps ensoleillÃ©, mais diminue les PV de 1/8Ã¨me par tour. 	â€”
+Fouille 	Frisk 	Permet de connaitre l'objet tenu d'un PokÃ©mon adverse. 	â€”
+Frein 	Stall 	Le PokÃ©mon attaque toujours en second pour deux attaques de mÃªme prioritÃ©. 	â€”
+Garde Magik 	Magic Guard 	Le PokÃ©mon ne subit de dÃ©gÃ¢ts que lors d'attaques directes. 	â€”
+Gloutonnerie 	Gluttony 	Le PokÃ©mon utilise la baie portÃ©e lorsque les PV descendent en dessous de 50%. 	â€”
+Hydratation 	Hydration 	Soigne les altÃ©rations d'Ã©tat par temps de pluie. 	â€”
+Ignifuge 	Heatproof 	Divise par 2 les dÃ©gÃ¢ts des attaques de type feu et les effets de brÃ»lure subis par le PokÃ©mon. 	â€”
+Impassible 	Steadfast 	Statistiques : Augmente d'un niveau la vitesse du PokÃ©mon lorsqu'il est apeurÃ©. 	â€”
+Inconscient 	Unaware 	Ignore les amÃ©liorations de statistiques du PokÃ©mon adverse, Ã  l'exception de sa Vitesse. 	â€”
+Lavabo 	Storm Drain 	Attire toutes les attaques de type eau.* 	â€”
+LentiteintÃ©e 	Tinted Lens 	Double les dÃ©gÃ¢ts des attaques peu efficaces portÃ©es au PokÃ©mon adverse. 	â€”
+Maladresse 	Klutz 	EmpÃªche l'utilisation et/ou ignore l'effet des objets tenus en combat. 	â€”
+Mauvais RÃªve 	Bad Dreams 	Fait perdre 1/8Ã¨me de ses PV au PokÃ©mon adverse s'il est endormi. 	â€”
+MotorisÃ© 	Motor Drive 	Immunise le PokÃ©mon contre les attaques de type Ã©lectrique. Augmente la vitesse du PokÃ©mon d'un niveau par attaque Ã©lectrique subie. 	â€”
+Multi-Coups 	Skill Link 	Utilise toujours le nombre de coups maximum d'une attaque. 	â€”
+Multitype 	Multitype 	Le type et la forme du PokÃ©mon changent en fonction de la plaque qu'il porte. 	â€”
+Normalise 	Normalize 	Toutes les attaques du PokÃ©mon sont considÃ©rÃ©es comme Ã©tant de type Normal. 	â€”
+Peau SÃ¨che 	Dry Skin 	Les attaques de type eau soignent le PokÃ©mon, qui regagne 1/4 de ses PV totaux. Par temps de pluie, il gagne 1/8Ã¨me de ses PV par tour.
+Les attaques de type feu infligent 25% de dÃ©gÃ¢ts en plus. Par temps ensoleillÃ©, il perd 1/8Ã¨me de ses PV par tour. 	â€”
+Pied Confus 	Tangled Feet 	Statistiques : Augmente l'esquive de 20% lorsque le PokÃ©mon est confus. 	â€”
+Pied VÃ©loce 	Quick Feet 	Statistiques : Augmente la vitesse de 50% lorsque le PokÃ©mon subit une altÃ©ration d'Ã©tat. 	â€”
+Poing de Fer 	Iron Fist 	Augmente de 20% la puissance des attaques de "Poing". 	â€”
+PrÃ©diction 	Forewarn 	Alerte le PokÃ©mon de l'attaque la plus puissante du PokÃ©mon adverse. 	â€”
+Querelleur 	Scrappy 	Permet de toucher les PokÃ©mon de type Spectre avec des attaques de type Normal ou Combat. 	â€”
+Rideau Neige 	Snow Cloak 	Statistiques : Augmente l'esquive de 20% par temps de grÃªle. Immunise les PokÃ©mon n'ayant pas le type glace contre la grÃªle. 	â€”
+RivalitÃ© 	Rivalry 	Statistiques : Augmente l'attaque et l'attaque spÃ©ciale de 25% si le PokÃ©mon adverse est de mÃªme sexe. Les diminue s'il est de sexe opposÃ©. 	â€”
+Simple 	Simple 	Double les effets des modifications de statistiques, positives ou nÃ©gatives. 	â€”
+Sniper 	Sniper 	Triple la puissance des coups critiques. 	â€”
+Soin Poison 	Poison Heal 	Le PokÃ©mon rÃ©cupÃ¨re 1/8Ã¨ de ses PV par tour lors d'un empoisonnement. 	Le PokÃ©mon empoisonnÃ© perd tout de mÃªme ses PV lorsque son dresseur se dÃ©place.*
+Solide Roc 	Solid Rock 	Retire 1/4 des dÃ©gÃ¢ts subits lors d'une attaque super efficace. 	â€”
+Technicien 	Technician 	Augmente de 50% la puissance des attaques faibles (de puissance infÃ©rieure ou Ã©gale Ã  60). 	â€”
+TÃ©lÃ©charge 	Download 	Statistiques : Augmente l'attaque ou l'attaque spÃ©ciale du PokÃ©mon, selon la statistique de dÃ©fense la plus faible du PokÃ©mon adverse. 	â€”
+TÃ©mÃ©raire 	Reckless 	Augmente de 20% la puissance des attaques infligeant des dÃ©gÃ¢ts de recul. 	â€”
+AcharnÃ© 	Defiant 	Statistiques : Monte l'Attaque du PokÃ©mon de deux niveau si l'une de ses statistiques est baissÃ©e par l'adversaire.
+Analyste 	Analytic 	Si le PokÃ©mon frappe en dernier durant le tour, la puissance de son attaque est augmentÃ©e de 30%.
+ArmurouillÃ©e 	Weak Armor 	Statistiques : Le PokÃ©mon touchÃ© par une attaque physique voit sa dÃ©fense diminuer d'un niveau et sa vitesse augmenter d'un niveau.
+Baigne Sable 	Sand Rush 	Statistiques : Double la Vitesse du PokÃ©mon lors d'une tempÃªte de sable. Immunise contre les dÃ©gÃ¢ts de la tempÃªte.
+CÅ“ur de Coq 	Big Pecks 	EmpÃªche la dÃ©fense du PokÃ©mon d'Ãªtre baissÃ©e par les attaques adverses.
+CÅ“ur Noble 	Justified 	Statistiques : Si le PokÃ©mon est touchÃ© par une attaque de type tÃ©nÃ¨bres, son attaque augmente d'un niveau.
+CÅ“ur Soin 	Healer 	Ã€ la fin de chaque tour, le PokÃ©mon a 30% de chance de guÃ©rir ses alliÃ©s d'une altÃ©ration d'Ã©tat en combat double ou triple.
 Contestation 	Contrary 	Statistiques : Inverse les effets des attaques modifiant les statistiques.
-Corps Maudit 	Cursed Body 	Toute attaque portée par l'adversaire a 30% de chance de s'entraver.
-Défaitiste 	Defeatist 	Statistiques : Divise par deux l'attaque et l'attaque spéciale du Pokémon s'il a moins de la moitié de ses PV totaux.
-Envelocape 	Overcoat 	Immunise contre les dégâts causés par la grêle et les tempêtes de sable.
-Épine de Fer 	Iron Barbs 	Retire 1/8ème de ses PV à l'adversaire lorsque celui-ci porte une attaque physique.
-Farceur 	Prankster 	Augmente la priorité des attaques de statut d'un niveau.
-Force Sable 	Sand Force 	Lors d'une tempête de sable, la puissance des attaques de type acier, roche et sol augmente de 30 %.
-Garde Amie 	Friend Guard 	Réduire de 25% les dégâts infligés aux alliés en combat double ou triple.
-Heavy Metal 	Heavy Metal 	Double la masse du Pokémon.
-Herbivore 	Sap Sipper 	Statistiques : Si le Pokémon est touché par une attaque de type plante, son attaque augmente d'un niveau.
-Illusion 	Illusion 	Lorsqu'il entre en combat, le Pokémon prend l'apparence du dernier Pokémon de l'équipe.
-Imposteur 	Imposter 	Le Pokémon entrant en combat prend automatiquement l'apparence du Pokémon adverse.
-Impudence 	Moxie 	Statistiques : Monte l'attaque du Pokémon d'un niveau lorsqu'il met un adversaire K.O.
-Infiltration 	Infiltrator 	Empêche les attaques de protection adverses de fonctionner. (N'influe pas sur Détection et Abri.)
-Light Metal 	Light Metal 	Divise par deux la masse du Pokémon.
-Lunatique 	Moody 	Statistiques : Aléatoirement, à la fin de chaque tour, une statistique du Pokémon augmente de deux niveaux, et une autre baisse d'un niveau (précision et esquive comprises).
+Corps Maudit 	Cursed Body 	Toute attaque portÃ©e par l'adversaire a 30% de chance de s'entraver.
+DÃ©faitiste 	Defeatist 	Statistiques : Divise par deux l'attaque et l'attaque spÃ©ciale du PokÃ©mon s'il a moins de la moitiÃ© de ses PV totaux.
+Envelocape 	Overcoat 	Immunise contre les dÃ©gÃ¢ts causÃ©s par la grÃªle et les tempÃªtes de sable.
+Ã‰pine de Fer 	Iron Barbs 	Retire 1/8Ã¨me de ses PV Ã  l'adversaire lorsque celui-ci porte une attaque physique.
+Farceur 	Prankster 	Augmente la prioritÃ© des attaques de statut d'un niveau.
+Force Sable 	Sand Force 	Lors d'une tempÃªte de sable, la puissance des attaques de type acier, roche et sol augmente de 30 %.
+Garde Amie 	Friend Guard 	RÃ©duire de 25% les dÃ©gÃ¢ts infligÃ©s aux alliÃ©s en combat double ou triple.
+Heavy Metal 	Heavy Metal 	Double la masse du PokÃ©mon.
+Herbivore 	Sap Sipper 	Statistiques : Si le PokÃ©mon est touchÃ© par une attaque de type plante, son attaque augmente d'un niveau.
+Illusion 	Illusion 	Lorsqu'il entre en combat, le PokÃ©mon prend l'apparence du dernier PokÃ©mon de l'Ã©quipe.
+Imposteur 	Imposter 	Le PokÃ©mon entrant en combat prend automatiquement l'apparence du PokÃ©mon adverse.
+Impudence 	Moxie 	Statistiques : Monte l'attaque du PokÃ©mon d'un niveau lorsqu'il met un adversaire K.O.
+Infiltration 	Infiltrator 	EmpÃªche les attaques de protection adverses de fonctionner. (N'influe pas sur DÃ©tection et Abri.)
+Light Metal 	Light Metal 	Divise par deux la masse du PokÃ©mon.
+Lunatique 	Moody 	Statistiques : AlÃ©atoirement, Ã  la fin de chaque tour, une statistique du PokÃ©mon augmente de deux niveaux, et une autre baisse d'un niveau (prÃ©cision et esquive comprises).
 Miroir Magik 	Magic Bounce 	Retourne les attaques de statut contre l'adversaire.
-Mode Transe 	Zen Mode 	Le Pokémon change de forme et modifie la répartition de ses statistiques lorsque ses PV sont inférieurs à 50%.
-Momie 	Mummy 	Si le Pokémon subit une attaque physique, le talent de l'adversaire devient "Momie". Ce talent est sans effet en elle-même.
-Multiécaille 	Multiscale 	Si le Pokémon possède 100% de ses PV, alors les dégâts infligés par l'adversaire sont divisés par deux.
-Peau Miracle 	Wonder Skin 	50% de chance de faire échouer les attaques de statut portées par l'adversaire.
-Phobique 	Rattled 	Statistiques : Si le Pokémon est touché par une attaque de type insecte, spectre ou ténèbres, sa vitesse augmente d'un niveau.
-Pickpocket 	Pickpocket 	Si le Pokémon subit une attaque physique, il récupère l'objet tenu par son adversaire.
-Rage Brûlure 	Flare Boost 	Statistiques : Augmente l'attaque spéciale du Pokémon de 50% en cas de brûlure.
-Rage Poison 	Toxic Boost 	Statistiques : Augmente l'attaque du Pokémon de 50% en cas d'empoisonnement.
-Récolte 	Harvest 	Une baie consommée par le Pokémon a 50% de chances d'être récupérée à la fin de chaque tour.
-Régé-Force 	Regenerator 	Restaure 1/3 des PV totaux si le Pokémon est retiré du combat.
-Sans Limite 	Sheer Force 	Augmente de 30% la puissance des attaques pouvant avoir un effet secondaire. L'effet secondaire est annulé.
-Télépathe 	Telepathy 	Anticipe et évite les attaques des alliés en combat double ou triple.
-Tension 	Unnerve 	Empêche l'adversaire de consommer sa baie.
-Téra-Voltage 	Teravolt 	Peut toucher un Pokémon adverse malgré son talent.
-Toxitouche 	Poison Touch 	Peut empoisonner l'adversaire après lui avoir porté une attaque physique.
-TurboBrasier 	Turboblaze 	Peut toucher un Pokémon adverse malgré son talent.
-Victorieux 	Victory Star 	Statistiques : Monte de 10% la précision des alliés en combat double ou triple.
-Ailes Bourrasque 	Gale Wings 	Augmente la priorité des capacités de type vol.
+Mode Transe 	Zen Mode 	Le PokÃ©mon change de forme et modifie la rÃ©partition de ses statistiques lorsque ses PV sont infÃ©rieurs Ã  50%.
+Momie 	Mummy 	Si le PokÃ©mon subit une attaque physique, le talent de l'adversaire devient "Momie". Ce talent est sans effet en elle-mÃªme.
+MultiÃ©caille 	Multiscale 	Si le PokÃ©mon possÃ¨de 100% de ses PV, alors les dÃ©gÃ¢ts infligÃ©s par l'adversaire sont divisÃ©s par deux.
+Peau Miracle 	Wonder Skin 	50% de chance de faire Ã©chouer les attaques de statut portÃ©es par l'adversaire.
+Phobique 	Rattled 	Statistiques : Si le PokÃ©mon est touchÃ© par une attaque de type insecte, spectre ou tÃ©nÃ¨bres, sa vitesse augmente d'un niveau.
+Pickpocket 	Pickpocket 	Si le PokÃ©mon subit une attaque physique, il rÃ©cupÃ¨re l'objet tenu par son adversaire.
+Rage BrÃ»lure 	Flare Boost 	Statistiques : Augmente l'attaque spÃ©ciale du PokÃ©mon de 50% en cas de brÃ»lure.
+Rage Poison 	Toxic Boost 	Statistiques : Augmente l'attaque du PokÃ©mon de 50% en cas d'empoisonnement.
+RÃ©colte 	Harvest 	Une baie consommÃ©e par le PokÃ©mon a 50% de chances d'Ãªtre rÃ©cupÃ©rÃ©e Ã  la fin de chaque tour.
+RÃ©gÃ©-Force 	Regenerator 	Restaure 1/3 des PV totaux si le PokÃ©mon est retirÃ© du combat.
+Sans Limite 	Sheer Force 	Augmente de 30% la puissance des attaques pouvant avoir un effet secondaire. L'effet secondaire est annulÃ©.
+TÃ©lÃ©pathe 	Telepathy 	Anticipe et Ã©vite les attaques des alliÃ©s en combat double ou triple.
+Tension 	Unnerve 	EmpÃªche l'adversaire de consommer sa baie.
+TÃ©ra-Voltage 	Teravolt 	Peut toucher un PokÃ©mon adverse malgrÃ© son talent.
+Toxitouche 	Poison Touch 	Peut empoisonner l'adversaire aprÃ¨s lui avoir portÃ© une attaque physique.
+TurboBrasier 	Turboblaze 	Peut toucher un PokÃ©mon adverse malgrÃ© son talent.
+Victorieux 	Victory Star 	Statistiques : Monte de 10% la prÃ©cision des alliÃ©s en combat double ou triple.
+Ailes Bourrasque 	Gale Wings 	Augmente la prioritÃ© des capacitÃ©s de type vol.
 Amour Filial 	Parental Bond 	Permet au lanceur de porter deux coups par tour au lieu d'un.
-Aroma-Voile 	Aroma Veil 	Protège les Pokémon alliés des capacités qui ont un effet sur l'état mental.
-Aura Féérique 	Fairy Aura 	Augmente la puissance des attaques de type fée des Pokémon présents sur le terrain.
-Aura Inversée 	Aura Break 	Inverse les effets des talents Aura.
-Aura Ténébreuse 	Dark Aura 	Augmente la puissance des attaques de type ténèbres des Pokémon présents sur le terrain.
-Bajoues 	Cheek Pouch 	Lorsque le Pokémon mange une Baie, il obtient ses effets et regagne des PV en prime.
-Battant 	Competitive 	Augmente l'Attaque Spéciale par deux niveaux lorsque n'importe quelle stat est baissée par un Pokémon adverse.
-Déclic Tactique 	Stance Change 	Change la forme du Pokémon selon le combat.
-Flora-Voile 	Flower Veil 	Empêche la diminution des statistiques des alliés de type plante par les Pokémon adverses.
-Gluco-Voile 	Sweet Veil 	Empêche les Pokémon alliés de s'endormir.
-Griffe Dure 	Tough Claws 	Augmente la puissance des attaques à base de griffe.
-Magicien 	Magician 	Vole l'objet d'une cible après l'avoir touché avec une attaque directe.
-Méga Blaster 	Mega Launcher 	Un Pokémon doté de ce talent verra la puissance de ses capacités d'aura augmentée.
-Pare-Balles 	Bulletproof 	Protège contre les capacités balles et bombes, par exemple Balle Graine ou Canon Graine.
-Peau Céleste 	Aerilate 	Transforme les capacités de type normal en type vol.
-Peau Féérique 	Pixilate 	Transforme les capacités de type normal en type fée.
-Peau Gelée 	Refrigerate 	Transforme les capacités de type normal en type glace.
-Poisseux 	Gooey 	Baisse la Vitesse des Pokémon qui touchent ce Pokémon avec une attaque directe.
-Prognathe 	Strong Jaw 	Augmente la puissance des attaques à base de morsures.
-Protéen 	Protean 	Change le type du Pokémon en celui de toute capacité qu'il utilise.
-Symbiose 	Symbiosis 	Passe un objet tenu à un Pokémon allié lorsque l'allié utilise son objet.
-Toison Épaisse 	Fur Coat 	Divise par deux les dégâts reçus lors d'une attaque physique.
-Toison Herbue 	Grass Pelt 	Augmente la Défense lorsque Champ Herbu est en vigueur."""
+Aroma-Voile 	Aroma Veil 	ProtÃ¨ge les PokÃ©mon alliÃ©s des capacitÃ©s qui ont un effet sur l'Ã©tat mental.
+Aura FÃ©Ã©rique 	Fairy Aura 	Augmente la puissance des attaques de type fÃ©e des PokÃ©mon prÃ©sents sur le terrain.
+Aura InversÃ©e 	Aura Break 	Inverse les effets des talents Aura.
+Aura TÃ©nÃ©breuse 	Dark Aura 	Augmente la puissance des attaques de type tÃ©nÃ¨bres des PokÃ©mon prÃ©sents sur le terrain.
+Bajoues 	Cheek Pouch 	Lorsque le PokÃ©mon mange une Baie, il obtient ses effets et regagne des PV en prime.
+Battant 	Competitive 	Augmente l'Attaque SpÃ©ciale par deux niveaux lorsque n'importe quelle stat est baissÃ©e par un PokÃ©mon adverse.
+DÃ©clic Tactique 	Stance Change 	Change la forme du PokÃ©mon selon le combat.
+Flora-Voile 	Flower Veil 	EmpÃªche la diminution des statistiques des alliÃ©s de type plante par les PokÃ©mon adverses.
+Gluco-Voile 	Sweet Veil 	EmpÃªche les PokÃ©mon alliÃ©s de s'endormir.
+Griffe Dure 	Tough Claws 	Augmente la puissance des attaques Ã  base de griffe.
+Magicien 	Magician 	Vole l'objet d'une cible aprÃ¨s l'avoir touchÃ© avec une attaque directe.
+MÃ©ga Blaster 	Mega Launcher 	Un PokÃ©mon dotÃ© de ce talent verra la puissance de ses capacitÃ©s d'aura augmentÃ©e.
+Pare-Balles 	Bulletproof 	ProtÃ¨ge contre les capacitÃ©s balles et bombes, par exemple Balle Graine ou Canon Graine.
+Peau CÃ©leste 	Aerilate 	Transforme les capacitÃ©s de type normal en type vol.
+Peau FÃ©Ã©rique 	Pixilate 	Transforme les capacitÃ©s de type normal en type fÃ©e.
+Peau GelÃ©e 	Refrigerate 	Transforme les capacitÃ©s de type normal en type glace.
+Poisseux 	Gooey 	Baisse la Vitesse des PokÃ©mon qui touchent ce PokÃ©mon avec une attaque directe.
+Prognathe 	Strong Jaw 	Augmente la puissance des attaques Ã  base de morsures.
+ProtÃ©en 	Protean 	Change le type du PokÃ©mon en celui de toute capacitÃ© qu'il utilise.
+Symbiose 	Symbiosis 	Passe un objet tenu Ã  un PokÃ©mon alliÃ© lorsque l'alliÃ© utilise son objet.
+Toison Ã‰paisse 	Fur Coat 	Divise par deux les dÃ©gÃ¢ts reÃ§us lors d'une attaque physique.
+Toison Herbue 	Grass Pelt 	Augmente la DÃ©fense lorsque Champ Herbu est en vigueur. """
 
 main(data)
