@@ -5,7 +5,7 @@ To udpate:
 
 
 / Pokemon Names (and image files?)
-- Abilities
+/ Abilities
 / Additional info text
 - Evolution chain paths
 
