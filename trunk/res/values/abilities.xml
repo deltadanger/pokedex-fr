@@ -1,0 +1,766 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ability_name_error">Erreur</string>
+    <string name="ability_infight_error">Il y a eu une erreur lors du chargement de ce pokémon.</string>
+    <string name="ability_outfight_error"></string>
+    
+    
+    
+    
+    <string name="ability_name_truant">Absentéisme</string>
+    <string name="ability_infight_truant">Le Pokémon n\'attaque qu\'un tour sur deux.</string>
+    <string name="ability_outfight_truant"></string>
+
+    <string name="ability_name_water_absorb">Absorb Eau</string>
+    <string name="ability_infight_water_absorb">Les attaques de type eau reçues par le Pokémon régénèrent 1/4 de ses PV.</string>
+    <string name="ability_outfight_water_absorb"></string>
+
+    <string name="ability_name_volt_absorb">Absorb Volt</string>
+    <string name="ability_infight_volt_absorb">Les attaques de type électrique reçues par le Pokémon régénèrent 1/4 de ses PV.</string>
+    <string name="ability_outfight_volt_absorb"></string>
+
+    <string name="ability_name_hustle">Agitation</string>
+    <string name="ability_infight_hustle">Statistiques : Augmente l\'attaque de 50% mais baisse la précision de 20%.</string>
+    <string name="ability_outfight_hustle">Augmente de 50% les chances de rencontrer un Pokémon sauvage de haut niveau.É</string>
+
+    <string name="ability_name_air_lock">Air Lock</string>
+    <string name="ability_infight_air_lock">Annule les effets du climat.</string>
+    <string name="ability_outfight_air_lock"></string>
+
+    <string name="ability_name_soundproof">Anti-Bruit</string>
+    <string name="ability_infight_soundproof">Annule les effets dus à une attaque sonore.</string>
+    <string name="ability_outfight_soundproof"></string>
+
+    <string name="ability_name_magma_armor">Armumagma</string>
+    <string name="ability_infight_magma_armor">Immunise contre le gel.</string>
+    <string name="ability_outfight_magma_armor">Divise par deux le nombre de pas nécessaire à l\'éclosion d\'un oeuf.É</string>
+
+    <string name="ability_name_battle_armor">Armurbaston</string>
+    <string name="ability_infight_battle_armor">Annule les chances de coups critiques du Pokémon ennemi.</string>
+    <string name="ability_outfight_battle_armor"></string>
+
+    <string name="ability_name_inner_focus">Attention</string>
+    <string name="ability_infight_inner_focus">Immunise contre la peur.</string>
+    <string name="ability_outfight_inner_focus"></string>
+
+    <string name="ability_name_oblivious">Benêt</string>
+    <string name="ability_infight_oblivious">Immunise contre le charme.</string>
+    <string name="ability_outfight_oblivious"></string>
+
+    <string name="ability_name_aftermath">Boom Final</string>
+    <string name="ability_infight_aftermath">Enlève 1/4 de ses PV totaux au Pokémon ennemi assénant un coup fatal.</string>
+    <string name="ability_outfight_aftermath"></string>
+
+    <string name="ability_name_blaze">Brasier</string>
+    <string name="ability_infight_blaze">Augmente la puissance des attaques de type Feu de 50% lorsque le Pokémon a moins d\'1/3 de ses PV totaux.</string>
+    <string name="ability_outfight_blaze"></string>
+
+    <string name="ability_name_cacophony">Cacophonie</string>
+    <string name="ability_infight_cacophony">Annule les effets dus à une attaque sonore.</string>
+    <string name="ability_outfight_cacophony"></string>
+
+    <string name="ability_name_trace">Calque</string>
+    <string name="ability_infight_trace">Copie le talent du Pokémon adverse.</string>
+    <string name="ability_outfight_trace"></string>
+
+    <string name="ability_name_super_luck">Chanceux</string>
+    <string name="ability_infight_super_luck">Double les chance de porter un coup critique.</string>
+    <string name="ability_outfight_super_luck"></string>
+
+    <string name="ability_name_chlorophyll">Chlorophyle</string>
+    <string name="ability_infight_chlorophyll">Statistiques : Augmente la vitesse au soleil.</string>
+    <string name="ability_outfight_chlorophyll"></string>
+
+    <string name="ability_name_cloud_nine">Ciel Gris</string>
+    <string name="ability_infight_cloud_nine">Annule les effets du climat.</string>
+    <string name="ability_outfight_cloud_nine"></string>
+
+    <string name="ability_name_huge_power">Coloforce</string>
+    <string name="ability_infight_huge_power">Statistiques : Double l\'attaque du Pokémon.</string>
+    <string name="ability_outfight_huge_power"></string>
+
+    <string name="ability_name_shell_armor">Coque Armure</string>
+    <string name="ability_infight_shell_armor">Annule les chances de coups critiques du Pokémon ennemi.</string>
+    <string name="ability_outfight_shell_armor"></string>
+
+    <string name="ability_name_flame_body">Corps Ardent</string>
+    <string name="ability_infight_flame_body">30% de chance de provoquer une brûlure sur le Pokémon adverse ayant attaqué.</string>
+    <string name="ability_outfight_flame_body">Divise par deux le nombre de pas nécessaire à l\'éclosion d\'un oeuf.É</string>
+
+    <string name="ability_name_clear_body">Corps Sain</string>
+    <string name="ability_infight_clear_body">Statistiques : Empêche la diminution de statistiques par le Pokémon adverse.</string>
+    <string name="ability_outfight_clear_body"></string>
+
+    <string name="ability_name_drizzle">Crachin</string>
+    <string name="ability_infight_drizzle">Fait tomber la pluie tant que le Pokémon est en jeu.</string>
+    <string name="ability_outfight_drizzle"></string>
+
+    <string name="ability_name_guts">Cran</string>
+    <string name="ability_infight_guts">Statistiques : Augmente de 50% l\'attaque du Pokémon s\'il subit un changement de statut.</string>
+    <string name="ability_outfight_guts"></string>
+
+    <string name="ability_name_rain_dish">Cuvette</string>
+    <string name="ability_infight_rain_dish">Régénère 1/16ème des PV par temps de pluie.</string>
+    <string name="ability_outfight_rain_dish"></string>
+
+    <string name="ability_name_color_change">Déguisement</string>
+    <string name="ability_infight_color_change">Change le type du Pokémon en celui de la dernière attaque subie.</string>
+    <string name="ability_outfight_color_change"></string>
+
+    <string name="ability_name_marvel_scale">Écaille Spé.</string>
+    <string name="ability_infight_marvel_scale">Statistiques : Augmente la défense de 50% lorsque le Pokémon subit un changement de statut.</string>
+    <string name="ability_outfight_marvel_scale"></string>
+
+    <string name="ability_name_limber">Échauffement</string>
+    <string name="ability_infight_limber">Immunise contre la paralysie.</string>
+    <string name="ability_outfight_limber"></string>
+
+    <string name="ability_name_white_smoke">Écran Fumée</string>
+    <string name="ability_infight_white_smoke">Empêche la diminution de statistiques par le Pokémon adverse.</string>
+    <string name="ability_outfight_white_smoke">Réduit de 50% les chances d\'être attaqué par un Pokémon sauvage.É</string>
+
+    <string name="ability_name_shield_dust">Écran Poudre</string>
+    <string name="ability_infight_shield_dust">Empêche les effets secondaires des attaques subies.</string>
+    <string name="ability_outfight_shield_dust"></string>
+
+    <string name="ability_name_overgrow">Engrais</string>
+    <string name="ability_infight_overgrow">Augmente la puissance des attaques de type Plante de 50% lorsque le Pokémon a moins d\'1/3 de ses PV totaux.</string>
+    <string name="ability_outfight_overgrow"></string>
+
+    <string name="ability_name_vital_spirit">Esprit Vital</string>
+    <string name="ability_infight_vital_spirit">Empêche le Pokémon d\'être endormi.</string>
+    <string name="ability_outfight_vital_spirit">Augmente de 50% les chances de rencontrer un Pokémon sauvage de haut niveau.É</string>
+
+    <string name="ability_name_swarm">Essaim</string>
+    <string name="ability_infight_swarm">Augmente la puissance des attaques de type Insecte de 50% lorsque le Pokémon a moins d\'1/3 de ses PV totaux.</string>
+    <string name="ability_outfight_swarm">Augmente les chances d\'entendre le cri d\'un Pokémon sauvage.É</string>
+
+    <string name="ability_name_sturdy">Fermeté</string>
+    <string name="ability_infight_sturdy">Immunise contre les attaques OHKO.*</string>
+    <string name="ability_outfight_sturdy"></string>
+
+    <string name="ability_name_pure_power">Force Pure</string>
+    <string name="ability_infight_pure_power">Statistiques : Double l\'attaque du Pokémon.</string>
+    <string name="ability_outfight_pure_power"></string>
+
+    <string name="ability_name_run_away">Fuite</string>
+    <string name="ability_infight_run_away">Assure la fuite contre les Pokémon sauvages.</string>
+    <string name="ability_outfight_run_away"></string>
+
+    <string name="ability_name_wonder_guard">Garde Mystik</string>
+    <string name="ability_infight_wonder_guard">Ne subit que les dégâts d\'attaques super efficaces.</string>
+    <string name="ability_outfight_wonder_guard"></string>
+
+    <string name="ability_name_swift_swim">Glissade</string>
+    <string name="ability_infight_swift_swim">Statistiques : Double la vitesse par temps de pluie.</string>
+    <string name="ability_outfight_swift_swim"></string>
+
+    <string name="ability_name_sticky_hold">Glue</string>
+    <string name="ability_infight_sticky_hold">Empêche la perte de l\'objet tenu.</string>
+    <string name="ability_outfight_sticky_hold">Facilite la capture des Pokémon pêchés.É</string>
+
+    <string name="ability_name_hyper_cutter">Hyper Cutter</string>
+    <string name="ability_infight_hyper_cutter">Statistiques : Empêche la diminution d\'attaque du Pokémon.</string>
+    <string name="ability_outfight_hyper_cutter"></string>
+
+    <string name="ability_name_water_veil">Ignifu-Voile</string>
+    <string name="ability_infight_water_veil">Immunise contre la brûlure.</string>
+    <string name="ability_outfight_water_veil"></string>
+
+    <string name="ability_name_insomnia">Insomnia</string>
+    <string name="ability_infight_insomnia">Empêche le Pokémon d\'être endormi.</string>
+    <string name="ability_outfight_insomnia"></string>
+
+    <string name="ability_name_intimidate">Intimidation</string>
+    <string name="ability_infight_intimidate">Statistiques : Diminue d\'un niveau l\'attaque du Pokémon adverse.</string>
+    <string name="ability_outfight_intimidate">Réduit de 50% les chances d\'être attaqué par un Pokémon sauvage de bas niveau.É</string>
+
+    <string name="ability_name_thick_fat">Isograisse</string>
+    <string name="ability_infight_thick_fat">Les dégâts provoqués par les attaques des types Feu ou Glace sont divisés par 2.</string>
+    <string name="ability_outfight_thick_fat"></string>
+
+    <string name="ability_name_cute_charm">Joli Sourire</string>
+    <string name="ability_infight_cute_charm">30% de chance de provoquer l\'attirance du Pokémon adverse ayant attaqué.</string>
+    <string name="ability_outfight_cute_charm">Augmente de 50% les chances d\'être attaqué par un Pokémon sauvage du sexe opposé.É</string>
+
+    <string name="ability_name_levitate">Lévitation</string>
+    <string name="ability_infight_levitate">Immunise contre les attaques de type Sol.</string>
+    <string name="ability_outfight_levitate"></string>
+
+    <string name="ability_name_illuminate">Lumiattirance</string>
+    <string name="ability_infight_illuminate">—</string>
+    <string name="ability_outfight_illuminate">Augmente les chances de rencontrer des Pokémon sauvages.RS</string>
+
+    <string name="ability_name_magnet_pull">Magnépiège</string>
+    <string name="ability_infight_magnet_pull">Empêche la fuite et le changement des Pokémon de type Acier.</string>
+    <string name="ability_outfight_magnet_pull">Augmente de 50% les chances de rencontrer un Pokémon sauvage de type acier.É</string>
+
+    <string name="ability_name_shadow_tag">Marque Ombre</string>
+    <string name="ability_infight_shadow_tag">Empêche la fuite des Pokémon sauvage et le changement du Pokémon adverse.</string>
+    <string name="ability_outfight_shadow_tag"></string>
+
+    <string name="ability_name_early_bird">Matinal</string>
+    <string name="ability_infight_early_bird">Réduit le nombre de tours de sommeil du Pokémon.</string>
+    <string name="ability_outfight_early_bird"></string>
+
+    <string name="ability_name_natural_cure">Médic Nature</string>
+    <string name="ability_infight_natural_cure">Le Pokémon est soigné de toute altération d\'état lorsqu\'il est changé ou en fin de combat.</string>
+    <string name="ability_outfight_natural_cure"></string>
+
+    <string name="ability_name_forecast">Météo</string>
+    <string name="ability_infight_forecast">Change le type et la forme du Pokémon selon le climat.</string>
+    <string name="ability_outfight_forecast"></string>
+
+    <string name="ability_name_minus">Minus</string>
+    <string name="ability_infight_minus">Statistiques : Augmente l\'attaque spéciale de 50% en match double, si le partenaire à le talent « Plus ».</string>
+    <string name="ability_outfight_minus"></string>
+
+    <string name="ability_name_damp">Moiteur</string>
+    <string name="ability_infight_damp">Émpêche l\'utilisation d\'attaques auto-destructrices par le Pokémon adverse.</string>
+    <string name="ability_outfight_damp"></string>
+
+    <string name="ability_name_shed_skin">Mue</string>
+    <string name="ability_infight_shed_skin">À chaque tour, le Pokémon a 33% de chance d\'être soigné d\'une altération d\'état.</string>
+    <string name="ability_outfight_shed_skin"></string>
+
+    <string name="ability_name_compoundeye">Oeil Composé</string>
+    <string name="ability_infight_compoundeye">Statistiques : Double la précision du Pokémon.</string>
+    <string name="ability_outfight_compoundeye">Augmente les chances de rencontrer un Pokémon sauvage tenant un objet.É</string>
+
+    <string name="ability_name_lightningrod">Paratonnerre</string>
+    <string name="ability_infight_lightningrod">Attire toutes les attaques de type électrique.*</string>
+    <string name="ability_outfight_lightningrod">Augmente les chances de recevoir un appel sur le PokéNav.É</string>
+
+    <string name="ability_name_rough_skin">Peau Dure</string>
+    <string name="ability_infight_rough_skin">Fait perdre 1/16è des PV du Pokémon adverse lors d\'une attaque directe.</string>
+    <string name="ability_outfight_rough_skin"></string>
+
+    <string name="ability_name_arena_trap">Piège</string>
+    <string name="ability_infight_arena_trap">Empêche la fuite et le changement du Pokémon adverse, s\'il touche le sol.</string>
+    <string name="ability_outfight_arena_trap">Augmente de 50% les chances d\'être attaqué par un Pokémon sauvage.É</string>
+
+    <string name="ability_name_plus">Plus</string>
+    <string name="ability_infight_plus">Statistiques : Augmente l\'attaque spéciale de 50% en match double, si le partenaire à le talent « Minus ».</string>
+    <string name="ability_outfight_plus"></string>
+
+    <string name="ability_name_poison_point">Point Poison</string>
+    <string name="ability_infight_poison_point">30% de chance de provoquer l\'empoisonnement du Pokémon adverse ayant attaqué.</string>
+    <string name="ability_outfight_poison_point"></string>
+
+    <string name="ability_name_effect_spore">Pose Spore</string>
+    <string name="ability_infight_effect_spore">30% de chance de provoquer l\'empoisonnement, le sommeil ou la paralysie du Pokémon adverse ayant attaqué.</string>
+    <string name="ability_outfight_effect_spore"></string>
+
+    <string name="ability_name_pressure">Pression</string>
+    <string name="ability_infight_pressure">Double l\'utilisation de PP des attaques offensives du Pokémon adverse.</string>
+    <string name="ability_outfight_pressure">Augmente de 50% les chances d\'être attaqué par un Pokémon sauvage.É</string>
+
+    <string name="ability_name_stench">Puanteur</string>
+    <string name="ability_infight_stench">—</string>
+    <string name="ability_outfight_stench">Diminue les chances de rencontrer des Pokémon sauvages.RS</string>
+
+    <string name="ability_name_pickup">Ramassage</string>
+    <string name="ability_infight_pickup">Donne une chance au Pokémon de ramasser un objet après un combat.</string>
+    <string name="ability_outfight_pickup"></string>
+
+    <string name="ability_name_keen_eye">Regard Vif</string>
+    <string name="ability_infight_keen_eye">Statistiques : Empêche la perte de précision.</string>
+    <string name="ability_outfight_keen_eye">Réduit de 50% les chances d\'être attaqué par un Pokémon sauvage de bas niveau.É</string>
+
+    <string name="ability_name_sand_stream">Sable Volant</string>
+    <string name="ability_infight_sand_stream">Déclenche une tempête de sable tant que le Pokémon est en jeu.</string>
+    <string name="ability_outfight_sand_stream"></string>
+
+    <string name="ability_name_drought">Sécheresse</string>
+    <string name="ability_infight_drought">Crée un temps ensoleillé tant que le Pokémon est en jeu.</string>
+    <string name="ability_outfight_drought"></string>
+
+    <string name="ability_name_serene_grace">Sérénité</string>
+    <string name="ability_infight_serene_grace">Double les chances de réussite des effets secondaires des attaques.</string>
+    <string name="ability_outfight_serene_grace"></string>
+
+    <string name="ability_name_static">Statik</string>
+    <string name="ability_infight_static">30% de chance de provoquer la paralysie du Pokémon adverse ayant attaqué.</string>
+    <string name="ability_outfight_static">Augmente de 50% les chances de rencontrer un Pokémon sauvage de type électrique.É</string>
+
+    <string name="ability_name_liquid_ooze">Suintement</string>
+    <string name="ability_infight_liquid_ooze">Les attaques vampiriques du Pokémon adverse lui font perdre des PV.</string>
+    <string name="ability_outfight_liquid_ooze"></string>
+
+    <string name="ability_name_synchronize">Synchro</string>
+    <string name="ability_infight_synchronize">Toute altération d\'état subie est transmise au Pokémon adverse.</string>
+    <string name="ability_outfight_synchronize">Augmente les chances de rencontrer un Pokémon sauvage ayant la même nature.É</string>
+
+    <string name="ability_name_own_tempo">Tempo Perso</string>
+    <string name="ability_infight_own_tempo">Immunise contre la confusion.</string>
+    <string name="ability_outfight_own_tempo"></string>
+
+    <string name="ability_name_rock_head">Tête de Roc</string>
+    <string name="ability_infight_rock_head">Le Pokémon ne subit pas de dégâts de contrecoup.</string>
+    <string name="ability_outfight_rock_head"></string>
+
+    <string name="ability_name_flash_fire">Torche</string>
+    <string name="ability_infight_flash_fire">Annule les dégâts des attaques de type Feu subies, et augmente de 50% la puissance des attaques de type Feu lancées.</string>
+    <string name="ability_outfight_flash_fire"></string>
+
+    <string name="ability_name_torrent">Torrent</string>
+    <string name="ability_infight_torrent">Augmente la puissance des attaques de type Eau de 50% lorsque le Pokémon a moins d\'1/3 de ses PV totaux.</string>
+    <string name="ability_outfight_torrent"></string>
+
+    <string name="ability_name_speed_boost">Turbo</string>
+    <string name="ability_infight_speed_boost">Statistiques : La vitesse du Pokémon augmente à chaque tour.</string>
+    <string name="ability_outfight_speed_boost"></string>
+
+    <string name="ability_name_immunity">Vaccin</string>
+    <string name="ability_infight_immunity">Immunise contre l\'empoisonnement.</string>
+    <string name="ability_outfight_immunity"></string>
+
+    <string name="ability_name_suction_cups">Ventouse</string>
+    <string name="ability_infight_suction_cups">Empêche d\'être changé de force par une attaque adverse.</string>
+    <string name="ability_outfight_suction_cups">Facilite la capture des Pokémon pêchés.É</string>
+
+    <string name="ability_name_sand_veil">Voile Sable</string>
+    <string name="ability_infight_sand_veil">Statistiques : Augmente l\'esquive de 20% lors d\'une tempête de sable, et immunise contre les dégâts de la tempête de sable.</string>
+    <string name="ability_outfight_sand_veil">Réduit de 50% les chances d\'être attaqué par un Pokémon sauvage lors d\'une tempête de sable.É</string>
+
+    <string name="ability_name_adaptability">Adaptabilité</string>
+    <string name="ability_infight_adaptability">STAB : Si ce Pokémon utilise une attaque de son type, la puissance de l\'attaque est multipliée par 2 au lieu de 1.5.</string>
+    <string name="ability_outfight_adaptability"></string>
+
+    <string name="ability_name_snow_warning">Alerte Neige</string>
+    <string name="ability_infight_snow_warning">Le Pokémon déclenche une grêle lorsqu\'il est envoyé au combat.</string>
+    <string name="ability_outfight_snow_warning"></string>
+
+    <string name="ability_name_no_guard">Annule Garde</string>
+    <string name="ability_infight_no_guard">Toutes les attaques du Pokémon et de son adversaire ont une précision de 100%.</string>
+    <string name="ability_outfight_no_guard">Augmente les chances de rencontrer un Pokémon sauvage.</string>
+
+    <string name="ability_name_anticipation">Anticipation</string>
+    <string name="ability_infight_anticipation">Alerte et protège lorsque le Pokémon adverse possède certaines attaques.</string>
+    <string name="ability_outfight_anticipation"></string>
+
+    <string name="ability_name_mold_breaker">Brise Moule</string>
+    <string name="ability_infight_mold_breaker">Peut toucher un Pokémon adverse malgré son talent.</string>
+    <string name="ability_outfight_mold_breaker"></string>
+
+    <string name="ability_name_honey_gather">Cherche Miel</string>
+    <string name="ability_infight_honey_gather">—</string>
+    <string name="ability_outfight_honey_gather">Le Pokémon peut trouver du Miel après un combat.</string>
+
+    <string name="ability_name_anger_point">Colérique</string>
+    <string name="ability_infight_anger_point">Statistiques : L\'attaque du Pokémon est fortement augmentée lorsqu\'il subit un coup critique.</string>
+    <string name="ability_outfight_anger_point"></string>
+
+    <string name="ability_name_ice_body">Corps Gel</string>
+    <string name="ability_infight_ice_body">Régénère 1/16ème des PV par temps de grêle. Immunise les Pokémon n\'ayant pas le type glace contre la grêle.</string>
+    <string name="ability_outfight_ice_body"></string>
+
+    <string name="ability_name_slow_start">Début Calme</string>
+    <string name="ability_infight_slow_start">Statistiques : Divise par deux l\'attaque et la vitesse du Pokémon pendant 5 tours.</string>
+    <string name="ability_outfight_slow_start"></string>
+
+    <string name="ability_name_unburden">Délestage</string>
+    <string name="ability_infight_unburden">Statistiques : Augmente la vitesse lorsqu\'un objet tenu est utilisé, lancé ou perdu.</string>
+    <string name="ability_outfight_unburden"></string>
+
+    <string name="ability_name_flower_gift">Don Floral</string>
+    <string name="ability_infight_flower_gift">Statistiques : Augmente l\'attaque et la défense spéciale de 50% par temps ensoleillé.</string>
+    <string name="ability_outfight_flower_gift"></string>
+
+    <string name="ability_name_leaf_guard">Feuil. Garde</string>
+    <string name="ability_infight_leaf_guard">Soigne les altérations d\'état par temps ensoleillé.</string>
+    <string name="ability_outfight_leaf_guard"></string>
+
+    <string name="ability_name_filter">Filtre</string>
+    <string name="ability_infight_filter">Retire 1/4 des dégâts subits lors d\'une attaque super efficace.</string>
+    <string name="ability_outfight_filter"></string>
+
+    <string name="ability_name_solar_power">Force Soleil</string>
+    <string name="ability_infight_solar_power">Statistiques : Augmente l\'attaque spéciale de 50% par temps ensoleillé, mais diminue les PV de 1/8ème par tour.</string>
+    <string name="ability_outfight_solar_power"></string>
+
+    <string name="ability_name_frisk">Fouille</string>
+    <string name="ability_infight_frisk">Permet de connaitre l\'objet tenu d\'un Pokémon adverse.</string>
+    <string name="ability_outfight_frisk"></string>
+
+    <string name="ability_name_stall">Frein</string>
+    <string name="ability_infight_stall">Le Pokémon attaque toujours en second pour deux attaques de même priorité.</string>
+    <string name="ability_outfight_stall"></string>
+
+    <string name="ability_name_magic_guard">Garde Magik</string>
+    <string name="ability_infight_magic_guard">Le Pokémon ne subit de dégâts que lors d\'attaques directes.</string>
+    <string name="ability_outfight_magic_guard"></string>
+
+    <string name="ability_name_gluttony">Gloutonnerie</string>
+    <string name="ability_infight_gluttony">Le Pokémon utilise la baie portée lorsque les PV descendent en dessous de 50%.</string>
+    <string name="ability_outfight_gluttony"></string>
+
+    <string name="ability_name_hydration">Hydratation</string>
+    <string name="ability_infight_hydration">Soigne les altérations d\'état par temps de pluie.</string>
+    <string name="ability_outfight_hydration"></string>
+
+    <string name="ability_name_heatproof">Ignifuge</string>
+    <string name="ability_infight_heatproof">Divise par 2 les dégâts des attaques de type feu et les effets de brûlure subis par le Pokémon.</string>
+    <string name="ability_outfight_heatproof"></string>
+
+    <string name="ability_name_steadfast">Impassible</string>
+    <string name="ability_infight_steadfast">Statistiques : Augmente d\'un niveau la vitesse du Pokémon lorsqu\'il est apeuré.</string>
+    <string name="ability_outfight_steadfast"></string>
+
+    <string name="ability_name_unaware">Inconscient</string>
+    <string name="ability_infight_unaware">Ignore les améliorations de statistiques du Pokémon adverse, à l\'exception de sa Vitesse.</string>
+    <string name="ability_outfight_unaware"></string>
+
+    <string name="ability_name_storm_drain">Lavabo</string>
+    <string name="ability_infight_storm_drain">Attire toutes les attaques de type eau.*</string>
+    <string name="ability_outfight_storm_drain"></string>
+
+    <string name="ability_name_tinted_lens">Lentiteintée</string>
+    <string name="ability_infight_tinted_lens">Double les dégâts des attaques peu efficaces portées au Pokémon adverse.</string>
+    <string name="ability_outfight_tinted_lens"></string>
+
+    <string name="ability_name_klutz">Maladresse</string>
+    <string name="ability_infight_klutz">Empêche l\'utilisation et/ou ignore l\'effet des objets tenus en combat.</string>
+    <string name="ability_outfight_klutz"></string>
+
+    <string name="ability_name_bad_dreams">Mauvais Rêve</string>
+    <string name="ability_infight_bad_dreams">Fait perdre 1/8ème de ses PV au Pokémon adverse s\'il est endormi.</string>
+    <string name="ability_outfight_bad_dreams"></string>
+
+    <string name="ability_name_motor_drive">Motorisé</string>
+    <string name="ability_infight_motor_drive">Immunise le Pokémon contre les attaques de type électrique. Augmente la vitesse du Pokémon d\'un niveau par attaque électrique subie.</string>
+    <string name="ability_outfight_motor_drive"></string>
+
+    <string name="ability_name_skill_link">Multi-Coups</string>
+    <string name="ability_infight_skill_link">Utilise toujours le nombre de coups maximum d\'une attaque.</string>
+    <string name="ability_outfight_skill_link"></string>
+
+    <string name="ability_name_multitype">Multitype</string>
+    <string name="ability_infight_multitype">Le type et la forme du Pokémon changent en fonction de la plaque qu\'il porte.</string>
+    <string name="ability_outfight_multitype"></string>
+
+    <string name="ability_name_normalize">Normalise</string>
+    <string name="ability_infight_normalize">Toutes les attaques du Pokémon sont considérées comme étant de type Normal.</string>
+    <string name="ability_outfight_normalize"></string>
+
+    <string name="ability_name_dry_skin">Peau Sèche</string>
+    <string name="ability_infight_dry_skin">Les attaques de type eau soignent le Pokémon, qui regagne 1/4 de ses PV totaux. Par temps de pluie, il gagne 1/8ème de ses PV par tour. Les attaques de type feu infligent 25% de dégâts en plus. Par temps ensoleillé, il perd 1/8ème de ses PV par tour.</string>
+    <string name="ability_outfight_dry_skin"></string>
+
+    <string name="ability_name_tangled_feet">Pied Confus</string>
+    <string name="ability_infight_tangled_feet">Statistiques : Augmente l\'esquive de 20% lorsque le Pokémon est confus.</string>
+    <string name="ability_outfight_tangled_feet"></string>
+
+    <string name="ability_name_quick_feet">Pied Véloce</string>
+    <string name="ability_infight_quick_feet">Statistiques : Augmente la vitesse de 50% lorsque le Pokémon subit une altération d\'état.</string>
+    <string name="ability_outfight_quick_feet"></string>
+
+    <string name="ability_name_iron_fist">Poing de Fer</string>
+    <string name="ability_infight_iron_fist">Augmente de 20% la puissance des attaques de \"Poing\".</string>
+    <string name="ability_outfight_iron_fist"></string>
+
+    <string name="ability_name_forewarn">Prédiction</string>
+    <string name="ability_infight_forewarn">Alerte le Pokémon de l\'attaque la plus puissante du Pokémon adverse.</string>
+    <string name="ability_outfight_forewarn"></string>
+
+    <string name="ability_name_scrappy">Querelleur</string>
+    <string name="ability_infight_scrappy">Permet de toucher les Pokémon de type Spectre avec des attaques de type Normal ou Combat.</string>
+    <string name="ability_outfight_scrappy"></string>
+
+    <string name="ability_name_snow_cloak">Rideau Neige</string>
+    <string name="ability_infight_snow_cloak">Statistiques : Augmente l\'esquive de 20% par temps de grêle. Immunise les Pokémon n\'ayant pas le type glace contre la grêle.</string>
+    <string name="ability_outfight_snow_cloak"></string>
+
+    <string name="ability_name_rivalry">Rivalité</string>
+    <string name="ability_infight_rivalry">Statistiques : Augmente l\'attaque et l\'attaque spéciale de 25% si le Pokémon adverse est de même sexe. Les diminue s\'il est de sexe opposé.</string>
+    <string name="ability_outfight_rivalry"></string>
+
+    <string name="ability_name_simple">Simple</string>
+    <string name="ability_infight_simple">Double les effets des modifications de statistiques, positives ou négatives.</string>
+    <string name="ability_outfight_simple"></string>
+
+    <string name="ability_name_sniper">Sniper</string>
+    <string name="ability_infight_sniper">Triple la puissance des coups critiques.</string>
+    <string name="ability_outfight_sniper"></string>
+
+    <string name="ability_name_poison_heal">Soin Poison</string>
+    <string name="ability_infight_poison_heal">Le Pokémon récupère 1/8è de ses PV par tour lors d\'un empoisonnement.</string>
+    <string name="ability_outfight_poison_heal">Le Pokémon empoisonné perd tout de même ses PV lorsque son dresseur se déplace.*</string>
+
+    <string name="ability_name_solid_rock">Solide Roc</string>
+    <string name="ability_infight_solid_rock">Retire 1/4 des dégâts subits lors d\'une attaque super efficace.</string>
+    <string name="ability_outfight_solid_rock"></string>
+
+    <string name="ability_name_technician">Technicien</string>
+    <string name="ability_infight_technician">Augmente de 50% la puissance des attaques faibles (de puissance inférieure ou égale à 60).</string>
+    <string name="ability_outfight_technician"></string>
+
+    <string name="ability_name_download">Télécharge</string>
+    <string name="ability_infight_download">Statistiques : Augmente l\'attaque ou l\'attaque spéciale du Pokémon, selon la statistique de défense la plus faible du Pokémon adverse.</string>
+    <string name="ability_outfight_download"></string>
+
+    <string name="ability_name_reckless">Téméraire</string>
+    <string name="ability_infight_reckless">Augmente de 20% la puissance des attaques infligeant des dégâts de recul.</string>
+    <string name="ability_outfight_reckless"></string>
+
+    <string name="ability_name_defiant">Acharné</string>
+    <string name="ability_infight_defiant">Statistiques : Monte l\'Attaque du Pokémon de deux niveau si l\'une de ses statistiques est baissée par l\'adversaire.</string>
+    <string name="ability_outfight_defiant"></string>
+
+    <string name="ability_name_analytic">Analyste</string>
+    <string name="ability_infight_analytic">Si le Pokémon frappe en dernier durant le tour, la puissance de son attaque est augmentée de 30%.</string>
+    <string name="ability_outfight_analytic"></string>
+
+    <string name="ability_name_weak_armor">Armurouillée</string>
+    <string name="ability_infight_weak_armor">Statistiques : Le Pokémon touché par une attaque physique voit sa défense diminuer d\'un niveau et sa vitesse augmenter d\'un niveau.</string>
+    <string name="ability_outfight_weak_armor"></string>
+
+    <string name="ability_name_sand_rush">Baigne Sable</string>
+    <string name="ability_infight_sand_rush">Statistiques : Double la Vitesse du Pokémon lors d\'une tempête de sable. Immunise contre les dégâts de la tempête.</string>
+    <string name="ability_outfight_sand_rush"></string>
+
+    <string name="ability_name_big_pecks">Coeur de Coq</string>
+    <string name="ability_infight_big_pecks">Empêche la défense du Pokémon d\'être baissée par les attaques adverses.</string>
+    <string name="ability_outfight_big_pecks"></string>
+
+    <string name="ability_name_justified">Coeur Noble</string>
+    <string name="ability_infight_justified">Statistiques : Si le Pokémon est touché par une attaque de type ténèbres, son attaque augmente d\'un niveau.</string>
+    <string name="ability_outfight_justified"></string>
+
+    <string name="ability_name_healer">Coeur Soin</string>
+    <string name="ability_infight_healer">À la fin de chaque tour, le Pokémon a 30% de chance de guérir ses alliés d\'une altération d\'état en combat double ou triple.</string>
+    <string name="ability_outfight_healer"></string>
+
+    <string name="ability_name_contrary">Contestation</string>
+    <string name="ability_infight_contrary">Statistiques : Inverse les effets des attaques modifiant les statistiques.</string>
+    <string name="ability_outfight_contrary"></string>
+
+    <string name="ability_name_cursed_body">Corps Maudit</string>
+    <string name="ability_infight_cursed_body">Toute attaque portée par l\'adversaire a 30% de chance de s\'entraver.</string>
+    <string name="ability_outfight_cursed_body"></string>
+
+    <string name="ability_name_defeatist">Défaitiste</string>
+    <string name="ability_infight_defeatist">Statistiques : Divise par deux l\'attaque et l\'attaque spéciale du Pokémon s\'il a moins de la moitié de ses PV totaux.</string>
+    <string name="ability_outfight_defeatist"></string>
+
+    <string name="ability_name_overcoat">Envelocape</string>
+    <string name="ability_infight_overcoat">Immunise contre les dégâts causés par la grêle et les tempêtes de sable.</string>
+    <string name="ability_outfight_overcoat"></string>
+
+    <string name="ability_name_iron_barbs">Épine de Fer</string>
+    <string name="ability_infight_iron_barbs">Retire 1/8ème de ses PV à l\'adversaire lorsque celui-ci porte une attaque physique.</string>
+    <string name="ability_outfight_iron_barbs"></string>
+
+    <string name="ability_name_prankster">Farceur</string>
+    <string name="ability_infight_prankster">Augmente la priorité des attaques de statut d\'un niveau.</string>
+    <string name="ability_outfight_prankster"></string>
+
+    <string name="ability_name_sand_force">Force Sable</string>
+    <string name="ability_infight_sand_force">Lors d\'une tempête de sable, la puissance des attaques de type acier, roche et sol augmente de 30 %.</string>
+    <string name="ability_outfight_sand_force"></string>
+
+    <string name="ability_name_friend_guard">Garde Amie</string>
+    <string name="ability_infight_friend_guard">Réduire de 25% les dégâts infligés aux alliés en combat double ou triple.</string>
+    <string name="ability_outfight_friend_guard"></string>
+
+    <string name="ability_name_heavy_metal">Heavy Metal</string>
+    <string name="ability_infight_heavy_metal">Double la masse du Pokémon.</string>
+    <string name="ability_outfight_heavy_metal"></string>
+
+    <string name="ability_name_sap_sipper">Herbivore</string>
+    <string name="ability_infight_sap_sipper">Statistiques : Si le Pokémon est touché par une attaque de type plante, son attaque augmente d\'un niveau.</string>
+    <string name="ability_outfight_sap_sipper"></string>
+
+    <string name="ability_name_illusion">Illusion</string>
+    <string name="ability_infight_illusion">Lorsqu\'il entre en combat, le Pokémon prend l\'apparence du dernier Pokémon de l\'équipe.</string>
+    <string name="ability_outfight_illusion"></string>
+
+    <string name="ability_name_imposter">Imposteur</string>
+    <string name="ability_infight_imposter">Le Pokémon entrant en combat prend automatiquement l\'apparence du Pokémon adverse.</string>
+    <string name="ability_outfight_imposter"></string>
+
+    <string name="ability_name_moxie">Impudence</string>
+    <string name="ability_infight_moxie">Statistiques : Monte l\'attaque du Pokémon d\'un niveau lorsqu\'il met un adversaire K.O.</string>
+    <string name="ability_outfight_moxie"></string>
+
+    <string name="ability_name_infiltrator">Infiltration</string>
+    <string name="ability_infight_infiltrator">Empêche les attaques de protection adverses de fonctionner. (N\'influe pas sur Détection et Abri.)</string>
+    <string name="ability_outfight_infiltrator"></string>
+
+    <string name="ability_name_light_metal">Light Metal</string>
+    <string name="ability_infight_light_metal">Divise par deux la masse du Pokémon.</string>
+    <string name="ability_outfight_light_metal"></string>
+
+    <string name="ability_name_moody">Lunatique</string>
+    <string name="ability_infight_moody">Statistiques : Aléatoirement, à la fin de chaque tour, une statistique du Pokémon augmente de deux niveaux, et une autre baisse d\'un niveau (précision et esquive comprises).</string>
+    <string name="ability_outfight_moody"></string>
+
+    <string name="ability_name_magic_bounce">Miroir Magik</string>
+    <string name="ability_infight_magic_bounce">Retourne les attaques de statut contre l\'adversaire.</string>
+    <string name="ability_outfight_magic_bounce"></string>
+
+    <string name="ability_name_zen_mode">Mode Transe</string>
+    <string name="ability_infight_zen_mode">Le Pokémon change de forme et modifie la répartition de ses statistiques lorsque ses PV sont inférieurs à 50%.</string>
+    <string name="ability_outfight_zen_mode"></string>
+
+    <string name="ability_name_mummy">Momie</string>
+    <string name="ability_infight_mummy">Si le Pokémon subit une attaque physique, le talent de l\'adversaire devient \"Momie\". Ce talent est sans effet en elle-même.</string>
+    <string name="ability_outfight_mummy"></string>
+
+    <string name="ability_name_multiscale">Multiécaille</string>
+    <string name="ability_infight_multiscale">Si le Pokémon possède 100% de ses PV, alors les dégâts infligés par l\'adversaire sont divisés par deux.</string>
+    <string name="ability_outfight_multiscale"></string>
+
+    <string name="ability_name_wonder_skin">Peau Miracle</string>
+    <string name="ability_infight_wonder_skin">50% de chance de faire échouer les attaques de statut portées par l\'adversaire.</string>
+    <string name="ability_outfight_wonder_skin"></string>
+
+    <string name="ability_name_rattled">Phobique</string>
+    <string name="ability_infight_rattled">Statistiques : Si le Pokémon est touché par une attaque de type insecte, spectre ou ténèbres, sa vitesse augmente d\'un niveau.</string>
+    <string name="ability_outfight_rattled"></string>
+
+    <string name="ability_name_pickpocket">Pickpocket</string>
+    <string name="ability_infight_pickpocket">Si le Pokémon subit une attaque physique, il récupère l\'objet tenu par son adversaire.</string>
+    <string name="ability_outfight_pickpocket"></string>
+
+    <string name="ability_name_flare_boost">Rage Brûlure</string>
+    <string name="ability_infight_flare_boost">Statistiques : Augmente l\'attaque spéciale du Pokémon de 50% en cas de brûlure.</string>
+    <string name="ability_outfight_flare_boost"></string>
+
+    <string name="ability_name_toxic_boost">Rage Poison</string>
+    <string name="ability_infight_toxic_boost">Statistiques : Augmente l\'attaque du Pokémon de 50% en cas d\'empoisonnement.</string>
+    <string name="ability_outfight_toxic_boost"></string>
+
+    <string name="ability_name_harvest">Récolte</string>
+    <string name="ability_infight_harvest">Une baie consommée par le Pokémon a 50% de chances d\'être récupérée à la fin de chaque tour.</string>
+    <string name="ability_outfight_harvest"></string>
+
+    <string name="ability_name_regenerator">Régé-Force</string>
+    <string name="ability_infight_regenerator">Restaure 1/3 des PV totaux si le Pokémon est retiré du combat.</string>
+    <string name="ability_outfight_regenerator"></string>
+
+    <string name="ability_name_sheer_force">Sans Limite</string>
+    <string name="ability_infight_sheer_force">Augmente de 30% la puissance des attaques pouvant avoir un effet secondaire. L\'effet secondaire est annulé.</string>
+    <string name="ability_outfight_sheer_force"></string>
+
+    <string name="ability_name_telepathy">Télépathe</string>
+    <string name="ability_infight_telepathy">Anticipe et évite les attaques des alliés en combat double ou triple.</string>
+    <string name="ability_outfight_telepathy"></string>
+
+    <string name="ability_name_unnerve">Tension</string>
+    <string name="ability_infight_unnerve">Empêche l\'adversaire de consommer sa baie.</string>
+    <string name="ability_outfight_unnerve"></string>
+
+    <string name="ability_name_teravolt">Téra-Voltage</string>
+    <string name="ability_infight_teravolt">Peut toucher un Pokémon adverse malgré son talent.</string>
+    <string name="ability_outfight_teravolt"></string>
+
+    <string name="ability_name_poison_touch">Toxitouche</string>
+    <string name="ability_infight_poison_touch">Peut empoisonner l\'adversaire après lui avoir porté une attaque physique.</string>
+    <string name="ability_outfight_poison_touch"></string>
+
+    <string name="ability_name_turboblaze">TurboBrasier</string>
+    <string name="ability_infight_turboblaze">Peut toucher un Pokémon adverse malgré son talent.</string>
+    <string name="ability_outfight_turboblaze"></string>
+
+    <string name="ability_name_victory_star">Victorieux</string>
+    <string name="ability_infight_victory_star">Statistiques : Monte de 10% la précision des alliés en combat double ou triple.</string>
+    <string name="ability_outfight_victory_star"></string>
+
+    <string name="ability_name_gale_wings">Ailes Bourrasque</string>
+    <string name="ability_infight_gale_wings">Augmente la priorité des capacités de type vol.</string>
+    <string name="ability_outfight_gale_wings"></string>
+
+    <string name="ability_name_parental_bond">Amour Filial</string>
+    <string name="ability_infight_parental_bond">Permet au lanceur de porter deux coups par tour au lieu d\'un.</string>
+    <string name="ability_outfight_parental_bond"></string>
+
+    <string name="ability_name_aroma_veil">Aroma-Voile</string>
+    <string name="ability_infight_aroma_veil">Protège les Pokémon alliés des capacités qui ont un effet sur l\'état mental.</string>
+    <string name="ability_outfight_aroma_veil"></string>
+
+    <string name="ability_name_fairy_aura">Aura Féérique</string>
+    <string name="ability_infight_fairy_aura">Augmente la puissance des attaques de type fée des Pokémon présents sur le terrain.</string>
+    <string name="ability_outfight_fairy_aura"></string>
+
+    <string name="ability_name_aura_break">Aura Inversée</string>
+    <string name="ability_infight_aura_break">Inverse les effets des talents Aura.</string>
+    <string name="ability_outfight_aura_break"></string>
+
+    <string name="ability_name_dark_aura">Aura Ténébreuse</string>
+    <string name="ability_infight_dark_aura">Augmente la puissance des attaques de type ténèbres des Pokémon présents sur le terrain.</string>
+    <string name="ability_outfight_dark_aura"></string>
+
+    <string name="ability_name_cheek_pouch">Bajoues</string>
+    <string name="ability_infight_cheek_pouch">Lorsque le Pokémon mange une Baie, il obtient ses effets et regagne des PV en prime.</string>
+    <string name="ability_outfight_cheek_pouch"></string>
+
+    <string name="ability_name_competitive">Battant</string>
+    <string name="ability_infight_competitive">Augmente l\'Attaque Spéciale par deux niveaux lorsque n\'importe quelle stat est baissée par un Pokémon adverse.</string>
+    <string name="ability_outfight_competitive"></string>
+
+    <string name="ability_name_stance_change">Déclic Tactique</string>
+    <string name="ability_infight_stance_change">Change la forme du Pokémon selon le combat.</string>
+    <string name="ability_outfight_stance_change"></string>
+
+    <string name="ability_name_flower_veil">Flora-Voile</string>
+    <string name="ability_infight_flower_veil">Empêche la diminution des statistiques des alliés de type plante par les Pokémon adverses.</string>
+    <string name="ability_outfight_flower_veil"></string>
+
+    <string name="ability_name_sweet_veil">Gluco-Voile</string>
+    <string name="ability_infight_sweet_veil">Empêche les Pokémon alliés de s\'endormir.</string>
+    <string name="ability_outfight_sweet_veil"></string>
+
+    <string name="ability_name_tough_claws">Griffe Dure</string>
+    <string name="ability_infight_tough_claws">Augmente la puissance des attaques à base de griffe.</string>
+    <string name="ability_outfight_tough_claws"></string>
+
+    <string name="ability_name_magician">Magicien</string>
+    <string name="ability_infight_magician">Vole l\'objet d\'une cible après l\'avoir touché avec une attaque directe.</string>
+    <string name="ability_outfight_magician"></string>
+
+    <string name="ability_name_mega_launcher">Méga Blaster</string>
+    <string name="ability_infight_mega_launcher">Un Pokémon doté de ce talent verra la puissance de ses capacités d\'aura augmentée.</string>
+    <string name="ability_outfight_mega_launcher"></string>
+
+    <string name="ability_name_bulletproof">Pare-Balles</string>
+    <string name="ability_infight_bulletproof">Protège contre les capacités balles et bombes, par exemple Balle Graine ou Canon Graine.</string>
+    <string name="ability_outfight_bulletproof"></string>
+
+    <string name="ability_name_aerilate">Peau Céleste</string>
+    <string name="ability_infight_aerilate">Transforme les capacités de type normal en type vol.</string>
+    <string name="ability_outfight_aerilate"></string>
+
+    <string name="ability_name_pixilate">Peau Féérique</string>
+    <string name="ability_infight_pixilate">Transforme les capacités de type normal en type fée.</string>
+    <string name="ability_outfight_pixilate"></string>
+
+    <string name="ability_name_refrigerate">Peau Gelée</string>
+    <string name="ability_infight_refrigerate">Transforme les capacités de type normal en type glace.</string>
+    <string name="ability_outfight_refrigerate"></string>
+
+    <string name="ability_name_gooey">Poisseux</string>
+    <string name="ability_infight_gooey">Baisse la Vitesse des Pokémon qui touchent ce Pokémon avec une attaque directe.</string>
+    <string name="ability_outfight_gooey"></string>
+
+    <string name="ability_name_strong_jaw">Prognathe</string>
+    <string name="ability_infight_strong_jaw">Augmente la puissance des attaques à base de morsures.</string>
+    <string name="ability_outfight_strong_jaw"></string>
+
+    <string name="ability_name_protean">Protéen</string>
+    <string name="ability_infight_protean">Change le type du Pokémon en celui de toute capacité qu\'il utilise.</string>
+    <string name="ability_outfight_protean"></string>
+
+    <string name="ability_name_symbiosis">Symbiose</string>
+    <string name="ability_infight_symbiosis">Passe un objet tenu à un Pokémon allié lorsque l\'allié utilise son objet.</string>
+    <string name="ability_outfight_symbiosis"></string>
+
+    <string name="ability_name_fur_coat">Toison Épaisse</string>
+    <string name="ability_infight_fur_coat">Divise par deux les dégâts reçus lors d\'une attaque physique.</string>
+    <string name="ability_outfight_fur_coat"></string>
+
+    <string name="ability_name_grass_pelt">Toison Herbue</string>
+    <string name="ability_infight_grass_pelt">Augmente la Défense lorsque Champ Herbu est en vigueur.</string>
+    <string name="ability_outfight_grass_pelt"></string>
+
+</resources>

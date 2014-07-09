@@ -10,12 +10,13 @@ def main(data):
         row = row.split("\t")
         talent = {
             "name": row[0],
-            "in_fight": row[2]
+            "eng_name": row[1],
+            "in_fight": row[2].replace("\"", "\\\"")
         }
         
         
         if len(row) > 3 and row[3] != "—":
-            talent["out_fight"] = row[3]
+            talent["out_fight"] = row[3].replace("\"", "\\\"")
         else:
             talent["out_fight"] = ""
         
@@ -23,8 +24,16 @@ def main(data):
     
     
     for talent in talents:
-        name = talent["name"].strip().replace("é", "e").replace("ê", "e").replace("è", "e").replace("É", "E").replace("-", "_").replace(" ", "_").replace(".", "").upper()
-        print '    {} ("{}", "{}", "{}"),'.format(name, talent["name"], talent["in_fight"], talent["out_fight"])
+        namefr = talent["name"].strip().replace("é", "e").replace("ê", "e").replace("è", "e").replace("É", "E").replace("û", "U").replace("-", "_").replace(" ", "_").replace(".", "").upper()
+        name = talent["eng_name"].strip().replace("-", "_").replace(" ", "_").replace(".", "").upper()
+        # Abilities.java
+        # print '    {0} (R.string.ability_name_{1}, R.string.ability_infight_{1}, R.string.ability_outfight_{1}),'.format(name, name.lower())
+        
+        # abilities.xml - fr
+        print "    <string name=\"ability_name_{}\">{}</string>".format(name.lower(), talent["name"].strip())
+        print "    <string name=\"ability_infight_{}\">{}</string>".format(name.lower(), talent["in_fight"].replace("'", "\\'").strip())
+        print "    <string name=\"ability_outfight_{}\">{}</string>".format(name.lower(), talent["out_fight"].replace("'", "\\'").strip())
+        print ""
         
     
 data = """Absentéisme 	Truant 	Le Pokémon n'attaque qu'un tour sur deux. 	—
