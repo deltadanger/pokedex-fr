@@ -119,7 +119,7 @@ class MainPageParser(HTMLParser):
         self.data = {}
     
     def handle_starttag(self, tag, attrs):
-        if tag == "table" and getAttr(attrs, "class") == "tableaustandard sortable":
+        if tag == "table" and getAttr(attrs, "class") == "sortable roundy":
             self.inTable = True
         
         if self.inTable and tag == "tr":
