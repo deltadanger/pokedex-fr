@@ -14,7 +14,7 @@ public class Pokemon {
             Type.NONE, 
             Type.NONE, 
             new ArrayList<Ability>(){{
-                this.add(Ability.ERREUR);
+                this.add(Ability.ERROR);
             }}, 0, 0, 0, 0, 0, 0){{
                 this.evolutions = null;
                 this.catchRate = 0;
