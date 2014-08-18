@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class AdvancedManager(models.Manager):
     """Contains advanced functions, but nothing related to StandardLookup tables, such as get_if_exist(**kwargs)"""
     
@@ -63,7 +64,7 @@ class Pokemon(BaseModel, AttributeValues):
     type2 = models.ForeignKey(PokemonType, related_name="type2", null=True)
     abilities = models.ManyToManyField(Ability)
     
-    sub_evolution = models.ForeignKey("Pokemon", null=True)
+    ancestor = models.ForeignKey("Pokemon", null=True)
     evolution_path = models.CharField(max_length=100, null=True) # Contains resource id like evolution_path_0150MX 
 
     size = models.FloatField()
@@ -73,8 +74,34 @@ class Pokemon(BaseModel, AttributeValues):
     gender = models.FloatField()
     hatch = models.IntegerField()
     eggGroup = models.ManyToManyField(EggGroup)
-
+    
     def __repr__(self):
-        return self.name + "(" + self.number + ")" + "[" + self.type1 + "," + self.type2 + "] [Attrs: " + self.size + "," + self.weight + "," + self.catchRate + "," + self.gender + "," + self.hatch + "]" 
-
+        type1 = self.type1 if hasattr(self, "type1") else "None"
+        type2 = self.type2 if hasattr(self, "type1") else "None"
+        eggGroups = self.eggGroups.all().values_list("name", flat=True) if hasattr(self, "type1") else []
+        ancestor = self.ancestor if hasattr(self, "type1") else "None"
+        abilities = self.abilities.all().values_list("name", flat=True) if hasattr(self, "type1") else []
+        
+        return "{name} ({number}) [{type1},{type2}] [Attrs: {size},{weight},{cachRate},{gender},{hatch},{eggGroup}] [Stat: {life},{attack},{defense},{sp_attack},{sp_defense},{speed}] [Evo: {ancestor} ({path})] [Abilities: {abilities}]".format(
+            name=self.name,
+            number=self.number,
+            type1=type1,
+            type2=type2,
+            size=self.size,
+            weight=self.weight,
+            cachRate=self.catchRate,
+            gender=self.gender,
+            hatch=self.hatch,
+            eggGroup=eggGroups,
+            life=self.life,
+            attack=self.attack,
+            defense=self.defense,
+            sp_attack=self.sp_attack,
+            sp_defense=self.sp_defense,
+            speed=self.speed,
+            ancestor=ancestor,
+            path=self.evolution_path,
+            abilities=abilities
+        )
+    
 
