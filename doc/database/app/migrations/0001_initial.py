@@ -57,7 +57,7 @@ class Migration(SchemaMigration):
             ('number', self.gf('django.db.models.fields.IntegerField')()),
             ('type1', self.gf('django.db.models.fields.related.ForeignKey')(related_name='type1', to=orm['app.PokemonType'])),
             ('type2', self.gf('django.db.models.fields.related.ForeignKey')(related_name='type2', null=True, to=orm['app.PokemonType'])),
-            ('sub_evolution', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['app.Pokemon'], null=True)),
+            ('ancestor', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['app.Pokemon'], null=True)),
             ('evolution_path', self.gf('django.db.models.fields.CharField')(max_length=100, null=True)),
             ('size', self.gf('django.db.models.fields.FloatField')()),
             ('weight', self.gf('django.db.models.fields.FloatField')()),
@@ -134,6 +134,7 @@ class Migration(SchemaMigration):
         u'app.pokemon': {
             'Meta': {'object_name': 'Pokemon'},
             'abilities': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['app.Ability']", 'symmetrical': 'False'}),
+            'ancestor': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['app.Pokemon']", 'null': 'True'}),
             'attack': ('django.db.models.fields.IntegerField', [], {}),
             'catchRate': ('django.db.models.fields.IntegerField', [], {}),
             'defense': ('django.db.models.fields.IntegerField', [], {}),
@@ -150,7 +151,6 @@ class Migration(SchemaMigration):
             'sp_attack': ('django.db.models.fields.IntegerField', [], {}),
             'sp_defense': ('django.db.models.fields.IntegerField', [], {}),
             'speed': ('django.db.models.fields.IntegerField', [], {}),
-            'sub_evolution': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['app.Pokemon']", 'null': 'True'}),
             'type1': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'type1'", 'to': u"orm['app.PokemonType']"}),
             'type2': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'type2'", 'null': 'True', 'to': u"orm['app.PokemonType']"}),
             'weight': ('django.db.models.fields.FloatField', [], {})
