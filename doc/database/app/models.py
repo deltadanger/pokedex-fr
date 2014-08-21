@@ -37,16 +37,16 @@ class PokemonType(BaseModel):
     name = models.CharField(max_length=100) # Resource id
     image = models.CharField(max_length=100) # Resource id
     
-    def __repr__(self):
+    def __str__(self):
         return self.name
 
 class Ability(BaseModel):
-    name = models.CharField(max_length=100) # Resource id
-    in_fight_description = models.CharField(max_length=100, null=True) # Resource id
-    out_fight_description = models.CharField(max_length=100, null=True) # Resource id
+    # Identifier used to retrieve the resource idsResource id
+    identifier = models.CharField(max_length=100)
+    # Resource ids will be in the form "ability_name_<identifier>", "ability_infight_<identifier>", "ability_outfight_<identifier>"
     
-    def __repr__(self):
-        return self.name
+    def __str__(self):
+        return self.identifier
 
 class EVBonus(BaseModel, AttributeValues):
     pass
@@ -54,7 +54,7 @@ class EVBonus(BaseModel, AttributeValues):
 class EggGroup(BaseModel):
     name = models.CharField(max_length=100) # Resource id
     
-    def __repr__(self):
+    def __str__(self):
         return self.name
 
 class Pokemon(BaseModel, AttributeValues):
@@ -65,34 +65,38 @@ class Pokemon(BaseModel, AttributeValues):
     abilities = models.ManyToManyField(Ability)
     
     ancestor = models.ForeignKey("Pokemon", null=True)
-    evolution_path = models.CharField(max_length=100, null=True) # Contains resource id like evolution_path_0150MX 
+    evolution_path = models.CharField(max_length=100, null=True)
 
     size = models.FloatField()
     weight = models.FloatField()
     ev = models.ForeignKey(EVBonus)
-    catchRate = models.IntegerField()
+    catch_rate = models.IntegerField()
     gender = models.FloatField()
     hatch = models.IntegerField()
-    eggGroup = models.ManyToManyField(EggGroup)
+    egg_group = models.ManyToManyField(EggGroup)
     
-    def __repr__(self):
-        type1 = self.type1 if hasattr(self, "type1") else "None"
-        type2 = self.type2 if hasattr(self, "type1") else "None"
-        eggGroups = self.eggGroups.all().values_list("name", flat=True) if hasattr(self, "type1") else []
-        ancestor = self.ancestor if hasattr(self, "type1") else "None"
-        abilities = self.abilities.all().values_list("name", flat=True) if hasattr(self, "type1") else []
+    def __str__(self):
+        type1 = "None"
+        type2 = "None"
+        ancestor = "None"
         
-        return "{name} ({number}) [{type1},{type2}] [Attrs: {size},{weight},{cachRate},{gender},{hatch},{eggGroup}] [Stat: {life},{attack},{defense},{sp_attack},{sp_defense},{speed}] [Evo: {ancestor} ({path})] [Abilities: {abilities}]".format(
+        if hasattr(self, "type1"): type1 = self.type1 
+        if hasattr(self, "type1"): type2 = self.type2
+        if hasattr(self, "ancestor") and self.ancestor: ancestor = self.ancestor.name
+        abilities = self.abilities.all().values_list("identifier", flat=True)
+        egg_group = self.egg_group.all().values_list("name", flat=True)
+        
+        return "{name} ({number}) [{type1},{type2}] [Attrs: {size},{weight},{catch_rate},{gender},{hatch},{egg_group}] [Stat: {life},{attack},{defense},{sp_attack},{sp_defense},{speed}] [Evo: {ancestor} ({path})] [Abilities: {abilities}]".format(
             name=self.name,
             number=self.number,
             type1=type1,
             type2=type2,
             size=self.size,
             weight=self.weight,
-            cachRate=self.catchRate,
+            catch_rate=self.catch_rate,
             gender=self.gender,
             hatch=self.hatch,
-            eggGroup=eggGroups,
+            egg_group=egg_group,
             life=self.life,
             attack=self.attack,
             defense=self.defense,
@@ -103,5 +107,4 @@ class Pokemon(BaseModel, AttributeValues):
             path=self.evolution_path,
             abilities=abilities
         )
-    
-
+        

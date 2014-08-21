@@ -19,9 +19,7 @@ class Migration(SchemaMigration):
         # Adding model 'Ability'
         db.create_table(u'app_ability', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('in_fight_description', self.gf('django.db.models.fields.CharField')(max_length=100, null=True)),
-            ('out_fight_description', self.gf('django.db.models.fields.CharField')(max_length=100, null=True)),
+            ('identifier', self.gf('django.db.models.fields.CharField')(max_length=100)),
         ))
         db.send_create_signal(u'app', ['Ability'])
 
@@ -62,7 +60,7 @@ class Migration(SchemaMigration):
             ('size', self.gf('django.db.models.fields.FloatField')()),
             ('weight', self.gf('django.db.models.fields.FloatField')()),
             ('ev', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['app.EVBonus'])),
-            ('catchRate', self.gf('django.db.models.fields.IntegerField')()),
+            ('catch_rate', self.gf('django.db.models.fields.IntegerField')()),
             ('gender', self.gf('django.db.models.fields.FloatField')()),
             ('hatch', self.gf('django.db.models.fields.IntegerField')()),
         ))
@@ -76,13 +74,13 @@ class Migration(SchemaMigration):
         ))
         db.create_unique(u'app_pokemon_abilities', ['pokemon_id', 'ability_id'])
 
-        # Adding M2M table for field eggGroup on 'Pokemon'
-        db.create_table(u'app_pokemon_eggGroup', (
+        # Adding M2M table for field egg_group on 'Pokemon'
+        db.create_table(u'app_pokemon_egg_group', (
             ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
             ('pokemon', models.ForeignKey(orm[u'app.pokemon'], null=False)),
             ('egggroup', models.ForeignKey(orm[u'app.egggroup'], null=False))
         ))
-        db.create_unique(u'app_pokemon_eggGroup', ['pokemon_id', 'egggroup_id'])
+        db.create_unique(u'app_pokemon_egg_group', ['pokemon_id', 'egggroup_id'])
 
 
     def backwards(self, orm):
@@ -104,17 +102,15 @@ class Migration(SchemaMigration):
         # Removing M2M table for field abilities on 'Pokemon'
         db.delete_table('app_pokemon_abilities')
 
-        # Removing M2M table for field eggGroup on 'Pokemon'
-        db.delete_table('app_pokemon_eggGroup')
+        # Removing M2M table for field egg_group on 'Pokemon'
+        db.delete_table('app_pokemon_egg_group')
 
 
     models = {
         u'app.ability': {
             'Meta': {'object_name': 'Ability'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'in_fight_description': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'out_fight_description': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True'})
+            'identifier': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
         u'app.egggroup': {
             'Meta': {'object_name': 'EggGroup'},
@@ -136,9 +132,9 @@ class Migration(SchemaMigration):
             'abilities': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['app.Ability']", 'symmetrical': 'False'}),
             'ancestor': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['app.Pokemon']", 'null': 'True'}),
             'attack': ('django.db.models.fields.IntegerField', [], {}),
-            'catchRate': ('django.db.models.fields.IntegerField', [], {}),
+            'catch_rate': ('django.db.models.fields.IntegerField', [], {}),
             'defense': ('django.db.models.fields.IntegerField', [], {}),
-            'eggGroup': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['app.EggGroup']", 'symmetrical': 'False'}),
+            'egg_group': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['app.EggGroup']", 'symmetrical': 'False'}),
             'ev': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['app.EVBonus']"}),
             'evolution_path': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True'}),
             'gender': ('django.db.models.fields.FloatField', [], {}),
