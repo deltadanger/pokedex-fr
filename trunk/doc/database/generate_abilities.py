@@ -32,9 +32,7 @@ def main(data):
         # print '    {0} (R.string.ability_name_{1}, R.string.ability_infight_{1}, R.string.ability_outfight_{1}),'.format(name, name.lower())
         
         # Database
-        Ability.objects.get_or_create(name="ability_name_{}".format(name.lower()),
-                                      in_fight_description="ability_infight_{}".format(talent["in_fight"].replace("'", "\\'").strip()),
-                                      out_fight_description="ability_outfight_{}".format(talent["out_fight"].replace("'", "\\'").strip()))
+        Ability.objects.get_or_create(identifier=name.lower())
         
         # abilities.xml - fr
 #         print "    <string name=\"ability_name_{}\">{}</string>".format(name.lower(), namefr)
