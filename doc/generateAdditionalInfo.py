@@ -54,46 +54,46 @@ def main(list, name_match):
     # name = "Kirlia"
     # info = list[name]
         
-        weight = info["weight"].replace("kg", "").replace(",", ".")
+        # weight = info["weight"].replace("kg", "").replace(",", ".")
         
-        hatch = -1
-        match = re.match("\d+ cycles - (\d+) pas", info["hatch"])
-        if match:
-            hatch = match.group(1)
+        # hatch = -1
+        # match = re.match("\d+ cycles - (\d+) pas", info["hatch"])
+        # if match:
+            # hatch = match.group(1)
         
-        gender = -1
-        match = re.match("([\d\.]+)% femelle; [\d\.]+% male", info["gender"])
-        if match:
-            gender = match.group(1)
+        # gender = -1
+        # match = re.match("([\d\.]+)% femelle; [\d\.]+% male", info["gender"])
+        # if match:
+            # gender = match.group(1)
         
-        evs = ""
-        for ev in re.split("[;,]", info["ev"]):
-            ev_match = re.match("\+(\d) (.*)", ev)
-            if ev_match:
-                evs += "this.append({}, R.string.{});".format(ev_match.group(1), ev_name_matching[ev_match.group(2)])
+        # evs = ""
+        # for ev in re.split("[;,]", info["ev"]):
+            # ev_match = re.match("\+(\d) (.*)", ev)
+            # if ev_match:
+                # evs += "this.append({}, R.string.{});".format(ev_match.group(1), ev_name_matching[ev_match.group(2)])
         
-        egg_groups = []
-        for egg_group in info["egg"].split("/"):
-            egg_groups.append("EggGroup." + egg_group_matching[egg_group])
+        # egg_groups = []
+        # for egg_group in info["egg"].split("/"):
+            # egg_groups.append("EggGroup." + egg_group_matching[egg_group])
         
-        size = info["size"].replace("m", "").replace(",", ".")
+        # size = info["size"].replace("m", "").replace(",", ".")
         
         
         tree = generate_evolution_tree(info["evolutions"], list)
+        text += str(tree)
         
+        # text += spacing + "p = perName.get(ctx.getString(R.string.name_{name}));\n".format(name=toId(name))
+        # text += spacing + "p.evolutions = " + get_text_from_evolution_tree(tree) + ";\n"
         
-        text += spacing + "p = perName.get(ctx.getString(R.string.name_{name}));\n".format(name=toId(name))
-        text += spacing + "p.evolutions = " + get_text_from_evolution_tree(tree) + ";\n"
-        
-        text += spacing + "p.catchRate = {};\n".format(info["catch"] if info["catch"] else "-1")
-        text += spacing + "p.weight = {}f;\n".format(weight)
-        text += spacing + "p.hatch = {};\n".format(hatch)
-        text += spacing + "p.gender = {}f;\n".format(gender)
-        text += spacing + "p.ev = new SparseIntArray(){{{{{}}}}};\n".format(evs)
-        text += spacing + "p.eggGroup = new EggGroup[]{{{}}};\n".format(",".join(egg_groups))
-        text += spacing + "p.size = {}f;\n\n".format(size)
+        # text += spacing + "p.catchRate = {};\n".format(info["catch"] if info["catch"] else "-1")
+        # text += spacing + "p.weight = {}f;\n".format(weight)
+        # text += spacing + "p.hatch = {};\n".format(hatch)
+        # text += spacing + "p.gender = {}f;\n".format(gender)
+        # text += spacing + "p.ev = new SparseIntArray(){{{{{}}}}};\n".format(evs)
+        # text += spacing + "p.eggGroup = new EggGroup[]{{{}}};\n".format(",".join(egg_groups))
+        # text += spacing + "p.size = {}f;\n\n".format(size)
 
-    print text
+    print tree
 
 def get_text_from_evolution_tree(evolution_tree):
     if not evolution_tree:
