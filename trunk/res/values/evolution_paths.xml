@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="evo_level">Niveau </string>
+    
+    <string name="evo_oval_stone">Gain de niveau en tenant une Pierre Ovale</string>
+    <string name="evo_leafeon">Gain de niveau pres d'une Pierre Mousse</string>
+    <string name="evo_attack_double_hit">Gain de niveau en connaissant l'attaque Coup Double</string>
+    <string name="evo_night_holding_razor_claw">Gain de niveau de nuit en tenant Griffe Rasoir</string>
+    <string name="evo_glaceon">Gain de niveau pres d'une Pierre Glacee</string>
+    <string name="evo_place">Gain de niveau dans un lieu indique</string>
+    <string name="evo_night_holding_razor_fang">Gain de niveau de nuit en tenant Croc Rasoir</string>
+    <string name="evo_sylveon">Gain de niveau avec une attaque Fee et 2 coeurs d'affection a la Poke Recre</string>
+    <string name="evo_mantine">Gain de niveau avec Remoraid dans l'equipe</string>
+    <string name="evo_attack_ancientpower">Gain de niveau en connaissant l'attaque Pouv.Antique</string>
+    
+    <string name="evo_exchange">Echange</string>
+    <string name="evo_exchange_karrablast">Echange avec Carabing</string>
+    <string name="evo_exchange_escavalier">Echange avec Escargaume</string>
+    <string name="evo_exchange_holding_upgrade">Echange en tenant Ameliorator</string>
+    <string name="evo_exchange_holding_electirizer">Echange en tenant Electiriseur</string>
+    <string name="evo_exchange_holding_deep_sea_tooth">Echange en tenant Dent Ocean</string>
+    <string name="evo_exchange_holding_metal_coat">Echange en tenant Peau Metal</string>
+    <string name="evo_exchange_holding_magmarizer">Echange en tenant Magmariseur</string>
+    <string name="evo_exchange_holding_sachet">Echange en tenant Sachet Senteur</string>
+    <string name="evo_exchange_holding_protector">Echange en tenant Protecteur</string>
+    <string name="evo_exchange_holding_dubious_disc">Echange en tenant CD Douteux</string>
+    <string name="evo_exchange_holding_deep_sea_scale">Echange en tenant Ecaille Ocean</string>
+    <string name="evo_exchange_holding_reaper_cloth">Echange en tenant Tissu Fauche</string>
+    <string name="evo_exchange_holding_kings_rock">Echange en tenant Roche Royale</string>
+    <string name="evo_exchange_holding_prism_scale">Echange en tenant Bel'Ecaille</string>
+    <string name="evo_exchange_holding_whipped_dream">Echange en tenant Chantibonbon</string>
+    <string name="evo_exchange_holding_dragon_scale">Echange en tenant Ecaille Draco</string>
+    
+    <string name="evo_happyness">Bonheur</string>
+    <string name="evo_happyness_night">Bonheur, Nuit</string>
+    <string name="evo_happyness_day">Bonheur, Jour</string>
+    
+    <string name="evo_sun_stone">Avec une Pierresoleil</string>
+    <string name="evo_water_stone">Avec une Pierre Eau</string>
+    <string name="evo_fire_stone">Avec une Pierre Feu</string>
+    <string name="evo_moon_stone">Avec une Pierre Lune</string>
+    <string name="evo_dawn_stone_female">Avec une Pierre Aube, Femelle</string>
+    <string name="evo_lightning_stone">Avec une Pierre Foudre</string>
+    <string name="evo_night_stone">Avec une Pierre Nuit</string>
+    <string name="evo_dawn_stone_male">Avec une Pierre Aube, Male</string>
+    <string name="evo_shiny_stone">Avec une Pierre Eclat</string>
+    <string name="evo_herb_stone">Avec une Pierre Plante</string>
+    
+    <string name="evo_20_att_gt_def">Niveau 20, Attaque &gt; Defense</string>
+    <string name="evo_20_att_lt_def">20, Attaque &lt; Defense</string>
+    <string name="evo_20_att=def">20, Attaque = Defense</string>
+    <string name="evo_20_male">Niveau 20, Male</string>
+    <string name="evo_20_female">Niveau 20, Femelle</string>
+    <string name="evo_21_female">Niveau 21, Femelle</string>
+    <string name="evo_39_day">Niveau 39, Jour</string>
+    <string name="evo_39_night">Niveau 39, Nuit</string>
+    <string name="evo_malamar">Niveau 30, en retournant la 3DS</string>
+    <string name="evo_cascoon">Niveau 7, au hasard</string>
+    <string name="evo_50_rain">Niveau 50, quand il pleut</string>
+    <string name="evo_pangoro">Niveau 32, avec un Pokemon dans l'equipe</string>
+    <string name="evo_shedinja">Niveau 20, emplacement libre et Poke Ball dans l'inventaire</string>
+    
+    <string name="evo_attack_mimic">En apprenant l'attaque Copie</string>
+    <string name="evo_attack_rollout">En apprenant l'attaque Roulade</string>
+    <string name="evo_mega">Mega Evolution</string>
+</resources>

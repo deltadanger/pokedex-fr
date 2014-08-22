@@ -4,7 +4,8 @@ from pprint import pprint
 
 def main(data):
 #     generate_pokemons(data)
-    generate_evolutions(data)
+#     generate_evolutions(data)
+    print_xml_evolution_path_names()
     
 def generate_pokemons(data):
     for block in data.split("\n\n"):
@@ -113,10 +114,20 @@ def generate_evolutions(data):
     Pokemon.objects.filter(name="name_mega_gardevoir").update(ancestor=Pokemon.objects.get(name="name_gardevoir"))
     
 
+def print_xml_evolution_path_names():
+    uniques = {}
+    for k,v in evolution_paths_mapping.items():
+        try:
+            int(v)
+        except ValueError:
+            uniques[v] = k
+    
+    for k,v in uniques.items():
+        print '    <string name="{}">{}</string>'.format(k, v)
 
 evolution_paths_mapping = {"2 coeurs d'affection a la Poke Recre + gagne un niveau + avoir une attaque Fee": 'evo_sylveon',
- '20, Attaque > Defense': 'evo_20_att>def',
- '20, Attaque < Defense': 'evo_20_att<def',
+ '20, Attaque > Defense': 'evo_20_att_gt_def',
+ '20, Attaque < Defense': 'evo_20_att_lt_def',
  '20, Attaque et Defense identiques': 'evo_20_att=def',
  "20, emplacement libre et Poke Ball dans l'inventaire": 'evo_shedinja',
  '30, en retournant la 3DS': 'evo_malamar',

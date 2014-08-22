@@ -14,8 +14,8 @@
     <string name="evolution_chain">Chaine d\'évolution</string>
     <string name="info_title">Détails</string>
     
-    <string name="size">Taille :</string>
-    <string name="weight">Poids :</string>
+    <string name="size">Taille (m):</string>
+    <string name="weight">Poids (kg):</string>
     <string name="ev">EV :</string>
     <string name="catch_rate">Taux de capture :</string>
     <string name="gender">Sexe :</string>
@@ -40,8 +40,6 @@
     <string name="ghost">spectre</string>
     <string name="dark">tenebre</string>
     <string name="flying">vol</string>
-    
-    <string name="level">Niveau </string>
     
     <string name="loading_error">Il y a eu une erreur lors du chargement de ce Pokémon.</string>
     <string name="no_result">Il n\'existe pas de Pokémon avec ce nom ou ce numéro.</string>
