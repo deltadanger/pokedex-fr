@@ -1,15 +1,6 @@
 from app.models import Pokemon, PokemonType, EggGroup, EVBonus, Ability
 import re
-
-def setMegaSuffix(pkid, data_row):
-    result = pkid
-    if "mega" in data_row:
-        pkid += "M"
-    if "_x" in data_row:
-        pkid += "X"
-    if "_y" in data_row:
-        pkid += "Y"
-    return result
+from pprint import pprint
 
 def main(data):
 #     generate_pokemons(data)
@@ -19,14 +10,12 @@ def generate_pokemons(data):
     for block in data.split("\n\n"):
         rows = block.split("\n")
         row2 = rows[1].split(",")
-        
-        pkid = row2[2].strip()
-        name = "name_" + setMegaSuffix(pkid, rows[2])
+        name = re.match(".*R\.string\.([a-z0-9_]+)\)", rows[2]).group(1)
         p = Pokemon.objects.get_if_exist(name=name)
         if not p:
             p = Pokemon()
-            p.name = name 
-        p.number = pkid
+            p.name = name
+        p.number = row2[2].strip()
         p.ancestor = None # Ancestor to be set after the first round, when all Pokemons are created
         p.evolution_path = None
         p.type1 = PokemonType.objects.get(name=row2[4].split(".")[1].strip())
@@ -70,11 +59,10 @@ def generate_pokemons(data):
         
         p.save()
 
-        egg_group_content = re.match(".*\{(.*)\}.*", rows[0]).group(1).split(",")
+        egg_group_content = re.match(".*\{(.*)\}.*", rows[9]).group(1).split(",")
         for egg_group_str in egg_group_content:
-            m = re.match(".*EggGroup\.([A-Z_]+)\).*", egg_group_str)
-            if m:
-                egg_group_name = "R.string.egg_group_" + m.group(1).lower()
+            if egg_group_str.startswith("EggGroup."):
+                egg_group_name = "egg_group_" + egg_group_str[9:].strip().lower()
                 p.egg_group.add(EggGroup.objects.get(name=egg_group_name))
         p.save()
         
@@ -93,37 +81,133 @@ def generate_pokemons(data):
 def generate_evolutions(data):
     for block in data.split("\n\n"):
         rows = block.split("\n")
-        row2 = rows[1].split(",")
-        pkid = row2[2].strip()
-        name = "name_" + setMegaSuffix(pkid, rows[2])
+        name = re.match(".*R\.string\.([a-z0-9_]+)\)", rows[2]).group(1)
         p = Pokemon.objects.get(name=name)
         
-#         p.ancestor = models.ForeignKey("Pokemon", null=True)
-#         p.evolution_path = ""
+        name = re.match(".*R\.string\.([a-z0-9_]+)\)", rows[2]).group(1)
+        evolutions = []
+        for row in rows[3].split("new HashMap<String, EvolutionNode>(){{"):
+            if row.startswith("this.put("):
+                row = row[9:]
+            evolutions.append(row.split("this.put("))
+        
+        for i, row in enumerate(evolutions):
+            for evol in row:
+                if name in evol:
+                    if evol.startswith("p.evolutions"):
+                        p.ancestor = None
+                        p.evolution_path = None
+                        
+                    else:
+                        p.evolution_path = re.match(".*\"(.*)\"", evol).group(1)
+                        try:
+                            int(p.evolution_path)
+                        except ValueError:
+#                             evolution_paths_mapping[p.evolution_path] = ""
+                            p.evolution_path = evolution_paths_mapping[p.evolution_path];
+                        ancestor_name = re.match(".*perName\.get\(ctx\.getString\(R\.string\.([a-z0-9_]+)\).*", evolutions[i-1][0]).group(1)
+                        p.ancestor = Pokemon.objects.get(name=ancestor_name)
         p.save()
         print p
-
-# p.evolutions = new EvolutionNode(
-#     perName.get(ctx.getString(R.string.name_ralts)),
-#     new HashMap<String, EvolutionNode>(){{
-#         this.put(ctx.getString(R.string.level) + "20",
-#                  new EvolutionNode(perName.get(ctx.getString(R.string.name_kirlia)),
-#                                    new HashMap<String, EvolutionNode>(){{
-#                                         this.put("Male + Pierre Aube",
-#                                                  new EvolutionNode(perName.get(ctx.getString(R.string.name_gallade)), null));
-#                                         this.put(ctx.getString(R.string.level) + "30",
-#                                                  new EvolutionNode(perName.get(ctx.getString(R.string.name_gardevoir)),
-#                                                                    new HashMap<String, EvolutionNode>(){{
-#                                                                         this.put("Gardevoirite",
-#                                                                                  new EvolutionNode(perName.get(ctx.getString(R.string.name_mega_gardevoir)), null));
-#                                                                     }}
-#                                         ));
-#                                     }}
-#         ));
-#     }}
-# );
+    
+    Pokemon.objects.filter(name="name_mega_gardevoir").update(ancestor=Pokemon.objects.get(name="name_gardevoir"))
+    
 
 
+evolution_paths_mapping = {"2 coeurs d'affection a la Poke Recre + gagne un niveau + avoir une attaque Fee": 'evo_sylveon',
+ '20, Attaque > Defense': 'evo_20_att>def',
+ '20, Attaque < Defense': 'evo_20_att<def',
+ '20, Attaque et Defense identiques': 'evo_20_att=def',
+ "20, emplacement libre et Poke Ball dans l'inventaire": 'evo_shedinja',
+ '30, en retournant la 3DS': 'evo_malamar',
+ "32, avec un Pokemon dans l'equipe": 'evo_pangoro',
+ '39 pendant la journee': 'evo_39_day',
+ '39 pendant la nuit': 'evo_39_night',
+ '50, quand il pleut': 'evo_50_rain',
+ '7, au hasard': 'evo_cascoon',
+ 'Absolite': 'evo_mega',
+ 'Alakazamite': 'evo_mega',
+ 'Avec une Pierre Eau': 'evo_water_stone',
+ 'Avec une Pierre Eclat': 'evo_shiny_stone',
+ 'Avec une Pierre Feu': 'evo_fire_stone',
+ 'Avec une Pierre Foudre': 'evo_lightning_stone',
+ 'Avec une Pierre Lune': 'evo_moon_stone',
+ 'Avec une Pierre Nuit': 'evo_night_stone',
+ 'Avec une Pierre Plante': 'evo_herb_stone',
+ 'Avec une Pierresoleil': 'evo_sun_stone',
+ 'Blizzarite': 'evo_mega',
+ 'Bonheur': 'evo_happyness',
+ 'Bonheur + gagne un niveau de jour': 'evo_happyness_day',
+ 'Bonheur , Jour': 'evo_happyness_day',
+ 'Bonheur , Nuit': 'evo_happyness_night',
+ 'Branettite': 'evo_mega',
+ 'Brasegalite': 'evo_mega',
+ 'Carchacrokite': 'evo_mega',
+ 'Charminite': 'evo_mega',
+ 'Cizayoxite': 'evo_mega',
+ 'Demolossite': 'evo_mega',
+ 'Dracaufite X': 'evo_mega',
+ 'Dracaufite Y': 'evo_mega',
+ 'Echange': 'evo_exchange',
+ 'Echange avec Carabing': 'evo_exchange_karrablast',
+ 'Echange avec Escargaume': 'evo_exchange_escavalier',
+ 'Echange en tenant Ameliorator': 'evo_exchange_holding_upgrade',
+ 'Echange en tenant CD Douteux': 'evo_exchange_holding_dubious_disc',
+ 'Echange en tenant Chantibonbon': 'evo_exchange_holding_whipped_dream',
+ 'Echange en tenant Magmariseur': 'evo_exchange_holding_magmarizer',
+ 'Echange en tenant Peau Metal': 'evo_exchange_holding_metal_coat',
+ 'Echange en tenant Roche Royale': 'evo_exchange_holding_kings_rock',
+ 'Echange en tenant Sachet Senteur': 'evo_exchange_holding_sachet',
+ "Echange en tenant l'objet Ecaille Draco": 'evo_exchange_holding_dragon_scale',
+ "Echange en tenant l'objet Protecteur": 'evo_exchange_holding_protector',
+ "Echange en tenant l'objet Tissu Fauche": 'evo_exchange_holding_reaper_cloth',
+ 'Echange en tenant un Electiriseur': 'evo_exchange_holding_electirizer',
+ 'Echange en tenant une Dent Ocean': 'evo_exchange_holding_deep_sea_tooth',
+ 'Echange en tenant une Ecaille Ocean': 'evo_exchange_holding_deep_sea_scale',
+ 'Ectoplasmite': 'evo_mega',
+ 'Elecsprintite': 'evo_mega',
+ "En apprenant l'attaque Copie": 'evo_attack_mimic',
+ "En apprenant l'attaque Pouv.Antique": 'evo_attack_ancientpower',
+ "En connaissant l'attaque Coup Double + passer un niveau": 'evo_attack_double_hit ',
+ "En connaissant l'attaque Pouv.Antique et lui faire monter d'un niveau": 'evo_attack_ancientpower',
+ "En connaissant l'attaque Roulade": 'evo_attack_rollout',
+ 'Femelle + Pierre Aube': 'evo_dawn_stone_female',
+ 'Male + Pierre Aube': 'evo_dawn_stone_male',
+ 'Florizarrite': 'evo_mega',
+ 'Gagne un niveau de nuit en tenant un Croc Rasoir': 'evo_night_holding_razor_fang',
+ 'Gagne un niveau de nuit en tenant une Griffe Rasoir': 'evo_night_holding_razor_claw',
+ "Gain de niveau avec Remoraid dans l'equipe": 'evo_mantine',
+ 'Gain de niveau dans un lieu indique': 'evo_place',
+ 'Gain de niveau en tenant une Pierre Ovale': 'evo_oval_stone',
+ 'Galekingite': 'evo_mega',
+ 'Gardevoirite': 'evo_mega',
+ 'Kangourexite': 'evo_mega',
+ 'Leviatorite': 'evo_mega',
+ 'Lucarite': 'evo_mega',
+ 'Mega': 'evo_mega',
+ 'Mewtwoite X': 'evo_mega',
+ 'Mewtwoite Y': 'evo_mega',
+ 'Mysdibulite': 'evo_mega',
+ 'Niv 30': '30',
+ 'Pharampite': 'evo_mega',
+ 'Pierre Eau': 'evo_water_stone',
+ "Pres d'une Pierre Glacee + gagne un niveau": 'evo_glaceon',
+ "Pres d'une Pierre Mousse + gagne un niveau": 'evo_leafeon',
+ 'Scarabruite': 'evo_mega',
+ 'Scarhinoite': 'evo_mega',
+ 'Si Femelle, Niveau 20': 'evo_20_female',
+ 'Si Femelle, Niveau 21': 'evo_21_female',
+ 'Si Male, Niveau 20': 'evo_20_male',
+ 'Tortankite': 'evo_mega',
+ 'Tyranocivite': 'evo_mega',
+ "de Beaute superieur ou egal a 170 (3eme et 4eme generations) ou Echange en tenant l'objet Bel'Ecaille (5eme et 6eme generations) ou Tenir le Voile Venus (Pokemon Donjon Mystere)": 'evo_exchange_holding_prism_scale',
+ 'niveau 26': '26',
+ 'niveau 30': '30',
+ 'niveau 33': '33',
+ 'niveau 34': '34',
+ 'niveau 37': '37',
+ 'niveau 38': '38'
+}
 
 data = """abilities = new ArrayList<Ability>(){{this.add(Ability.GUTS);this.add(Ability.RUN_AWAY);this.add(Ability.HUSTLE);}};
 perName.put(ctx.getString(R.string.name_raticate), new Pokemon(ctx.getString(R.string.name_raticate), 20, 24, Type.NORMAL, Type.NONE, abilities, 55, 81, 60, 50, 70, 97));
@@ -2912,7 +2996,7 @@ p.size = 0.2f;
 abilities = new ArrayList<Ability>(){{this.add(Ability.INTIMIDATE);this.add(Ability.TECHNICIAN);this.add(Ability.STEADFAST);}};
 perName.put(ctx.getString(R.string.name_hitmontop), new Pokemon(ctx.getString(R.string.name_hitmontop), 237, 253, Type.FIGHTING, Type.NONE, abilities, 50, 95, 95, 35, 110, 70));
 p = perName.get(ctx.getString(R.string.name_hitmontop));
-p.evolutions = new EvolutionNode(perName.get(ctx.getString(R.string.name_tyrogue)), new HashMap<String, EvolutionNode>(){{this.put(ctx.getString(R.string.level) + "20, Attaque Defense", new EvolutionNode(perName.get(ctx.getString(R.string.name_hitmonchan)), null));this.put(ctx.getString(R.string.level) + "20, Attaque et Defense identiques", new EvolutionNode(perName.get(ctx.getString(R.string.name_hitmontop)), null));}});
+p.evolutions = new EvolutionNode(perName.get(ctx.getString(R.string.name_tyrogue)), new HashMap<String, EvolutionNode>(){{this.put(ctx.getString(R.string.level) + "20, Attaque < Defense", new EvolutionNode(perName.get(ctx.getString(R.string.name_hitmonchan)), null));this.put(ctx.getString(R.string.level) + "20, Attaque > Defense", new EvolutionNode(perName.get(ctx.getString(R.string.name_hitmonlee)), null));this.put(ctx.getString(R.string.level) + "20, Attaque et Defense identiques", new EvolutionNode(perName.get(ctx.getString(R.string.name_hitmontop)), null));}});
 p.catchRate = 45;
 p.weight = 48.0f;
 p.hatch = 6400;
@@ -5407,7 +5491,7 @@ p.size = 1.0f;
 
 abilities = new ArrayList<Ability>(){{this.add(Ability.TRACE);this.add(Ability.DOWNLOAD);this.add(Ability.ANALYTIC);}};
 perName.put(ctx.getString(R.string.name_porygon2), new Pokemon(ctx.getString(R.string.name_porygon2), 233, 249, Type.NORMAL, Type.NONE, abilities, 85, 80, 90, 105, 95, 60));
-p = perName.get(ctx.getString(R.string.name_porygon));
+p = perName.get(ctx.getString(R.string.name_porygon2));
 p.evolutions = new EvolutionNode(perName.get(ctx.getString(R.string.name_porygon)), new HashMap<String, EvolutionNode>(){{this.put("Echange en tenant Ameliorator", new EvolutionNode(perName.get(ctx.getString(R.string.name_porygon2)), new HashMap<String, EvolutionNode>(){{this.put("Echange en tenant CD Douteux", new EvolutionNode(perName.get(ctx.getString(R.string.name_porygon_z)), null));}}));}});
 p.catchRate = 45;
 p.weight = 36.5f;
@@ -5444,7 +5528,7 @@ p.size = 1.7f;
 abilities = new ArrayList<Ability>(){{this.add(Ability.KEEN_EYE);this.add(Ability.IRON_FIST);this.add(Ability.INNER_FOCUS);}};
 perName.put(ctx.getString(R.string.name_hitmonchan), new Pokemon(ctx.getString(R.string.name_hitmonchan), 107, 113, Type.FIGHTING, Type.NONE, abilities, 50, 105, 79, 35, 110, 76));
 p = perName.get(ctx.getString(R.string.name_hitmonchan));
-p.evolutions = new EvolutionNode(perName.get(ctx.getString(R.string.name_tyrogue)), new HashMap<String, EvolutionNode>(){{this.put(ctx.getString(R.string.level) + "20, Attaque Defense", new EvolutionNode(perName.get(ctx.getString(R.string.name_hitmonchan)), null));this.put(ctx.getString(R.string.level) + "20, Attaque et Defense identiques", new EvolutionNode(perName.get(ctx.getString(R.string.name_hitmontop)), null));}});
+p.evolutions = new EvolutionNode(perName.get(ctx.getString(R.string.name_tyrogue)), new HashMap<String, EvolutionNode>(){{this.put(ctx.getString(R.string.level) + "20, Attaque < Defense", new EvolutionNode(perName.get(ctx.getString(R.string.name_hitmonchan)), null));this.put(ctx.getString(R.string.level) + "20, Attaque > Defense", new EvolutionNode(perName.get(ctx.getString(R.string.name_hitmonlee)), null));this.put(ctx.getString(R.string.level) + "20, Attaque et Defense identiques", new EvolutionNode(perName.get(ctx.getString(R.string.name_hitmontop)), null));}});
 p.catchRate = 45;
 p.weight = 50.2f;
 p.hatch = 6400;
@@ -5948,7 +6032,7 @@ p.size = 1.0f;
 abilities = new ArrayList<Ability>(){{this.add(Ability.LIMBER);this.add(Ability.RECKLESS);this.add(Ability.UNBURDEN);}};
 perName.put(ctx.getString(R.string.name_hitmonlee), new Pokemon(ctx.getString(R.string.name_hitmonlee), 106, 112, Type.FIGHTING, Type.NONE, abilities, 50, 120, 53, 35, 110, 87));
 p = perName.get(ctx.getString(R.string.name_hitmonlee));
-p.evolutions = new EvolutionNode(perName.get(ctx.getString(R.string.name_tyrogue)), new HashMap<String, EvolutionNode>(){{this.put(ctx.getString(R.string.level) + "20, Attaque Defense", new EvolutionNode(perName.get(ctx.getString(R.string.name_hitmonchan)), null));this.put(ctx.getString(R.string.level) + "20, Attaque et Defense identiques", new EvolutionNode(perName.get(ctx.getString(R.string.name_hitmontop)), null));}});
+p.evolutions = new EvolutionNode(perName.get(ctx.getString(R.string.name_tyrogue)), new HashMap<String, EvolutionNode>(){{this.put(ctx.getString(R.string.level) + "20, Attaque < Defense", new EvolutionNode(perName.get(ctx.getString(R.string.name_hitmonchan)), null));this.put(ctx.getString(R.string.level) + "20, Attaque > Defense", new EvolutionNode(perName.get(ctx.getString(R.string.name_hitmonlee)), null));this.put(ctx.getString(R.string.level) + "20, Attaque et Defense identiques", new EvolutionNode(perName.get(ctx.getString(R.string.name_hitmontop)), null));}});
 p.catchRate = 45;
 p.weight = 49.8f;
 p.hatch = 6400;
@@ -6512,7 +6596,7 @@ p.size = 1.5f;
 abilities = new ArrayList<Ability>(){{this.add(Ability.GUTS);this.add(Ability.STEADFAST);this.add(Ability.VITAL_SPIRIT);}};
 perName.put(ctx.getString(R.string.name_tyrogue), new Pokemon(ctx.getString(R.string.name_tyrogue), 236, 252, Type.FIGHTING, Type.NONE, abilities, 35, 35, 35, 35, 35, 35));
 p = perName.get(ctx.getString(R.string.name_tyrogue));
-p.evolutions = new EvolutionNode(perName.get(ctx.getString(R.string.name_tyrogue)), new HashMap<String, EvolutionNode>(){{this.put(ctx.getString(R.string.level) + "20, Attaque Defense", new EvolutionNode(perName.get(ctx.getString(R.string.name_hitmonchan)), null));this.put(ctx.getString(R.string.level) + "20, Attaque et Defense identiques", new EvolutionNode(perName.get(ctx.getString(R.string.name_hitmontop)), null));}});
+p.evolutions = new EvolutionNode(perName.get(ctx.getString(R.string.name_tyrogue)), new HashMap<String, EvolutionNode>(){{this.put(ctx.getString(R.string.level) + "20, Attaque < Defense", new EvolutionNode(perName.get(ctx.getString(R.string.name_hitmonchan)), null));this.put(ctx.getString(R.string.level) + "20, Attaque > Defense", new EvolutionNode(perName.get(ctx.getString(R.string.name_hitmonlee)), null));this.put(ctx.getString(R.string.level) + "20, Attaque et Defense identiques", new EvolutionNode(perName.get(ctx.getString(R.string.name_hitmontop)), null));}});
 p.catchRate = 75;
 p.weight = 21.0f;
 p.hatch = 6400;
