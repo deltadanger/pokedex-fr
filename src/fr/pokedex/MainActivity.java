@@ -9,7 +9,7 @@ import fr.pokedex.data.PokemonList;
 /*
  * TODO:
  * - Recherche par texte pur (incluant par numéro)
- * - Ajouter lien entre Ptéra et Mega-Ptéra
+ * / Ajouter lien entre Ptéra et Mega-Ptéra
  * X Recherche par type
  * - Theme sombre
  * - Liste des attaques apprises
