@@ -1,4 +1,4 @@
-types="ACIER	COMBAT	DRAGON	EAU	ELECTRIQUE	FEE	FEU	GLACE	INSECTE	NORMAL	PLANTE	POISON	PSY	ROCHE	SOL	SPECTRE	TENEBRE	VOL".split('\t')
+types="STEEL	FIGHTING	DRAGON	WATER	ELECTRIC	FAIRY	FIRE	ICE	BUG	NORMAL	GRASS	POISON	PSYCHIC	ROCK	GROUND	GHOST	DARK	FLYING".split('\t')
 
 
 
@@ -35,6 +35,7 @@ for i in range(len(table)):
         except:
             dic[types[i]][types[j]] = 1.
 
+print dic
 
 text = ""
 for type in types:
@@ -49,4 +50,4 @@ for type in types:
     }});
 """
 
-print text
+# print text
