@@ -21,7 +21,6 @@ class BaseModel(models.Model):
         abstract = True
 
 
-
 class AttributeValues(models.Model):
     life = models.IntegerField()
     attack = models.IntegerField()
@@ -34,11 +33,18 @@ class AttributeValues(models.Model):
         abstract = True
 
 class PokemonType(BaseModel):
-    name = models.CharField(max_length=100) # Resource id
-    image = models.CharField(max_length=100) # Resource id
+    name = models.CharField(max_length=100)
     
     def __str__(self):
         return self.name
+
+class Weakness(BaseModel):
+    base_type = models.ForeignKey(PokemonType, related_name="base_type")
+    receiving_type = models.ForeignKey(PokemonType, related_name="receiving_type")
+    weakness = models.CharField(max_length=50)
+    
+    def __str__(self):
+        return str(self.base_type) + " " + self.weakness + " to " + str(self.receiving_type)
 
 class Ability(BaseModel):
     # Identifier used to retrieve the resource idsResource id
@@ -52,13 +58,13 @@ class EVBonus(BaseModel, AttributeValues):
     pass
 
 class EggGroup(BaseModel):
-    name = models.CharField(max_length=100) # Resource id
+    name = models.CharField(max_length=100)
     
     def __str__(self):
         return self.name
 
 class Pokemon(BaseModel, AttributeValues):
-    name = models.CharField(max_length=100) # Contains resource id like name_0150MX
+    name = models.CharField(max_length=100)
     number = models.IntegerField()
     type1 = models.ForeignKey(PokemonType, related_name="type1")
     type2 = models.ForeignKey(PokemonType, related_name="type2", null=True)
