@@ -22,7 +22,7 @@
             <include layout="@layout/head" />
             <include layout="@layout/infos" />
             <include layout="@layout/stats" />
-            <include layout="@layout/sensibilities" />
+            <include layout="@layout/weaknesses" />
             
         </LinearLayout>
         

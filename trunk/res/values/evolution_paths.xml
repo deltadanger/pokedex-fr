@@ -48,7 +48,7 @@
     
     <string name="evo_20_att_gt_def">Niveau 20, Attaque &gt; Defense</string>
     <string name="evo_20_att_lt_def">Niveau 20, Attaque &lt; Defense</string>
-    <string name="evo_20_att=def">Niveau 20, Attaque = Defense</string>
+    <string name="evo_20_att_eq_def">Niveau 20, Attaque = Defense</string>
     <string name="evo_20_male">Niveau 20, Male</string>
     <string name="evo_20_female">Niveau 20, Femelle</string>
     <string name="evo_21_female">Niveau 21, Femelle</string>

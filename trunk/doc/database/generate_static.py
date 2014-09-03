@@ -413,6 +413,26 @@ data = {
             'GRASS': "WEAK",
             'BUG': "NORMAL",
             'GROUND': "NORMAL"
+        },
+        'NONE': {
+            'STEEL': "NORMAL",
+            'GHOST': "NORMAL",
+            'ELECTRIC': "NORMAL",
+            'NORMAL': "NORMAL",
+            'FIRE': "NORMAL",
+            'PSYCHIC': "NORMAL",
+            'FLYING': "NORMAL",
+            'FIGHTING': "NORMAL",
+            'DRAGON': "NORMAL",
+            'WATER': "NORMAL",
+            'POISON': "NORMAL",
+            'ICE': "NORMAL",
+            'DARK': "NORMAL",
+            'ROCK': "NORMAL",
+            'FAIRY': "NORMAL",
+            'GRASS': "NORMAL",
+            'BUG': "NORMAL",
+            'GROUND': "NORMAL"
         }
     }
 }

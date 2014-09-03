@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="name_missigno">MissingNo</string>
+    
     <string name="name_raticate">Rattatac</string>
     <string name="name_porygon_z">Porygon-Z</string>
     <string name="name_scraggy">Baggiguane</string>

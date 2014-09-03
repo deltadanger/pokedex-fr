@@ -128,7 +128,7 @@ def print_xml_evolution_path_names():
 evolution_paths_mapping = {"2 coeurs d'affection a la Poke Recre + gagne un niveau + avoir une attaque Fee": 'evo_sylveon',
  '20, Attaque > Defense': 'evo_20_att_gt_def',
  '20, Attaque < Defense': 'evo_20_att_lt_def',
- '20, Attaque et Defense identiques': 'evo_20_att=def',
+ '20, Attaque et Defense identiques': 'evo_20_att_eq_def',
  "20, emplacement libre et Poke Ball dans l'inventaire": 'evo_shedinja',
  '30, en retournant la 3DS': 'evo_malamar',
  "32, avec un Pokemon dans l'equipe": 'evo_pangoro',

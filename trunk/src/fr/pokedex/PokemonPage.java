@@ -34,7 +34,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import fr.pokedex.data.EvolutionNode;
 import fr.pokedex.data.Pokemon;
-import fr.pokedex.data.PokemonList;
+import fr.pokedex.data.DataHolder;
 import fr.pokedex.data.Ability;
 import fr.pokedex.data.Type;
 import fr.pokedex.data.Weakness;
@@ -94,7 +94,7 @@ public class PokemonPage extends Activity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
-        dpToPx = this.getResources().getDisplayMetrics().density;
+        dpToPx = getResources().getDisplayMetrics().density;
         
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         final SearchView searchView = (SearchView) findViewById(R.id.search_text);
@@ -115,7 +115,7 @@ public class PokemonPage extends Activity {
             String query = Utils.standardize(originalQuery);
             boolean validSearch = false;
             
-            for (Entry<String, Pokemon> el : PokemonList.perName.entrySet()) {
+            for (Entry<String, Pokemon> el : DataHolder.pokemons.entrySet()) {
                 String name = Utils.standardize(el.getKey());
                 String number = Utils.standardize(""+el.getValue().number);
                 
@@ -163,7 +163,7 @@ public class PokemonPage extends Activity {
             
             @Override
             public void onClick(View v) {
-                showTalentDialog(0);
+                showAbilityDialog(0);
             }
         });
 
@@ -172,7 +172,7 @@ public class PokemonPage extends Activity {
             
             @Override
             public void onClick(View v) {
-                showTalentDialog(1);
+                showAbilityDialog(1);
             }
         });
 
@@ -181,7 +181,7 @@ public class PokemonPage extends Activity {
             
             @Override
             public void onClick(View v) {
-                showTalentDialog(2);
+                showAbilityDialog(2);
             }
         });
         
@@ -237,7 +237,7 @@ public class PokemonPage extends Activity {
                 finish();
             }
 
-            if (touchPositionX - position > swipeDetect && currentPokemon.index + 1 <= PokemonList.perIndex.size()) {
+            if (touchPositionX - position > swipeDetect && currentPokemon.index + 1 <= DataHolder.pokemons.size()) {
                 Intent intent = new Intent(this, this.getClass());
                 intent.putExtra(INTENT_EXTRA_POKEMON_INDEX, currentPokemon.index + 1);
                 intent.putExtra(INTENT_EXTRA_SCROLL_POSITION, scroll.getScrollY());
@@ -330,12 +330,12 @@ public class PokemonPage extends Activity {
         findViewById(R.id.main_layout).invalidate();
     }
     
-    private void showTalentDialog(int n) {
+    private void showAbilityDialog(int n) {
         AlertDialog.Builder b = new AlertDialog.Builder(PokemonPage.this);
         Ability ability = currentPokemon.abilities.get(n);
         b.setTitle(ability.name);
         
-        String message = ability.inFight;
+        String message = getResources().getString(ability.inFight);
         if (!"".equals(ability.outFight)) {
             message += "\n------------------\n" + ability.outFight;
         }
@@ -347,7 +347,7 @@ public class PokemonPage extends Activity {
     
     private void loadData(int index) {
         try {
-            currentPokemon = PokemonList.perIndex.get(index);
+            currentPokemon = DataHolder.pokemonById.get(index);
             loadData();
         } catch (Exception e) {
             Toast.makeText(this, R.string.loading_error, Toast.LENGTH_LONG).show();
@@ -358,7 +358,7 @@ public class PokemonPage extends Activity {
     
     private void loadData(String name) {
         try {
-            currentPokemon = PokemonList.perName.get(name);
+            currentPokemon = DataHolder.pokemons.get(name);
             loadData();
         } catch (Exception e) {
             Toast.makeText(this, R.string.loading_error, Toast.LENGTH_LONG).show();
@@ -384,7 +384,7 @@ public class PokemonPage extends Activity {
         
         try {
             ImageView image = (ImageView)findViewById(R.id.icon);
-            image.setImageDrawable(Drawable.createFromStream(getAssets().open("image/" + Utils.standardize(currentPokemon.name, true) + ".png"), null));
+            image.setImageDrawable(Drawable.createFromStream(getAssets().open("image/" + Utils.standardize(currentPokemon.name_str, true) + ".png"), null));
             image.invalidate();
         } catch (IOException e) {
             e.printStackTrace();
@@ -404,7 +404,7 @@ public class PokemonPage extends Activity {
                 img.setLayoutParams(layout);
                 img.setImageDrawable(Drawable.createFromStream(
                         getAssets().open(
-                                "image/" + Utils.standardize(p.name, true) + ".png"), null));
+                                "image/" + Utils.standardize(p.name_str, true) + ".png"), null));
                 img.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View arg0) {
@@ -434,23 +434,23 @@ public class PokemonPage extends Activity {
         type.setImageResource(currentPokemon.type2.image);
         
         TextView talentTxt = (TextView)findViewById(R.id.talent1Txt);
-        SpannableString content = new SpannableString(currentPokemon.abilities.get(0).name);
-        content.setSpan(new UnderlineSpan(), 0, currentPokemon.abilities.get(0).name.length(), 0);
+        SpannableString content = new SpannableString(getResources().getString(currentPokemon.abilities.get(0).name));
+        content.setSpan(new UnderlineSpan(), 0, getResources().getString(currentPokemon.abilities.get(0).name).length(), 0);
         talentTxt.setText(content);
         
         talentTxt = (TextView)findViewById(R.id.talent2Txt);
         talentTxt.setText("");
         if (currentPokemon.abilities.size() > 1) {
-            content = new SpannableString(currentPokemon.abilities.get(1).name);
-            content.setSpan(new UnderlineSpan(), 0, currentPokemon.abilities.get(1).name.length(), 0);
+            content = new SpannableString(getResources().getString(currentPokemon.abilities.get(1).name));
+            content.setSpan(new UnderlineSpan(), 0, getResources().getString(currentPokemon.abilities.get(1).name).length(), 0);
             talentTxt.setText(content);
         }
         
         talentTxt = (TextView)findViewById(R.id.talent3Txt);
         talentTxt.setText("");
         if (currentPokemon.abilities.size() > 2) {
-            content = new SpannableString(currentPokemon.abilities.get(2).name);
-            content.setSpan(new UnderlineSpan(), 0, currentPokemon.abilities.get(2).name.length(), 0);
+            content = new SpannableString(getResources().getString(currentPokemon.abilities.get(2).name));
+            content.setSpan(new UnderlineSpan(), 0, getResources().getString(currentPokemon.abilities.get(2).name).length(), 0);
             talentTxt.setText(content);
         }
         
@@ -467,29 +467,29 @@ public class PokemonPage extends Activity {
             text.setText(R.string.evolution_chain);
             fullEvolutionsLayout.addView(text);
             
-            addEvolutions(currentPokemon.evolutions, fullEvolutionsLayout);
+            addEvolutions(currentPokemon.evolutionRoot, fullEvolutionsLayout);
         }
         
         TextView infoTxt = (TextView)findViewById(R.id.size_txt);
-        infoTxt.setText(currentPokemon.size);
+        infoTxt.setText(getResources().getString(R.string.size) + currentPokemon.size);
         
         infoTxt = (TextView)findViewById(R.id.weight_txt);
-        infoTxt.setText(currentPokemon.weight);
+        infoTxt.setText(getResources().getString(R.string.weight) + currentPokemon.weight);
 
         infoTxt = (TextView)findViewById(R.id.ev_txt);
-        infoTxt.setText(currentPokemon.ev);
+        infoTxt.setText(getResources().getString(R.string.ev) + currentPokemon.ev);
 
         infoTxt = (TextView)findViewById(R.id.catch_rate_txt);
-        infoTxt.setText(currentPokemon.catchRate);
+        infoTxt.setText(getResources().getString(R.string.catch_rate) + currentPokemon.catchRate);
         
         infoTxt = (TextView)findViewById(R.id.gender_txt);
-        infoTxt.setText(currentPokemon.gender);
+        infoTxt.setText(getResources().getString(R.string.gender) + currentPokemon.gender);
         
         infoTxt = (TextView)findViewById(R.id.hatch_txt);
-        infoTxt.setText(currentPokemon.hatch);
+        infoTxt.setText(getResources().getString(R.string.hatch) + currentPokemon.hatch);
         
         infoTxt = (TextView)findViewById(R.id.egg_group_txt);
-        infoTxt.setText(currentPokemon.eggGroup);
+        infoTxt.setText(getResources().getString(R.string.egg_group) + currentPokemon.eggGroup);
         
 
         TextView statTxt = (TextView)findViewById(R.id.lifeTxt);
@@ -533,75 +533,75 @@ public class PokemonPage extends Activity {
 
         View typeWeakness = findViewById(R.id.acier);
         typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-        typeWeakness.setBackgroundResource(weaknesses.get(Type.ACIER).resource);
+        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("STEEL")).resource);
         
         typeWeakness = findViewById(R.id.combat);
         typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-        typeWeakness.setBackgroundResource(weaknesses.get(Type.COMBAT).resource);
+        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("FIGHTING")).resource);
         
         typeWeakness = findViewById(R.id.dragon);
         typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-        typeWeakness.setBackgroundResource(weaknesses.get(Type.DRAGON).resource);
+        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("DRAGON")).resource);
         
         typeWeakness = findViewById(R.id.eau);
         typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-        typeWeakness.setBackgroundResource(weaknesses.get(Type.EAU).resource);
+        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("WATER")).resource);
         
         typeWeakness = findViewById(R.id.electrique);
         typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-        typeWeakness.setBackgroundResource(weaknesses.get(Type.ELECTRIQUE).resource);
+        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("ELECTRIC")).resource);
         
         typeWeakness = findViewById(R.id.fee);
         typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-        typeWeakness.setBackgroundResource(weaknesses.get(Type.FEE).resource);
+        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("FAIRY")).resource);
         
         typeWeakness = findViewById(R.id.feu);
         typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-        typeWeakness.setBackgroundResource(weaknesses.get(Type.FEU).resource);
+        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("FIRE")).resource);
         
         typeWeakness = findViewById(R.id.glace);
         typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-        typeWeakness.setBackgroundResource(weaknesses.get(Type.GLACE).resource);
+        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("ICE")).resource);
         
         typeWeakness = findViewById(R.id.insecte);
         typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-        typeWeakness.setBackgroundResource(weaknesses.get(Type.INSECTE).resource);
+        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("BUG")).resource);
         
         typeWeakness = findViewById(R.id.normal);
         typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-        typeWeakness.setBackgroundResource(weaknesses.get(Type.NORMAL).resource);
+        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("NORMAL")).resource);
         
         typeWeakness = findViewById(R.id.plante);
         typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-        typeWeakness.setBackgroundResource(weaknesses.get(Type.PLANTE).resource);
+        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("GRASS")).resource);
         
         typeWeakness = findViewById(R.id.poison);
         typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-        typeWeakness.setBackgroundResource(weaknesses.get(Type.POISON).resource);
+        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("POISON")).resource);
         
         typeWeakness = findViewById(R.id.psy);
         typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-        typeWeakness.setBackgroundResource(weaknesses.get(Type.PSY).resource);
+        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("PSYCHIC")).resource);
         
         typeWeakness = findViewById(R.id.roche);
         typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-        typeWeakness.setBackgroundResource(weaknesses.get(Type.ROCHE).resource);
+        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("ROCK")).resource);
         
         typeWeakness = findViewById(R.id.sol);
         typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-        typeWeakness.setBackgroundResource(weaknesses.get(Type.SOL).resource);
+        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("GROUND")).resource);
         
         typeWeakness = findViewById(R.id.spectre);
         typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-        typeWeakness.setBackgroundResource(weaknesses.get(Type.SPECTRE).resource);
+        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("GHOST")).resource);
         
         typeWeakness = findViewById(R.id.tenebre);
         typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-        typeWeakness.setBackgroundResource(weaknesses.get(Type.TENEBRE).resource);
+        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("DARK")).resource);
         
         typeWeakness = findViewById(R.id.vol);
         typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-        typeWeakness.setBackgroundResource(weaknesses.get(Type.VOL).resource);
+        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("FLYING")).resource);
     }
     
     private void addEvolutions(final EvolutionNode root, LinearLayout layout) {
