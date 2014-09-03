@@ -10,7 +10,7 @@ import android.database.MatrixCursor;
 import android.net.Uri;
 import android.provider.BaseColumns;
 import fr.pokedex.R;
-import fr.pokedex.data.PokemonList;
+import fr.pokedex.data.DataHolder;
 import fr.pokedex.utils.Utils;
 
 public class SearchContentProvider extends ContentProvider {
@@ -26,13 +26,13 @@ public class SearchContentProvider extends ContentProvider {
             return c;
         }
         
-        Object[] names = PokemonList.perName.keySet().toArray();
+        Object[] names = DataHolder.pokemons.keySet().toArray();
         Arrays.sort(names);
         
         for (Object obj : names) {
             String name = obj.toString();
             String stdName = Utils.standardize(name);
-            String number = ""+PokemonList.perName.get(name).number;
+            String number = ""+DataHolder.pokemons.get(name).number;
             if (stdName.contains(query)) {
                 c.addRow(new Object[]{id++, "#" + number + " " + name, "content://" + getContext().getString(R.string.assets_authority) + "/image/"+Utils.standardize(name, true)+".png", name});
             }
