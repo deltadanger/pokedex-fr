@@ -1,12 +1,11 @@
-from app.models import Pokemon, PokemonType, EggGroup, EVBonus, Ability
+from app.models import Pokemon, PokemonType, EggGroup, Ability
 import re
-from pprint import pprint
 
 def main(data):
 #     generate_pokemons(data)
-#     generate_evolutions(data)
-    print_xml_evolution_path_names()
-    
+    generate_evolutions(data)
+#     print_xml_evolution_path_names()
+
 def generate_pokemons(data):
     for block in data.split("\n\n"):
         rows = block.split("\n")
@@ -33,33 +32,9 @@ def generate_pokemons(data):
         p.catch_rate = rows[4].split(" = ")[1].strip()[:-1]
         p.gender = rows[7].split(" = ")[1].strip()[:-2]
         p.hatch = rows[6].split(" = ")[1].strip()[:-1]
-        
-        ev_names_map = {
-            "life": "life",
-            "att": "attack",
-            "def": "defense",
-            "spatt": "sp_attack",
-            "spdef": "sp_defense",
-            "speed": "speed"
-        }
-         
-        ev_values = {
-            "life": 0,
-            "attack": 0,
-            "defense": 0,
-            "sp_attack": 0,
-            "sp_defense": 0,
-            "speed": 0
-        }
-        ev_content = re.match(".*\{\{(.*)\}\}.*", rows[8]).group(1).split(";")
-        for ev in ev_content:
-            m = re.match("this.append((\d+), R.string.([a-z]+)_short)", ev)
-            if m:
-                ev_values[ev_names_map[m.group(2)]] = m.group(1)
-        p.ev, _created = EVBonus.objects.get_or_create(**ev_values)
-        
+        p.ev_id = 0 # Will be populated later as the data in here is not valid.
         p.save()
-
+        
         egg_group_content = re.match(".*\{(.*)\}.*", rows[9]).group(1).split(",")
         for egg_group_str in egg_group_content:
             if egg_group_str.startswith("EggGroup."):
@@ -72,11 +47,10 @@ def generate_pokemons(data):
             m = re.match(".*Ability\.([A-Z_]+)\).*", ability_str)
             if m:
                 ability_identifier = m.group(1).lower()
-                ability, _created = Ability.objects.get_or_create(identifier=ability_identifier)
-                p.abilities.add(ability)
+                p.abilities.add(Ability.objects.get(identifier=ability_identifier))
         p.save()
 
-        print p
+        print p.name
     
 
 def generate_evolutions(data):
@@ -109,9 +83,14 @@ def generate_evolutions(data):
                         ancestor_name = re.match(".*perName\.get\(ctx\.getString\(R\.string\.([a-z0-9_]+)\).*", evolutions[i-1][0]).group(1)
                         p.ancestor = Pokemon.objects.get(name=ancestor_name)
         p.save()
-        print p
+        print p.name
     
+    # Special cases
     Pokemon.objects.filter(name="name_mega_gardevoir").update(ancestor=Pokemon.objects.get(name="name_gardevoir"))
+    Pokemon.objects.filter(name="name_paras").update(ancestor=None)
+    Pokemon.objects.filter(name="name_porygon").update(ancestor=None)
+    Pokemon.objects.filter(name="name_kabuto").update(ancestor=None)
+    Pokemon.objects.filter(name="name_klink").update(ancestor=None)
     
 
 def print_xml_evolution_path_names():

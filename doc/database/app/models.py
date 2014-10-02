@@ -55,7 +55,8 @@ class Ability(BaseModel):
         return self.identifier
 
 class EVBonus(BaseModel, AttributeValues):
-    pass
+    def __str__(self):
+        return ",".join([str(self.life), str(self.attack), str(self.defense), str(self.sp_attack), str(self.sp_defense), str(self.speed)])
 
 class EggGroup(BaseModel):
     name = models.CharField(max_length=100)
@@ -92,7 +93,7 @@ class Pokemon(BaseModel, AttributeValues):
         abilities = self.abilities.all().values_list("identifier", flat=True)
         egg_group = self.egg_group.all().values_list("name", flat=True)
         
-        return "{name} ({number}) [{type1},{type2}] [Attrs: {size},{weight},{catch_rate},{gender},{hatch},{egg_group}] [Stat: {life},{attack},{defense},{sp_attack},{sp_defense},{speed}] [Evo: {ancestor} ({path})] [Abilities: {abilities}]".format(
+        return "{name} ({number}) [{type1},{type2}] [Attrs: {size},{weight},{catch_rate},{gender},{hatch},{egg_group}] [Stat: {life},{attack},{defense},{sp_attack},{sp_defense},{speed}] [EVs: {ev}] [Evo: {ancestor} ({path})] [Abilities: {abilities}]".format(
             name=self.name,
             number=self.number,
             type1=type1,
@@ -111,6 +112,7 @@ class Pokemon(BaseModel, AttributeValues):
             speed=self.speed,
             ancestor=ancestor,
             path=self.evolution_path,
+            ev=self.ev,
             abilities=abilities
         )
         
