@@ -1,14 +1,15 @@
 package fr.pokedex;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map.Entry;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources.NotFoundException;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -32,10 +33,11 @@ import android.widget.ScrollView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
+import fr.pokedex.data.Ability;
+import fr.pokedex.data.DataHolder;
+import fr.pokedex.data.EggGroup;
 import fr.pokedex.data.EvolutionNode;
 import fr.pokedex.data.Pokemon;
-import fr.pokedex.data.DataHolder;
-import fr.pokedex.data.Ability;
 import fr.pokedex.data.Type;
 import fr.pokedex.data.Weakness;
 import fr.pokedex.utils.ExpandAnimation;
@@ -44,8 +46,9 @@ import fr.pokedex.utils.Utils;
 
 public class PokemonPage extends Activity {
 
-    public static final String INTENT_EXTRA_POKEMON_INDEX = "intent_extra_pokemon_index";
+    public static final String INTENT_EXTRA_POKEMON_NAME = "intent_extra_pokemon_name";
     public static final String INTENT_EXTRA_SCROLL_POSITION = "intent_extra_scroll_position";
+    public static final String DEFAULT_POKEMON_NAME = "name_bulbasaur";
     
     private static int infosVisibility = View.GONE;
 
@@ -113,14 +116,15 @@ public class PokemonPage extends Activity {
         } else if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String originalQuery = intent.getStringExtra(SearchManager.QUERY);
             String query = Utils.standardize(originalQuery);
+            
             boolean validSearch = false;
             
-            for (Entry<String, Pokemon> el : DataHolder.pokemons.entrySet()) {
-                String name = Utils.standardize(el.getKey());
-                String number = Utils.standardize(""+el.getValue().number);
+            for (Pokemon p : DataHolder.pokemons.values()) {
+                String name = Utils.standardize(getResources().getString(p.name));
+                String number = Utils.standardize(""+p.number);
                 
                 if (query.equals(name) || query.equals(number)) {
-                    loadData(el.getKey());
+                    loadData(p.name_str);
                     validSearch = true;
                     break;
                 }
@@ -128,13 +132,16 @@ public class PokemonPage extends Activity {
             
             if (!validSearch) {
                 Toast.makeText(PokemonPage.this, R.string.no_result, Toast.LENGTH_LONG).show();
-                loadData(1);
+                loadData(DEFAULT_POKEMON_NAME);
                 searchView.setQuery(originalQuery, false);
             }
             
         } else {
-            int index = intent.getIntExtra(INTENT_EXTRA_POKEMON_INDEX, 1);
-            loadData(index);
+            String name = intent.getStringExtra(INTENT_EXTRA_POKEMON_NAME);
+            if (name == null) {
+                name = DEFAULT_POKEMON_NAME;
+            }
+            loadData(name);
         }
 
         final LinearLayout infos = (LinearLayout)findViewById(R.id.info_content);
@@ -228,18 +235,18 @@ public class PokemonPage extends Activity {
             
             final int swipeDetect = (int)(SWIPE_MIN_MOVE*dpToPx + 0.5f);
 
-            if (position - touchPositionX > swipeDetect && currentPokemon.index - 1 > 0) {
+            if (position - touchPositionX > swipeDetect && currentPokemon.hasPrevious()) {
                 Intent intent = new Intent(this, this.getClass());
-                intent.putExtra(INTENT_EXTRA_POKEMON_INDEX, currentPokemon.index - 1);
+                intent.putExtra(INTENT_EXTRA_POKEMON_NAME, currentPokemon.getPrevious().name_str);
                 intent.putExtra(INTENT_EXTRA_SCROLL_POSITION, scroll.getScrollY());
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out);
                 finish();
             }
 
-            if (touchPositionX - position > swipeDetect && currentPokemon.index + 1 <= DataHolder.pokemons.size()) {
+            if (touchPositionX - position > swipeDetect && currentPokemon.hasNext()) {
                 Intent intent = new Intent(this, this.getClass());
-                intent.putExtra(INTENT_EXTRA_POKEMON_INDEX, currentPokemon.index + 1);
+                intent.putExtra(INTENT_EXTRA_POKEMON_NAME, currentPokemon.getNext().name_str);
                 intent.putExtra(INTENT_EXTRA_SCROLL_POSITION, scroll.getScrollY());
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
@@ -333,11 +340,11 @@ public class PokemonPage extends Activity {
     private void showAbilityDialog(int n) {
         AlertDialog.Builder b = new AlertDialog.Builder(PokemonPage.this);
         Ability ability = currentPokemon.abilities.get(n);
-        b.setTitle(ability.name);
+        b.setTitle(getResources().getString(ability.name));
         
         String message = getResources().getString(ability.inFight);
-        if (!"".equals(ability.outFight)) {
-            message += "\n------------------\n" + ability.outFight;
+        if (!"".equals(getResources().getString(ability.outFight))) {
+            message += "\n------------------\n" + getResources().getString(ability.outFight);
         }
         b.setMessage(message);
         
@@ -345,22 +352,12 @@ public class PokemonPage extends Activity {
         dialog.show();
     }
     
-    private void loadData(int index) {
-        try {
-            currentPokemon = DataHolder.pokemonById.get(index);
-            loadData();
-        } catch (Exception e) {
-            Toast.makeText(this, R.string.loading_error, Toast.LENGTH_LONG).show();
-            currentPokemon = Pokemon.MISSINGNO;
-            loadData();
-        }
-    }
-    
     private void loadData(String name) {
         try {
             currentPokemon = DataHolder.pokemons.get(name);
             loadData();
         } catch (Exception e) {
+            e.printStackTrace();
             Toast.makeText(this, R.string.loading_error, Toast.LENGTH_LONG).show();
             currentPokemon = Pokemon.MISSINGNO;
             loadData();
@@ -384,7 +381,7 @@ public class PokemonPage extends Activity {
         
         try {
             ImageView image = (ImageView)findViewById(R.id.icon);
-            image.setImageDrawable(Drawable.createFromStream(getAssets().open("image/" + Utils.standardize(currentPokemon.name_str, true) + ".png"), null));
+            image.setImageDrawable(Drawable.createFromStream(getAssets().open("image/" + currentPokemon.name_str + ".png"), null));
             image.invalidate();
         } catch (IOException e) {
             e.printStackTrace();
@@ -404,11 +401,11 @@ public class PokemonPage extends Activity {
                 img.setLayoutParams(layout);
                 img.setImageDrawable(Drawable.createFromStream(
                         getAssets().open(
-                                "image/" + Utils.standardize(p.name_str, true) + ".png"), null));
+                                "image/" + p.name_str + ".png"), null));
                 img.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View arg0) {
-                        loadData(p.name);
+                        loadData(p.name_str);
                     }
                 });
                 evolutions.addView(img);
@@ -471,25 +468,50 @@ public class PokemonPage extends Activity {
         }
         
         TextView infoTxt = (TextView)findViewById(R.id.size_txt);
-        infoTxt.setText(getResources().getString(R.string.size) + currentPokemon.size);
+        infoTxt.setText(String.format(getResources().getString(R.string.size_value), currentPokemon.size));
         
         infoTxt = (TextView)findViewById(R.id.weight_txt);
-        infoTxt.setText(getResources().getString(R.string.weight) + currentPokemon.weight);
+        infoTxt.setText(String.format(getResources().getString(R.string.weight_value), currentPokemon.weight));
 
+        String evs = "";
+        evs += evChunk(currentPokemon.ev.life, R.string.life_short, !evs.isEmpty());
+        evs += evChunk(currentPokemon.ev.attack, R.string.att_short, !evs.isEmpty());
+        evs += evChunk(currentPokemon.ev.defense, R.string.def_short, !evs.isEmpty());
+        evs += evChunk(currentPokemon.ev.spAttack, R.string.spatt_short, !evs.isEmpty());
+        evs += evChunk(currentPokemon.ev.spDefense, R.string.spdef_short, !evs.isEmpty());
+        evs += evChunk(currentPokemon.ev.speed, R.string.speed_short, !evs.isEmpty());
         infoTxt = (TextView)findViewById(R.id.ev_txt);
-        infoTxt.setText(getResources().getString(R.string.ev) + currentPokemon.ev);
+        infoTxt.setText(evs);
 
         infoTxt = (TextView)findViewById(R.id.catch_rate_txt);
-        infoTxt.setText(getResources().getString(R.string.catch_rate) + currentPokemon.catchRate);
+        if (currentPokemon.catchRate >= 0) {
+            infoTxt.setText(""+currentPokemon.catchRate);
+        } else {
+            infoTxt.setText("");
+        }
+        
         
         infoTxt = (TextView)findViewById(R.id.gender_txt);
-        infoTxt.setText(getResources().getString(R.string.gender) + currentPokemon.gender);
+        if (currentPokemon.gender >= 0) {
+            infoTxt.setText(String.format(getResources().getString(R.string.gender_value), currentPokemon.gender, 100-currentPokemon.gender));
+        } else {
+            infoTxt.setText("");
+        }
         
         infoTxt = (TextView)findViewById(R.id.hatch_txt);
-        infoTxt.setText(getResources().getString(R.string.hatch) + currentPokemon.hatch);
+        if (currentPokemon.hatch >= 0) {
+            infoTxt.setText(String.format(getResources().getString(R.string.hatch_value), currentPokemon.hatch));
+        } else {
+            infoTxt.setText("");
+        }
+        
         
         infoTxt = (TextView)findViewById(R.id.egg_group_txt);
-        infoTxt.setText(getResources().getString(R.string.egg_group) + currentPokemon.eggGroup);
+        ArrayList<String> arr = new ArrayList<String>();
+        for (EggGroup e : currentPokemon.eggGroup) {
+            arr.add(getResources().getString(e.name));
+        }
+        infoTxt.setText(arr.toString().replace("[", "").replace("]", ""));
         
 
         TextView statTxt = (TextView)findViewById(R.id.lifeTxt);
@@ -546,7 +568,7 @@ public class PokemonPage extends Activity {
         typeWeakness = findViewById(R.id.eau);
         typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
         typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("WATER")).resource);
-        
+
         typeWeakness = findViewById(R.id.electrique);
         typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
         typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("ELECTRIC")).resource);
@@ -623,11 +645,11 @@ public class PokemonPage extends Activity {
             img.setLayoutParams(params);
             img.setImageDrawable(Drawable.createFromStream(
                     getAssets().open(
-                            "image/" + Utils.standardize(root.base.name, true) + ".png"), null));
+                            "image/" + root.base.name_str + ".png"), null));
             img.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View arg0) {
-                    loadData(root.base.name);
+                    loadData(root.base.name_str);
                 }
             });
             layout.addView(img);
@@ -678,12 +700,45 @@ public class PokemonPage extends Activity {
     
     private void addPathText(String path, LinearLayout layout) {
         TextView text = new TextView(this);
+        try {
+            Integer.parseInt(path);
+            path = String.format(getResources().getString(R.string.evo_level), path); 
+        } catch (NumberFormatException e) {
+            try {
+                path = getResources().getString(R.string.class.getField(path).getInt(null));
+            } catch (NotFoundException e1) {
+                e1.printStackTrace();
+                path = getResources().getString(R.string.evo_error);
+            } catch (IllegalArgumentException e1) {
+                e1.printStackTrace();
+                path = getResources().getString(R.string.evo_error);
+            } catch (IllegalAccessException e1) {
+                e1.printStackTrace();
+                path = getResources().getString(R.string.evo_error);
+            } catch (NoSuchFieldException e1) {
+                e1.printStackTrace();
+                path = getResources().getString(R.string.evo_error);
+            }
+        }
+        
         text.setText(path);
         LayoutParams params = new LayoutParams((int)(FULL_EVOLUTION_PIC_WIDTH*dpToPx + 0.5f), LayoutParams.WRAP_CONTENT);
         text.setLayoutParams(params);
         text.setTextSize(TypedValue.COMPLEX_UNIT_SP, FULL_EVOLUTION_PATH_SIZE);
         text.setEllipsize(null);
         text.setHorizontallyScrolling(false);
+        text.setGravity(Gravity.CENTER_HORIZONTAL);
         layout.addView(text);
+    }
+    
+    private String evChunk(int carac, int resource, boolean addComma) {
+        String result = "";
+        if (carac > 0) {
+            if (addComma) {
+                result += ", ";
+            }
+            result += carac + " " + getResources().getString(resource);
+        }
+        return result;
     }
 }

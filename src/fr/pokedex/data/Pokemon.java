@@ -2,11 +2,13 @@ package fr.pokedex.data;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import fr.pokedex.R;
 
 
-public class Pokemon {
+public class Pokemon implements Comparable<Pokemon> {
     
     @SuppressWarnings("serial")
     public static Pokemon MISSINGNO = new Pokemon(){{
@@ -24,6 +26,10 @@ public class Pokemon {
             ev = new EVBonus(0,0,0,0,0,0);
             eggGroup = new ArrayList<EggGroup>();
     }};
+
+    public static String MEGA_AFFIX = "mega";
+    public static String MEGA_X_AFFIX = "_x";
+    public static String MEGA_Y_AFFIX = "_y";
     
     public int db_id;
     public int name;
@@ -99,5 +105,73 @@ public class Pokemon {
             result.addAll(getEvolutionList(root.evolutions.get(path)));
         }
         return result;
+    }
+
+    public Pokemon getPrevious() {
+        SortedSet<Pokemon> sameNumbers = DataHolder.pokemonByNumber.get(number);
+        
+        SortedSet<Pokemon> previousSet = new TreeSet<Pokemon>(sameNumbers.headSet(this));
+        if (previousSet.size() == 0) {
+            previousSet = DataHolder.pokemonByNumber.get(number-1);
+            
+            if (previousSet == null || previousSet.size() == 0) {
+                return null;
+            }
+        }
+        return previousSet.last();
+    }
+
+    public Pokemon getNext() {
+        SortedSet<Pokemon> sameNumbers = DataHolder.pokemonByNumber.get(number);
+        
+        SortedSet<Pokemon> nextSet = new TreeSet<Pokemon>(sameNumbers.tailSet(this));
+        nextSet.remove(this); // tailSet() includes provided item in returned set.
+        if (nextSet.size() == 0) {
+            nextSet = DataHolder.pokemonByNumber.get(number+1);
+            
+            if (nextSet == null || nextSet.size() == 0) {
+                return null;
+            }
+        }
+        return nextSet.first();
+    }
+
+    public boolean hasPrevious() {
+        return getPrevious() != null;
+    }
+
+    public boolean hasNext() {
+        return getNext() != null;
+    }
+
+    @Override
+    public int compareTo(Pokemon other) {
+        // Compare numbers
+        if (this.number != other.number) {
+            return this.number - other.number;
+        }
+        
+        // If numbers are same, megaY > megaX > mega > other
+        if (this.name_str.contains(MEGA_Y_AFFIX)) {
+            return 1;
+        }
+        if (other.name_str.contains(MEGA_Y_AFFIX)) {
+            return -1;
+        }
+        if (this.name_str.contains(MEGA_X_AFFIX)) {
+            return 1;
+        }
+        if (other.name_str.contains(MEGA_X_AFFIX)) {
+            return -1;
+        }
+        if (this.name_str.contains(MEGA_AFFIX)) {
+            return 1;
+        }
+        if (other.name_str.contains(MEGA_AFFIX)) {
+            return -1;
+        }
+        
+        // No mega in comparison, sort by name
+        return this.name_str.compareTo(other.name_str);
     }
 }

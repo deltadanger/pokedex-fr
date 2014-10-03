@@ -5,8 +5,6 @@
     <string name="ability_outfight_error"></string>
     
     
-    
-    
     <string name="ability_name_truant">Absentéisme</string>
     <string name="ability_infight_truant">Le Pokémon n\'attaque qu\'un tour sur deux.</string>
     <string name="ability_outfight_truant"></string>
@@ -21,7 +19,7 @@
 
     <string name="ability_name_hustle">Agitation</string>
     <string name="ability_infight_hustle">Statistiques : Augmente l\'attaque de 50% mais baisse la précision de 20%.</string>
-    <string name="ability_outfight_hustle">Augmente de 50% les chances de rencontrer un Pokémon sauvage de haut niveau.É</string>
+    <string name="ability_outfight_hustle">Augmente de 50% les chances de rencontrer un Pokémon sauvage de haut niveau.</string>
 
     <string name="ability_name_air_lock">Air Lock</string>
     <string name="ability_infight_air_lock">Annule les effets du climat.</string>
