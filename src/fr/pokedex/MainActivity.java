@@ -9,6 +9,33 @@ import fr.pokedex.data.DataHolder;
 /*
  * TODO:
  * / Ajouter lien entre Ptéra et Mega-Ptéra
+ * - Ajouter images pour :
+name_aegislash_shield_forme
+name_darmanitan_standard_mode
+name_deoxys_defense_forme
+name_deoxys_normal_forme
+name_deoxys_speed_forme
+name_giratina_origin_forme
+name_gourgeist_average_size
+name_gourgeist_small_size
+name_gourgeist_super_size
+name_kyurem_black_kyurem
+name_landorus_therian_forme
+name_meloetta_aria_forme
+name_pumpkaboo_average_size
+name_pumpkaboo_large_size
+name_pumpkaboo_small_size
+name_rotom_fan_rotom
+name_rotom_frost_rotom
+name_rotom_heat_rotom
+name_rotom_normal_rotom
+name_rotom_wash_rotom
+name_shaymin_sky_forme
+name_thundurus_therian_forme
+name_tornadus_therian_forme
+name_wormadam_plant_cloak
+name_wormadam_sandy_cloak
+
  * - Clavier qui apparait quand on ferme les details d'un talent
  * - Layout de l'affichage des détails (certains mots sortent tel: Y530 (hwY530-U00))
  * - Trier les types par ordre alphabétiques dans la langue sélectionnée

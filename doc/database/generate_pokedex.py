@@ -25,8 +25,7 @@ def generate_pokemons(data):
         p.defense = row2[9].strip()
         p.sp_attack = row2[10].strip()
         p.sp_defense = row2[11].strip()
-        p.speed = row2[12].strip()[:-3]
-        
+        p.speed = row2[12].strip()[:-3]  
         p.size = rows[10].split(" = ")[1].strip()[:-2]
         p.weight = rows[5].split(" = ")[1].strip()[:-2]
         p.catch_rate = rows[4].split(" = ")[1].strip()[:-1]
