@@ -16,10 +16,7 @@ import fr.pokedex.data.DataHolder;
  * X Recherche par type
  * - Theme sombre
  * - Liste des attaques apprises
- */
-
-/* 
- * java.lang.OutOfMemoryError
+ * - Erreurs diverses
  */
 
 public class MainActivity extends Activity {
@@ -32,7 +29,7 @@ public class MainActivity extends Activity {
         DataHolder.initialize(this);
 
         Intent intent = new Intent(this, PokemonPage.class);
-        intent.putExtra(PokemonPage.INTENT_EXTRA_POKEMON_INDEX, 1);
+//        intent.putExtra(PokemonPage.INTENT_EXTRA_POKEMON_NAME, "");
         startActivity(intent);
         finish();
     }

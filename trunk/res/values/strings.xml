@@ -14,12 +14,16 @@
     <string name="evolution_chain">Chaine d\'évolution</string>
     <string name="info_title">Détails</string>
     
-    <string name="size">Taille (m):</string>
-    <string name="weight">Poids (kg):</string>
+    <string name="size">Taille :</string>
+    <string name="size_value">%1$s m</string>
+    <string name="weight">Poids :</string>
+    <string name="weight_value">%1$s kg</string>
     <string name="ev">EV :</string>
     <string name="catch_rate">Taux de capture :</string>
     <string name="gender">Sexe :</string>
+    <string name="gender_value">%1$s%% Femelle, %2$s%% Mâle </string>
     <string name="hatch">Eclosion :</string>
+    <string name="hatch_value">%1$s pas</string>
     <string name="egg_group">Groupe oeuf :</string>
 
     <string name="steel">acier</string>

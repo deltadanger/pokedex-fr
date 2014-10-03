@@ -1,6 +1,6 @@
 package fr.pokedex.provider;
 
-import java.util.Arrays;
+import java.util.TreeSet;
 
 import android.app.SearchManager;
 import android.content.ContentProvider;
@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.provider.BaseColumns;
 import fr.pokedex.R;
 import fr.pokedex.data.DataHolder;
+import fr.pokedex.data.Pokemon;
 import fr.pokedex.utils.Utils;
 
 public class SearchContentProvider extends ContentProvider {
@@ -25,21 +26,21 @@ public class SearchContentProvider extends ContentProvider {
         if ("".equals(query)) {
             return c;
         }
+
+        TreeSet<Pokemon> pokemons = new TreeSet<Pokemon>(DataHolder.pokemons.values());
         
-        Object[] names = DataHolder.pokemons.keySet().toArray();
-        Arrays.sort(names);
-        
-        for (Object obj : names) {
-            String name = obj.toString();
+        for (Pokemon p : pokemons) {
+            String name = getContext().getResources().getString(p.name);
             String stdName = Utils.standardize(name);
-            String number = ""+DataHolder.pokemons.get(name).number;
+            String number = ""+p.number;
             if (stdName.contains(query)) {
-                c.addRow(new Object[]{id++, "#" + number + " " + name, "content://" + getContext().getString(R.string.assets_authority) + "/image/"+Utils.standardize(name, true)+".png", name});
+                c.addRow(new Object[]{id++, "#" + number + " " + name, "content://" + getContext().getString(R.string.assets_authority) + "/image/"+p.name_str+".png", p.name_str});
             }
             if (number.contains(query)) {
-            	c.addRow(new Object[]{id++, "#" + number + " " + name, "content://" + getContext().getString(R.string.assets_authority) + "/image/"+Utils.standardize(name, true)+".png", name});
+            	c.addRow(new Object[]{id++, "#" + number + " " + name, "content://" + getContext().getString(R.string.assets_authority) + "/image/"+p.name_str+".png", p.name_str});
             }
         }
+        
         return c;
     }
 

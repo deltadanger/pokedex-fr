@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="evo_level">Niveau </string>
+    <string name="evo_level">Niveau %1$s</string>
+    <string name="evo_error">Erreur</string>
     
     <string name="evo_oval_stone">Gain de niveau en tenant une Pierre Ovale</string>
     <string name="evo_leafeon">Gain de niveau pres d\'une Pierre Mousse</string>
@@ -63,4 +64,6 @@
     <string name="evo_attack_mimic">En apprenant l\'attaque Copie</string>
     <string name="evo_attack_rollout">En apprenant l\'attaque Roulade</string>
     <string name="evo_mega">Mega Evolution</string>
+    <string name="evo_mega_x">Mega Evolution X</string>
+    <string name="evo_mega_y">Mega Evolution Y</string>
 </resources>
