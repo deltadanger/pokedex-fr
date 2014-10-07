@@ -31,7 +31,7 @@
 
     <string name="ability_name_magma_armor">Armumagma</string>
     <string name="ability_infight_magma_armor">Immunise contre le gel.</string>
-    <string name="ability_outfight_magma_armor">Divise par deux le nombre de pas nécessaire à l\'éclosion d\'un oeuf.É</string>
+    <string name="ability_outfight_magma_armor">Divise par deux le nombre de pas nécessaire à l\'éclosion d\'un oeuf.</string>
 
     <string name="ability_name_battle_armor">Armurbaston</string>
     <string name="ability_infight_battle_armor">Annule les chances de coups critiques du Pokémon ennemi.</string>
@@ -83,7 +83,7 @@
 
     <string name="ability_name_flame_body">Corps Ardent</string>
     <string name="ability_infight_flame_body">30% de chance de provoquer une brûlure sur le Pokémon adverse ayant attaqué.</string>
-    <string name="ability_outfight_flame_body">Divise par deux le nombre de pas nécessaire à l\'éclosion d\'un oeuf.É</string>
+    <string name="ability_outfight_flame_body">Divise par deux le nombre de pas nécessaire à l\'éclosion d\'un oeuf.</string>
 
     <string name="ability_name_clear_body">Corps Sain</string>
     <string name="ability_infight_clear_body">Statistiques : Empêche la diminution de statistiques par le Pokémon adverse.</string>
@@ -115,7 +115,7 @@
 
     <string name="ability_name_white_smoke">Écran Fumée</string>
     <string name="ability_infight_white_smoke">Empêche la diminution de statistiques par le Pokémon adverse.</string>
-    <string name="ability_outfight_white_smoke">Réduit de 50% les chances d\'être attaqué par un Pokémon sauvage.É</string>
+    <string name="ability_outfight_white_smoke">Réduit de 50% les chances d\'être attaqué par un Pokémon sauvage.</string>
 
     <string name="ability_name_shield_dust">Écran Poudre</string>
     <string name="ability_infight_shield_dust">Empêche les effets secondaires des attaques subies.</string>
@@ -127,11 +127,11 @@
 
     <string name="ability_name_vital_spirit">Esprit Vital</string>
     <string name="ability_infight_vital_spirit">Empêche le Pokémon d\'être endormi.</string>
-    <string name="ability_outfight_vital_spirit">Augmente de 50% les chances de rencontrer un Pokémon sauvage de haut niveau.É</string>
+    <string name="ability_outfight_vital_spirit">Augmente de 50% les chances de rencontrer un Pokémon sauvage de haut niveau.</string>
 
     <string name="ability_name_swarm">Essaim</string>
     <string name="ability_infight_swarm">Augmente la puissance des attaques de type Insecte de 50% lorsque le Pokémon a moins d\'1/3 de ses PV totaux.</string>
-    <string name="ability_outfight_swarm">Augmente les chances d\'entendre le cri d\'un Pokémon sauvage.É</string>
+    <string name="ability_outfight_swarm">Augmente les chances d\'entendre le cri d\'un Pokémon sauvage.</string>
 
     <string name="ability_name_sturdy">Fermeté</string>
     <string name="ability_infight_sturdy">Immunise contre les attaques OHKO.*</string>
@@ -155,7 +155,7 @@
 
     <string name="ability_name_sticky_hold">Glue</string>
     <string name="ability_infight_sticky_hold">Empêche la perte de l\'objet tenu.</string>
-    <string name="ability_outfight_sticky_hold">Facilite la capture des Pokémon pêchés.É</string>
+    <string name="ability_outfight_sticky_hold">Facilite la capture des Pokémon pêchés.</string>
 
     <string name="ability_name_hyper_cutter">Hyper Cutter</string>
     <string name="ability_infight_hyper_cutter">Statistiques : Empêche la diminution d\'attaque du Pokémon.</string>
@@ -171,7 +171,7 @@
 
     <string name="ability_name_intimidate">Intimidation</string>
     <string name="ability_infight_intimidate">Statistiques : Diminue d\'un niveau l\'attaque du Pokémon adverse.</string>
-    <string name="ability_outfight_intimidate">Réduit de 50% les chances d\'être attaqué par un Pokémon sauvage de bas niveau.É</string>
+    <string name="ability_outfight_intimidate">Réduit de 50% les chances d\'être attaqué par un Pokémon sauvage de bas niveau.</string>
 
     <string name="ability_name_thick_fat">Isograisse</string>
     <string name="ability_infight_thick_fat">Les dégâts provoqués par les attaques des types Feu ou Glace sont divisés par 2.</string>
@@ -179,7 +179,7 @@
 
     <string name="ability_name_cute_charm">Joli Sourire</string>
     <string name="ability_infight_cute_charm">30% de chance de provoquer l\'attirance du Pokémon adverse ayant attaqué.</string>
-    <string name="ability_outfight_cute_charm">Augmente de 50% les chances d\'être attaqué par un Pokémon sauvage du sexe opposé.É</string>
+    <string name="ability_outfight_cute_charm">Augmente de 50% les chances d\'être attaqué par un Pokémon sauvage du sexe opposé.</string>
 
     <string name="ability_name_levitate">Lévitation</string>
     <string name="ability_infight_levitate">Immunise contre les attaques de type Sol.</string>
@@ -191,7 +191,7 @@
 
     <string name="ability_name_magnet_pull">Magnépiège</string>
     <string name="ability_infight_magnet_pull">Empêche la fuite et le changement des Pokémon de type Acier.</string>
-    <string name="ability_outfight_magnet_pull">Augmente de 50% les chances de rencontrer un Pokémon sauvage de type acier.É</string>
+    <string name="ability_outfight_magnet_pull">Augmente de 50% les chances de rencontrer un Pokémon sauvage de type acier.</string>
 
     <string name="ability_name_shadow_tag">Marque Ombre</string>
     <string name="ability_infight_shadow_tag">Empêche la fuite des Pokémon sauvage et le changement du Pokémon adverse.</string>
@@ -223,11 +223,11 @@
 
     <string name="ability_name_compoundeye">Oeil Composé</string>
     <string name="ability_infight_compoundeye">Statistiques : Double la précision du Pokémon.</string>
-    <string name="ability_outfight_compoundeye">Augmente les chances de rencontrer un Pokémon sauvage tenant un objet.É</string>
+    <string name="ability_outfight_compoundeye">Augmente les chances de rencontrer un Pokémon sauvage tenant un objet.</string>
 
     <string name="ability_name_lightningrod">Paratonnerre</string>
     <string name="ability_infight_lightningrod">Attire toutes les attaques de type électrique.*</string>
-    <string name="ability_outfight_lightningrod">Augmente les chances de recevoir un appel sur le PokéNav.É</string>
+    <string name="ability_outfight_lightningrod">Augmente les chances de recevoir un appel sur le PokéNav.</string>
 
     <string name="ability_name_rough_skin">Peau Dure</string>
     <string name="ability_infight_rough_skin">Fait perdre 1/16è des PV du Pokémon adverse lors d\'une attaque directe.</string>
@@ -235,7 +235,7 @@
 
     <string name="ability_name_arena_trap">Piège</string>
     <string name="ability_infight_arena_trap">Empêche la fuite et le changement du Pokémon adverse, s\'il touche le sol.</string>
-    <string name="ability_outfight_arena_trap">Augmente de 50% les chances d\'être attaqué par un Pokémon sauvage.É</string>
+    <string name="ability_outfight_arena_trap">Augmente de 50% les chances d\'être attaqué par un Pokémon sauvage.</string>
 
     <string name="ability_name_plus">Plus</string>
     <string name="ability_infight_plus">Statistiques : Augmente l\'attaque spéciale de 50% en match double, si le partenaire à le talent « Minus ».</string>
@@ -251,7 +251,7 @@
 
     <string name="ability_name_pressure">Pression</string>
     <string name="ability_infight_pressure">Double l\'utilisation de PP des attaques offensives du Pokémon adverse.</string>
-    <string name="ability_outfight_pressure">Augmente de 50% les chances d\'être attaqué par un Pokémon sauvage.É</string>
+    <string name="ability_outfight_pressure">Augmente de 50% les chances d\'être attaqué par un Pokémon sauvage.</string>
 
     <string name="ability_name_stench">Puanteur</string>
     <string name="ability_infight_stench">—</string>
@@ -263,7 +263,7 @@
 
     <string name="ability_name_keen_eye">Regard Vif</string>
     <string name="ability_infight_keen_eye">Statistiques : Empêche la perte de précision.</string>
-    <string name="ability_outfight_keen_eye">Réduit de 50% les chances d\'être attaqué par un Pokémon sauvage de bas niveau.É</string>
+    <string name="ability_outfight_keen_eye">Réduit de 50% les chances d\'être attaqué par un Pokémon sauvage de bas niveau.</string>
 
     <string name="ability_name_sand_stream">Sable Volant</string>
     <string name="ability_infight_sand_stream">Déclenche une tempête de sable tant que le Pokémon est en jeu.</string>
@@ -279,7 +279,7 @@
 
     <string name="ability_name_static">Statik</string>
     <string name="ability_infight_static">30% de chance de provoquer la paralysie du Pokémon adverse ayant attaqué.</string>
-    <string name="ability_outfight_static">Augmente de 50% les chances de rencontrer un Pokémon sauvage de type électrique.É</string>
+    <string name="ability_outfight_static">Augmente de 50% les chances de rencontrer un Pokémon sauvage de type électrique.</string>
 
     <string name="ability_name_liquid_ooze">Suintement</string>
     <string name="ability_infight_liquid_ooze">Les attaques vampiriques du Pokémon adverse lui font perdre des PV.</string>
@@ -287,7 +287,7 @@
 
     <string name="ability_name_synchronize">Synchro</string>
     <string name="ability_infight_synchronize">Toute altération d\'état subie est transmise au Pokémon adverse.</string>
-    <string name="ability_outfight_synchronize">Augmente les chances de rencontrer un Pokémon sauvage ayant la même nature.É</string>
+    <string name="ability_outfight_synchronize">Augmente les chances de rencontrer un Pokémon sauvage ayant la même nature.</string>
 
     <string name="ability_name_own_tempo">Tempo Perso</string>
     <string name="ability_infight_own_tempo">Immunise contre la confusion.</string>
@@ -315,11 +315,11 @@
 
     <string name="ability_name_suction_cups">Ventouse</string>
     <string name="ability_infight_suction_cups">Empêche d\'être changé de force par une attaque adverse.</string>
-    <string name="ability_outfight_suction_cups">Facilite la capture des Pokémon pêchés.É</string>
+    <string name="ability_outfight_suction_cups">Facilite la capture des Pokémon pêchés.</string>
 
     <string name="ability_name_sand_veil">Voile Sable</string>
     <string name="ability_infight_sand_veil">Statistiques : Augmente l\'esquive de 20% lors d\'une tempête de sable, et immunise contre les dégâts de la tempête de sable.</string>
-    <string name="ability_outfight_sand_veil">Réduit de 50% les chances d\'être attaqué par un Pokémon sauvage lors d\'une tempête de sable.É</string>
+    <string name="ability_outfight_sand_veil">Réduit de 50% les chances d\'être attaqué par un Pokémon sauvage lors d\'une tempête de sable.</string>
 
     <string name="ability_name_adaptability">Adaptabilité</string>
     <string name="ability_infight_adaptability">STAB : Si ce Pokémon utilise une attaque de son type, la puissance de l\'attaque est multipliée par 2 au lieu de 1.5.</string>

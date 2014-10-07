@@ -337,17 +337,3 @@ public class DataHolder {
         return result;
     }
 }
-
-
-//abilities = new ArrayList<Ability>(){{this.add(Ability.GUTS);this.add(Ability.RUN_AWAY);this.add(Ability.HUSTLE);}};
-//perName.put(ctx.getString(R.string.name_raticate), new Pokemon(ctx.getString(R.string.name_raticate), 20, 24, Type.NORMAL, Type.NONE, abilities, 55, 81, 60, 50, 70, 97));
-
-//p = perName.get(ctx.getString(R.string.name_lopunny));
-//p.evolutions = new EvolutionNode(perName.get(ctx.getString(R.string.name_buneary)), new HashMap<String, EvolutionNode>(){{this.put("Bonheur", new EvolutionNode(perName.get(ctx.getString(R.string.name_lopunny)), null));}});
-//p.catchRate = 60;
-//p.weight = 33.3f;
-//p.hatch = 5120;
-//p.gender = 50f;
-//p.ev = new SparseIntArray(){{this.append(2, R.string.speed_short);}};
-//p.eggGroup = new EggGroup[]{EggGroup.FIELD,EggGroup.HUMANLIKE};
-//p.size = 1.2f;

@@ -54,7 +54,7 @@
     <string name="name_toxicroak">Coatox</string>
     <string name="name_medicham">Charmina</string>
     <string name="name_jolteon">Voltali</string>
-    <string name="name_aegislash_shield_forme">Exagide (Forme Assaut)</string>
+    <string name="name_aegislash_shield_forme">Exagide (Forme Parade)</string>
     <string name="name_ralts">Tarsal</string>
     <string name="name_pawniard">Scalpion</string>
     <string name="name_lairon">Galegon</string>
@@ -101,7 +101,7 @@
     <string name="name_tynamo">Anchwatt</string>
     <string name="name_plusle">Posipi</string>
     <string name="name_unown">Zarbi</string>
-    <string name="name_aegislash_blade_forme">Exagide (Forme Parade)</string>
+    <string name="name_aegislash_blade_forme">Exagide (Forme Assaut)</string>
     <string name="name_baltoy">Balbuto</string>
     <string name="name_yanma">Yanma</string>
     <string name="name_pidove">Poichigeon</string>
@@ -209,7 +209,7 @@
     <string name="name_swampert">Laggron</string>
     <string name="name_mudkip">Gobou</string>
     <string name="name_farfetchd">Canarticho</string>
-    <string name="name_kyurem_normal_kyurem">Kyurem</string>
+    <string name="name_kyurem">Kyurem</string>
     <string name="name_groudon">Groudon</string>
     <string name="name_scyther">Insécateur</string>
     <string name="name_sunkern">Tournegrin</string>

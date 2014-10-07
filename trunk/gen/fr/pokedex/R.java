@@ -1144,8 +1144,8 @@ public final class R {
         public static int name_krokorok=0x7f070545;
         public static int name_krookodile=0x7f0703b3;
         public static int name_kyogre=0x7f070338;
+        public static int name_kyurem=0x7f070362;
         public static int name_kyurem_black_kyurem=0x7f0703cf;
-        public static int name_kyurem_normal_kyurem=0x7f070362;
         public static int name_kyurem_white_kyurem=0x7f07042b;
         public static int name_lairon=0x7f0702ca;
         public static int name_lampent=0x7f0703cc;
