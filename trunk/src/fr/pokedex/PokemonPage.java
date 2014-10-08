@@ -3,12 +3,16 @@ package fr.pokedex;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.content.res.Resources.NotFoundException;
 import android.graphics.Color;
 import android.graphics.Rect;
@@ -49,6 +53,8 @@ public class PokemonPage extends Activity {
     public static final String INTENT_EXTRA_POKEMON_NAME = "intent_extra_pokemon_name";
     public static final String INTENT_EXTRA_SCROLL_POSITION = "intent_extra_scroll_position";
     public static final String DEFAULT_POKEMON_NAME = "name_bulbasaur";
+    public static final String LANGUAGE_PREFERENCE = "language_preference";
+    public static final String LANGUAGE_PREFERENCE_KEY = "lang";
     
     private static int infosVisibility = View.GONE;
 
@@ -96,6 +102,12 @@ public class PokemonPage extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        final SharedPreferences languageSettings = getSharedPreferences(LANGUAGE_PREFERENCE, 0);
+        
+        String lang = languageSettings.getString(LANGUAGE_PREFERENCE_KEY, getResources().getConfiguration().locale.getLanguage());
+        setCurrentLanguage(lang);
+        
         setContentView(R.layout.activity_main);
         dpToPx = getResources().getDisplayMetrics().density;
         
@@ -105,6 +117,31 @@ public class PokemonPage extends Activity {
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setIconified(false);
         searchView.clearFocus();
+
+        final ImageView language = (ImageView) findViewById(R.id.language);
+        final LanguageAdapter adapter = new LanguageAdapter(this, getResources().getStringArray(R.array.languages));
+        language.setOnClickListener(new OnClickListener() {
+            
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(PokemonPage.this)
+                .setAdapter(adapter, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String lang = getResources().getStringArray(R.array.languages)[which].split(";")[0];
+                        setCurrentLanguage(lang);
+
+                        ScrollView scroll = (ScrollView)findViewById(R.id.main_scroll);
+                        Intent intent = new Intent(PokemonPage.this, PokemonPage.this.getClass());
+                        intent.putExtra(INTENT_EXTRA_POKEMON_NAME, currentPokemon.name_str);
+                        intent.putExtra(INTENT_EXTRA_SCROLL_POSITION, scroll.getScrollY());
+                        startActivity(intent);
+                        
+                        dialog.dismiss();
+                    }
+                }).create().show();
+            }
+        });
         
         final Intent intent = getIntent();
         
@@ -201,6 +238,33 @@ public class PokemonPage extends Activity {
             }
         });
     }
+
+    private void setCurrentLanguage(String lang) {
+        SharedPreferences languageSettings = getSharedPreferences(LANGUAGE_PREFERENCE, 0);
+        
+        SharedPreferences.Editor editor = languageSettings.edit();
+        editor.putString(LANGUAGE_PREFERENCE_KEY, lang);
+        editor.commit();
+
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+
+        ImageView language = (ImageView) findViewById(R.id.language);
+        if (language != null) {
+            try {
+                language.setImageResource(R.drawable.class.getField(lang).getInt(null));
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
+            }
+        }
+    }
     
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
@@ -277,6 +341,9 @@ public class PokemonPage extends Activity {
         return ret;
     }
     
+    /**
+     * Returns the HorizontalScrollView at given coordinates, if it exists.
+     */
     private HorizontalScrollView getHorizontalScrollView(float x, float y) {
         View v = findViewById(R.id.evolution_scroll);
         int[] location = {0,0};

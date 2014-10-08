@@ -11,6 +11,12 @@
     <string name="expand">Elargir</string>
     <string name="type">Type</string>
     
+    <string name="language">Langue</string>
+    <string-array name="languages">
+        <item>fr;Français</item>
+        <item>en;English</item>
+    </string-array>
+    
     <string name="evolution_chain">Chaine d\'évolution</string>
     <string name="info_title">Détails</string>
     
