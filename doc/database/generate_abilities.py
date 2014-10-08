@@ -1,13 +1,10 @@
 # -*- coding: utf-8 -*- 
-from app.models import Ability
+# from app.models import Ability
 
-def main(data):
-    data = data.split("\n")
-    
-    
+def main(data, data_en):
     talents = []
     
-    for row in data:
+    for row in data.split("\n"):
         row = row.split("\t")
         talent = {
             "name": row[0],
@@ -23,7 +20,7 @@ def main(data):
         
         talents.append(talent)
     
-    
+    abilities_en = []
     for talent in talents:
         namefr = talent["name"].strip().replace("�", "e").replace("�", "e").replace("�", "e").replace("�", "E").replace("�", "U").replace("-", "_").replace(" ", "_").replace(".", "").upper()
         name = talent["eng_name"].strip().replace("-", "_").replace(" ", "_").replace(".", "").upper()
@@ -32,19 +29,58 @@ def main(data):
         # print '    {0} (R.string.ability_name_{1}, R.string.ability_infight_{1}, R.string.ability_outfight_{1}),'.format(name, name.lower())
         
         # Database
-        Ability.objects.get_or_create(identifier=name.lower())
+#         Ability.objects.get_or_create(identifier=name.lower())
         
         # abilities.xml - fr
 #         print "    <string name=\"ability_name_{}\">{}</string>".format(name.lower(), namefr)
 #         print "    <string name=\"ability_infight_{}\">{}</string>".format(name.lower(), talent["in_fight"].replace("'", "\\'").strip())
 #         print "    <string name=\"ability_outfight_{}\">{}</string>".format(name.lower(), talent["out_fight"].replace("'", "\\'").strip())
 #         print ""
+#         
+        abilities_en.append(name.lower())
         
         # Ability name mapping
         
-        print '"' + namefr + '": "' + name.upper() + '",'
+#         print '"' + namefr + '": "' + name.upper() + '",
         
     
+    talents = []
+    
+    for row in data_en.split("\n"):
+        row = row.split("    ")
+        talent = {
+            "name": row[1].strip().replace("-", "_").replace(" ", "_").replace(".", "").lower(),
+            "eng_name": row[1].strip(),
+            "in_fight": row[2].replace("\"", "\\\"").strip()
+        }
+        
+        if talent["name"] in english_name_unused:
+            continue
+        
+        name_used = english_name_mapping.get(talent["name"])
+        if name_used:
+            talent["name"] = name_used
+        
+        talents.append(talent)
+    
+    for talent in talents:
+#         # abilities.xml - en
+        print "    <string name=\"ability_name_{}\">{}</string>".format(talent["name"].lower(), talent["eng_name"])
+        print "    <string name=\"ability_infight_{}\">{}</string>".format(talent["name"].lower(), talent["in_fight"].replace("'", "\\'"))
+        print "    <string name=\"ability_outfight_{}\"></string>".format(talent["name"].lower())
+        print ""
+
+english_name_mapping = {
+    "compound_eyes" : "compoundeye",
+    "lightning_rod" : "lightningrod",
+}
+
+english_name_unused = [
+    "delta_stream",
+    "desolate_land",
+    "primordial_sea",
+]
+
 data = """Absent�isme 	Truant 	Le Pok�mon n'attaque qu'un tour sur deux. 	�
 Absorb Eau 	Water Absorb 	Les attaques de type eau re�ues par le Pok�mon r�g�n�rent 1/4 de ses PV. 	�
 Absorb Volt 	Volt Absorb 	Les attaques de type �lectrique re�ues par le Pok�mon r�g�n�rent 1/4 de ses PV. 	�
@@ -235,4 +271,196 @@ Symbiose 	Symbiosis 	Passe un objet tenu � un Pok�mon alli� lorsque l'alli
 Toison �paisse 	Fur Coat 	Divise par deux les d�g�ts re�us lors d'une attaque physique.
 Toison Herbue 	Grass Pelt 	Augmente la D�fense lorsque Champ Herbu est en vigueur."""
 
-main(data)
+data_en = """091     Adaptability     Powers up moves of the same type.     IV     0     4     5
+184     Aerilate     Normal-type moves become Flying-type moves.     VI     1     0     0
+106     Aftermath     Damages the foe landing the finishing hit.     IV     0     4     4
+076     Air Lock     Eliminates the effects of weather.     III     1     0     0
+148     Analytic     Strengthens moves when moving last.     V     0     0     12
+083     Anger Point     Raises Attack upon taking a critical hit.     IV     0     3     4
+107     Anticipation     Senses the foe’s dangerous moves.     IV     1     4     2
+071     Arena Trap     Prevents the foe from fleeing.     III     0     3     0
+165     Aroma Veil     Protects allies from attacks that limit their move choices.     VI     0     0     2
+188     Aura Break     The effects of "Aura" Abilities are reversed.     VI     1     0     0
+123     Bad Dreams     Reduces a sleeping foe’s HP.     IV     1     0     0
+004     Battle Armor     The Pokémon is protected against critical hits.     III     2     4     2
+145     Big Pecks     Protects the Pokémon from Defense-lowering attacks.     V     0     8     4
+066     Blaze     Powers up Fire-type moves in a pinch.     III     18     0     2
+171     Bulletproof     Protects the Pokémon from some ball and bomb moves.     VI     0     0     3
+—     Cacophony     Avoids sound-based moves.     III     0     0     0
+167     Cheek Pouch     Restores HP as well when the Pokémon eats a Berry.     VI     0     3     0
+034     Chlorophyll     Boosts the Pokémon’s Speed in sunshine.     III     10     19     6
+029     Clear Body     Prevents the Pokémon’s stats from being lowered.     III     7     2     3
+013     Cloud Nine     Eliminates the effects of weather.     III     0     2     4
+016     Color Change     Changes the Pokémon’s type to the foe’s move.     III     1     0     0
+172     Competitive     Boosts the Sp.Atk stat when a stat is lowered.     VI     0     7     1
+014     Compound Eyes     The Pokémon’s accuracy is boosted.     III     2     6     1
+126     Contrary     Inverts stat modifiers.     V     0     2     5
+130     Cursed Body     Has a 30% chance of Disabling any move that hits the Pokémon.     V     0     2     3
+056     Cute Charm     Contact with the Pokémon may cause infatuation.     III     1     12     1
+006     Damp     Prevents combatants from self destructing.     III     0     8     10
+186     Dark Aura     Powers up each Pokémon's Dark-type moves.     VI     1     0     0
+129     Defeatist     Halves Attack and Special Attack below 50% HP.     V     2     0     0
+128     Defiant     Raises Attack two stages upon having any stat lowered.     V     0     2     10
+ ???     Delta Stream     Eliminates weather effects and eliminates weaknesses of Flying-type Pokémon.     VI     1     0     0
+ ???     Desolate Land     Creates harsh sunlight.     VI     1     0     0
+088     Download     Adjusts power according to the foe’s lowest defensive stat.     IV     1     3     0
+002     Drizzle     The Pokémon makes it rain if it appears in battle.     III     1     0     1
+070     Drought     The Pokémon makes it sunny if it is in battle.     III     2     0     2
+087     Dry Skin     Reduces HP if it is hot. Water restores HP.     IV     0     6     1
+048     Early Bird     The Pokémon awakens quickly from sleep.     III     0     13     2
+027     Effect Spore     Contact may paralyze, poison, or cause sleep.     III     2     4     1
+187     Fairy Aura     Powers up each Pokémon's Fairy-type moves.     VI     1     0     0
+111     Filter     Powers down supereffective moves.     IV     1     2     0
+049     Flame Body     Contact with the Pokémon may burn the foe.     III     9     5     4
+138     Flare Boost     Increases Special Attack to 1.5× when burned.     V     0     0     2
+018     Flash Fire     Powers up Fire-type moves if hit by a fire move.     III     4     10     4
+122     Flower Gift     Powers up party Pokémon when it is sunny.     IV     1     0     0
+166     Flower Veil     Prevents lowering of ally Grass-type Pokémon's stats.     VI     3     0     0
+059     Forecast     Transforms with the weather.     III     1     0     0
+108     Forewarn     Determines what moves the foe has.     IV     0     6     0
+132     Friend Guard     Decreases damage inflicted against ally Pokémon.     V     0     0     8
+119     Frisk     The Pokémon can check the foe’s held item.     IV     0     12     8
+169     Fur Coat     Halves damage from physical moves.     VI     1     0     0
+177     Gale Wings     Gives priority to Flying-type moves.     VI     0     0     3
+082     Gluttony     Encourages the early use of a held Berry.     IV     6     4     9
+183     Gooey     Contact with the Pokémon lowers the attacker's Speed stat.     VI     0     0     3
+179     Grass Pelt     Boosts the Defense stat in Grassy Terrain.     VI     0     0     2
+062     Guts     Boosts Attack if there is a status problem.     III     3     14     4
+139     Harvest     Restores any held Berry after the turn on which it is used.     V     0     0     5
+131     Healer     Has a 30% chance of curing each adjacent ally of any major status ailment after each turn.     V     2     2     3
+085     Heatproof     Weakens the power of Fire-type moves.     IV     0     2     0
+134     Heavy Metal     Doubles the Pokémon's weight.     V     0     0     5
+118     Honey Gather     The Pokémon may gather Honey from somewhere.     IV     1     0     1
+037     Huge Power     Raises the Pokémon’s Attack stat.     III     1     3     2
+055     Hustle     Boosts the Attack stat, but lowers accuracy.     III     3     7     8
+093     Hydration     Heals status problems if it is raining.     IV     2     10     9
+052     Hyper Cutter     Prevents the Attack stat from being lowered.     III     0     9     0
+115     Ice Body     The Pokémon regains HP in a hailstorm.     IV     3     7     4
+035     Illuminate     Raises the likelihood of meeting wild Pokémon.     III     0     6     0
+149     Illusion     Takes the appearance of the last conscious party Pokémon upon being sent out until hit by a damaging move.     V     2     0     0
+017     Immunity     Prevents the Pokémon from getting poisoned.     III     1     1     1
+150     Imposter     Transforms upon entering battle.     V     0     0     1
+151     Infiltrator     Ignores Light Screen, Reflect, and Safeguard.     V     0     7     14
+039     Inner Focus     The Pokémon is protected from flinching.     III     4     16     6
+015     Insomnia     Prevents the Pokémon from falling asleep.     III     0     11     3
+022     Intimidate     Lowers the foe’s Attack stat.     III     5     19     3
+160     Iron Barbs     Damages attacking Pokémon for 1/8 their max HP on contact.     V     2     0     0
+089     Iron Fist     Boosts the power of punching moves.     IV     0     5     7
+154     Justified     Raises Attack when hit by Dark-type moves.     V     4     0     5
+051     Keen Eye     Prevents the Pokémon from losing accuracy.     III     5     21     5
+103     Klutz     The Pokémon can’t use any held items.     IV     0     6     1
+102     Leaf Guard     Prevents status problems in sunny weather.     IV     1     6     7
+026     Levitate     Gives full immunity to all Ground-type moves.     III     30     2     0
+135     Light Metal     Halves the Pokémon's weight.     V     0     0     5
+031     Lightning Rod     The Pokémon draws in all Electric-type moves.     III     0     9     5
+007     Limber     The Pokémon is protected from paralysis.     III     1     7     2
+064     Liquid Ooze     Inflicts damage on foes using any draining move.     III     0     4     0
+156     Magic Bounce     Reflects most non-damaging moves back at their user.     V     1     0     3
+098     Magic Guard     The Pokémon only takes damage from attacks.     IV     0     7     3
+170     Magician     The Pokémon steals the held item of a Pokémon it hits with a move.     VI     0     0     4
+040     Magma Armor     Prevents the Pokémon from becoming frozen.     III     0     3     0
+042     Magnet Pull     Prevents Steel-type Pokémon from escaping.     III     0     5     0
+063     Marvel Scale     Boosts Defense if there is a status problem.     III     1     0     2
+178     Mega Launcher     Powers up aura and pulse moves.     VI     3     0     0
+058     Minus     Boosts Sp. Atk if another Pokémon has Plus.     III     1     3     2
+104     Mold Breaker     Moves can be used regardless of Abilities.     IV     4     6     8
+141     Moody     Raises a random stat two stages and lowers another one stage after each turn.     V     0     0     7
+078     Motor Drive     Raises Speed if hit by an Electric-type move.     IV     1     2     1
+153     Moxie     Raises Attack one stage upon KOing a Pokémon.     V     0     5     8
+136     Multiscale     Halves damage taken from full HP.     V     0     0     2
+121     Multitype     Changes type to match the held Plate.     IV     1     0     0
+152     Mummy     Contact with this Pokémon spreads this Ability.     V     2     0     0
+030     Natural Cure     All status problems are healed upon switching out.     III     3     12     0
+099     No Guard     Ensures the Pokémon and its foe’s attacks land.     IV     2     3     3
+096     Normalize     All the Pokémon’s moves become the Normal type.     IV     0     2     0
+012     Oblivious     Prevents the Pokémon from becoming infatuated.     III     0     16     3
+142     Overcoat     Protects against damage from weather.     V     0     5     12
+065     Overgrow     Powers up Grass-type moves in a pinch.     III     18     0     2
+020     Own Tempo     Prevents the Pokémon from becoming confused.     III     0     15     5
+185     Parental Bond     Parent and child attack together.     VI     1     0     0
+124     Pickpocket     Steals attacking Pokémon's held item on contact.     V     0     0     7
+053     Pickup     The Pokémon may pick up items.     III     1     14     0
+182     Pixilate     Normal-type moves become Fairy-type moves.     VI     1     0     1
+057     Plus     Boosts Sp. Atk if another Pokémon has Minus.     III     1     3     4
+090     Poison Heal     Restores HP if the Pokémon is poisoned.     IV     0     2     1
+038     Poison Point     Contact with the Pokémon may poison the foe.     III     0     16     0
+143     Poison Touch     Has a 30% chance of poisoning Pokémon upon contact when attacking.     V     0     3     4
+158     Prankster     Raises non-damaging moves' priority by one stage.     V     4     2     8
+046     Pressure     The Pokémon raises the foe’s PP usage.     III     18     3     4
+ ???     Primordial Sea     Causes heavy rain.     VI     1     0     0
+168     Protean     Changes the Pokémon's type to the same type of the move it is using.     VI     0     0     4
+074     Pure Power     Boosts the power of physical attacks.     III     3     0     0
+095     Quick Feet     Boosts Speed if there is a status problem.     IV     0     5     4
+044     Rain Dish     The Pokémon gradually recovers HP in rain.     III     0     3     8
+155     Rattled     Raises Speed one stage upon being hit by a Dark, Ghost, or Bug move.     V     0     0     11
+120     Reckless     Powers up moves that have recoil damage.     IV     0     3     8
+174     Refrigerate     Normal-type moves become Ice-type moves.     VI     2     0     0
+144     Regenerator     Heals for 1/3 max HP upon leaving battle.     V     0     3     14
+079     Rivalry     Raises Attack if the foe is of the same gender.     IV     0     14     4
+069     Rock Head     Protects the Pokémon from recoil damage.     III     2     16     5
+024     Rough Skin     Inflicts damage to the foe on contact.     III     2     1     3
+050     Run Away     Enables sure getaway from wild Pokémon.     III     0     16     8
+159     Sand Force     Strengthens Rock, Ground, and Steel moves to 1.3× their power during a sandstorm.     V     1     2     11
+146     Sand Rush     Doubles Speed during a sandstorm.     V     0     4     2
+045     Sand Stream     The Pokémon summons a sandstorm in battle.     III     3     0     0
+008     Sand Veil     Boosts the Pokémon’s evasion in a sandstorm.     III     7     6     7
+157     Sap Sipper     Absorbs Grass moves, raising Attack one stage.     V     2     6     8
+113     Scrappy     Enables moves to hit Ghost-type foes.     IV     0     2     8
+032     Serene Grace     Boosts the likelihood of added effects appearing.     III     2     8     2
+023     Shadow Tag     Prevents the foe from escaping.     III     2     0     3
+061     Shed Skin     The Pokémon may heal its own status problems.     III     11     5     0
+125     Sheer Force     Strengthens moves with extra effects to 1.3× their power, but prevents their extra effects.     V     1     6     17
+075     Shell Armor     The Pokémon is protected against critical hits.     III     1     13     7
+019     Shield Dust     Blocks the added effects of attacks taken.     III     4     3     0
+086     Simple     The Pokémon is prone to wild stat changes.     IV     0     3     2
+092     Skill Link     Increases the frequency of multi-strike moves.     IV     0     2     4
+112     Slow Start     Temporarily halves Attack and Speed.     IV     1     0     0
+097     Sniper     Powers up moves if they become critical hits.     IV     0     9     5
+081     Snow Cloak     Raises evasion in a hailstorm.     IV     4     3     1
+117     Snow Warning     The Pokémon summons a hailstorm in battle.     IV     3     0     2
+094     Solar Power     Boosts Sp. Atk, but lowers HP in sunshine.     IV     0     3     5
+116     Solid Rock     Powers down supereffective moves.     IV     0     4     0
+043     Soundproof     Gives full immunity to all sound-based moves.     III     3     6     3
+003     Speed Boost     The Pokémon’s Speed stat is gradually boosted.     III     1     2     8
+100     Stall     The Pokémon moves after even slower foes.     IV     0     1     0
+176     Stance Change     The Pokémon changes form depending on how it battles.     VI     1     0     0
+009     Static     Contact with the Pokémon may cause paralysis.     III     9     5     1
+080     Steadfast     Raises Speed each time the Pokémon flinches.     IV     2     3     5
+001     Stench     The stench may cause the target to flinch.     III     0     6     1
+060     Sticky Hold     Protects the Pokémon from item theft.     III     0     8     0
+114     Storm Drain     The Pokémon draws in all Water-type moves.     IV     0     4     3
+173     Strong Jaw     The Pokémon's strong jaw gives it tremendous biting power.     VI     2     0     0
+005     Sturdy     The Pokémon is protected against 1-hit KO attacks.     III     8     22     5
+021     Suction Cups     Negates moves that force switching out.     III     2     3     0
+105     Super Luck     Heightens the critical-hit ratios of moves.     IV     0     6     3
+068     Swarm     Powers up Bug-type moves in a pinch.     III     4     16     4
+175     Sweet Veil     Prevents itself and its allies from falling asleep.     VI     2     0     0
+033     Swift Swim     Boosts the Pokémon’s Speed in rain.     III     8     20     10
+180     Symbiosis     The Pokémon can pass an item to an ally.     VI     0     0     3
+028     Synchronize     Passes on a burn, poison, or paralysis to the foe.     III     3     12     0
+077     Tangled Feet     Raises evasion if the Pokémon is confused.     IV     0     5     2
+101     Technician     Powers up the Pokémon’s weaker moves.     IV     0     9     5
+140     Telepathy     Protects against damaging moves from friendly Pokémon.     V     0     2     14
+164     Teravolt     Moves can be used regardless of Abilities.     V     2     0     0
+047     Thick Fat     Raises resistance to Fire- and Ice-type moves.     III     0     16     5
+110     Tinted Lens     Powers up “not very effective” moves.     IV     0     4     5
+067     Torrent     Powers up Water-type moves in a pinch.     III     18     0     2
+181     Tough Claws     Powers up moves that make direct contact.     VI     2     2     0
+137     Toxic Boost     Increases Attack to 1.5× when poisoned.     V     0     0     1
+036     Trace     The Pokémon copies a foe's Ability.     III     0     5     0
+054     Truant     The Pokémon can't attack on consecutive turns.     III     2     0     1
+163     Turboblaze     Moves can be used regardless of Abilities.     V     2     0     0
+109     Unaware     Ignores any change in stats by the foe.     IV     0     4     3
+084     Unburden     Raises Speed if a held item is used.     IV     0     5     7
+127     Unnerve     Prevents opposing Pokémon from eating held Berries.     V     0     4     15
+162     Victory Star     Raises moves' accuracy to 1.1× for friendly Pokémon.     V     1     0     0
+072     Vital Spirit     Prevents the Pokémon from falling asleep.     III     1     4     7
+010     Volt Absorb     Restores HP if hit by an Electric-type move.     III     1     2     2
+011     Water Absorb     Restores HP if hit by a Water-type move.     III     1     12     8
+041     Water Veil     Prevents the Pokémon from getting a burn.     III     0     4     7
+133     Weak Armor     Raises Speed and lowers Defense by one stage each upon being hit by any move.     V     0     1     15
+073     White Smoke     Prevents the Pokémon’s stats from being lowered.     III     1     0     1
+025     Wonder Guard     Only supereffective moves will hit.     III     1     0     0
+147     Wonder Skin     Has a 50% chance of protecting against non-damaging moves that inflict major status ailments.     V     0     1     3
+161     Zen Mode     Changes the Pokémon's shape when HP is halved.     V     0     0     1 """
+main(data, data_en)
