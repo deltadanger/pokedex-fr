@@ -28,9 +28,27 @@
         
     </ScrollView>
     
-    <SearchView
-        android:id="@+id/search_text"
+    <!-- Needs to be defined after because TouchEvents are checked from bottom to top and the ScrollView would consume all >_< -->
+    <LinearLayout
+        android:id="@+id/head_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true" />
+        android:orientation="horizontal"
+        android:layout_alignParentTop="true">
+        
+        <SearchView
+            android:id="@+id/search_text"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="50dp" />
+        
+        <ImageView
+            android:id="@+id/language"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/language"
+            android:src="@drawable/flag" />
+        
+    </LinearLayout>
+    
 </RelativeLayout>
