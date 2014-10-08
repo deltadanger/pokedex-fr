@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="evo_level">Level %1$s</string>
+    <string name="evo_error">Error</string>
+    
+    <string name="evo_oval_stone">Level up while holding an Oval Stone</string>
+    <string name="evo_leafeon">Level up near Moss Rock</string>
+    <string name="evo_attack_double_hit">Level up when knowing Double Hit</string>
+    <string name="evo_night_holding_razor_claw">Level up by night while holding Razor Claw</string>
+    <string name="evo_glaceon">Level up near Ice Rock</string>
+    <string name="evo_place">Level up in a specific location</string>
+    <string name="evo_night_holding_razor_fang">Level up by night while holding Razor Fang</string>
+    <string name="evo_sylveon">Level up with 2 affection and a Fairy-type move</string>
+    <string name="evo_mantine">Level up with Remoraid in party</string>
+    <string name="evo_attack_ancientpower">Level up when knowing Acient Power</string>
+    
+    <string name="evo_exchange">Exchange</string>
+    <string name="evo_exchange_karrablast">Exchange with Karrablast</string>
+    <string name="evo_exchange_escavalier">Exchange with Escavalier</string>
+    <string name="evo_exchange_holding_upgrade">Exchange while holding Upgrade</string>
+    <string name="evo_exchange_holding_electirizer">Exchange while holding electirizer</string>
+    <string name="evo_exchange_holding_deep_sea_tooth">Exchange while holding Deep Sea Tooth</string>
+    <string name="evo_exchange_holding_metal_coat">Exchange while holding Metal Coat</string>
+    <string name="evo_exchange_holding_magmarizer">Exchange while holding Magmarizer</string>
+    <string name="evo_exchange_holding_sachet">Exchange while holding Sachet</string>
+    <string name="evo_exchange_holding_protector">Exchange while holding Protector</string>
+    <string name="evo_exchange_holding_dubious_disc">Exchange while holding Dubious Disc</string>
+    <string name="evo_exchange_holding_deep_sea_scale">Exchange while holding Deep Sea Scale</string>
+    <string name="evo_exchange_holding_reaper_cloth">Exchange while holding Reaper Cloth</string>
+    <string name="evo_exchange_holding_kings_rock">Exchange while holding King\'s Rock</string>
+    <string name="evo_exchange_holding_prism_scale">Exchange while holding Prism Scale</string>
+    <string name="evo_exchange_holding_whipped_dream">Exchange while holding Whipped Dream</string>
+    <string name="evo_exchange_holding_dragon_scale">Exchange while holding Dragon Scale</string>
+    
+    <string name="evo_happyness">Happiness</string>
+    <string name="evo_happyness_night">Happiness, Night</string>
+    <string name="evo_happyness_day">Happiness, Day</string>
+    
+    <string name="evo_sun_stone">With a Sun Stone</string>
+    <string name="evo_water_stone">With a Water Stone</string>
+    <string name="evo_fire_stone">With a Fire Stone</string>
+    <string name="evo_moon_stone">With a Moon Stone</string>
+    <string name="evo_dawn_stone_female">With a Dawn Stone, Female</string>
+    <string name="evo_lightning_stone">With a Lightning Stone</string>
+    <string name="evo_night_stone">With a Night Stone</string>
+    <string name="evo_dawn_stone_male">With a Dawn Stone, Male</string>
+    <string name="evo_shiny_stone">With a Shiny Stone</string>
+    <string name="evo_herb_stone">With an Herb Stone</string>
+    
+    <string name="evo_20_att_gt_def">Level 20, Attack &gt; Defense</string>
+    <string name="evo_20_att_lt_def">Level 20, Attack &lt; Defense</string>
+    <string name="evo_20_att_eq_def">Level 20, Attack = Defense</string>
+    <string name="evo_20_male">Level 20, Male</string>
+    <string name="evo_20_female">Level 20, Female</string>
+    <string name="evo_21_female">Level 21, Female</string>
+    <string name="evo_39_day">Level 39, Day</string>
+    <string name="evo_39_night">Level 39, Night</string>
+    <string name="evo_malamar">Level 30, holing 3DS upside down</string>
+    <string name="evo_cascoon">Level 7, randomly</string>
+    <string name="evo_50_rain">Level 50, while raining</string>
+    <string name="evo_pangoro">Level 32, with a Dark-type Pokemon in party</string>
+    <string name="evo_shedinja">Level 20, free space in party and Poke Ball in bag</string>
+    
+    <string name="evo_attack_mimic">When learning Mimic</string>
+    <string name="evo_attack_rollout">When learning Rollout</string>
+    <string name="evo_mega">Mega Evolution</string>
+    <string name="evo_mega_x">Mega Evolution X</string>
+    <string name="evo_mega_y">Mega Evolution Y</string>
+</resources>

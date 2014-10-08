@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="egg_group_flying">Flying</string>
+    <string name="egg_group_amorphous">Amorphous</string>
+    <string name="egg_group_water1">Water 1</string>
+    <string name="egg_group_water2">Water 2</string>
+    <string name="egg_group_water3">Water 3</string>
+    <string name="egg_group_dragon">Dragon</string>
+    <string name="egg_group_fairy">Fairy</string>
+    <string name="egg_group_humanlike">Humanlike</string>
+    <string name="egg_group_unknown">Unknown</string>
+    <string name="egg_group_bug">Bug</string>
+    <string name="egg_group_ditto">Ditto</string>
+    <string name="egg_group_mineral">Minrral</string>
+    <string name="egg_group_monster">Monster</string>
+    <string name="egg_group_field">Field</string>
+    <string name="egg_group_grass">Grass</string>
+    <string name="egg_group_no_egg">No Egg</string>
+</resources>

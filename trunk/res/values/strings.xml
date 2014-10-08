@@ -4,9 +4,9 @@
     <string name="assets_authority">fr.pokedex.assets</string>
     <string name="search_authority">fr.pokedex.SearchContentProvider</string>
     
-    <string name="app_name">Pokedex Fr</string>
+    <string name="app_name">Pokedex Offline</string>
     <string name="search_title">Recherche</string>
-    <string name="search_hint">Chercher Pokemon ou numéro</string>
+    <string name="search_hint">Chercher Pokemon</string>
     <string name="icon">Icone de Pokemon</string>
     <string name="expand">Elargir</string>
     <string name="type">Type</string>
@@ -32,25 +32,6 @@
     <string name="hatch_value">%1$s pas</string>
     <string name="egg_group">Groupe oeuf :</string>
 
-    <string name="steel">acier</string>
-    <string name="fighting">combat</string>
-    <string name="dragon">dragon</string>
-    <string name="water">eau</string>
-    <string name="electric">electrique</string>
-    <string name="fairy">fee</string>
-    <string name="fire">feu</string>
-    <string name="ice">glace</string>
-    <string name="bug">insecte</string>
-    <string name="normal">normal</string>
-    <string name="grass">plante</string>
-    <string name="poison">poison</string>
-    <string name="psychic">psy</string>
-    <string name="rock">roche</string>
-    <string name="ground">sol</string>
-    <string name="ghost">spectre</string>
-    <string name="dark">tenebre</string>
-    <string name="flying">vol</string>
-    
     <string name="loading_error">Il y a eu une erreur lors du chargement de ce Pokémon.</string>
     <string name="no_result">Il n\'existe pas de Pokémon avec ce nom ou ce numéro.</string>
 </resources>

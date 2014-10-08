@@ -1,4 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="size">Size :</string>
+
+    <string name="search_title">Search</string>
+    <string name="search_hint">Search Pokemon</string>
+    <string name="icon">Pokemon icon</string>
+    <string name="expand">Expand</string>
+    <string name="type">Type</string>
+    
+    <string name="language">Language</string>
+    
+    <string name="evolution_chain">Evolution chain</string>
+    <string name="info_title">Details</string>
+    
+    <string name="size">Size:</string>
+    <string name="size_value">%1$s m</string>
+    <string name="weight">Weight:</string>
+    <string name="weight_value">%1$s kg</string>
+    <string name="ev">EV :</string>
+    <string name="catch_rate">Catch rate:</string>
+    <string name="gender">Gender:</string>
+    <string name="gender_value">%1$s%% Female, %2$s%% Male </string>
+    <string name="hatch">Hatch:</string>
+    <string name="hatch_value">%1$s steps</string>
+    <string name="egg_group">Egg group:</string>
+    
+    <string name="loading_error">There was an error when loading this Pokemon.</string>
+    <string name="no_result">There is no Pokemon with this name or number.</string>
 </resources>
