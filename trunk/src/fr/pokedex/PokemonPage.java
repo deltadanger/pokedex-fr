@@ -124,7 +124,7 @@ public class PokemonPage extends Activity {
             
             @Override
             public void onClick(View v) {
-                new AlertDialog.Builder(PokemonPage.this)
+                AlertDialog dialog = new AlertDialog.Builder(PokemonPage.this)
                 .setAdapter(adapter, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -136,10 +136,21 @@ public class PokemonPage extends Activity {
                         intent.putExtra(INTENT_EXTRA_POKEMON_NAME, currentPokemon.name_str);
                         intent.putExtra(INTENT_EXTRA_SCROLL_POSITION, scroll.getScrollY());
                         startActivity(intent);
-                        
+                        overridePendingTransition(0, 0);
+                        finish();
                         dialog.dismiss();
                     }
-                }).create().show();
+
+                }).create();
+                
+                dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        findViewById(R.id.main_layout).requestFocus();
+                    }
+                });
+                
+                dialog.show();
             }
         });
         
@@ -416,6 +427,12 @@ public class PokemonPage extends Activity {
         b.setMessage(message);
         
         AlertDialog dialog = b.create();
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                findViewById(R.id.main_layout).requestFocus();
+            }
+        });
         dialog.show();
     }
     
