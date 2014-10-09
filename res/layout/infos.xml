@@ -26,13 +26,13 @@
         
         <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp">
             
             <TableRow>
                 
                 <TextView android:text="@string/size"
-                    android:textSize="15sp"
-                    android:paddingLeft="40dp" />
+                    android:textSize="15sp" />
                 
                 <TextView android:id="@+id/size_txt"
                     android:textSize="15sp"
@@ -44,8 +44,7 @@
                 android:layout_marginTop="5dp">
                 
                 <TextView android:text="@string/weight"
-                    android:textSize="15sp"
-                    android:paddingLeft="40dp" />
+                    android:textSize="15sp" />
                 
                 <TextView android:id="@+id/weight_txt"
                     android:textSize="15sp"
@@ -57,8 +56,7 @@
                 android:layout_marginTop="5dp">
                 
                 <TextView android:text="@string/ev"
-                    android:textSize="15sp"
-                    android:paddingLeft="40dp" />
+                    android:textSize="15sp" />
                 
                 <TextView android:id="@+id/ev_txt"
                     android:textSize="15sp"
@@ -70,8 +68,7 @@
                 android:layout_marginTop="5dp">
                 
                 <TextView android:text="@string/catch_rate"
-                    android:textSize="15sp"
-                    android:paddingLeft="40dp" />
+                    android:textSize="15sp" />
                 
                 <TextView android:id="@+id/catch_rate_txt"
                     android:textSize="15sp"
@@ -83,8 +80,7 @@
                 android:layout_marginTop="5dp">
                 
                 <TextView android:text="@string/gender"
-                    android:textSize="15sp"
-                    android:paddingLeft="40dp" />
+                    android:textSize="15sp" />
                 
                 <TextView android:id="@+id/gender_txt"
                     android:textSize="15sp"
@@ -96,8 +92,7 @@
                 android:layout_marginTop="5dp">
                 
                 <TextView android:text="@string/hatch"
-                    android:textSize="15sp"
-                    android:paddingLeft="40dp" />
+                    android:textSize="15sp" />
                 
                 <TextView android:id="@+id/hatch_txt"
                     android:textSize="15sp"
@@ -109,8 +104,7 @@
                 android:layout_marginTop="5dp">
                 
                 <TextView android:text="@string/egg_group"
-                    android:textSize="15sp"
-                    android:paddingLeft="40dp" />
+                    android:textSize="15sp" />
                 
                 <TextView android:id="@+id/egg_group_txt"
                     android:textSize="15sp"
