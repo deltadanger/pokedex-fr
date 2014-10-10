@@ -12,15 +12,16 @@ import com.google.android.gms.ads.AdView;
 
 public class PokemonPage extends fr.pokedex.PokemonPage {
 	
-	private AdView adView;
-	
+    private AdView adView;
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-	    adView = new AdView(this);
-	    adView.setAdUnitId("ca-app-pub-3293663299631285/7902019453");
-	    adView.setAdSize(AdSize.BANNER);
+		adView = new AdView(this);
+        adView.setAdUnitId("ca-app-pub-3293663299631285/7902019453");
+//        adView.setAdUnitId("");
+		adView.setAdSize(AdSize.BANNER);
 
 	    ScrollView scroll = (ScrollView)findViewById(fr.pokedex.R.id.main_scroll);
         LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
@@ -37,7 +38,7 @@ public class PokemonPage extends fr.pokedex.PokemonPage {
 	
     @Override
     public void onPause() {
-	    adView.pause();
+        adView.pause();
 	    super.onPause();
     }
 
@@ -49,7 +50,7 @@ public class PokemonPage extends fr.pokedex.PokemonPage {
 
     @Override
     public void onDestroy() {
-	    adView.destroy();
+        adView.destroy();
 	    super.onDestroy();
     }
 }
