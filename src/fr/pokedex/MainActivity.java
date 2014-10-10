@@ -15,15 +15,16 @@ import fr.pokedex.data.DataHolder;
  * / Clavier qui apparait quand on ferme les details d'un talent / change de langue
  * / Corriger les images de types anglais
  * / Trier les types par ordre alphabétique dans la langue sélectionnée
- * - Erreurs diverses
- * - Recherche par texte pur (incluant par numéro)
+ * 
+ * ? Erreurs diverses
+ * ? Layout de l'affichage des détails (certains mots sortent tel: Y530 (hwY530-U00))
  * 
  * v3.1
  * - Espagol
  * - Portugais
  * - Allemand
  * 
- * ? Layout de l'affichage des détails (certains mots sortent tel: Y530 (hwY530-U00))
+ * - Recherche par texte pur (incluant par numéro)
  * - Theme sombre
  * - Liste des attaques apprises
  * X Recherche par type
