@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="steel">Steel</string>
+    <string name="fighting">Fighting</string>
+    <string name="dragon">Dragon</string>
+    <string name="water">Water</string>
+    <string name="electric">Electric</string>
+    <string name="fairy">Fairy</string>
+    <string name="fire">Fire</string>
+    <string name="ice">Ice</string>
+    <string name="bug">Bug</string>
+    <string name="normal">Normal</string>
+    <string name="grass">Grass</string>
+    <string name="poison">Poison</string>
+    <string name="psychic">Psychic</string>
+    <string name="rock">Rock</string>
+    <string name="ground">Ground</string>
+    <string name="ghost">Ghost</string>
+    <string name="dark">Dark</string>
+    <string name="flying">Flying</string>
+</resources>

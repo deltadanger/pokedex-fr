@@ -2,6 +2,7 @@ package fr.pokedex;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Locale;
 
@@ -31,6 +32,7 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ScrollView;
@@ -56,6 +58,8 @@ public class PokemonPage extends Activity {
     public static final String LANGUAGE_PREFERENCE = "language_preference";
     public static final String LANGUAGE_PREFERENCE_KEY = "lang";
     
+    public static final int N_WEAKNESS_ROWS = 3;
+    
     private static int infosVisibility = View.GONE;
 
     private final int COLOUR_LIFE = Color.rgb(79, 202, 30);
@@ -68,6 +72,11 @@ public class PokemonPage extends Activity {
     private final int STAT_BAR_HEIGHT = 19;
     private final int WEAKNESS_BLOCK_WIDTH = 46;
     private final int WEAKNESS_BLOCK_HEIGHT = 20;
+    private final int WEAKNESS_ROW_MARGIN_LEFT = 40;
+    private final int WEAKNESS_ROW_MARGIN_TOP= 10;
+    private final int TYPE_IMAGE_WIDTH = 40;
+    private final int TYPE_IMAGE_HEIGHT = 20;
+    private final int TYPE_IMAGE_MARGIN = 3;
     
     private final int EVOLUTION_PIC_WIDTH = 30;
     private final int EVOLUTION_PIC_HEIGHT = 30;
@@ -456,6 +465,11 @@ public class PokemonPage extends Activity {
         final int barHeight = (int)(STAT_BAR_HEIGHT*dpToPx + 0.5f);
         final int weaknessBlockWidth = (int)(WEAKNESS_BLOCK_WIDTH*dpToPx + 0.5f);
         final int weaknessBlockHeight = (int)(WEAKNESS_BLOCK_HEIGHT*dpToPx + 0.5f);
+        final int weaknessRowMarginLeft = (int)(WEAKNESS_ROW_MARGIN_LEFT*dpToPx + 0.5f);
+        final int weaknessRowMarginTop = (int)(WEAKNESS_ROW_MARGIN_TOP*dpToPx + 0.5f);
+        final int typeImageWidth = (int)(TYPE_IMAGE_WIDTH*dpToPx + 0.5f);
+        final int typeImageHeight = (int)(TYPE_IMAGE_HEIGHT*dpToPx + 0.5f);
+        final int typeImageMargin = (int)(TYPE_IMAGE_MARGIN*dpToPx + 0.5f);
         
         TextView nameTxt = (TextView)findViewById(R.id.nameTxt);
         nameTxt.setText(currentPokemon.name);
@@ -509,10 +523,10 @@ public class PokemonPage extends Activity {
             }
         }
 
-        ImageView type = (ImageView)findViewById(R.id.type1);
-        type.setImageResource(currentPokemon.type1.image);
-        type = (ImageView)findViewById(R.id.type2);
-        type.setImageResource(currentPokemon.type2.image);
+        ImageView typeImg = (ImageView)findViewById(R.id.type1);
+        typeImg.setImageResource(currentPokemon.type1.image);
+        typeImg = (ImageView)findViewById(R.id.type2);
+        typeImg.setImageResource(currentPokemon.type2.image);
         
         TextView talentTxt = (TextView)findViewById(R.id.talent1Txt);
         SpannableString content = new SpannableString(getResources().getString(currentPokemon.abilities.get(0).name));
@@ -635,79 +649,163 @@ public class PokemonPage extends Activity {
         draw.setBackgroundColor(COLOUR_SPEED);
         
         
-        HashMap<Type, Weakness>weaknesses = currentPokemon.getWeaknesses();
+        
+        HashMap<Type, Weakness> weaknesses = currentPokemon.getWeaknesses();
+        
+        HashMap<String, String> typeStringToValue = new HashMap<String, String>();
+        ArrayList<String> typeNames = new ArrayList<String>();
+        
+        for (String type : DataHolder.typeByName.keySet()) {
+            try {
+                String name = getResources().getString(R.string.class.getField(type).getInt(null));
+                typeStringToValue.put(name, type);
+                typeNames.add(name);
+            } catch (IllegalArgumentException e1) {
+                e1.printStackTrace();
+            } catch (IllegalAccessException e1) {
+                e1.printStackTrace();
+            } catch (NoSuchFieldException e1) {
+                e1.printStackTrace();
+            }
+        }
 
-        View typeWeakness = findViewById(R.id.acier);
-        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("STEEL")).resource);
+        Collections.sort(typeNames);
         
-        typeWeakness = findViewById(R.id.combat);
-        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("FIGHTING")).resource);
+        LinearLayout weaknessesLayout = (LinearLayout) findViewById(R.id.weaknesses);
+        weaknessesLayout.removeAllViews();
         
-        typeWeakness = findViewById(R.id.dragon);
-        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("DRAGON")).resource);
+        int rowLength = typeNames.size() / N_WEAKNESS_ROWS;
+        LayoutParams params;
+        LinearLayout row, block;
+        // ImageView typeImg; // Variable already exist
+        View weaknessBlock;
         
-        typeWeakness = findViewById(R.id.eau);
-        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("WATER")).resource);
+        for (int i=0; i < N_WEAKNESS_ROWS; i++) {
+            params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+            params.leftMargin = weaknessRowMarginLeft;
+            if (i == 0) {
+                // Top margin only for first row
+                params.topMargin = weaknessRowMarginTop;
+            }
+            row = new LinearLayout(this);
+            row.setOrientation(LinearLayout.HORIZONTAL);
+            row.setLayoutParams(params);
+            
+            for (int j=0; j < rowLength; j++) {
+                
+                String currentType = typeStringToValue.get(typeNames.get(i*rowLength + j));
+                String description = "";
+                Drawable src = null;
+                
+                try {
+                    description = getResources().getString(R.string.class.getField(currentType).getInt(null));
+                    src = getResources().getDrawable(R.drawable.class.getField(currentType).getInt(null));
+                } catch (IllegalArgumentException e1) {
+                    e1.printStackTrace();
+                } catch (IllegalAccessException e1) {
+                    e1.printStackTrace();
+                } catch (NoSuchFieldException e1) {
+                    e1.printStackTrace();
+                }
 
-        typeWeakness = findViewById(R.id.electrique);
-        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("ELECTRIC")).resource);
+
+                params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+                block = new LinearLayout(this);
+                block.setOrientation(LinearLayout.VERTICAL);
+                block.setLayoutParams(params);
+                
+                params = new LayoutParams(typeImageWidth, typeImageHeight);
+                params.leftMargin = params.rightMargin = params.bottomMargin = params.topMargin = typeImageMargin;
+                typeImg = new ImageView(this);
+                typeImg.setContentDescription(description);
+                typeImg.setImageDrawable(src);
+                typeImg.setScaleType(ScaleType.FIT_CENTER);
+                typeImg.setLayoutParams(params);
+                block.addView(typeImg);
+                
+                params = new LayoutParams(weaknessBlockWidth, weaknessBlockHeight);
+                weaknessBlock = new View(this);
+                weaknessBlock.setLayoutParams(params);
+                weaknessBlock.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get(currentType)).resource);
+                block.addView(weaknessBlock);
+                
+                row.addView(block);
+            }
+            
+            weaknessesLayout.addView(row);
+        }
         
-        typeWeakness = findViewById(R.id.fee);
-        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("FAIRY")).resource);
-        
-        typeWeakness = findViewById(R.id.feu);
-        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("FIRE")).resource);
-        
-        typeWeakness = findViewById(R.id.glace);
-        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("ICE")).resource);
-        
-        typeWeakness = findViewById(R.id.insecte);
-        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("BUG")).resource);
-        
-        typeWeakness = findViewById(R.id.normal);
-        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("NORMAL")).resource);
-        
-        typeWeakness = findViewById(R.id.plante);
-        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("GRASS")).resource);
-        
-        typeWeakness = findViewById(R.id.poison);
-        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("POISON")).resource);
-        
-        typeWeakness = findViewById(R.id.psy);
-        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("PSYCHIC")).resource);
-        
-        typeWeakness = findViewById(R.id.roche);
-        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("ROCK")).resource);
-        
-        typeWeakness = findViewById(R.id.sol);
-        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("GROUND")).resource);
-        
-        typeWeakness = findViewById(R.id.spectre);
-        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("GHOST")).resource);
-        
-        typeWeakness = findViewById(R.id.tenebre);
-        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("DARK")).resource);
-        
-        typeWeakness = findViewById(R.id.vol);
-        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("FLYING")).resource);
+//        View typeWeakness = findViewById(R.id.acier);
+//        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
+//        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("STEEL")).resource);
+//        
+//        typeWeakness = findViewById(R.id.combat);
+//        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
+//        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("FIGHTING")).resource);
+//        
+//        typeWeakness = findViewById(R.id.dragon);
+//        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
+//        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("DRAGON")).resource);
+//        
+//        typeWeakness = findViewById(R.id.eau);
+//        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
+//        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("WATER")).resource);
+//
+//        typeWeakness = findViewById(R.id.electrique);
+//        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
+//        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("ELECTRIC")).resource);
+//        
+//        typeWeakness = findViewById(R.id.fee);
+//        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
+//        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("FAIRY")).resource);
+//        
+//        typeWeakness = findViewById(R.id.feu);
+//        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
+//        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("FIRE")).resource);
+//        
+//        typeWeakness = findViewById(R.id.glace);
+//        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
+//        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("ICE")).resource);
+//        
+//        typeWeakness = findViewById(R.id.insecte);
+//        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
+//        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("BUG")).resource);
+//        
+//        typeWeakness = findViewById(R.id.normal);
+//        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
+//        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("NORMAL")).resource);
+//        
+//        typeWeakness = findViewById(R.id.plante);
+//        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
+//        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("GRASS")).resource);
+//        
+//        typeWeakness = findViewById(R.id.poison);
+//        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
+//        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("POISON")).resource);
+//        
+//        typeWeakness = findViewById(R.id.psy);
+//        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
+//        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("PSYCHIC")).resource);
+//        
+//        typeWeakness = findViewById(R.id.roche);
+//        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
+//        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("ROCK")).resource);
+//        
+//        typeWeakness = findViewById(R.id.sol);
+//        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
+//        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("GROUND")).resource);
+//        
+//        typeWeakness = findViewById(R.id.spectre);
+//        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
+//        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("GHOST")).resource);
+//        
+//        typeWeakness = findViewById(R.id.tenebre);
+//        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
+//        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("DARK")).resource);
+//        
+//        typeWeakness = findViewById(R.id.vol);
+//        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
+//        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("FLYING")).resource);
     }
     
     private void addEvolutions(final EvolutionNode root, LinearLayout layout) {
