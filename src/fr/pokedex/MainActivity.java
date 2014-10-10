@@ -8,19 +8,22 @@ import fr.pokedex.data.DataHolder;
 
 /*
  * TODO:
+ * v3.0
  * / Ajouter lien entre Ptéra et Mega-Ptéra
  * / Ajouter images pour les formes alternatives
  * / Evolutions disparues
  * / Clavier qui apparait quand on ferme les details d'un talent / change de langue
  * / Corriger les images de types anglais
- * - Trier les types par ordre alphabétique dans la langue sélectionnée
- * ? Layout de l'affichage des détails (certains mots sortent tel: Y530 (hwY530-U00))
+ * / Trier les types par ordre alphabétique dans la langue sélectionnée
  * - Erreurs diverses
+ * - Recherche par texte pur (incluant par numéro)
+ * 
+ * v3.1
  * - Espagol
  * - Portugais
  * - Allemand
  * 
- * - Recherche par texte pur (incluant par numéro)
+ * ? Layout de l'affichage des détails (certains mots sortent tel: Y530 (hwY530-U00))
  * - Theme sombre
  * - Liste des attaques apprises
  * X Recherche par type

@@ -39,7 +39,7 @@ public class DataHolder {
     public static String DATABASE_TABLE_POKEMON_ABILITIES = "app_pokemon_abilities";
     public static String DATABASE_TABLE_POKEMON_EGG_GROUPS = "app_pokemon_egg_group";
     
-    public static String NO_TYPE_NAME = "NONE";
+    public static String NO_TYPE_NAME = "none";
     
     private static class SQLiteOpener extends SQLiteOpenHelper {
         
