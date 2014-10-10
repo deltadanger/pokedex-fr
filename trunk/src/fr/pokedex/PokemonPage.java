@@ -1,6 +1,7 @@
 package fr.pokedex;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -476,14 +477,23 @@ public class PokemonPage extends Activity {
         
         TextView numberTxt = (TextView)findViewById(R.id.numberTxt);
         numberTxt.setText("#" + currentPokemon.number);
-        
+
+        ImageView image = (ImageView)findViewById(R.id.icon);
+        InputStream imageStream = null;
         try {
-            ImageView image = (ImageView)findViewById(R.id.icon);
-            image.setImageDrawable(Drawable.createFromStream(getAssets().open("image/" + currentPokemon.name_str + ".png"), null));
-            image.invalidate();
-        } catch (IOException e) {
-            e.printStackTrace();
+            imageStream = getAssets().open("image/" + currentPokemon.name_str + ".png");
+        } catch (IOException e2) {
+            e2.printStackTrace();
         }
+        if (imageStream != null) {
+            try {
+                image.setImageDrawable(Drawable.createFromStream(imageStream, null));
+            } catch (OutOfMemoryError e) {
+                System.gc();
+                image.setImageDrawable(Drawable.createFromStream(imageStream, null));
+            }
+        }
+        image.invalidate();
         
         Pokemon[] currentPokemonEvolutions = currentPokemon.getSimpleEvolutionList();
         LinearLayout evolutions = (LinearLayout)findViewById(R.id.evolutions);
@@ -492,24 +502,32 @@ public class PokemonPage extends Activity {
         LayoutParams layout;
         for (int i = 0; i < currentPokemonEvolutions.length; i++) {
             final Pokemon p = currentPokemonEvolutions[i];
+            
+            layout = new LayoutParams((int)(EVOLUTION_PIC_WIDTH*dpToPx + 0.5f), (int)(EVOLUTION_PIC_HEIGHT*dpToPx + 0.5f));
+            layout.leftMargin = (int)(EVOLUTION_MARGIN*dpToPx + 0.5f);
+            img = new ImageView(this);
+            img.setLayoutParams(layout);
+            imageStream = null;
             try {
-                layout = new LayoutParams((int)(EVOLUTION_PIC_WIDTH*dpToPx + 0.5f), (int)(EVOLUTION_PIC_HEIGHT*dpToPx + 0.5f));
-                layout.leftMargin = (int)(EVOLUTION_MARGIN*dpToPx + 0.5f);
-                img = new ImageView(this);
-                img.setLayoutParams(layout);
-                img.setImageDrawable(Drawable.createFromStream(
-                        getAssets().open(
-                                "image/" + p.name_str + ".png"), null));
-                img.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View arg0) {
-                        loadData(p.name_str);
-                    }
-                });
-                evolutions.addView(img);
-            } catch (IOException e) {
-                e.printStackTrace();
+                imageStream = getAssets().open("image/" + p.name_str + ".png");
+            } catch (IOException e2) {
+                e2.printStackTrace();
             }
+            if (imageStream != null) {
+                try {
+                    img.setImageDrawable(Drawable.createFromStream(imageStream, null));
+                } catch (OutOfMemoryError e) {
+                    System.gc();
+                    img.setImageDrawable(Drawable.createFromStream(imageStream, null));
+                }
+            }
+            evolutions.addView(img);
+            img.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View arg0) {
+                    loadData(p.name_str);
+                }
+            });
             
             // Another element, add an arrow
             if (i+1 < currentPokemonEvolutions.length) {
@@ -734,111 +752,48 @@ public class PokemonPage extends Activity {
             
             weaknessesLayout.addView(row);
         }
-        
-//        View typeWeakness = findViewById(R.id.acier);
-//        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-//        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("STEEL")).resource);
-//        
-//        typeWeakness = findViewById(R.id.combat);
-//        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-//        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("FIGHTING")).resource);
-//        
-//        typeWeakness = findViewById(R.id.dragon);
-//        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-//        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("DRAGON")).resource);
-//        
-//        typeWeakness = findViewById(R.id.eau);
-//        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-//        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("WATER")).resource);
-//
-//        typeWeakness = findViewById(R.id.electrique);
-//        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-//        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("ELECTRIC")).resource);
-//        
-//        typeWeakness = findViewById(R.id.fee);
-//        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-//        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("FAIRY")).resource);
-//        
-//        typeWeakness = findViewById(R.id.feu);
-//        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-//        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("FIRE")).resource);
-//        
-//        typeWeakness = findViewById(R.id.glace);
-//        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-//        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("ICE")).resource);
-//        
-//        typeWeakness = findViewById(R.id.insecte);
-//        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-//        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("BUG")).resource);
-//        
-//        typeWeakness = findViewById(R.id.normal);
-//        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-//        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("NORMAL")).resource);
-//        
-//        typeWeakness = findViewById(R.id.plante);
-//        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-//        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("GRASS")).resource);
-//        
-//        typeWeakness = findViewById(R.id.poison);
-//        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-//        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("POISON")).resource);
-//        
-//        typeWeakness = findViewById(R.id.psy);
-//        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-//        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("PSYCHIC")).resource);
-//        
-//        typeWeakness = findViewById(R.id.roche);
-//        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-//        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("ROCK")).resource);
-//        
-//        typeWeakness = findViewById(R.id.sol);
-//        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-//        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("GROUND")).resource);
-//        
-//        typeWeakness = findViewById(R.id.spectre);
-//        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-//        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("GHOST")).resource);
-//        
-//        typeWeakness = findViewById(R.id.tenebre);
-//        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-//        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("DARK")).resource);
-//        
-//        typeWeakness = findViewById(R.id.vol);
-//        typeWeakness.setLayoutParams(new LayoutParams(weaknessBlockWidth, weaknessBlockHeight));
-//        typeWeakness.setBackgroundResource(weaknesses.get(DataHolder.typeByName.get("FLYING")).resource);
     }
     
     private void addEvolutions(final EvolutionNode root, LinearLayout layout) {
         LayoutParams params;
         ImageView img;
-    
+
+        TextView text = new TextView(this);
+        text.setText(root.base.name);
+        params = new LayoutParams((int)(FULL_EVOLUTION_PIC_WIDTH*dpToPx + 0.5f), LayoutParams.WRAP_CONTENT);
+        params.topMargin = (int)(EVOLUTION_MARGIN*dpToPx + 0.5f);
+        params.bottomMargin = (int)(EVOLUTION_MARGIN*dpToPx + 0.5f);
+        text.setLayoutParams(params);
+        text.setGravity(Gravity.CENTER_HORIZONTAL);
+        layout.addView(text);
+        
+        params = new LayoutParams((int)(FULL_EVOLUTION_PIC_WIDTH*dpToPx + 0.5f), (int)(FULL_EVOLUTION_PIC_HEIGHT*dpToPx + 0.5f));
+        img = new ImageView(this);
+        img.setLayoutParams(params);
+
+        InputStream imageStream = null;
         try {
-            TextView text = new TextView(this);
-            text.setText(root.base.name);
-            params = new LayoutParams((int)(FULL_EVOLUTION_PIC_WIDTH*dpToPx + 0.5f), LayoutParams.WRAP_CONTENT);
-            params.topMargin = (int)(EVOLUTION_MARGIN*dpToPx + 0.5f);
-            params.bottomMargin = (int)(EVOLUTION_MARGIN*dpToPx + 0.5f);
-            text.setLayoutParams(params);
-            text.setGravity(Gravity.CENTER_HORIZONTAL);
-            layout.addView(text);
-            
-            params = new LayoutParams((int)(FULL_EVOLUTION_PIC_WIDTH*dpToPx + 0.5f), (int)(FULL_EVOLUTION_PIC_HEIGHT*dpToPx + 0.5f));
-            img = new ImageView(this);
-            img.setLayoutParams(params);
-            img.setImageDrawable(Drawable.createFromStream(
-                    getAssets().open(
-                            "image/" + root.base.name_str + ".png"), null));
-            img.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View arg0) {
-                    loadData(root.base.name_str);
-                }
-            });
-            layout.addView(img);
-            
-        } catch (IOException e) {
-            e.printStackTrace();
+            imageStream = getAssets().open("image/" + root.base.name_str + ".png");
+        } catch (IOException e2) {
+            e2.printStackTrace();
         }
+        if (imageStream != null) {
+            try {
+                img.setImageDrawable(Drawable.createFromStream(imageStream, null));
+            } catch (OutOfMemoryError e) {
+                System.gc();
+                img.setImageDrawable(Drawable.createFromStream(imageStream, null));
+            }
+        }
+        
+        img.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                loadData(root.base.name_str);
+            }
+        });
+        layout.addView(img);
+        
 
         if (root.isLeaf()) {
             return;
