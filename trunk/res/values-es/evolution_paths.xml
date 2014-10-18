@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="evo_level">Nivel %1$s</string>
+    <string name="evo_error">Error</string>
+    
+    <!-- Pokemon #113 -->
+    <string name="evo_oval_stone">Subir nivel equipado con Piedra Oval</string>
+    <!-- Pokemon #133 -->
+    <string name="evo_leafeon">Subir nivel al lado de Roca Musgo</string>
+    <!-- Pokemon #424 -->
+    <string name="evo_attack_double_hit">Subir nivel sabiendo Doble Golpe</string>
+    <!-- Pokemon #461 -->
+    <string name="evo_night_holding_razor_claw">Subir nivel de noche equipado con Garrafilada</string>
+    <!-- Pokemon #133 -->
+    <string name="evo_glaceon">Subir nivel near Roca Hielo</string>
+    <!-- Pokemon #462 -->
+    <string name="evo_place">Subir nivel en lugar específico</string>
+    <!-- Pokemon #472 -->
+    <string name="evo_night_holding_razor_fang">Subir nivel de noche equipado con Colmillo Agudo</string>
+    <!-- Pokemon #133 -->
+    <string name="evo_sylveon">Subir nivel con al menos dos corazones en el Poké Recreo y conociendo un movimiento tipo hada</string>
+    <!-- Pokemon #226 -->
+    <string name="evo_mantine">Subir nivel con Remoraid en el equipo</string>
+    <!-- Pokemon #473 -->
+    <string name="evo_attack_ancientpower">Subir nivel sabiendo Poder Pasado</string>
+    
+    <!-- Pokemon #76 -->
+    <string name="evo_exchange">Intercambio</string>
+    <!-- Pokemon #617 -->
+    <string name="evo_exchange_karrablast">Intercambio por Shelmet</string>
+    <!-- Pokemon #589 -->
+    <string name="evo_exchange_escavalier">Intercambio por Karrablast</string>
+    <!-- Pokemon #233 -->
+    <string name="evo_exchange_holding_upgrade">Intercambio equipado con Mejora</string>
+    <!-- Pokemon #466 -->
+    <string name="evo_exchange_holding_electirizer">Intercambio equipado con Electrizador</string>
+    <!-- Pokemon #366 -->
+    <string name="evo_exchange_holding_deep_sea_tooth">Intercambio equipado con Diente Marino</string>
+    <!-- Pokemon #208 -->
+    <string name="evo_exchange_holding_metal_coat">Intercambio equipado con Rev. Metálico</string>
+    <!-- Pokemon #467 -->
+    <string name="evo_exchange_holding_magmarizer">Intercambio equipado con Magmatizador</string>
+    <!-- Pokemon #683 -->
+    <string name="evo_exchange_holding_sachet">Intercambio equipado con Saquito Fragante</string>
+    <!-- Pokemon #464 -->
+    <string name="evo_exchange_holding_protector">Intercambio equipado con Protector</string>
+    <!-- Pokemon #233 -->
+    <string name="evo_exchange_holding_dubious_disc">Intercambio equipado con Disco Extraño</string>
+    <!-- Pokemon #366 -->
+    <string name="evo_exchange_holding_deep_sea_scale">Intercambio equipado con Escama Marina</string>
+    <!-- Pokemon #477 -->
+    <string name="evo_exchange_holding_reaper_cloth">Intercambio equipado con Tela Terrible</string>
+    <!-- Pokemon #186 -->
+    <string name="evo_exchange_holding_kings_rock">Intercambio equipado con Roca Del Rey</string>
+    <!-- Pokemon #350 -->
+    <string name="evo_exchange_holding_prism_scale">Intercambio equipado con Escama Bella</string>
+    <!-- Pokemon #685 -->
+    <string name="evo_exchange_holding_whipped_dream">Intercambio equipado con Dulce De Nata</string>
+    <!-- Pokemon #230 -->
+    <string name="evo_exchange_holding_dragon_scale">Intercambio con Escamadragón</string>
+    
+    <!-- Pokemon #25 -->
+    <string name="evo_happyness">Amistad</string>
+    <!-- Pokemon #133 -->
+    <string name="evo_happyness_night">Amistad, Noche</string>
+    <!-- Pokemon #133 -->
+    <string name="evo_happyness_day">Amistad, Día</string>
+    
+    <!-- Pokemon #182 -->
+    <string name="evo_sun_stone">Piedra Solar</string>
+    <!-- Pokemon #133 -->
+    <string name="evo_water_stone">Piedra Agua</string>
+    <!-- Pokemon #133 -->
+    <string name="evo_fire_stone">Piedra Fuego</string>
+    <!-- Pokemon #36 -->
+    <string name="evo_moon_stone">Piedra Lunar</string>
+    <!-- Pokemon #281 -->
+    <string name="evo_dawn_stone_female">Piedra Alba, Hembra</string>
+    <!-- Pokemon #133 -->
+    <string name="evo_lightning_stone">Piedra Trueno</string>
+    <!-- Pokemon #681 -->
+    <string name="evo_night_stone">Piedra Noche</string>
+    <!-- Pokemon #281 -->
+    <string name="evo_dawn_stone_male">Piedra Alba, Macho</string>
+    <!-- Pokemon #573 -->
+    <string name="evo_shiny_stone">Piedra Día</string>
+    <!-- Pokemon #103 -->
+    <string name="evo_herb_stone">Piedra Hoja</string>
+    
+    <!-- Pokemon #236 -->
+    <string name="evo_20_att_gt_def">Nivel 20, Ataque &gt; Defensa</string>
+    <!-- Pokemon #236 -->
+    <string name="evo_20_att_lt_def">Nivel 20, Ataque &lt; Defensa</string>
+    <!-- Pokemon #236 -->
+    <string name="evo_20_att_eq_def">Nivel 20, Ataque = Defensa</string>
+    <!-- Pokemon #412 -->
+    <string name="evo_20_male">Nivel 20, Macho</string>
+    <!-- Pokemon #412 -->
+    <string name="evo_20_female">Nivel 20, Hembra</string>
+    <!-- Pokemon #416 -->
+    <string name="evo_21_female">Nivel 21, Hembra</string>
+    <!-- Pokemon #697 -->
+    <string name="evo_39_day">Nivel 39, Día</string>
+    <!-- Pokemon #699 -->
+    <string name="evo_39_night">Nivel 39, Noche</string>
+    <!-- Pokemon #687 -->
+    <string name="evo_malamar">Nivel 30, sosteniendo la consola cabeza abajo</string>
+    <!-- Pokemon #268 -->
+    <string name="evo_cascoon">Nivel 7, aleatoriamente</string>
+    <!-- Pokemon #706 -->
+    <string name="evo_50_rain">Nivel 50, Lluvia</string>
+    <!-- Pokemon #675 -->
+    <string name="evo_pangoro">Nivel 32, Pokémon de tipo Siniestro en el equipo</string>
+    <!-- Pokemon #292 -->
+    <string name="evo_shedinja">Nivel 20, si hay espacio en el equipo y teniendo una Poké Ball</string>
+    
+    <!-- Pokemon #185 -->
+    <string name="evo_attack_mimic">Sabiendo Mimético</string>
+    <!-- Pokemon #463 -->
+    <string name="evo_attack_rollout">Conociendo Desenrollar</string>
+    <!-- Pokemon #1 -->
+    <string name="evo_mega">Mega Evolucion</string>
+    <!-- Pokemon #6 -->
+    <string name="evo_mega_x">Mega Evolucion X</string>
+    <!-- Pokemon #6 -->
+    <string name="evo_mega_y">Mega Evolucion Y</string>
+
+<!--
+6, 25, 36, 76, 113, 133, 182, 185, 186, 208, 226, 230, 233, 236, 268, 281, 292
+350, 367, 368, 412, 416, 424, 461, 462, 463, 464, 466, 467, 472, 473, 477
+573, 589, 617, 675, 681, 683, 685, 687, 697, 699, 706
+-->
+
+</resources>

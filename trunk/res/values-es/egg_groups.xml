@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="egg_group_flying">Volador</string>
+    <string name="egg_group_amorphous">Amorfo</string>
+    <string name="egg_group_water1">Agua 1</string>
+    <string name="egg_group_water2">Agua 2</string>
+    <string name="egg_group_water3">Agua 3</string>
+    <string name="egg_group_dragon">Dragón</string>
+    <string name="egg_group_fairy">Hada</string>
+    <string name="egg_group_humanlike">Humanoide</string>
+    <string name="egg_group_unknown">Desconocido</string>
+    <string name="egg_group_bug">Bicho</string>
+    <string name="egg_group_ditto">Ditto</string>
+    <string name="egg_group_mineral">Mineral</string>
+    <string name="egg_group_monster">Monstruo</string>
+    <string name="egg_group_field">Campo</string>
+    <string name="egg_group_grass">Planta</string>
+    <string name="egg_group_no_egg">Ninguno</string>
+</resources>

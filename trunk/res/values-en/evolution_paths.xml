@@ -18,7 +18,7 @@
     <string name="evo_exchange_karrablast">Exchange with Karrablast</string>
     <string name="evo_exchange_escavalier">Exchange with Escavalier</string>
     <string name="evo_exchange_holding_upgrade">Exchange while holding Upgrade</string>
-    <string name="evo_exchange_holding_electirizer">Exchange while holding electirizer</string>
+    <string name="evo_exchange_holding_electirizer">Exchange while holding Electirizer</string>
     <string name="evo_exchange_holding_deep_sea_tooth">Exchange while holding Deep Sea Tooth</string>
     <string name="evo_exchange_holding_metal_coat">Exchange while holding Metal Coat</string>
     <string name="evo_exchange_holding_magmarizer">Exchange while holding Magmarizer</string>
@@ -55,7 +55,7 @@
     <string name="evo_21_female">Level 21, Female</string>
     <string name="evo_39_day">Level 39, Day</string>
     <string name="evo_39_night">Level 39, Night</string>
-    <string name="evo_malamar">Level 30, holing 3DS upside down</string>
+    <string name="evo_malamar">Level 30, holding 3DS upside down</string>
     <string name="evo_cascoon">Level 7, randomly</string>
     <string name="evo_50_rain">Level 50, while raining</string>
     <string name="evo_pangoro">Level 32, with a Dark-type Pokemon in party</string>

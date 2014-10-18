@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="search_title">Buscar</string>
+    <string name="search_hint">Buscar Pokemon</string>
+    <string name="icon">Pokemon icono</string>
+    <string name="expand">Expandir</string>
+    <string name="type">Tipo</string>
+    
+    <string name="language">Idioma</string>
+    
+    <string name="evolution_chain">Cadena Evolución</string>
+    <string name="info_title">Detalles</string>
+    
+    <string name="size">Altura :</string>
+    <string name="size_value">%1$s m</string>
+    <string name="weight">Peso :</string>
+    <string name="weight_value">%1$s kg</string>
+    <string name="ev">PE :</string>
+    <string name="catch_rate">Captura :</string>
+    <string name="gender">Género :</string>
+    <string name="gender_value">%1$s%% Hembra, %2$s%% Macho </string>
+    <string name="hatch">Eclosión :</string>
+    <string name="hatch_value">%1$s pasos</string>
+    <string name="egg_group">Grupos huevo :</string>
+    
+    <string name="loading_error">Se produjo un error al cargar este Pokemon.</string>
+    <string name="no_result">No hay Pokemon con este nombre o el número.</string>
+</resources>
