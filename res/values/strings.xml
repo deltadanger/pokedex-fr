@@ -15,6 +15,7 @@
     <string-array name="languages">
         <item>fr;Français</item>
         <item>en;English</item>
+        <item>es;Español</item>
     </string-array>
     
     <string name="evolution_chain">Chaine d\'évolution</string>
