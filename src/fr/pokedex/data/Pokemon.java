@@ -16,8 +16,8 @@ public class Pokemon implements Comparable<Pokemon> {
             name_str = "name_missigno";
             number = index = life = attack = defense = spAttack = spDefense = speed = catchRate = hatch = 0;
             weight = size = 0f;
-            type1 = DataHolder.typeByName.get("NORMAL");
-            type2 = DataHolder.typeByName.get("NONE");
+            type1 = new Type("normal");
+            type2 = new Type("none");
             abilities = new ArrayList<Ability>(){{
                 this.add(Ability.ERROR);
             }};
