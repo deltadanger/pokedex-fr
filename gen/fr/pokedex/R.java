@@ -31,35 +31,37 @@ public final class R {
     }
     public static final class drawable {
         public static int arrow=0x7f020000;
-        public static int bug=0x7f020001;
-        public static int dark=0x7f020002;
-        public static int dragon=0x7f020003;
-        public static int electric=0x7f020004;
-        public static int en=0x7f020005;
-        public static int expand_arrow=0x7f020006;
-        public static int fairy=0x7f020007;
-        public static int fighting=0x7f020008;
-        public static int fire=0x7f020009;
-        public static int flag=0x7f02000a;
-        public static int flying=0x7f02000b;
-        public static int fr=0x7f02000c;
-        public static int ghost=0x7f02000d;
-        public static int grass=0x7f02000e;
-        public static int ground=0x7f02000f;
-        public static int ic_launcher=0x7f020010;
-        public static int ice=0x7f020011;
-        public static int normal=0x7f020012;
-        public static int poison=0x7f020013;
-        public static int psychic=0x7f020014;
-        public static int rock=0x7f020015;
-        public static int steel=0x7f020016;
-        public static int water=0x7f020017;
-        public static int weakness_ignore=0x7f020018;
-        public static int weakness_normal=0x7f020019;
-        public static int weakness_strong=0x7f02001a;
-        public static int weakness_very_strong=0x7f02001b;
-        public static int weakness_very_weak=0x7f02001c;
-        public static int weakness_weak=0x7f02001d;
+        public static int arrow_dropdown=0x7f020001;
+        public static int bug=0x7f020002;
+        public static int dark=0x7f020003;
+        public static int dragon=0x7f020004;
+        public static int electric=0x7f020005;
+        public static int en=0x7f020006;
+        public static int es=0x7f020007;
+        public static int expand_arrow=0x7f020008;
+        public static int fairy=0x7f020009;
+        public static int fighting=0x7f02000a;
+        public static int fire=0x7f02000b;
+        public static int flag=0x7f02000c;
+        public static int flying=0x7f02000d;
+        public static int fr=0x7f02000e;
+        public static int ghost=0x7f02000f;
+        public static int grass=0x7f020010;
+        public static int ground=0x7f020011;
+        public static int ic_launcher=0x7f020012;
+        public static int ice=0x7f020013;
+        public static int normal=0x7f020014;
+        public static int poison=0x7f020015;
+        public static int psychic=0x7f020016;
+        public static int rock=0x7f020017;
+        public static int steel=0x7f020018;
+        public static int water=0x7f020019;
+        public static int weakness_ignore=0x7f02001a;
+        public static int weakness_normal=0x7f02001b;
+        public static int weakness_strong=0x7f02001c;
+        public static int weakness_very_strong=0x7f02001d;
+        public static int weakness_very_weak=0x7f02001e;
+        public static int weakness_weak=0x7f02001f;
     }
     public static final class id {
         public static int attTxt=0x7f0c001d;
@@ -719,65 +721,181 @@ public final class R {
         public static int egg_group_water3=0x7f07024a;
         public static int electric=0x7f0705b3;
         public static int ev=0x7f0705a6;
+        /**  Pokemon #236 
+         */
         public static int evo_20_att_eq_def=0x7f070282;
+        /**  Pokemon #236 
+         */
         public static int evo_20_att_gt_def=0x7f070280;
+        /**  Pokemon #236 
+         */
         public static int evo_20_att_lt_def=0x7f070281;
+        /**  Pokemon #412 
+         */
         public static int evo_20_female=0x7f070284;
+        /**  Pokemon #412 
+         */
         public static int evo_20_male=0x7f070283;
+        /**  Pokemon #416 
+         */
         public static int evo_21_female=0x7f070285;
+        /**  Pokemon #697 
+         */
         public static int evo_39_day=0x7f070286;
+        /**  Pokemon #699 
+         */
         public static int evo_39_night=0x7f070287;
+        /**  Pokemon #706 
+         */
         public static int evo_50_rain=0x7f07028a;
+        /**  Pokemon #473 
+         */
         public static int evo_attack_ancientpower=0x7f070261;
+        /**  Pokemon #424 
+         */
         public static int evo_attack_double_hit=0x7f07025a;
+        /**  Pokemon #185 
+         */
         public static int evo_attack_mimic=0x7f07028d;
+        /**  Pokemon #463 
+         */
         public static int evo_attack_rollout=0x7f07028e;
+        /**  Pokemon #268 
+         */
         public static int evo_cascoon=0x7f070289;
+        /**  Pokemon #281 
+         */
         public static int evo_dawn_stone_female=0x7f07027a;
+        /**  Pokemon #281 
+         */
         public static int evo_dawn_stone_male=0x7f07027d;
         public static int evo_error=0x7f070257;
+        /**  Pokemon #76 
+         */
         public static int evo_exchange=0x7f070262;
+        /**  Pokemon #589 
+         */
         public static int evo_exchange_escavalier=0x7f070264;
+        /**  Pokemon #366 
+         */
         public static int evo_exchange_holding_deep_sea_scale=0x7f07026d;
+        /**  Pokemon #366 
+         */
         public static int evo_exchange_holding_deep_sea_tooth=0x7f070267;
+        /**  Pokemon #230 
+         */
         public static int evo_exchange_holding_dragon_scale=0x7f070272;
+        /**  Pokemon #233 
+         */
         public static int evo_exchange_holding_dubious_disc=0x7f07026c;
+        /**  Pokemon #466 
+         */
         public static int evo_exchange_holding_electirizer=0x7f070266;
+        /**  Pokemon #186 
+         */
         public static int evo_exchange_holding_kings_rock=0x7f07026f;
+        /**  Pokemon #467 
+         */
         public static int evo_exchange_holding_magmarizer=0x7f070269;
+        /**  Pokemon #208 
+         */
         public static int evo_exchange_holding_metal_coat=0x7f070268;
+        /**  Pokemon #350 
+         */
         public static int evo_exchange_holding_prism_scale=0x7f070270;
+        /**  Pokemon #464 
+         */
         public static int evo_exchange_holding_protector=0x7f07026b;
+        /**  Pokemon #477 
+         */
         public static int evo_exchange_holding_reaper_cloth=0x7f07026e;
+        /**  Pokemon #683 
+         */
         public static int evo_exchange_holding_sachet=0x7f07026a;
+        /**  Pokemon #233 
+         */
         public static int evo_exchange_holding_upgrade=0x7f070265;
+        /**  Pokemon #685 
+         */
         public static int evo_exchange_holding_whipped_dream=0x7f070271;
+        /**  Pokemon #617 
+         */
         public static int evo_exchange_karrablast=0x7f070263;
+        /**  Pokemon #133 
+         */
         public static int evo_fire_stone=0x7f070278;
+        /**  Pokemon #133 
+         */
         public static int evo_glaceon=0x7f07025c;
+        /**  Pokemon #25 
+         */
         public static int evo_happyness=0x7f070273;
+        /**  Pokemon #133 
+         */
         public static int evo_happyness_day=0x7f070275;
+        /**  Pokemon #133 
+         */
         public static int evo_happyness_night=0x7f070274;
+        /**  Pokemon #103 
+         */
         public static int evo_herb_stone=0x7f07027f;
+        /**  Pokemon #133 
+         */
         public static int evo_leafeon=0x7f070259;
         public static int evo_level=0x7f070256;
+        /**  Pokemon #133 
+         */
         public static int evo_lightning_stone=0x7f07027b;
+        /**  Pokemon #687 
+         */
         public static int evo_malamar=0x7f070288;
+        /**  Pokemon #226 
+         */
         public static int evo_mantine=0x7f070260;
+        /**  Pokemon #1 
+         */
         public static int evo_mega=0x7f07028f;
+        /**  Pokemon #6 
+         */
         public static int evo_mega_x=0x7f070290;
+        /**  Pokemon #6 
+         */
         public static int evo_mega_y=0x7f070291;
+        /**  Pokemon #36 
+         */
         public static int evo_moon_stone=0x7f070279;
+        /**  Pokemon #461 
+         */
         public static int evo_night_holding_razor_claw=0x7f07025b;
+        /**  Pokemon #472 
+         */
         public static int evo_night_holding_razor_fang=0x7f07025e;
+        /**  Pokemon #681 
+         */
         public static int evo_night_stone=0x7f07027c;
+        /**  Pokemon #113 
+         */
         public static int evo_oval_stone=0x7f070258;
+        /**  Pokemon #675 
+         */
         public static int evo_pangoro=0x7f07028b;
+        /**  Pokemon #462 
+         */
         public static int evo_place=0x7f07025d;
+        /**  Pokemon #292 
+         */
         public static int evo_shedinja=0x7f07028c;
+        /**  Pokemon #573 
+         */
         public static int evo_shiny_stone=0x7f07027e;
+        /**  Pokemon #182 
+         */
         public static int evo_sun_stone=0x7f070276;
+        /**  Pokemon #133 
+         */
         public static int evo_sylveon=0x7f07025f;
+        /**  Pokemon #133 
+         */
         public static int evo_water_stone=0x7f070277;
         public static int evolution_chain=0x7f0705a0;
         public static int expand=0x7f07059d;
