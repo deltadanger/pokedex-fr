@@ -50,7 +50,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:contentDescription="@string/language"
-            android:src="@drawable/flag" />
+            android:src="@drawable/flag_dropdown" />
         
     </LinearLayout>
     

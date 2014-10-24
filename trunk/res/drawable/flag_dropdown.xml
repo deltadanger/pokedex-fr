@@ -1,0 +1,7 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/flag" />
+    
+    <item android:top="10dp" android:left="20dp" android:bottom="10dp">
+        <inset android:drawable="@drawable/arrow_dropdown" android:insetLeft="20dp" android:insetTop="20dp" />
+    </item>
+</layer-list>
